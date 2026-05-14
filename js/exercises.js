@@ -48,7 +48,10 @@ const Exercises = {
    * - Richtig: Button gruen, Erklaerung anzeigen, alle Buttons sperren, onComplete()
    * - Falsch: Button rot + gesperrt, Fehlermeldung anzeigen, weiter probieren
    *
-   * @param {Object} exercise - { type, question, options, correct, explanation }
+   * @param {Object} exercise - { type, question, options, correct, explanation, hint?, wrongExplanations? }
+   *   - hint (optional): genereller Hint bei falscher Antwort, wenn keine spezifische Erklaerung
+   *   - wrongExplanations (optional): { optionIndex: erklaerung } fuer elaboriertes Feedback pro falscher Option
+   *   Stufen-Logik: wrongExplanations[i] > hint > generisches "Leider falsch"
    * @param {HTMLElement} container - DOM-Element in das gerendert wird
    * @param {Function} onComplete - Callback wenn richtige Antwort gewaehlt
    */
@@ -102,8 +105,19 @@ const Exercises = {
           button.classList.add('incorrect');
           button.disabled = true;
 
-          // Fehlermeldung anzeigen
-          feedbackEl.textContent = 'Leider falsch. Versuch es nochmal!';
+          // Elaboriertes Feedback: Stufen-Logik
+          // 1. Spezifische Erklaerung pro falscher Option (wrongExplanations[index])
+          // 2. Allgemeiner Hint zur Aufgabe (hint)
+          // 3. Generisches Fallback
+          let feedbackText;
+          if (exercise.wrongExplanations && exercise.wrongExplanations[index]) {
+            feedbackText = exercise.wrongExplanations[index];
+          } else if (exercise.hint) {
+            feedbackText = exercise.hint;
+          } else {
+            feedbackText = 'Leider falsch. Versuch es nochmal!';
+          }
+          feedbackEl.textContent = feedbackText;
           feedbackEl.className = 'exercise-feedback incorrect';
           feedbackEl.style.display = 'block';
         }

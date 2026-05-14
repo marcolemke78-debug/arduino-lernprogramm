@@ -1552,13 +1552,14 @@ p {
 
 /* === Ordering Exercise (Reihenfolge sortieren) === */
 .exercise-ordering .ordering-list {
-  list-style: decimal inside;
+  list-style: none;
   padding: 0;
   margin: 1rem 0;
   counter-reset: ordering-counter;
 }
 
 .exercise-ordering .ordering-item {
+  counter-increment: ordering-counter;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1569,6 +1570,14 @@ p {
   background: white;
   gap: 1rem;
   transition: border-color 0.15s, background 0.15s;
+}
+
+.exercise-ordering .ordering-item::before {
+  content: counter(ordering-counter) ".";
+  font-weight: 600;
+  color: var(--text-light);
+  min-width: 1.5rem;
+  flex-shrink: 0;
 }
 
 .exercise-ordering .ordering-item:hover {

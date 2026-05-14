@@ -70,7 +70,7 @@ const LESSONS_GRUNDLAGEN = [
         explanation: 'Richtig! Ein Arduino ist ein Mikrocontroller, der für eine bestimmte Aufgabe programmiert wird und diese dauerhaft ausführt. Ein Computer kann viele Programme gleichzeitig laufen lassen.',
         wrongExplanations: {
           0: 'Andersherum: Ein Computer ist deutlich schneller. Der Arduino-Chip arbeitet mit 16 MHz, ein moderner Computer mit mehreren GHz – etwa 1000× schneller.',
-          2: 'Doch, ein Arduino braucht Strom – aber sehr wenig (ca. 50 mA, weniger als eine LED-Lampe).',
+          2: 'Doch, ein Arduino braucht Strom – aber sehr wenig. Etwa so viel wie zwei bis drei kleine LEDs, also viel weniger als ein Laptop.',
           3: 'Nein, der Arduino hat keinen eingebauten Bildschirm. Er kann aber externe Displays ansteuern.'
         }
       },

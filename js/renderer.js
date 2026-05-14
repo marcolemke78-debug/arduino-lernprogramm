@@ -40,10 +40,11 @@ const Renderer = {
 
   /**
    * Fortschrittsbalken aktualisieren.
-   * Zeigt den Gesamtfortschritt ueber alle 17 Lektionen.
+   * Zeigt den Gesamtfortschritt ueber alle Lektionen (dynamisch aus LESSONS).
    */
   renderProgressBar() {
-    const percent = Progress.getCompletionPercent(1, 25);
+    const total = Progress.getTotalLessons();
+    const percent = Progress.getCompletionPercent(1, total);
     const bar = document.getElementById('progress-bar');
     bar.style.width = percent + '%';
   },

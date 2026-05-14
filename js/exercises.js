@@ -110,7 +110,7 @@ const Exercises = {
           // 2. Allgemeiner Hint zur Aufgabe (hint)
           // 3. Generisches Fallback
           let feedbackText;
-          if (exercise.wrongExplanations && exercise.wrongExplanations[index]) {
+          if (exercise.wrongExplanations && exercise.wrongExplanations[index] !== undefined) {
             feedbackText = exercise.wrongExplanations[index];
           } else if (exercise.hint) {
             feedbackText = exercise.hint;
@@ -1783,6 +1783,17 @@ Exercises.renderNetworkLabeling = function(exercise, container, onComplete) {
  * @param {Function} onComplete
  */
 Exercises.renderOrdering = function(exercise, container, onComplete) {
+  // Schema-Validation: items und correctOrder muessen vorhanden und gleich lang sein
+  if (!Array.isArray(exercise.items) || !Array.isArray(exercise.correctOrder)
+      || exercise.items.length !== exercise.correctOrder.length
+      || exercise.items.length === 0) {
+    const errDiv = document.createElement('div');
+    errDiv.className = 'exercise-feedback incorrect';
+    errDiv.textContent = 'Diese Übung ist fehlerhaft konfiguriert (items und correctOrder muessen gleich lang sein).';
+    container.appendChild(errDiv);
+    return;
+  }
+
   const wrapper = document.createElement('div');
   wrapper.className = 'exercise-ordering';
 
@@ -1876,7 +1887,12 @@ Exercises.renderOrdering = function(exercise, container, onComplete) {
   checkBtn.className = 'exercise-check-btn';
   checkBtn.textContent = 'Prüfen';
 
+  // Guard gegen Doppel-Auslösung von onComplete() bei schnellem Doppeltap
+  let completed = false;
+
   checkBtn.addEventListener('click', function() {
+    if (completed) return;
+
     let correctCount = 0;
     items.forEach(function(item, idx) {
       if (item.originalIndex === exercise.correctOrder[idx]) {
@@ -1885,6 +1901,7 @@ Exercises.renderOrdering = function(exercise, container, onComplete) {
     });
 
     if (correctCount === items.length) {
+      completed = true;
       feedbackEl.textContent = 'Reihenfolge korrekt – super!';
       feedbackEl.className = 'exercise-feedback correct';
       feedbackEl.style.display = 'block';

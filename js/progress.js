@@ -1,12 +1,19 @@
 const Progress = {
-  STORAGE_KEY: 'koin_lernprogramm_progress',
+  STORAGE_KEY: 'arduino_lernprogramm_progress',
   VERSION: 2,
-  TOTAL_LESSONS: 25,
 
-  // Standard-Zustand: alle 25 Lektionen auf not_started, letzte Lektion = 1
+  // Anzahl Lektionen dynamisch aus LESSONS-Array.
+  // Vermeidet hardcoded Wert beim Kopieren auf andere Lernprogramme
+  // und passt sich automatisch an, wenn Lektionen ergaenzt werden.
+  getTotalLessons() {
+    return (typeof LESSONS !== 'undefined' && Array.isArray(LESSONS)) ? LESSONS.length : 1;
+  },
+
+  // Standard-Zustand: alle Lektionen auf not_started, letzte Lektion = 1
   createDefault() {
     const data = { version: this.VERSION, lessons: {}, lastLesson: 1 };
-    for (let i = 1; i <= this.TOTAL_LESSONS; i++) {
+    const total = this.getTotalLessons();
+    for (let i = 1; i <= total; i++) {
       data.lessons[i] = { status: 'not_started' };
     }
     return data;

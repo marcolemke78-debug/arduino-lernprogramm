@@ -33,6 +33,8 @@ const Exercises = {
         return Exercises.renderSubnetExercise(exercise, container, onComplete);
       case 'network-labeling':
         return Exercises.renderNetworkLabeling(exercise, container, onComplete);
+      case 'ordering':
+        return Exercises.renderOrdering(exercise, container, onComplete);
       default:
         const div = document.createElement('div');
         div.textContent = 'Übungstyp "' + exercise.type + '" wird noch implementiert.';
@@ -1752,4 +1754,138 @@ Exercises.renderNetworkLabeling = function(exercise, container, onComplete) {
       }, 1500);
     }
   });
+};
+
+/**
+ * Rendert eine Reihenfolge-Uebung.
+ * Items werden in zufaelliger Reihenfolge angezeigt und koennen
+ * per Pfeil-Buttons (Hoch/Runter) sortiert werden.
+ * Touch-Targets 44x44px fuer iPad-Bedienung.
+ *
+ * @param {Object} exercise - { type, question, items, correctOrder }
+ *   items: Array von Strings in Original-Reihenfolge
+ *   correctOrder: Array von Indizes - correctOrder[i] = welches item gehoert an Position i
+ * @param {HTMLElement} container
+ * @param {Function} onComplete
+ */
+Exercises.renderOrdering = function(exercise, container, onComplete) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'exercise-ordering';
+
+  // Frage anzeigen
+  const questionEl = document.createElement('p');
+  questionEl.className = 'exercise-question';
+  questionEl.textContent = exercise.question;
+  wrapper.appendChild(questionEl);
+
+  // Items mit Original-Index merken, dann mischen (Fisher-Yates)
+  const items = exercise.items.map((text, idx) => ({ text: text, originalIndex: idx }));
+  for (let i = items.length - 1; i > 0; i--) {
+    const rand = Math.floor(Math.random() * (i + 1));
+    const tmp = items[i];
+    items[i] = items[rand];
+    items[rand] = tmp;
+  }
+
+  // Falls zufaellig schon korrekt sortiert: einmal tauschen, damit Schueler aktiv werden muss
+  let alreadyCorrect = true;
+  for (let i = 0; i < items.length; i++) {
+    if (items[i].originalIndex !== exercise.correctOrder[i]) {
+      alreadyCorrect = false;
+      break;
+    }
+  }
+  if (alreadyCorrect && items.length >= 2) {
+    const tmp = items[0];
+    items[0] = items[1];
+    items[1] = tmp;
+  }
+
+  // Liste rendern (wird bei jeder Aenderung neu gezeichnet)
+  const list = document.createElement('ol');
+  list.className = 'ordering-list';
+  wrapper.appendChild(list);
+
+  function renderList() {
+    list.innerHTML = '';
+    items.forEach(function(item, idx) {
+      const li = document.createElement('li');
+      li.className = 'ordering-item';
+
+      const textSpan = document.createElement('span');
+      textSpan.className = 'ordering-text';
+      textSpan.textContent = item.text;
+      li.appendChild(textSpan);
+
+      const btnGroup = document.createElement('div');
+      btnGroup.className = 'ordering-buttons';
+
+      const upBtn = document.createElement('button');
+      upBtn.className = 'ordering-btn ordering-up';
+      upBtn.textContent = '↑';
+      upBtn.disabled = (idx === 0);
+      upBtn.setAttribute('aria-label', 'Nach oben verschieben');
+      upBtn.addEventListener('click', function() {
+        const tmp = items[idx];
+        items[idx] = items[idx - 1];
+        items[idx - 1] = tmp;
+        renderList();
+      });
+
+      const downBtn = document.createElement('button');
+      downBtn.className = 'ordering-btn ordering-down';
+      downBtn.textContent = '↓';
+      downBtn.disabled = (idx === items.length - 1);
+      downBtn.setAttribute('aria-label', 'Nach unten verschieben');
+      downBtn.addEventListener('click', function() {
+        const tmp = items[idx];
+        items[idx] = items[idx + 1];
+        items[idx + 1] = tmp;
+        renderList();
+      });
+
+      btnGroup.appendChild(upBtn);
+      btnGroup.appendChild(downBtn);
+      li.appendChild(btnGroup);
+      list.appendChild(li);
+    });
+  }
+  renderList();
+
+  // Feedback-Bereich
+  const feedbackEl = document.createElement('div');
+  feedbackEl.className = 'exercise-feedback';
+  feedbackEl.style.display = 'none';
+
+  // Pruefen-Button
+  const checkBtn = document.createElement('button');
+  checkBtn.className = 'exercise-check-btn';
+  checkBtn.textContent = 'Prüfen';
+
+  checkBtn.addEventListener('click', function() {
+    let correctCount = 0;
+    items.forEach(function(item, idx) {
+      if (item.originalIndex === exercise.correctOrder[idx]) {
+        correctCount++;
+      }
+    });
+
+    if (correctCount === items.length) {
+      feedbackEl.textContent = 'Reihenfolge korrekt – super!';
+      feedbackEl.className = 'exercise-feedback correct';
+      feedbackEl.style.display = 'block';
+      checkBtn.disabled = true;
+      // Alle Pfeil-Buttons sperren
+      list.querySelectorAll('button').forEach(function(b) { b.disabled = true; });
+      onComplete();
+    } else {
+      feedbackEl.textContent = correctCount + ' von ' + items.length + ' an der richtigen Position. Verschiebe die Items mit den Pfeilen.';
+      feedbackEl.className = 'exercise-feedback incorrect';
+      feedbackEl.style.display = 'block';
+    }
+  });
+
+  wrapper.appendChild(checkBtn);
+  wrapper.appendChild(feedbackEl);
+  container.appendChild(wrapper);
 };

@@ -39,7 +39,7 @@ const Renderer = {
   },
 
   /**
-   * Fortschrittsbalken aktualisieren.
+   * Fortschrittsbalken + Label aktualisieren.
    * Zeigt den Gesamtfortschritt ueber alle Lektionen (dynamisch aus LESSONS).
    */
   renderProgressBar() {
@@ -47,6 +47,19 @@ const Renderer = {
     const percent = Progress.getCompletionPercent(1, total);
     const bar = document.getElementById('progress-bar');
     bar.style.width = percent + '%';
+
+    // Label mit absoluter Anzahl aktualisieren
+    const label = document.getElementById('progress-label');
+    if (label) {
+      const data = Progress.load();
+      let completed = 0;
+      for (let i = 1; i <= total; i++) {
+        if (data.lessons[i] && data.lessons[i].status === 'completed') {
+          completed++;
+        }
+      }
+      label.textContent = percent + ' % – ' + completed + ' von ' + total + ' Lektionen abgeschlossen';
+    }
   },
 
   /**
@@ -157,9 +170,17 @@ const Renderer = {
       const totalExercises = lessonData.exercises.length;
       let completedCount = 0;
 
-      lessonData.exercises.forEach(exercise => {
+      lessonData.exercises.forEach((exercise, index) => {
+        // Übungs-Header "Übung X von Y" vor jeder Aufgabe
+        const exerciseHeader = document.createElement('div');
+        exerciseHeader.className = 'exercise-header';
+        exerciseHeader.textContent = 'Übung ' + (index + 1) + ' von ' + totalExercises;
+        exercisesSection.appendChild(exerciseHeader);
+
         Exercises.render(exercise, exercisesSection, () => {
           completedCount++;
+          // Header als abgeschlossen markieren (visuelle Rueckmeldung)
+          exerciseHeader.classList.add('completed');
           // Wenn alle Uebungen bestanden: Lektion als abgeschlossen markieren
           if (completedCount === totalExercises) {
             Progress.setStatus(id, 'completed');

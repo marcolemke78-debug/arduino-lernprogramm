@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 680" width="100%" style="max-width: 720px; height: auto; font-family: 'Helvetica Neue', Arial, sans-serif;">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 720" width="100%" style="max-width: 760px; height: auto; font-family: 'Helvetica Neue', Arial, sans-serif;">
 
   <defs>
     <linearGradient id="servoBody" x1="0" x2="0" y1="0" y2="1">
@@ -12,15 +12,14 @@
     </linearGradient>
   </defs>
 
-  <!-- Hintergrund -->
-  <rect width="720" height="680" fill="#fdfcf6"/>
+  <rect width="760" height="720" fill="#fdfcf6"/>
 
   <!-- ===================== ARDUINO UNO ===================== -->
-  <g id="arduino" transform="translate(180, 30)">
+  <g id="arduino" transform="translate(200, 30)">
     <rect x="0" y="0" width="360" height="120" rx="10" fill="#00979d" stroke="#005c61" stroke-width="2"/>
     <rect x="355" y="20" width="35" height="30" fill="#9ea7ac" stroke="#444" stroke-width="1.5"/>
     <text x="180" y="68" text-anchor="middle" fill="#fff" font-weight="bold" font-size="15" letter-spacing="2">ARDUINO UNO</text>
-    <text x="180" y="88" text-anchor="middle" fill="#cfeeed" font-size="11">5V &#183; GND &#183; Pin 9 werden genutzt</text>
+    <text x="180" y="90" text-anchor="middle" fill="#cfeeed" font-size="11">5V, GND und Pin 9 werden genutzt</text>
 
     <!-- Pin-Leiste unten -->
     <rect x="20" y="115" width="320" height="13" fill="#1a1a1a"/>
@@ -42,154 +41,144 @@
       <rect x="310" y="117" width="9" height="10"/>
     </g>
 
-    <rect x="69" y="116" width="11" height="12" fill="#d62828" stroke="#fff" stroke-width="1"/>
-    <text x="74" y="148" text-anchor="middle" font-size="11" font-weight="bold" fill="#d62828">5V</text>
+    <!-- 5V Pin (links, ROT) - bei x=34 (absolut 234) -->
+    <rect x="29" y="116" width="11" height="12" fill="#d62828" stroke="#fff" stroke-width="1"/>
+    <text x="34" y="152" text-anchor="middle" font-size="13" font-weight="bold" fill="#d62828">5V</text>
 
-    <rect x="109" y="116" width="11" height="12" fill="#222" stroke="#fff" stroke-width="1"/>
-    <text x="114" y="148" text-anchor="middle" font-size="11" font-weight="bold" fill="#222">GND</text>
+    <!-- GND Pin (mitte-links, SCHWARZ) - bei x=134 (absolut 334) -->
+    <rect x="129" y="116" width="11" height="12" fill="#222" stroke="#fff" stroke-width="1"/>
+    <text x="134" y="152" text-anchor="middle" font-size="13" font-weight="bold" fill="#222">GND</text>
 
-    <rect x="209" y="116" width="11" height="12" fill="#E67E22" stroke="#fff" stroke-width="1"/>
-    <text x="214" y="148" text-anchor="middle" font-size="11" font-weight="bold" fill="#E67E22">Pin 9</text>
+    <!-- Pin 9 (rechts, ORANGE) - bei x=234 (absolut 434) -->
+    <rect x="229" y="116" width="11" height="12" fill="#E67E22" stroke="#fff" stroke-width="1"/>
+    <text x="234" y="152" text-anchor="middle" font-size="13" font-weight="bold" fill="#E67E22">Pin 9</text>
   </g>
 
   <!-- ===================== JUMPER ARDUINO -> BREADBOARD ===================== -->
-  <!-- Rot: Arduino-5V -> +Schiene am Breadboard -->
-  <path d="M 254 180 L 254 215 L 120 215 L 120 240" stroke="#d62828" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <circle cx="254" cy="180" r="3.5" fill="#d62828"/>
-  <circle cx="120" cy="240" r="3.5" fill="#d62828"/>
+  <!-- ROT: 5V (absolut 234) -> +Schiene-Loch in Spalte 5 (absolut 160, 244) -->
+  <path d="M 234 180 L 234 210 L 160 210 L 160 244" stroke="#d62828" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="234" cy="180" r="3.5" fill="#d62828"/>
+  <circle cx="160" cy="244" r="3.5" fill="#d62828"/>
 
-  <!-- Schwarz: GND -> -Schiene -->
-  <path d="M 294 180 L 294 200 L 90 200 L 90 440 L 120 440" stroke="#222" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <circle cx="294" cy="180" r="3.5" fill="#222"/>
-  <circle cx="120" cy="440" r="3.5" fill="#222"/>
+  <!-- SCHWARZ: GND (absolut 334) -> -Schiene-Loch in Spalte 15 (absolut 360, 444) — verlaeuft RECHTS aussen ums Breadboard -->
+  <path d="M 334 180 L 334 200 L 700 200 L 700 444 L 360 444" stroke="#222" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="334" cy="180" r="3.5" fill="#222"/>
+  <circle cx="360" cy="444" r="3.5" fill="#222"/>
 
-  <!-- Orange: Pin 9 -> Spalte 10 Reihe a -->
-  <path d="M 394 180 L 394 220 L 260 220 L 260 277" stroke="#E67E22" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <circle cx="394" cy="180" r="3.5" fill="#E67E22"/>
-  <circle cx="260" cy="277" r="3.5" fill="#E67E22"/>
+  <!-- ORANGE: Pin 9 (absolut 434) -> Loch a10 (absolut 260, 281) -->
+  <path d="M 434 180 L 434 220 L 260 220 L 260 281" stroke="#E67E22" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="434" cy="180" r="3.5" fill="#E67E22"/>
+  <circle cx="260" cy="281" r="3.5" fill="#E67E22"/>
 
   <!-- ===================== BREADBOARD ===================== -->
-  <g id="breadboard" transform="translate(60, 230)">
+  <g id="breadboard" transform="translate(60, 234)">
     <rect x="0" y="0" width="640" height="230" rx="6" fill="#f0ede6" stroke="#c8c3b8" stroke-width="1.5"/>
 
+    <!-- +Schiene oben (rot) -->
     <rect x="20" y="10" width="600" height="14" rx="2" fill="#FECACA" stroke="#EF4444" stroke-width="0.7"/>
     <text x="12" y="20" font-size="11" font-weight="bold" fill="#EF4444">+</text>
 
+    <!-- -Schiene unten (blau) -->
     <rect x="20" y="206" width="600" height="14" rx="2" fill="#BFDBFE" stroke="#3B82F6" stroke-width="0.7"/>
     <text x="12" y="217" font-size="11" font-weight="bold" fill="#3B82F6">&#8722;</text>
 
+    <!-- Spaltennummern -->
     <g font-size="8" fill="#888" text-anchor="middle">
-      <text x="40" y="38">1</text>
-      <text x="60" y="38">2</text>
-      <text x="80" y="38">3</text>
-      <text x="100" y="38">4</text>
-      <text x="120" y="38">5</text>
-      <text x="140" y="38">6</text>
-      <text x="160" y="38">7</text>
-      <text x="180" y="38">8</text>
-      <text x="200" y="38">9</text>
-      <text x="220" y="38">10</text>
-      <text x="240" y="38">11</text>
-      <text x="260" y="38">12</text>
-      <text x="280" y="38">13</text>
+      <text x="40" y="38">1</text><text x="60" y="38">2</text><text x="80" y="38">3</text><text x="100" y="38">4</text><text x="120" y="38">5</text>
+      <text x="140" y="38">6</text><text x="160" y="38">7</text><text x="180" y="38">8</text><text x="200" y="38">9</text><text x="220" y="38">10</text>
+      <text x="240" y="38">11</text><text x="260" y="38">12</text><text x="280" y="38">13</text><text x="300" y="38">14</text><text x="320" y="38">15</text>
     </g>
 
+    <!-- Reihen-Beschriftung -->
     <g font-size="9" fill="#999">
-      <text x="12" y="50">a</text>
-      <text x="12" y="68">b</text>
-      <text x="12" y="86">c</text>
-      <text x="12" y="104">d</text>
-      <text x="12" y="122">e</text>
+      <text x="12" y="50">a</text><text x="12" y="68">b</text><text x="12" y="86">c</text><text x="12" y="104">d</text><text x="12" y="122">e</text>
     </g>
 
+    <!-- Loecher obere Halbinsel -->
     <g fill="#cbcbcb">
-      <circle cx="40" cy="47" r="2"/><circle cx="60" cy="47" r="2"/><circle cx="80" cy="47" r="2"/><circle cx="100" cy="47" r="2"/><circle cx="120" cy="47" r="2"/><circle cx="140" cy="47" r="2"/><circle cx="160" cy="47" r="2"/><circle cx="180" cy="47" r="2"/><circle cx="200" cy="47" r="2"/><circle cx="220" cy="47" r="2"/><circle cx="240" cy="47" r="2"/><circle cx="260" cy="47" r="2"/><circle cx="280" cy="47" r="2"/>
-      <circle cx="40" cy="65" r="2"/><circle cx="60" cy="65" r="2"/><circle cx="80" cy="65" r="2"/><circle cx="100" cy="65" r="2"/><circle cx="120" cy="65" r="2"/><circle cx="140" cy="65" r="2"/><circle cx="160" cy="65" r="2"/><circle cx="180" cy="65" r="2"/><circle cx="200" cy="65" r="2"/><circle cx="220" cy="65" r="2"/><circle cx="240" cy="65" r="2"/><circle cx="260" cy="65" r="2"/><circle cx="280" cy="65" r="2"/>
-      <circle cx="40" cy="83" r="2"/><circle cx="60" cy="83" r="2"/><circle cx="80" cy="83" r="2"/><circle cx="100" cy="83" r="2"/><circle cx="120" cy="83" r="2"/><circle cx="140" cy="83" r="2"/><circle cx="160" cy="83" r="2"/><circle cx="180" cy="83" r="2"/><circle cx="200" cy="83" r="2"/><circle cx="220" cy="83" r="2"/><circle cx="240" cy="83" r="2"/><circle cx="260" cy="83" r="2"/><circle cx="280" cy="83" r="2"/>
-      <circle cx="40" cy="101" r="2"/><circle cx="60" cy="101" r="2"/><circle cx="80" cy="101" r="2"/><circle cx="100" cy="101" r="2"/><circle cx="120" cy="101" r="2"/><circle cx="140" cy="101" r="2"/><circle cx="160" cy="101" r="2"/><circle cx="180" cy="101" r="2"/><circle cx="200" cy="101" r="2"/><circle cx="220" cy="101" r="2"/><circle cx="240" cy="101" r="2"/><circle cx="260" cy="101" r="2"/><circle cx="280" cy="101" r="2"/>
-      <circle cx="40" cy="119" r="2"/><circle cx="60" cy="119" r="2"/><circle cx="80" cy="119" r="2"/><circle cx="100" cy="119" r="2"/><circle cx="120" cy="119" r="2"/><circle cx="140" cy="119" r="2"/><circle cx="160" cy="119" r="2"/><circle cx="180" cy="119" r="2"/><circle cx="200" cy="119" r="2"/><circle cx="220" cy="119" r="2"/><circle cx="240" cy="119" r="2"/><circle cx="260" cy="119" r="2"/><circle cx="280" cy="119" r="2"/>
+      <circle cx="40" cy="47" r="2"/><circle cx="60" cy="47" r="2"/><circle cx="80" cy="47" r="2"/><circle cx="100" cy="47" r="2"/><circle cx="120" cy="47" r="2"/><circle cx="140" cy="47" r="2"/><circle cx="160" cy="47" r="2"/><circle cx="180" cy="47" r="2"/><circle cx="200" cy="47" r="2"/><circle cx="220" cy="47" r="2"/><circle cx="240" cy="47" r="2"/><circle cx="260" cy="47" r="2"/><circle cx="280" cy="47" r="2"/><circle cx="300" cy="47" r="2"/><circle cx="320" cy="47" r="2"/>
+      <circle cx="40" cy="65" r="2"/><circle cx="60" cy="65" r="2"/><circle cx="80" cy="65" r="2"/><circle cx="100" cy="65" r="2"/><circle cx="120" cy="65" r="2"/><circle cx="140" cy="65" r="2"/><circle cx="160" cy="65" r="2"/><circle cx="180" cy="65" r="2"/><circle cx="200" cy="65" r="2"/><circle cx="220" cy="65" r="2"/><circle cx="240" cy="65" r="2"/><circle cx="260" cy="65" r="2"/><circle cx="280" cy="65" r="2"/><circle cx="300" cy="65" r="2"/><circle cx="320" cy="65" r="2"/>
+      <circle cx="40" cy="83" r="2"/><circle cx="60" cy="83" r="2"/><circle cx="80" cy="83" r="2"/><circle cx="100" cy="83" r="2"/><circle cx="120" cy="83" r="2"/><circle cx="140" cy="83" r="2"/><circle cx="160" cy="83" r="2"/><circle cx="180" cy="83" r="2"/><circle cx="200" cy="83" r="2"/><circle cx="220" cy="83" r="2"/><circle cx="240" cy="83" r="2"/><circle cx="260" cy="83" r="2"/><circle cx="280" cy="83" r="2"/><circle cx="300" cy="83" r="2"/><circle cx="320" cy="83" r="2"/>
+      <circle cx="40" cy="101" r="2"/><circle cx="60" cy="101" r="2"/><circle cx="80" cy="101" r="2"/><circle cx="100" cy="101" r="2"/><circle cx="120" cy="101" r="2"/><circle cx="140" cy="101" r="2"/><circle cx="160" cy="101" r="2"/><circle cx="180" cy="101" r="2"/><circle cx="200" cy="101" r="2"/><circle cx="220" cy="101" r="2"/><circle cx="240" cy="101" r="2"/><circle cx="260" cy="101" r="2"/><circle cx="280" cy="101" r="2"/><circle cx="300" cy="101" r="2"/><circle cx="320" cy="101" r="2"/>
+      <circle cx="40" cy="119" r="2"/><circle cx="60" cy="119" r="2"/><circle cx="80" cy="119" r="2"/><circle cx="100" cy="119" r="2"/><circle cx="120" cy="119" r="2"/><circle cx="140" cy="119" r="2"/><circle cx="160" cy="119" r="2"/><circle cx="180" cy="119" r="2"/><circle cx="200" cy="119" r="2"/><circle cx="220" cy="119" r="2"/><circle cx="240" cy="119" r="2"/><circle cx="260" cy="119" r="2"/><circle cx="280" cy="119" r="2"/><circle cx="300" cy="119" r="2"/><circle cx="320" cy="119" r="2"/>
     </g>
 
     <line x1="20" y1="138" x2="620" y2="138" stroke="#d0ccc0" stroke-width="0.7" stroke-dasharray="2 3"/>
 
+    <!-- Loecher untere Halbinsel -->
     <g fill="#cbcbcb">
-      <circle cx="40" cy="146" r="2"/><circle cx="60" cy="146" r="2"/><circle cx="80" cy="146" r="2"/><circle cx="100" cy="146" r="2"/><circle cx="120" cy="146" r="2"/><circle cx="140" cy="146" r="2"/><circle cx="160" cy="146" r="2"/><circle cx="180" cy="146" r="2"/><circle cx="200" cy="146" r="2"/><circle cx="220" cy="146" r="2"/><circle cx="240" cy="146" r="2"/><circle cx="260" cy="146" r="2"/><circle cx="280" cy="146" r="2"/>
-      <circle cx="40" cy="164" r="2"/><circle cx="60" cy="164" r="2"/><circle cx="80" cy="164" r="2"/><circle cx="100" cy="164" r="2"/><circle cx="120" cy="164" r="2"/><circle cx="140" cy="164" r="2"/><circle cx="160" cy="164" r="2"/><circle cx="180" cy="164" r="2"/><circle cx="200" cy="164" r="2"/><circle cx="220" cy="164" r="2"/><circle cx="240" cy="164" r="2"/><circle cx="260" cy="164" r="2"/><circle cx="280" cy="164" r="2"/>
-      <circle cx="40" cy="182" r="2"/><circle cx="60" cy="182" r="2"/><circle cx="80" cy="182" r="2"/><circle cx="100" cy="182" r="2"/><circle cx="120" cy="182" r="2"/><circle cx="140" cy="182" r="2"/><circle cx="160" cy="182" r="2"/><circle cx="180" cy="182" r="2"/><circle cx="200" cy="182" r="2"/><circle cx="220" cy="182" r="2"/><circle cx="240" cy="182" r="2"/><circle cx="260" cy="182" r="2"/><circle cx="280" cy="182" r="2"/>
-      <circle cx="40" cy="200" r="2"/><circle cx="60" cy="200" r="2"/><circle cx="80" cy="200" r="2"/><circle cx="100" cy="200" r="2"/><circle cx="120" cy="200" r="2"/><circle cx="140" cy="200" r="2"/><circle cx="160" cy="200" r="2"/><circle cx="180" cy="200" r="2"/><circle cx="200" cy="200" r="2"/><circle cx="220" cy="200" r="2"/><circle cx="240" cy="200" r="2"/><circle cx="260" cy="200" r="2"/><circle cx="280" cy="200" r="2"/>
+      <circle cx="40" cy="146" r="2"/><circle cx="60" cy="146" r="2"/><circle cx="80" cy="146" r="2"/><circle cx="100" cy="146" r="2"/><circle cx="120" cy="146" r="2"/><circle cx="140" cy="146" r="2"/><circle cx="160" cy="146" r="2"/><circle cx="180" cy="146" r="2"/><circle cx="200" cy="146" r="2"/><circle cx="220" cy="146" r="2"/><circle cx="240" cy="146" r="2"/><circle cx="260" cy="146" r="2"/><circle cx="280" cy="146" r="2"/><circle cx="300" cy="146" r="2"/><circle cx="320" cy="146" r="2"/>
+      <circle cx="40" cy="164" r="2"/><circle cx="60" cy="164" r="2"/><circle cx="80" cy="164" r="2"/><circle cx="100" cy="164" r="2"/><circle cx="120" cy="164" r="2"/><circle cx="140" cy="164" r="2"/><circle cx="160" cy="164" r="2"/><circle cx="180" cy="164" r="2"/><circle cx="200" cy="164" r="2"/><circle cx="220" cy="164" r="2"/><circle cx="240" cy="164" r="2"/><circle cx="260" cy="164" r="2"/><circle cx="280" cy="164" r="2"/><circle cx="300" cy="164" r="2"/><circle cx="320" cy="164" r="2"/>
+      <circle cx="40" cy="182" r="2"/><circle cx="60" cy="182" r="2"/><circle cx="80" cy="182" r="2"/><circle cx="100" cy="182" r="2"/><circle cx="120" cy="182" r="2"/><circle cx="140" cy="182" r="2"/><circle cx="160" cy="182" r="2"/><circle cx="180" cy="182" r="2"/><circle cx="200" cy="182" r="2"/><circle cx="220" cy="182" r="2"/><circle cx="240" cy="182" r="2"/><circle cx="260" cy="182" r="2"/><circle cx="280" cy="182" r="2"/><circle cx="300" cy="182" r="2"/><circle cx="320" cy="182" r="2"/>
+      <circle cx="40" cy="200" r="2"/><circle cx="60" cy="200" r="2"/><circle cx="80" cy="200" r="2"/><circle cx="100" cy="200" r="2"/><circle cx="120" cy="200" r="2"/><circle cx="140" cy="200" r="2"/><circle cx="160" cy="200" r="2"/><circle cx="180" cy="200" r="2"/><circle cx="200" cy="200" r="2"/><circle cx="220" cy="200" r="2"/><circle cx="240" cy="200" r="2"/><circle cx="260" cy="200" r="2"/><circle cx="280" cy="200" r="2"/><circle cx="300" cy="200" r="2"/><circle cx="320" cy="200" r="2"/>
+    </g>
+
+    <!-- ===== Markierungs-Kreise mit Beschriftung wo die Servo-Draehte ankommen ===== -->
+    <!-- Markierung am +Schiene-Loch (Spalte 5, Servo-Versorgung) -->
+    <circle cx="100" cy="17" r="7" fill="none" stroke="#d62828" stroke-width="2" stroke-dasharray="3 2"/>
+    <text x="100" y="-4" text-anchor="middle" font-size="10" font-weight="bold" fill="#d62828">Servo +</text>
+
+    <!-- Markierung am -Schiene-Loch (Spalte 13, Servo-GND) -->
+    <circle cx="240" cy="213" r="7" fill="none" stroke="#222" stroke-width="2" stroke-dasharray="3 2"/>
+    <text x="240" y="240" text-anchor="middle" font-size="10" font-weight="bold" fill="#222">Servo &#8722;</text>
+
+    <!-- Markierung am a10 (Spalte 10 obere Halbinsel, Servo-Signal & Pin-9-Jumper-Ende) -->
+    <circle cx="200" cy="47" r="7" fill="none" stroke="#E67E22" stroke-width="2" stroke-dasharray="3 2"/>
+    <text x="200" y="-4" text-anchor="middle" font-size="10" font-weight="bold" fill="#E67E22">Servo S</text>
   </g>
 
-    <!-- Markierung: "Servo-rot kommt hier rein" am +Schiene-Loch -->
-    <circle cx="160" cy="17" r="6" fill="none" stroke="#d62828" stroke-width="2" stroke-dasharray="2 2"/>
-    <text x="160" y="-2" text-anchor="middle" font-size="9" font-weight="bold" fill="#d62828">Servo +</text>
-
-    <!-- Markierung: "Servo-schwarz" an -Schiene -->
-    <circle cx="200" cy="213" r="6" fill="none" stroke="#222" stroke-width="2" stroke-dasharray="2 2"/>
-
-    <!-- Markierung: "Servo-signal" an a10 (gleicher Knoten wie Pin-9-Eingang) -->
-    <circle cx="220" cy="47" r="6" fill="none" stroke="#E67E22" stroke-width="2" stroke-dasharray="2 2"/>
-  </g>
-
-  <!-- ===================== SERVO SG90 (unten links) ===================== -->
-  <g id="servo" transform="translate(120, 530)">
+  <!-- ===================== SERVO SG90 (unten mittig) ===================== -->
+  <g id="servo" transform="translate(280, 540)">
     <!-- Servo-Gehaeuse -->
-    <rect x="0" y="0" width="130" height="80" rx="4" fill="url(#servoBody)" stroke="#1e40af" stroke-width="2"/>
-    <text x="65" y="46" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">SG90</text>
-    <text x="65" y="62" text-anchor="middle" font-size="10" fill="#cfdcfa">Hobby-Servo</text>
+    <rect x="0" y="0" width="160" height="90" rx="5" fill="url(#servoBody)" stroke="#1e40af" stroke-width="2"/>
+    <text x="80" y="50" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">SG90</text>
+    <text x="80" y="68" text-anchor="middle" font-size="11" fill="#cfdcfa">Hobby-Servo</text>
 
-    <!-- Servo-Arm (oben, drehbar) -->
-    <rect x="50" y="-22" width="30" height="22" rx="2" fill="url(#servoArm)" stroke="#888" stroke-width="1.5"/>
-    <circle cx="65" cy="-11" r="4" fill="#222"/>
-    <!-- Andeutung Drehbewegung -->
-    <path d="M 45 -28 A 24 24 0 0 1 85 -28" fill="none" stroke="#1e40af" stroke-width="1" stroke-dasharray="2 2"/>
-    <text x="65" y="-32" text-anchor="middle" font-size="9" fill="#1e40af" font-style="italic">drehbar 0&#176; - 180&#176;</text>
+    <!-- Servo-Arm (klein, oben rechts am Gehaeuse, schlicht) -->
+    <rect x="60" y="-18" width="40" height="22" rx="3" fill="url(#servoArm)" stroke="#888" stroke-width="1.5"/>
+    <circle cx="80" cy="-7" r="4" fill="#222"/>
 
-    <!-- 3 Pin-Anschluesse oben am Servo (so kommen die Drahtenden raus) -->
-    <rect x="5" y="-5" width="36" height="10" rx="1.5" fill="#0f172a" stroke="#000" stroke-width="1"/>
-    <circle cx="11" cy="0" r="2" fill="#d62828"/>
-    <circle cx="23" cy="0" r="2" fill="#222"/>
-    <circle cx="35" cy="0" r="2" fill="#E67E22"/>
+    <!-- 3 Pin-Anschluss-Punkte (oben am Servo, links) -->
+    <rect x="10" y="-6" width="48" height="12" rx="1.5" fill="#0f172a" stroke="#000" stroke-width="1"/>
+    <circle cx="18" cy="0" r="2.5" fill="#d62828"/>
+    <circle cx="34" cy="0" r="2.5" fill="#222"/>
+    <circle cx="50" cy="0" r="2.5" fill="#E67E22"/>
 
-    <!-- Beschriftung der 3 Pins -->
-    <text x="11" y="22" text-anchor="middle" font-size="9" font-weight="bold" fill="#d62828">+</text>
-    <text x="23" y="22" text-anchor="middle" font-size="9" font-weight="bold" fill="#222">&#8722;</text>
-    <text x="35" y="22" text-anchor="middle" font-size="9" font-weight="bold" fill="#E67E22">S</text>
+    <!-- Pin-Beschriftung UNTERHALB des Pin-Blocks (im Gehaeuse, weiss) -->
+    <text x="18" y="22" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">+</text>
+    <text x="34" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">&#8722;</text>
+    <text x="50" y="22" text-anchor="middle" font-size="11" font-weight="bold" fill="#fff">S</text>
   </g>
 
   <!-- ===================== DRAEHTE VOM SERVO ZUM BREADBOARD ===================== -->
   <!-- Servo-Pin-Positionen absolut:
-       rot:    (131, 525)
-       schwarz: (143, 525)
-       orange:  (155, 525)
-       Breadboard +Schiene-Loch: absolut (220, 246) (Translation 60+160, 230+17)
-                    schon markiert mit rotem gestricheltem Kreis
-       Breadboard -Schiene-Loch: absolut (260, 443)
-                    schon markiert mit schwarzem gestricheltem Kreis
-       Breadboard a10:           absolut (280, 277) - aber dort steckt schon Pin-9-Jumper
-                    schon markiert mit orangem gestricheltem Kreis -->
+       rot:    (298, 534)
+       schwarz: (314, 534)
+       orange:  (330, 534)
+       Breadboard-Anschluesse:
+       +Schiene Spalte 5:  (160, 251)
+       -Schiene Spalte 13: (300, 447)
+       a10:                (260, 281) -->
 
-  <!-- ROT: Servo "+" -> +Schiene-Loch -->
-  <path d="M 131 525 C 131 480, 200 360, 220 246" stroke="#d62828" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <circle cx="131" cy="525" r="3.5" fill="#d62828"/>
-  <circle cx="220" cy="246" r="3.5" fill="#d62828"/>
+  <!-- ROT: Servo VCC -> +Schiene -->
+  <path d="M 298 534 C 240 480, 180 360, 160 251" stroke="#d62828" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="298" cy="534" r="3.5" fill="#d62828"/>
+  <circle cx="160" cy="251" r="3.5" fill="#d62828"/>
 
-  <!-- SCHWARZ: Servo "-" -> -Schiene-Loch -->
-  <path d="M 143 525 C 180 510, 240 470, 260 443" stroke="#222" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <circle cx="143" cy="525" r="3.5" fill="#222"/>
-  <circle cx="260" cy="443" r="3.5" fill="#222"/>
+  <!-- SCHWARZ: Servo GND -> -Schiene-Loch unten -->
+  <path d="M 314 534 C 312 500, 305 470, 300 447" stroke="#222" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="314" cy="534" r="3.5" fill="#222"/>
+  <circle cx="300" cy="447" r="3.5" fill="#222"/>
 
-  <!-- ORANGE: Servo "S" -> a10 (gleiche Spalte wie Pin-9-Jumper) -->
-  <path d="M 155 525 C 200 460, 260 350, 280 277" stroke="#E67E22" stroke-width="3" fill="none" stroke-linecap="round"/>
-  <circle cx="155" cy="525" r="3.5" fill="#E67E22"/>
-  <circle cx="280" cy="277" r="3.5" fill="#E67E22"/>
+  <!-- ORANGE: Servo Signal -> a10 -->
+  <path d="M 330 534 C 335 460, 280 350, 260 281" stroke="#E67E22" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="330" cy="534" r="3.5" fill="#E67E22"/>
+  <circle cx="260" cy="281" r="3.5" fill="#E67E22"/>
 
-  <!-- ===================== HINWEIS-BOX rechts ===================== -->
-  <g transform="translate(320, 540)">
-    <rect x="0" y="0" width="380" height="120" rx="6" fill="#fff8e1" stroke="#ffb300" stroke-width="1.5"/>
-    <text x="20" y="26" font-size="13" font-weight="bold" fill="#5d4118">Polung beachten!</text>
-    <text x="20" y="48" font-size="11" fill="#5d4118"><tspan font-weight="bold" fill="#d62828">rot</tspan> &#8594; +5V (Versorgung)</text>
-    <text x="20" y="66" font-size="11" fill="#5d4118"><tspan font-weight="bold" fill="#222">braun/schwarz</tspan> &#8594; GND (Masse)</text>
-    <text x="20" y="84" font-size="11" fill="#5d4118"><tspan font-weight="bold" fill="#E67E22">orange/gelb</tspan> &#8594; Signal (Pin 9, ueber Spalte 10)</text>
-    <text x="20" y="106" font-size="10" font-style="italic" fill="#7d5a29">Die 3 gestrichelten Kreise oben markieren die Anschluss-Loecher am Breadboard.</text>
+  <!-- ===================== HINWEIS-BOX (unten breit) ===================== -->
+  <g transform="translate(60, 660)">
+    <rect x="0" y="0" width="640" height="50" rx="6" fill="#fff8e1" stroke="#ffb300" stroke-width="1.5"/>
+    <text x="14" y="22" font-size="12" font-weight="bold" fill="#5d4118">Polung beachten!</text>
+    <text x="14" y="40" font-size="11" fill="#5d4118"><tspan font-weight="bold" fill="#d62828">rot</tspan> &#8594; +5V &#183; <tspan font-weight="bold" fill="#222">braun/schwarz</tspan> &#8594; GND &#183; <tspan font-weight="bold" fill="#E67E22">orange/gelb</tspan> &#8594; Signal (Pin 9 ueber Spalte 10). Die 3 gestrichelten Kreise markieren die Anschluss-Loecher.</text>
   </g>
 </svg>

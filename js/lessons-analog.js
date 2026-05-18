@@ -272,11 +272,11 @@ Hitze:       U<sub>2</sub> = 5 V &middot; 4  / (10 + 4)  &asymp; <strong>1,43 V<
         svg: `
           <figure class="schaltbild-figur">
             <figcaption><strong>1. Schaltplan</strong> &mdash; so funktioniert die Schaltung elektrisch:</figcaption>
-            <img src="assets/lektion-30-spannungsteiler-schaltplan.svg?v=1" alt="Schaltplan Spannungsteiler: 5V - R1 - Abgriff U2 - R2 - GND, Multimeter zwischen Abgriff und GND" style="max-width: 100%; height: auto;" />
+            <img src="assets/lektion-30-spannungsteiler-schaltplan.svg?v=2" alt="Schaltplan Spannungsteiler: 5V - R1 - Abgriff U2 - R2 - GND, Multimeter zwischen Abgriff und GND" style="max-width: 100%; height: auto;" />
           </figure>
           <figure class="schaltbild-figur">
             <figcaption><strong>2. Aufbau am Steckbrett</strong> &mdash; so sieht der echte Aufbau aus:</figcaption>
-            <img src="assets/lektion-30-spannungsteiler-aufbau.svg?v=1" alt="Steckbrett-Aufbau Spannungsteiler: zwei 10k-Widerstaende in Reihe zwischen 5V-Schiene und GND-Schiene, Multimeter misst in der Mitte" style="max-width: 100%; height: auto;" />
+            <img src="assets/lektion-30-spannungsteiler-aufbau.svg?v=2" alt="Steckbrett-Aufbau Spannungsteiler: zwei 10k-Widerstaende in Reihe zwischen 5V-Schiene und GND-Schiene, Multimeter misst in der Mitte" style="max-width: 100%; height: auto;" />
           </figure>`,
         schritte: [
           'Stecke das <strong>rote Jumper-Kabel</strong> in den <strong>5V-Pin</strong> des Arduino und das andere Ende in die <strong>+Schiene (rot)</strong> oben am Breadboard.',
@@ -1641,11 +1641,11 @@ analogRead &asymp; <strong>682</strong></pre>
         svg: `
           <figure class="schaltbild-figur">
             <figcaption><strong>1. Schaltplan</strong> &mdash; so funktioniert die Schaltung elektrisch:</figcaption>
-            <img src="assets/lektion-31-ntc-schaltplan.svg?v=1" alt="Schaltplan NTC-Temperatursensor: 5V - 10k-Widerstand - A0-Abgriff - NTC - GND" style="max-width: 100%; height: auto;" />
+            <img src="assets/lektion-31-ntc-schaltplan.svg?v=2" alt="Schaltplan NTC-Temperatursensor: 5V - 10k-Widerstand - A0-Abgriff - NTC - GND" style="max-width: 100%; height: auto;" />
           </figure>
           <figure class="schaltbild-figur">
             <figcaption><strong>2. Aufbau am Steckbrett</strong> &mdash; so sieht der echte Aufbau aus:</figcaption>
-            <img src="assets/lektion-31-ntc-aufbau.svg?v=1" alt="Steckbrett-Aufbau NTC: fester 10k-Widerstand und NTC in Reihe zwischen 5V und GND, Mittelpunkt an A0" style="max-width: 100%; height: auto;" />
+            <img src="assets/lektion-31-ntc-aufbau.svg?v=2" alt="Steckbrett-Aufbau NTC: fester 10k-Widerstand und NTC in Reihe zwischen 5V und GND, Mittelpunkt an A0" style="max-width: 100%; height: auto;" />
           </figure>`,
         schritte: [
           'Stecke das <strong>rote Jumper-Kabel</strong> in den <strong>5V-Pin</strong> des Arduino und das andere Ende in die <strong>+Schiene</strong> oben am Breadboard.',

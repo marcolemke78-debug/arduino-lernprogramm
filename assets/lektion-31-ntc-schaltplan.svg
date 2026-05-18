@@ -31,12 +31,12 @@
   <text x="330" y="170" font-size="13" font-weight="bold" fill="#27AE60">A0</text>
   <text x="330" y="200" font-size="10" fill="#666">Analog-Pin Arduino</text>
 
-  <!-- NTC-Symbol: Rechteck mit Schraegstrich + "t&deg;" Label -->
+  <!-- NTC-Symbol: Rechteck mit Schraegstrich + "t&#176;" Label -->
   <rect x="150" y="200" width="40" height="60" fill="white" stroke="#222" stroke-width="2"/>
   <line x1="146" y1="260" x2="194" y2="200" stroke="#E67E22" stroke-width="2"/>
   <text x="200" y="232" font-size="13" font-weight="bold" fill="#E67E22">NTC</text>
   <text x="200" y="248" font-size="11" fill="#666">10 k&#937; bei 25 &#8451;</text>
-  <text x="200" y="262" font-size="10" font-style="italic" fill="#E67E22">t&deg; senkt R</text>
+  <text x="200" y="262" font-size="10" font-style="italic" fill="#E67E22">t&#176; senkt R</text>
 
   <!-- Verbindung NTC zu GND -->
   <line x1="170" y1="260" x2="170" y2="295" stroke="#222" stroke-width="2"/>
@@ -55,5 +55,5 @@
   <text x="50" y="210" font-size="11" fill="#888">= 5 V</text>
 
   <!-- Hinweis-Text unten -->
-  <text x="230" y="340" text-anchor="middle" font-size="11" fill="#666" font-style="italic">heiss &rarr; NTC-Widerstand sinkt &rarr; U&#8322; sinkt &rarr; analogRead sinkt</text>
+  <text x="230" y="340" text-anchor="middle" font-size="11" fill="#666" font-style="italic">heiss &#8594; NTC-Widerstand sinkt &#8594; U&#8322; sinkt &#8594; analogRead sinkt</text>
 </svg>

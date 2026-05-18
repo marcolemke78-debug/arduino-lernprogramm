@@ -273,11 +273,11 @@ void loop() {
         svg: `
           <figure class="schaltbild-figur">
             <figcaption><strong>1. Schaltplan</strong> &mdash; so funktioniert die Schaltung elektrisch:</figcaption>
-            <img src="assets/lektion-32-servo-schaltplan.svg?v=3" alt="Schaltplan Servo: 5V - Servo-Versorgung, GND - Servo-Masse, Pin 9 - Servo-Signal" style="max-width: 100%; height: auto;" />
+            <img src="assets/lektion-32-servo-schaltplan.svg?v=4" alt="Schaltplan Servo: 5V - Servo-Versorgung, GND - Servo-Masse, Pin 9 - Servo-Signal" style="max-width: 100%; height: auto;" />
           </figure>
           <figure class="schaltbild-figur">
             <figcaption><strong>2. Aufbau am Steckbrett</strong> &mdash; so sieht der echte Aufbau aus:</figcaption>
-            <img src="assets/lektion-32-servo-aufbau.svg?v=3" alt="Steckbrett-Aufbau Servo: Servo direkt mit Jumper-Kabeln an Arduino - rot zu 5V, schwarz zu GND, gelb zu Pin 9" style="max-width: 100%; height: auto;" />
+            <img src="assets/lektion-32-servo-aufbau.svg?v=4" alt="Steckbrett-Aufbau Servo: Servo direkt mit Jumper-Kabeln an Arduino - rot zu 5V, schwarz zu GND, gelb zu Pin 9" style="max-width: 100%; height: auto;" />
           </figure>`,
         schritte: [
           'Stecke das <strong>rote Jumper-Kabel</strong> in den <strong>5V-Pin</strong> des Arduino und das andere Ende an die <strong>+Schiene</strong> oben am Breadboard.',

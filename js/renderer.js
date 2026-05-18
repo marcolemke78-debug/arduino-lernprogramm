@@ -76,6 +76,7 @@ const Renderer = {
     const lessonData = LESSONS_GRUNDLAGEN.find(l => l.id === id)
       || LESSONS_DIGITAL.find(l => l.id === id)
       || LESSONS_ANALOG.find(l => l.id === id)
+      || (typeof LESSONS_AKTOREN !== 'undefined' && LESSONS_AKTOREN.find(l => l.id === id))
       || LESSONS_PROJEKT.find(l => l.id === id);
 
     // Titel aus der LESSONS-Liste (hat immer einen Eintrag)

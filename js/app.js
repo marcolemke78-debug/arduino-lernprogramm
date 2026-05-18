@@ -18,7 +18,9 @@ const LESSONS = [
   { id: 13, title: 'Lichtsensor (LDR)', module: 'analog' },
   { id: 31, title: 'NTC-Temperatursensor', module: 'analog' },
   { id: 14, title: 'Entscheidungen mit Sensorwerten', module: 'analog' },
-  // Modul 4: Prüfungsprojekt
+  // Modul 4: Aktoren erweitert
+  { id: 32, title: 'Servomotor ansteuern', module: 'aktoren' },
+  // Modul 5: Prüfungsprojekt
   { id: 15, title: 'Ampel mit Fußgängerüberweg', module: 'projekt' },
   { id: 16, title: 'Nachtabschaltung mit Lichtsensor', module: 'projekt' },
   { id: 17, title: 'Prüfungsschaltung komplett', module: 'projekt' },

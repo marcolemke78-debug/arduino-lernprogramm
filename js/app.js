@@ -16,6 +16,7 @@ const LESSONS = [
   { id: 11, title: 'Analoge Eingänge', module: 'analog' },
   { id: 12, title: 'PWM: Dimmen statt Schalten', module: 'analog' },
   { id: 13, title: 'Lichtsensor (LDR)', module: 'analog' },
+  { id: 31, title: 'NTC-Temperatursensor', module: 'analog' },
   { id: 14, title: 'Entscheidungen mit Sensorwerten', module: 'analog' },
   // Modul 4: Prüfungsprojekt
   { id: 15, title: 'Ampel mit Fußgängerüberweg', module: 'projekt' },

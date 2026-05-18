@@ -1351,6 +1351,364 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
     ]
   },
 
+  // ===================== LEKTION 16 (NTC, id 31) =====================
+  // RSAP-Pflicht-Lektion: NTC taucht in mehreren Pool-Aufgaben auf
+  // (Temperaturanzeige, Gewaechshaus, Lueftung). Baut direkt auf L11
+  // Spannungsteiler auf. Diese Lektion zeigt nur den Sensor +
+  // analogRead-Auslesen. Die Kombination Sensor->Aktor (LED schalten
+  // bei Schwellwert) folgt in der naechsten Lektion (Entscheidungen).
+  {
+    id: 31,
+    title: 'NTC-Temperatursensor',
+    explanation: {
+      html: `
+        <h2>NTC &ndash; Wenn Hitze den Widerstand schmelzen laesst</h2>
+        <p>Du kennst jetzt zwei analoge Sensoren: das Potentiometer (Drehung) und den LDR (Helligkeit). Jetzt kommt der dritte im Bunde: der <strong>NTC</strong>. Er misst <strong>Temperatur</strong> &ndash; und steckt in jedem Backofen-Thermometer, in deiner Heizung, sogar in deinem Smartphone-Akku.</p>
+
+        <div class="analogy-box">
+          <strong>Alltagsanalogie:</strong> Stell dir ein Schokoladenstueck an einem heissen Sommertag vor. Im Kuehlschrank ist es hart (= grosser Widerstand). Auf der Hand wird es weich, fast fluessig (= kleiner Widerstand). Ein NTC funktioniert genauso: kalt &rarr; "hart" &rarr; grosser Widerstand. Heiss &rarr; "weich" &rarr; kleiner Widerstand.
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Was bedeutet "NTC"?</h3>
+          <p>NTC ist die Abkuerzung fuer <strong>N</strong>egativer <strong>T</strong>emperatur<strong>K</strong>oeffizient (engl.: <em>Negative Temperature Coefficient</em>). Auf deutsch: <strong>negativer Zusammenhang</strong> zwischen Temperatur und Widerstand.</p>
+          <table class="icon-table">
+            <tr><th>Temperatur</th><th>Widerstand</th><th>Eselsbruecke</th></tr>
+            <tr><td><strong>kalt</strong></td><td>hoch</td><td>"kalt = klemmt"</td></tr>
+            <tr><td><strong>warm</strong></td><td>mittel</td><td>Zimmer = Nennwert (z.B. 10 k&Omega;)</td></tr>
+            <tr><td><strong>heiss</strong></td><td>niedrig</td><td>"heiss = haut ab"</td></tr>
+          </table>
+
+          <div class="tip-box">
+            <strong>Gegenstueck:</strong> Es gibt auch <strong>PTC-</strong>Widerstaende (<strong>P</strong>ositiver Temperatur-Koeffizient). Bei denen ist es umgekehrt &ndash; je waermer, desto hoeher der Widerstand. Im Arduino-Unterricht arbeiten wir aber fast immer mit NTCs.
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Die typische NTC-Kennlinie (10 k&Omega; NTC)</h3>
+          <p>Ein "10 k&Omega; NTC" hat seinen <strong>Nennwiderstand</strong> bei 25&nbsp;&deg;C &ndash; also Zimmertemperatur. Bei anderen Temperaturen sieht es ungefaehr so aus:</p>
+
+          <table class="icon-table">
+            <tr><th>Temperatur</th><th>Widerstand (ca.)</th><th>Was bedeutet das?</th></tr>
+            <tr><td>0&nbsp;&deg;C</td><td>33 k&Omega;</td><td>Eiswuerfel-Test</td></tr>
+            <tr><td>25&nbsp;&deg;C</td><td><strong>10 k&Omega;</strong></td><td>Zimmertemperatur (Nennwert)</td></tr>
+            <tr><td>50&nbsp;&deg;C</td><td>3,6 k&Omega;</td><td>Heisses Wasser-Glas</td></tr>
+            <tr><td>100&nbsp;&deg;C</td><td>1 k&Omega;</td><td>Kochend (achtung, nicht in echt machen!)</td></tr>
+          </table>
+
+          <div class="warning-box">
+            <strong>Vorsicht im Unterricht:</strong> Klassische NTC-Bauteile (klein, schwarz, mit zwei langen Beinchen) vertragen Zimmertemperatur + Finger-Erwaermung problemlos. Aber sie sind <strong>keine Kochthermometer</strong> &ndash; nicht ins heisse Wasser oder gar in die Flamme halten!
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Vom Widerstand zur Spannung &ndash; der Spannungsteiler</h3>
+          <p>Der Arduino kann <strong>keinen Widerstand</strong> direkt messen &ndash; nur Spannung. Also brauchen wir wieder unseren alten Freund aus Lektion 11: den <strong>Spannungsteiler</strong>.</p>
+
+          <p>Wir bauen den NTC als <strong>untere</strong> Haelfte (R<sub>2</sub>) des Spannungsteilers, oben kommt ein fester 10-k&Omega;-Widerstand (R<sub>1</sub>). Der Mittelpunkt geht an Pin <code>A0</code> des Arduino:</p>
+
+          <svg viewBox="0 0 460 280" style="width:100%;max-width:400px;margin:1em auto;display:block;font-family:system-ui;">
+            <rect x="0" y="0" width="460" height="280" rx="8" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1"/>
+
+            <!-- +5V oben -->
+            <line x1="170" y1="20" x2="170" y2="55" stroke="#222" stroke-width="2"/>
+            <circle cx="170" cy="20" r="4" fill="#C0392B"/>
+            <text x="155" y="25" text-anchor="end" font-size="12" font-weight="bold" fill="#C0392B">+5 V</text>
+
+            <!-- R1 fest (Rechteck) -->
+            <rect x="150" y="55" width="40" height="50" fill="white" stroke="#222" stroke-width="2"/>
+            <text x="210" y="78" font-size="13" font-weight="bold" fill="#222">R<tspan font-size="10" baseline-shift="sub">1</tspan> = 10 k&#937;</text>
+            <text x="210" y="93" font-size="10" fill="#666">(fester Widerstand)</text>
+
+            <!-- Mittelpunkt -->
+            <line x1="170" y1="105" x2="170" y2="140" stroke="#222" stroke-width="2"/>
+            <circle cx="170" cy="125" r="4" fill="#2980B9"/>
+            <line x1="170" y1="125" x2="320" y2="125" stroke="#2980B9" stroke-width="2"/>
+            <text x="330" y="130" font-size="13" font-weight="bold" fill="#2980B9">A0 (Arduino)</text>
+
+            <!-- NTC-Symbol: Rechteck mit Schraegstrich + "t" -->
+            <rect x="150" y="140" width="40" height="50" fill="white" stroke="#222" stroke-width="2"/>
+            <line x1="150" y1="190" x2="190" y2="140" stroke="#E67E22" stroke-width="2"/>
+            <text x="200" y="167" font-size="11" font-weight="bold" fill="#E67E22">t&deg;</text>
+            <text x="225" y="167" font-size="13" font-weight="bold" fill="#222">R<tspan font-size="10" baseline-shift="sub">2</tspan> = NTC</text>
+            <text x="225" y="182" font-size="10" fill="#666">(temperaturabhaengig)</text>
+
+            <!-- GND -->
+            <line x1="170" y1="190" x2="170" y2="225" stroke="#222" stroke-width="2"/>
+            <line x1="155" y1="225" x2="185" y2="225" stroke="#222" stroke-width="2.5"/>
+            <line x1="160" y1="232" x2="180" y2="232" stroke="#222" stroke-width="2"/>
+            <line x1="165" y1="239" x2="175" y2="239" stroke="#222" stroke-width="2"/>
+            <text x="195" y="230" font-size="12" fill="#222">GND</text>
+
+            <!-- Beschriftung U2 -->
+            <text x="50" y="125" font-size="11" font-weight="bold" fill="#888">U<tspan font-size="9" baseline-shift="sub">2</tspan> = Sensor-</text>
+            <text x="50" y="140" font-size="11" font-weight="bold" fill="#888">spannung</text>
+            <line x1="120" y1="125" x2="165" y2="125" stroke="#888" stroke-width="1" stroke-dasharray="3 2"/>
+          </svg>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Was misst der Arduino bei verschiedenen Temperaturen?</h3>
+          <p>Der Arduino wandelt die Sensor-Spannung U<sub>2</sub> ueber den <strong>AD-Wandler</strong> in einen Zahlenwert zwischen 0 und 1023. Mit unserer Schaltung (R<sub>1</sub>&nbsp;=&nbsp;10&nbsp;k&Omega;, NTC = R<sub>2</sub>) ergeben sich diese ungefaehren Werte:</p>
+
+          <table class="icon-table">
+            <tr><th>Temperatur</th><th>NTC R<sub>2</sub></th><th>U<sub>2</sub></th><th>analogRead-Wert</th></tr>
+            <tr><td>0&nbsp;&deg;C (kalt)</td><td>33 k&Omega;</td><td>3,84 V</td><td><strong>~ 786</strong></td></tr>
+            <tr><td>25&nbsp;&deg;C (Zimmer)</td><td>10 k&Omega;</td><td>2,50 V</td><td><strong>~ 511</strong></td></tr>
+            <tr><td>50&nbsp;&deg;C (warm)</td><td>3,6 k&Omega;</td><td>1,32 V</td><td><strong>~ 270</strong></td></tr>
+            <tr><td>100&nbsp;&deg;C (sehr heiss)</td><td>1 k&Omega;</td><td>0,45 V</td><td><strong>~ 92</strong></td></tr>
+          </table>
+
+          <div class="tip-box">
+            <strong>Merksatz:</strong> <em>Heisser Sensor, kleiner Zahlenwert.</em> Das ist die wichtigste Faustregel fuer das Programmieren. Du wirst in der naechsten Lektion damit Entscheidungen treffen (&bdquo;Wenn analogRead unter 300 &rarr; LED an").
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Wofuer braucht man NTCs in der Pruefung?</h3>
+          <p>In der Realschulabschlusspruefung (RSAP) Technik BW tauchen NTCs in mehreren Aufgaben auf:</p>
+          <ul>
+            <li><strong>Temperaturanzeige mit RGB-LED:</strong> Rot bei Hitze, blau bei Kaelte, gruen bei Wohlfuehltemperatur.</li>
+            <li><strong>Gewaechshaus-Lueftung:</strong> Wenn es zu heiss wird, oeffnet ein Servomotor das Dachfenster.</li>
+            <li><strong>Lueftungs-Steuerung:</strong> Bei Hitze startet ein DC-Motor (Luefter).</li>
+          </ul>
+          <p>Alle drei beginnen mit dem gleichen Grundbaustein: <strong>NTC im Spannungsteiler &rarr; analogRead</strong>. Wenn du <em>diese</em> Lektion verstanden hast, hast du den Sensor-Teil all dieser Aufgaben schon im Griff.</p>
+        </div>
+      `
+    },
+    example: {
+      title: 'Was passiert in der Schaltung, wenn der NTC warm wird?',
+      steps: [
+        {
+          label: 'Ausgangslage: Zimmertemperatur (25 &deg;C)',
+          html: `
+            <p>Du baust die NTC-Schaltung wie oben gezeigt auf. Der Raum hat normale Zimmertemperatur. Der NTC hat in diesem Zustand seinen <strong>Nennwert von 10 k&Omega;</strong>. Damit ist die Schaltung ein <strong>symmetrischer Spannungsteiler</strong>:</p>
+            <pre style="background:#f5f5f5;padding:0.8rem;border-left:3px solid #2980B9;">
+R<sub>1</sub> = 10 k&Omega; (fest)
+R<sub>2</sub> = 10 k&Omega; (NTC bei 25 &deg;C)
+U<sub>2</sub> = 5 V &middot; 10 / (10 + 10) = <strong>2,5 V</strong>
+analogRead &asymp; 2,5 V &middot; 1023 / 5 V &asymp; <strong>511</strong></pre>
+            <p>Im Serial Monitor steht: <code>511</code> (mit kleinen Schwankungen, z.&nbsp;B. 508, 513).</p>
+          `
+        },
+        {
+          label: 'Du legst den Finger auf den NTC',
+          html: `
+            <p>Dein Finger hat ca. 35&nbsp;&deg;C. Der NTC erwaermt sich und sein Widerstand <strong>sinkt</strong> auf ca. 7 k&Omega;:</p>
+            <pre style="background:#f5f5f5;padding:0.8rem;border-left:3px solid #E67E22;">
+R<sub>1</sub> = 10 k&Omega; (fest)
+R<sub>2</sub> = 7 k&Omega; (NTC bei 35 &deg;C)
+U<sub>2</sub> = 5 V &middot; 7 / (10 + 7) = 5 V &middot; 7/17 &asymp; <strong>2,06 V</strong>
+analogRead &asymp; <strong>421</strong></pre>
+            <p>Der Wert <strong>sinkt</strong> von 511 auf etwa 421. Das ist im Serial Monitor sofort sichtbar.</p>
+          `
+        },
+        {
+          label: 'Du atmest ihn an oder hauchst direkt drauf (~ 50 &deg;C)',
+          html: `
+            <p>Bei einem warmen Atemzug oder Foen-Hauch erhitzt sich der NTC auf etwa 50&nbsp;&deg;C. Sein Widerstand sinkt drastisch auf ca. 3,6 k&Omega;:</p>
+            <pre style="background:#f5f5f5;padding:0.8rem;border-left:3px solid #C0392B;">
+R<sub>2</sub> = 3,6 k&Omega; (NTC bei 50 &deg;C)
+U<sub>2</sub> = 5 V &middot; 3,6 / 13,6 &asymp; <strong>1,32 V</strong>
+analogRead &asymp; <strong>270</strong></pre>
+            <p>Der Wert fiel deutlich. Heiss = kleiner Zahlenwert.</p>
+          `
+        },
+        {
+          label: 'NTC abkuehlen lassen (z.B. Eiswuerfel danebenhalten)',
+          html: `
+            <p>Wenn du den NTC vorsichtig <strong>abkuehlst</strong> (Eiswuerfel in der Hand 10&nbsp;cm daneben halten, NICHT direkt drauf!), steigt sein Widerstand &uuml;ber den Nennwert:</p>
+            <pre style="background:#f5f5f5;padding:0.8rem;border-left:3px solid #2980B9;">
+R<sub>2</sub> = 20 k&Omega; (NTC bei 10 &deg;C)
+U<sub>2</sub> = 5 V &middot; 20 / 30 &asymp; <strong>3,33 V</strong>
+analogRead &asymp; <strong>682</strong></pre>
+            <p>Der Wert <strong>steigt</strong>. Kalt = groesserer Zahlenwert. Genau dieses Verhalten kannst du in der naechsten Lektion mit <code>if</code>-Abfragen ausnutzen: <em>"Wenn Wert &lt; 300, schalte die LED ein."</em></p>
+          `
+        }
+      ]
+    },
+    exercises: [
+      {
+        type: 'multiple-choice',
+        question: 'Wofuer steht die Abkuerzung NTC?',
+        options: [
+          'New Temperature Control',
+          'Negative Temperature Coefficient (Negativer Temperaturkoeffizient)',
+          'Normal Temperature Component',
+          'Niedrige Temperatur-Charakteristik'
+        ],
+        correct: 1,
+        explanation: 'Richtig! NTC = Negative Temperature Coefficient. "Negativ" bedeutet hier: Temperatur und Widerstand verhalten sich gegensaetzlich &ndash; steigt das eine, sinkt das andere.',
+        wrongExplanations: {
+          0: 'Nein, das klingt zwar plausibel, ist aber ein Fantasie-Name. Achte in der Fachsprache immer auf den Begriff "Coefficient" (Koeffizient).',
+          2: 'Nein, das gibt es so nicht. Wichtig ist das Wort "Coefficient" (Koeffizient), nicht "Component".',
+          3: 'Nein, die Abkuerzung kommt aus dem Englischen, nicht aus dem Deutschen.'
+        }
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Wie veraendert sich der Widerstand eines NTC, wenn die Temperatur steigt?',
+        options: [
+          'Er wird groesser',
+          'Er wird kleiner',
+          'Er bleibt gleich',
+          'Er wird negativ'
+        ],
+        correct: 1,
+        explanation: 'Richtig! Bei steigender Temperatur sinkt der Widerstand eines NTC. Eselsbruecke: "Heiss = haut ab" (der Widerstand schmilzt davon).',
+        wrongExplanations: {
+          0: 'Das waere ein PTC (Positiver Temperaturkoeffizient) &ndash; den gibt es auch, aber er ist im Arduino-Unterricht selten. Beim NTC ist es genau umgekehrt.',
+          2: 'Wenn er gleich bliebe, koennte man damit keine Temperatur messen. Der ganze Witz ist gerade die Veraenderung.',
+          3: 'Widerstaende sind immer positiv. "Negativ" im Namen NTC bezieht sich auf den Zusammenhang Temp&harr;Widerstand, nicht auf den Widerstandswert selbst.'
+        }
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Du baust einen Spannungsteiler mit NTC als R2 (unten) und 10 kOhm fest als R1 (oben). Was passiert mit der Spannung U2 (am NTC) und damit dem analogRead-Wert, wenn der NTC erwaermt wird?',
+        options: [
+          'U2 steigt &rarr; analogRead steigt',
+          'U2 sinkt &rarr; analogRead sinkt',
+          'U2 bleibt konstant',
+          'analogRead springt auf 0'
+        ],
+        correct: 1,
+        explanation: 'Richtig! NTC waermer &rarr; R2 sinkt &rarr; kleinerer Anteil im Spannungsteiler &rarr; U2 sinkt &rarr; analogRead-Wert wird kleiner. Daraus folgt der wichtige Merksatz: "Heisser Sensor, kleiner Zahlenwert."',
+        wrongExplanations: {
+          0: 'Nein, andersrum: R2 sinkt &rarr; U2 sinkt &rarr; analogRead sinkt. Die Spannung folgt dem Widerstand.',
+          2: 'Konstant kann sie nicht sein &ndash; sonst gaebe es ja keine Messung. Der NTC aendert sein R, also auch U2.',
+          3: 'analogRead wuerde nur dann auf 0 springen, wenn U2 = 0 V (also R2 = 0). Bei normalen Temperaturen liegt der NTC zwischen 1 k&Omega; und 100 k&Omega;, U2 ist also immer zwischen 0,4 V und 4,5 V.'
+        }
+      },
+      {
+        type: 'matching',
+        question: 'Ordne die Temperatur dem ungefaehren analogRead-Wert zu (Schaltung: NTC unten + 10kOhm fest oben).',
+        pairs: [
+          { left: '0 °C (Eiswuerfel)', right: '~ 786 (sehr hoch)' },
+          { left: '25 °C (Zimmertemperatur)', right: '~ 511 (mittig)' },
+          { left: '50 °C (Tasse heisses Wasser danebenhalten)', right: '~ 270 (klein)' },
+          { left: '100 °C (kochend, NICHT in echt machen)', right: '~ 92 (sehr klein)' }
+        ]
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Im Serial Monitor liest du folgenden Wert ab: analogRead = 80. Was bedeutet das fuer die Temperatur am NTC (Schaltung: NTC unten + 10kOhm fest oben)?',
+        options: [
+          'Der NTC ist sehr kalt',
+          'Der NTC hat ungefaehr Zimmertemperatur',
+          'Der NTC ist sehr heiss',
+          'Der NTC ist defekt (Kurzschluss)'
+        ],
+        correct: 2,
+        explanation: 'Richtig! Ein analogRead-Wert um 80 entspricht einer NTC-Temperatur von ca. 100 &deg;C. Merke: kleiner Zahlenwert = heisser Sensor.',
+        wrongExplanations: {
+          0: 'Sehr kalt waere ein grosser Wert (Richtung 800-1000). Hier ist es genau umgekehrt.',
+          1: 'Zimmertemperatur liegt bei ungefaehr 511 (mittig). 80 ist deutlich darunter.',
+          3: 'Bei einem Kurzschluss waere der Wert exakt 0 oder exakt 1023. 80 ist plausibel und entspricht einer realen Temperatur.'
+        }
+      }
+    ],
+    // === Praxis-Tab (Tab 4) ===
+    // Erst-Kontakt mit dem NTC: Schaltung aufbauen, Serial Monitor
+    // beobachten, mit dem Finger waermen. Schwellwert-Steuerung mit
+    // LED kommt erst in der NAECHSTEN Lektion (Entscheidungen mit
+    // Sensorwerten). So bleibt der Praxis-Teil hier fokussiert auf
+    // "Sensor verstehen und auslesen".
+    praxis: {
+      aufgabe: {
+        titel: 'NTC-Werte im Serial Monitor beobachten',
+        auftrag: '<p>Baue einen NTC-Spannungsteiler an Pin <code>A0</code> des Arduino. Schreibe ein Programm, das den NTC alle halbe Sekunde ausliest und den Wert im <strong>Serial Monitor</strong> ausgibt.</p><p><strong>Deine drei Aufgaben:</strong></p><ol><li><strong>Hardware:</strong> Baue die Schaltung nach dem Schaltplan auf. Achtung: NTC kommt nach <strong>unten</strong>, der feste 10-k&Omega;-Widerstand nach oben.</li><li><strong>Software:</strong> Vervollstaendige das Code-Geruest unten. Lade es auf den Arduino.</li><li><strong>Beobachten:</strong> Oeffne den Serial Monitor (Werkzeuge &rarr; Serial Monitor, 9600 Baud) und beobachte den Wert. Halte dann den Finger auf den NTC &ndash; was passiert mit dem Wert?</li></ol>',
+        lernziel: 'Du kannst einen NTC als Spannungsteiler an einen analogen Pin anschliessen, den Wert mit <code>analogRead()</code> auslesen und mit <code>Serial.println()</code> beobachten. Du verstehst, dass <em>heisser Sensor = kleiner Zahlenwert</em>.'
+      },
+      bauteile: [
+        { name: 'Arduino Uno', anzahl: 1 },
+        { name: 'Steckbrett (Breadboard)', anzahl: 1 },
+        { name: 'NTC 10 kΩ', anzahl: 1, hinweis: 'Klein, schwarz, mit 2 langen Beinchen. Beine sind nicht gepolt &ndash; beliebige Reihenfolge.' },
+        { name: 'Widerstand 10 kΩ', anzahl: 1, hinweis: 'Farbcode: braun-schwarz-orange' },
+        { name: 'Jumper-Kabel', anzahl: 3, hinweis: 'rot (5V), schwarz (GND), gelb/gruen fuer A0' },
+        { name: 'USB-Kabel', anzahl: 1, hinweis: 'Fuer Strom + Serial Monitor' }
+      ],
+      anschluss: {
+        svg: `
+          <figure class="schaltbild-figur">
+            <figcaption><strong>1. Schaltplan</strong> &mdash; so funktioniert die Schaltung elektrisch:</figcaption>
+            <img src="assets/lektion-31-ntc-schaltplan.svg?v=1" alt="Schaltplan NTC-Temperatursensor: 5V - 10k-Widerstand - A0-Abgriff - NTC - GND" style="max-width: 100%; height: auto;" />
+          </figure>
+          <figure class="schaltbild-figur">
+            <figcaption><strong>2. Aufbau am Steckbrett</strong> &mdash; so sieht der echte Aufbau aus:</figcaption>
+            <img src="assets/lektion-31-ntc-aufbau.svg?v=1" alt="Steckbrett-Aufbau NTC: fester 10k-Widerstand und NTC in Reihe zwischen 5V und GND, Mittelpunkt an A0" style="max-width: 100%; height: auto;" />
+          </figure>`,
+        schritte: [
+          'Stecke das <strong>rote Jumper-Kabel</strong> in den <strong>5V-Pin</strong> des Arduino und das andere Ende in die <strong>+Schiene</strong> oben am Breadboard.',
+          'Stecke das <strong>schwarze Jumper-Kabel</strong> in einen <strong>GND-Pin</strong> des Arduino und das andere Ende in die <strong>&minus;Schiene</strong> oben am Breadboard.',
+          'Stecke den <strong>10&nbsp;k&Omega;-Widerstand (R<sub>1</sub>, fest)</strong> waagrecht ein: ein Bein in die <strong>+Schiene</strong>, das andere Bein in Loch <code>c5</code>.',
+          'Stecke den <strong>NTC</strong> senkrecht ein: ein Beinchen in Loch <code>a5</code> (gleiche Spalte wie c5 &rarr; elektrisch verbunden = Mittelpunkt), das andere Beinchen in die <strong>&minus;Schiene</strong> (GND).',
+          'Verbinde mit einem <strong>gelben oder gruenen Jumper-Kabel</strong> den <strong>Mittelpunkt</strong> (z.B. Loch <code>b5</code>, gleiche Spalte wie der NTC- und der R-Anschluss) mit Pin <code>A0</code> am Arduino.',
+          'Schliesse den Arduino mit dem USB-Kabel an den Computer an. Lade dein Programm hoch (Pfeil-nach-rechts-Symbol in der IDE).',
+          'Oeffne den <strong>Serial Monitor</strong> (Werkzeuge &rarr; Serial Monitor oder Lupe-Symbol oben rechts in der IDE). Stelle unten rechts <code>9600 Baud</code> ein. Es sollten Zahlen zwischen 0 und 1023 erscheinen, alle 500 ms eine neue.',
+          'Halte deinen <strong>Finger</strong> direkt auf den NTC. Beobachte: Der Wert <strong>sinkt</strong>. Lass los und warte 30 Sekunden &ndash; der Wert <strong>steigt</strong> wieder zurueck.'
+        ]
+      },
+      code_hinweise: {
+        geruest:
+`const int NTC_PIN = A0;
+
+void setup() {
+  // TODO: Serial-Verbindung starten mit 9600 Baud
+  // Tipp: Serial.begin(?);
+}
+
+void loop() {
+  // TODO: NTC-Wert auslesen und in einer Variablen speichern
+  // Tipp: int wert = analogRead(?);
+
+  // TODO: Wert im Serial Monitor ausgeben
+  // Tipp: Serial.println(?);
+
+  delay(500); // halbe Sekunde warten, dann naechste Messung
+}`,
+        tipps: [
+          'Der Pin <code>A0</code> ist als Konstante <code>NTC_PIN</code> schon oben definiert &ndash; benutze sie statt der Zahl A0 direkt.',
+          'Im <code>setup()</code> rufst du <code>Serial.begin(9600)</code> nur EINMAL auf. Im <code>loop()</code> brauchst du es nicht.',
+          'Wenn du nur Serial.print statt Serial.println verwendest, kleben alle Werte in einer Zeile aneinander. Mit <strong>ln</strong> ist es eine Zeile pro Wert &ndash; viel besser lesbar.',
+          'Falls der Serial Monitor leer bleibt: Pruefe die Baudrate (unten rechts muss 9600 stehen) und ob das richtige Board und der richtige Port in der IDE ausgewaehlt sind.'
+        ]
+      },
+      loesung: {
+        code:
+`const int NTC_PIN = A0;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int wert = analogRead(NTC_PIN);
+  Serial.println(wert);
+  delay(500);
+}`,
+        erklaerung: '<p>Im <code>setup()</code> wird die Serial-Verbindung mit 9600 Baud gestartet &ndash; das ist die "Geschwindigkeit" der Datenuebertragung zwischen Arduino und PC. 9600 ist der ueblichste Wert im Unterricht.</p><p>In der <code>loop()</code> liest <code>analogRead(NTC_PIN)</code> den Spannungspegel am Pin A0 und wandelt ihn in einen Zahlenwert zwischen 0 und 1023 um. Dieser Wert landet in der Variablen <code>wert</code> und wird mit <code>Serial.println()</code> an den PC geschickt. Das <code>delay(500)</code> sorgt fuer eine halbe Sekunde Pause, damit die Anzeige im Serial Monitor nicht zu schnell scrollt.</p><p><strong>Erwartete Werte (Zimmertemperatur 22-25 &deg;C):</strong> ca. 480-540 &ndash; je nach Raumtemperatur, exaktem NTC-Modell und USB-Versorgungsspannung. Bei Finger-Erwaermung sinkt der Wert in 5-10 Sekunden um 50-150 Einheiten.</p>',
+        haeufige_fehler: [
+          '<strong>Serial Monitor zeigt nichts:</strong> Falscher Port (Werkzeuge &rarr; Port) oder falsches Board (Werkzeuge &rarr; Board) ausgewaehlt. Auch pruefen: Stimmt die Baudrate (9600) im Monitor mit der im Code (Serial.begin(9600)) ueberein?',
+          '<strong>Wert ist immer 0:</strong> Mittelpunkt des Spannungsteilers ist nicht mit A0 verbunden &ndash; oder das Mittelpunkt-Kabel steckt versehentlich in GND.',
+          '<strong>Wert ist immer 1023:</strong> Mittelpunkt ist direkt mit 5V verbunden &ndash; meistens steckt das A0-Kabel an der falschen Stelle, oder der NTC ist nicht angeschlossen (offene Leitung &rarr; floating &rarr; analogRead liefert wirres Zeug, aber tendenziell hoch).',
+          '<strong>Wert wackelt extrem (z.B. 200, 800, 50, 950 ...):</strong> Verbindung am Mittelpunkt ist nicht gesteckt (loses Kabel). Pin "schwimmt" elektrisch.',
+          '<strong>Wert reagiert kaum auf Finger:</strong> Du hast eventuell einen falschen Sensor (PTC statt NTC, oder einen anderen Festwiderstand) eingebaut. Pruefe die Bauteile-Box: NTC sind meist klein-schwarz mit Aufdruck, einfache Widerstaende haben Farbringe.',
+          '<strong>Wert sinkt zu langsam:</strong> Der NTC hat eine thermische Traegheit von einigen Sekunden &ndash; das ist normal. Bei langsamen NTCs hilft direktes Auflegen und 10-15 Sekunden warten.'
+        ]
+      }
+    }
+  },
+
   // ===================== LEKTION 14 =====================
   {
     id: 14,

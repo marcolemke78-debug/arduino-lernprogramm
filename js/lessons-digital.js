@@ -280,7 +280,76 @@ const LESSONS_DIGITAL = [
         correct: 1,
         explanation: 'Zuerst wird der Pin als OUTPUT gesetzt, dann mit digitalWrite(5, HIGH) eingeschaltet. Ohne OUTPUT-Modus kann der Pin keinen Strom liefern.'
       }
-    ]
+    ],
+    // === Praxis-Tab (Tab 4) ===
+    // Inhalte werden gemeinsam Schritt fuer Schritt mit Marco erarbeitet.
+    // Aktuell: Platzhalter, damit Layout/Renderer testbar ist.
+    praxis: {
+      aufgabe: {
+        titel: 'Eigene LED zum Leuchten bringen',
+        auftrag: '<p>Baue auf dem Steckbrett eine Schaltung, mit der eine rote LED an <strong>Pin 8</strong> dauerhaft leuchtet, sobald der Arduino mit Strom versorgt wird.</p><p><strong>Deine zwei Aufgaben:</strong></p><ol><li><strong>Hardware:</strong> Baue die Schaltung nach dem Schaltbild unten auf. Achte auf den Vorwiderstand und die Polung der LED.</li><li><strong>Software:</strong> Schreibe ein Arduino-Programm. Vervollstaendige dazu das Code-Geruest weiter unten und lade es auf deinen Arduino.</li></ol>',
+        lernziel: 'Du kannst eine LED korrekt an einen frei waehlbaren Pin anschliessen und mit <code>pinMode()</code> und <code>digitalWrite()</code> einschalten.'
+      },
+      bauteile: [
+        { name: 'Arduino Uno', anzahl: 1 },
+        { name: 'Steckbrett (Breadboard)', anzahl: 1 },
+        { name: 'LED rot', anzahl: 1, hinweis: 'Langes Bein = Plus (Anode)' },
+        { name: 'Widerstand 220 Ω', anzahl: 1, hinweis: 'Farbcode: rot-rot-braun' },
+        { name: 'Jumper-Kabel', anzahl: 2, hinweis: 'Stecker-Stecker' },
+        { name: 'USB-Kabel', anzahl: 1, hinweis: 'Zum Anschluss an den PC' }
+      ],
+      anschluss: {
+        svg: `
+          <figure class="schaltbild-figur">
+            <figcaption><strong>1. Schaltplan</strong> &mdash; so funktioniert die Schaltung elektrisch:</figcaption>
+            <img src="assets/lektion-05-led-pin8-schaltplan.svg?v=6" alt="Schaltplan: Pin 8 - 220 Ohm Widerstand - LED rot - GND" style="max-width: 100%; height: auto;" />
+          </figure>
+          <figure class="schaltbild-figur">
+            <figcaption><strong>2. Aufbau am Steckbrett</strong> &mdash; so sieht der echte Aufbau aus:</figcaption>
+            <img src="assets/lektion-05-led-pin8-aufbau.svg?v=6" alt="Steckbrett-Aufbau: LED an Pin 8 mit 220 Ohm Vorwiderstand" style="max-width: 100%; height: auto;" />
+          </figure>`,
+        schritte: [
+          'Stecke die LED senkrecht in das Steckbrett, <strong>ueber die Mittelluecke</strong>: der <strong>lange Anschluss</strong> (Anode, +) in Loch <code>f12</code>, der <strong>kurze Anschluss</strong> (Kathode, &minus;) genau gegenueber in <code>e12</code>.',
+          'Stecke den 220&nbsp;&Omega;-Widerstand <strong>waagrecht</strong> in das Steckbrett: ein Bein in <code>g12</code> (gleiche Reihe wie die LED-Anode), das andere Bein 3 Reihen weiter in <code>g15</code>.',
+          'Verbinde mit einem <strong>roten Jumper-Kabel</strong> <strong>Pin 8</strong> des Arduino mit Loch <code>h15</code>. <em>(Dadurch fliesst der Strom von Pin&nbsp;8 ueber den Widerstand zur LED.)</em>',
+          'Verbinde mit einem <strong>schwarzen Jumper-Kabel</strong> Loch <code>d12</code> (gleiche Reihe wie die LED-Kathode) mit einem <strong>GND-Pin</strong> des Arduino. <em>Tipp: GND gibt es mehrmals &mdash; im Schaltbild nutzen wir den <strong>GND auf der Digital-Pin-Reihe</strong> (links neben AREF).</em>',
+          'Schliesse den Arduino mit dem USB-Kabel an den PC an &mdash; die LED bleibt zunaechst dunkel, weil das Programm noch fehlt.'
+        ]
+      },
+      code_hinweise: {
+        geruest:
+`void setup() {
+  // TODO: Pin 8 als Ausgang festlegen
+  // Tipp: pinMode(?, ?);
+}
+
+void loop() {
+  // TODO: LED an Pin 8 einschalten
+  // Tipp: digitalWrite(?, ?);
+}`,
+        tipps: [
+          'Welche Konstanten kennst du fuer "an" und "aus"? (Lektion: HIGH / LOW)',
+          'Vergiss <code>pinMode()</code> im setup() nicht — sonst leuchtet nichts.'
+        ]
+      },
+      loesung: {
+        code:
+`void setup() {
+  pinMode(8, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(8, HIGH);
+}`,
+        erklaerung: '<p>Im <code>setup()</code> wird Pin 8 als Ausgang konfiguriert — das passiert genau einmal beim Start. In der <code>loop()</code> wird der Pin dauerhaft auf HIGH (5V) gesetzt, die LED leuchtet konstant. <em>Erklaerung wird beim Pilot ggf. noch verfeinert.</em></p>',
+        haeufige_fehler: [
+          '<strong>Vorwiderstand vergessen:</strong> LED brennt sofort durch — riecht verbrannt.',
+          '<strong>LED falsch herum:</strong> Langes Bein (Anode) muss zum Widerstand/+5V, kurzes Bein zu GND.',
+          '<strong>pinMode() vergessen:</strong> LED bleibt dunkel, kein Strom am Ausgang.',
+          '<strong>Falscher Pin im Code:</strong> Code zeigt Pin 8, Kabel steckt in Pin 7 — kommt erstaunlich oft vor.'
+        ]
+      }
+    }
   },
 
   // ===================== LEKTION 6 =====================

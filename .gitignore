@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# Fremde Urheberrechte (CC-NC + KM-BW) — NIE ins oeffentliche Repo
+Arduino-Lernskripte/
+*.docx
+
+# Symlink/Mirror auf ~/Desktop/lernapp-framework/ — eigenes Verzeichnis
+lernapp-framework/
+
+# Editor / Tooling
+.vscode/
+.idea/
+*.swp
+*~

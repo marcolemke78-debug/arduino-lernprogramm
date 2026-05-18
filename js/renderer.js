@@ -102,6 +102,15 @@ const Renderer = {
       { key: 'exercises', label: 'Übung' }
     ];
 
+    // Tab 4 (Praxis) nur wenn die Lektion einen Praxisteil hat
+    if (lessonData.praxis) {
+      phases.push({ key: 'praxis', label: 'Praxis' });
+      // Tab 5 (Lösung) nur für Lehrer:innen sichtbar (?teacher=1)
+      if (Renderer.isTeacherMode() && lessonData.praxis.loesung) {
+        phases.push({ key: 'loesung', label: 'Lösung' });
+      }
+    }
+
     phases.forEach((phase, i) => {
       const btn = document.createElement('button');
       btn.className = 'phase-tab' + (i === 0 ? ' active' : '');
@@ -189,6 +198,24 @@ const Renderer = {
           }
         });
       });
+    }
+
+    // Phase: Praxis (Tab 4) - nur wenn vorhanden
+    if (lessonData.praxis) {
+      const praxisSection = document.createElement('section');
+      praxisSection.className = 'phase praxis';
+      praxisSection.id = 'phase-praxis';
+      Renderer.renderPraxis(lessonData.praxis, praxisSection);
+      container.appendChild(praxisSection);
+
+      // Phase: Lösung (Tab 5) - nur im Teacher-Mode
+      if (Renderer.isTeacherMode() && lessonData.praxis.loesung) {
+        const loesungSection = document.createElement('section');
+        loesungSection.className = 'phase loesung';
+        loesungSection.id = 'phase-loesung';
+        Renderer.renderLoesung(lessonData.praxis.loesung, loesungSection);
+        container.appendChild(loesungSection);
+      }
     }
 
     // Tab-Klick-Logik: Phase wechseln
@@ -365,6 +392,155 @@ Renderer.renderVisuals = function(visuals, container) {
         console.warn('Unbekannter Visual-Typ:', vis.type);
     }
   });
+};
+
+/**
+ * Prüft, ob die App im Lehrer-Modus läuft.
+ * Aktivierung: URL-Parameter ?teacher=1 anhängen.
+ */
+Renderer.isTeacherMode = function() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('teacher') === '1';
+};
+
+/**
+ * Rendert den Praxis-Tab (Tab 4): Aufgabe, Bauteile, Anschluss, Code-Gerüst.
+ * @param {Object} praxis - praxis-Block aus den Lektionsdaten
+ * @param {HTMLElement} section - Ziel-Section
+ */
+Renderer.renderPraxis = function(praxis, section) {
+  // --- Aufgabe ---
+  if (praxis.aufgabe) {
+    const aufgabeBox = document.createElement('div');
+    aufgabeBox.className = 'praxis-aufgabe';
+    aufgabeBox.innerHTML = `
+      <h2>🔧 Praxis: ${praxis.aufgabe.titel || 'Aufgabe'}</h2>
+      <div class="praxis-auftrag">${praxis.aufgabe.auftrag || ''}</div>
+      ${praxis.aufgabe.lernziel ? `<div class="praxis-lernziel"><strong>Dein Lernziel:</strong> ${praxis.aufgabe.lernziel}</div>` : ''}
+    `;
+    section.appendChild(aufgabeBox);
+  }
+
+  // --- Bauteile ---
+  if (praxis.bauteile && praxis.bauteile.length > 0) {
+    const bauteileBlock = document.createElement('div');
+    bauteileBlock.className = 'praxis-block';
+    bauteileBlock.innerHTML = '<h3>📦 Das brauchst du</h3>';
+
+    const liste = document.createElement('ul');
+    liste.className = 'bauteile-liste';
+    praxis.bauteile.forEach(b => {
+      const li = document.createElement('li');
+      li.className = 'bauteil-card';
+      li.innerHTML = `
+        <span class="bauteil-anzahl">${b.anzahl}×</span>
+        <span class="bauteil-name">${b.name}</span>
+        ${b.hinweis ? `<span class="bauteil-hinweis">${b.hinweis}</span>` : ''}
+      `;
+      liste.appendChild(li);
+    });
+    bauteileBlock.appendChild(liste);
+    section.appendChild(bauteileBlock);
+  }
+
+  // --- Anschluss (SVG + Schritte) ---
+  if (praxis.anschluss) {
+    const anschlussBlock = document.createElement('div');
+    anschlussBlock.className = 'praxis-block';
+    anschlussBlock.innerHTML = '<h3>🔌 Anschluss-Schaltplan</h3>';
+
+    if (praxis.anschluss.svg) {
+      const svgContainer = document.createElement('div');
+      svgContainer.className = 'anschluss-svg';
+      svgContainer.innerHTML = praxis.anschluss.svg;
+      anschlussBlock.appendChild(svgContainer);
+    }
+
+    if (praxis.anschluss.schritte && praxis.anschluss.schritte.length > 0) {
+      const ol = document.createElement('ol');
+      ol.className = 'anschluss-schritte';
+      praxis.anschluss.schritte.forEach(s => {
+        const li = document.createElement('li');
+        li.innerHTML = s;
+        ol.appendChild(li);
+      });
+      anschlussBlock.appendChild(ol);
+    }
+    section.appendChild(anschlussBlock);
+  }
+
+  // --- Code-Gerüst ---
+  if (praxis.code_hinweise) {
+    const codeBlock = document.createElement('div');
+    codeBlock.className = 'praxis-block';
+    codeBlock.innerHTML = '<h3>💻 Dein Code-Gerüst</h3><p>Vervollständige die Stellen mit <code>// TODO</code>.</p>';
+
+    if (praxis.code_hinweise.geruest) {
+      const pre = document.createElement('pre');
+      pre.className = 'code-geruest';
+      const code = document.createElement('code');
+      code.textContent = praxis.code_hinweise.geruest;
+      pre.appendChild(code);
+      codeBlock.appendChild(pre);
+    }
+
+    if (praxis.code_hinweise.tipps && praxis.code_hinweise.tipps.length > 0) {
+      const tippBox = document.createElement('div');
+      tippBox.className = 'tip-box';
+      tippBox.innerHTML = '<strong>Tipps:</strong><ul>'
+        + praxis.code_hinweise.tipps.map(t => `<li>${t}</li>`).join('')
+        + '</ul>';
+      codeBlock.appendChild(tippBox);
+    }
+    section.appendChild(codeBlock);
+  }
+};
+
+/**
+ * Rendert den Lösungs-Tab (Tab 5): nur im Teacher-Mode sichtbar.
+ * @param {Object} loesung - loesung-Block aus praxis
+ * @param {HTMLElement} section - Ziel-Section
+ */
+Renderer.renderLoesung = function(loesung, section) {
+  const badge = document.createElement('div');
+  badge.className = 'teacher-badge';
+  badge.innerHTML = '👩‍🏫 <strong>Lehrer:innen-Ansicht</strong> – nur über <code>?teacher=1</code> sichtbar';
+  section.appendChild(badge);
+
+  if (loesung.code) {
+    const codeBlock = document.createElement('div');
+    codeBlock.className = 'praxis-block';
+    codeBlock.innerHTML = '<h3>✅ Vollständiger Lösungscode</h3>';
+    const pre = document.createElement('pre');
+    pre.className = 'code-loesung';
+    const code = document.createElement('code');
+    code.textContent = loesung.code;
+    pre.appendChild(code);
+    codeBlock.appendChild(pre);
+    section.appendChild(codeBlock);
+  }
+
+  if (loesung.erklaerung) {
+    const erklBlock = document.createElement('div');
+    erklBlock.className = 'praxis-block';
+    erklBlock.innerHTML = `<h3>💡 Erklärung der Lösung</h3><div>${loesung.erklaerung}</div>`;
+    section.appendChild(erklBlock);
+  }
+
+  if (loesung.haeufige_fehler && loesung.haeufige_fehler.length > 0) {
+    const fehlerBlock = document.createElement('div');
+    fehlerBlock.className = 'praxis-block';
+    fehlerBlock.innerHTML = '<h3>⚠️ Häufige Fehler in der Klasse</h3>';
+    const ul = document.createElement('ul');
+    ul.className = 'fehler-liste';
+    loesung.haeufige_fehler.forEach(f => {
+      const li = document.createElement('li');
+      li.innerHTML = f;
+      ul.appendChild(li);
+    });
+    fehlerBlock.appendChild(ul);
+    section.appendChild(fehlerBlock);
+  }
 };
 
 // Event-Delegation: Klicks auf Sidebar-<li>-Elemente abfangen

@@ -1661,3 +1661,190 @@ p {
   opacity: 0.3;
   cursor: not-allowed;
 }
+
+/* === Praxis-Tab (Tab 4) === */
+.praxis-aufgabe {
+  background: linear-gradient(135deg, #fff7e6 0%, #ffeacc 100%);
+  border-left: 4px solid #e6a700;
+  padding: 1.25rem 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.praxis-aufgabe h2 {
+  margin-top: 0;
+  color: #8a5a00;
+}
+
+.praxis-auftrag {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin: 0.75rem 0;
+}
+
+.praxis-lernziel {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed #e6a700;
+  color: #6b4500;
+}
+
+.praxis-block {
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  background: var(--sidebar-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.praxis-block h3 {
+  margin-top: 0;
+}
+
+/* Bauteile-Liste */
+.bauteile-liste {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.75rem;
+}
+
+.bauteil-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.bauteil-anzahl {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 1.1rem;
+  min-width: 2rem;
+}
+
+.bauteil-name {
+  flex: 1;
+}
+
+.bauteil-hinweis {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  flex-basis: 100%;
+  padding-left: 2.5rem;
+}
+
+/* Anschluss */
+.anschluss-svg {
+  background: white;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border);
+}
+
+.anschluss-svg svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.schaltbild-figur {
+  margin: 0 0 1.25rem 0;
+  padding: 0.75rem;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.schaltbild-figur:last-child {
+  margin-bottom: 0;
+}
+
+.schaltbild-figur figcaption {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.schaltbild-figur img {
+  display: block;
+  margin: 0 auto;
+}
+
+.anschluss-schritte {
+  margin: 0;
+  padding-left: 1.5rem;
+  line-height: 1.7;
+}
+
+.anschluss-schritte li {
+  margin-bottom: 0.5rem;
+}
+
+/* Code-Gerüst */
+.code-geruest,
+.code-loesung {
+  background: #1e1e2e;
+  color: #cdd6f4;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.code-loesung {
+  background: #1a3a1a;
+  border-left: 4px solid #4caf50;
+}
+
+/* Lösungs-Tab (Tab 5) */
+.teacher-badge {
+  background: #fde8e8;
+  border-left: 4px solid #d44;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.teacher-badge code {
+  background: #fff;
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+}
+
+.fehler-liste li {
+  margin-bottom: 0.4rem;
+  line-height: 1.5;
+}
+
+/* Print-Stylesheet (für späteren AB-Export) */
+@media print {
+  .phase-tabs,
+  #sidebar,
+  #progress-section,
+  .menu-toggle {
+    display: none !important;
+  }
+  .phase {
+    display: block !important;
+    page-break-before: always;
+  }
+  .code-geruest,
+  .code-loesung {
+    background: #f5f5f5 !important;
+    color: #000 !important;
+    border: 1px solid #ccc;
+  }
+}

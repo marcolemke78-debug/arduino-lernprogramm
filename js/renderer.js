@@ -48,16 +48,18 @@ const Renderer = {
     const bar = document.getElementById('progress-bar');
     bar.style.width = percent + '%';
 
-    // Label mit absoluter Anzahl aktualisieren
+    // Label mit absoluter Anzahl aktualisieren.
+    // Iteriert ueber LESSONS (nicht 1..total), damit auch
+    // nicht-zusammenhaengende IDs (z.B. 30) korrekt mitgezaehlt werden.
     const label = document.getElementById('progress-label');
     if (label) {
       const data = Progress.load();
       let completed = 0;
-      for (let i = 1; i <= total; i++) {
-        if (data.lessons[i] && data.lessons[i].status === 'completed') {
+      LESSONS.forEach(l => {
+        if (data.lessons[l.id] && data.lessons[l.id].status === 'completed') {
           completed++;
         }
-      }
+      });
       label.textContent = percent + ' % – ' + completed + ' von ' + total + ' Lektionen abgeschlossen';
     }
   },
@@ -89,8 +91,11 @@ const Renderer = {
 
     // --- DOM aufbauen ---
 
-    // Titel
-    container.innerHTML = `<h1>Lektion ${id}: ${lessonData.title}</h1>`;
+    // Titel — angezeigte Nummer ist Array-Position in LESSONS, nicht id.
+    // So bleibt die Numerierung konsistent, auch wenn neue Lektionen
+    // eingeschoben werden (Curriculum 2.0).
+    const position = LESSONS.findIndex(l => l.id === id) + 1;
+    container.innerHTML = `<h1>Lektion ${position}: ${lessonData.title}</h1>`;
 
     // Phase-Tabs
     const tabsDiv = document.createElement('div');

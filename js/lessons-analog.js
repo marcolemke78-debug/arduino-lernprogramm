@@ -1,4 +1,306 @@
 const LESSONS_ANALOG = [
+  // ===================== LEKTION 11 (Spannungsteiler, id 30) =====================
+  // Pflicht-Bruecke zum analogen Teil: alle Sensorschaltungen (NTC, LDR,
+  // Taster-Pulldown) und das Potentiometer beruhen auf dem Spannungsteiler.
+  // Diese Lektion erklaert das Prinzip rein als Hardware-Konzept,
+  // ohne Code — mit Multimeter-Messung im Praxis-Tab.
+  {
+    id: 30,
+    title: 'Spannungsteiler verstehen',
+    explanation: {
+      html: `
+        <h2>Spannungsteiler &ndash; Spannung teilen wie ein Stueck Kuchen</h2>
+        <p>Bis jetzt hattest du am Arduino immer <strong>5&nbsp;Volt</strong> oder <strong>0&nbsp;Volt</strong> &ndash; entweder voll an oder voll aus. Aber viele Sensoren liefern Werte <em>dazwischen</em>: ein Temperatursensor zeigt z.B. <strong>2,3&nbsp;V</strong> an, wenn es warm wird, und <strong>1,7&nbsp;V</strong>, wenn es kalt ist. Wie geht das &ndash; mit nur einer 5-V-Versorgung?</p>
+        <p>Die Antwort heisst <strong>Spannungsteiler</strong>. Das ist die wichtigste analoge Schaltung ueberhaupt &ndash; und sie steckt in <em>jedem</em> Sensor, den du in den kommenden Lektionen verwendest.</p>
+
+        <div class="analogy-box">
+          <strong>Alltagsanalogie:</strong> Stell dir einen Kuchen vor, der zwischen zwei Personen geteilt wird. Wer den groesseren Hunger (= groesseren Widerstand) hat, bekommt das groessere Stueck. Genauso ist es beim Spannungsteiler: Die Spannung wird zwischen zwei Widerstaenden aufgeteilt &ndash; der groessere Widerstand bekommt das groessere Stueck.
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Die Schaltung in einem Bild</h3>
+          <p>Zwei Widerstaende werden <strong>hintereinander</strong> (in Reihe) zwischen <code>+5V</code> und <code>GND</code> geschaltet. Genau in der Mitte greifen wir eine Spannung ab &ndash; das ist <strong>U<sub>2</sub></strong>:</p>
+
+          <svg viewBox="0 0 420 260" style="width:100%;max-width:380px;margin:1em auto;display:block;font-family:system-ui;">
+            <!-- Hintergrund -->
+            <rect x="0" y="0" width="420" height="260" rx="8" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1"/>
+
+            <!-- +5V oben -->
+            <line x1="210" y1="20" x2="210" y2="50" stroke="#333" stroke-width="2"/>
+            <text x="225" y="28" font-size="12" fill="#C0392B" font-weight="bold">+5 V</text>
+
+            <!-- R1 Rechteck -->
+            <rect x="190" y="50" width="40" height="55" fill="white" stroke="#333" stroke-width="2"/>
+            <text x="248" y="82" font-size="13" font-weight="bold" fill="#333">R<tspan font-size="10" baseline-shift="sub">1</tspan></text>
+
+            <!-- Mitte -->
+            <line x1="210" y1="105" x2="210" y2="135" stroke="#333" stroke-width="2"/>
+            <line x1="210" y1="120" x2="310" y2="120" stroke="#2980B9" stroke-width="2"/>
+            <circle cx="210" cy="120" r="4" fill="#2980B9"/>
+            <text x="320" y="124" font-size="13" font-weight="bold" fill="#2980B9">U<tspan font-size="10" baseline-shift="sub">2</tspan> (Abgriff)</text>
+
+            <!-- R2 Rechteck -->
+            <rect x="190" y="135" width="40" height="55" fill="white" stroke="#333" stroke-width="2"/>
+            <text x="248" y="167" font-size="13" font-weight="bold" fill="#333">R<tspan font-size="10" baseline-shift="sub">2</tspan></text>
+
+            <!-- GND unten -->
+            <line x1="210" y1="190" x2="210" y2="220" stroke="#333" stroke-width="2"/>
+            <line x1="195" y1="220" x2="225" y2="220" stroke="#333" stroke-width="2.5"/>
+            <line x1="200" y1="226" x2="220" y2="226" stroke="#333" stroke-width="2"/>
+            <line x1="205" y1="232" x2="215" y2="232" stroke="#333" stroke-width="2"/>
+            <text x="235" y="225" font-size="12" fill="#333">GND</text>
+
+            <!-- U gesamt (links) -->
+            <line x1="120" y1="50" x2="120" y2="190" stroke="#888" stroke-width="1"/>
+            <line x1="115" y1="50" x2="125" y2="50" stroke="#888" stroke-width="1"/>
+            <line x1="115" y1="190" x2="125" y2="190" stroke="#888" stroke-width="1"/>
+            <text x="75" y="125" font-size="13" font-weight="bold" fill="#888">U<tspan font-size="10" baseline-shift="sub">ges</tspan></text>
+          </svg>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Die Formel: U<sub>2</sub> berechnen</h3>
+          <p>Wie viel Spannung kommt am Abgriff an? Das haengt vom <strong>Verhaeltnis</strong> der beiden Widerstaende ab:</p>
+
+          <div style="background:#FFF8E1;border:1.5px solid #FFB300;border-radius:6px;padding:1rem;text-align:center;margin:1em auto;max-width:380px;">
+            <p style="margin:0;font-size:1.15em;">
+              <strong>U<sub>2</sub> = U<sub>ges</sub> &middot; <span style="display:inline-block;text-align:center;vertical-align:middle;"><span style="border-bottom:2px solid #333;padding:0 0.4em;">R<sub>2</sub></span><br><span style="padding:0 0.4em;">R<sub>1</sub> + R<sub>2</sub></span></span></strong>
+            </p>
+          </div>
+
+          <p>Klingt kompliziert, ist aber eigentlich nur <em>Bruchrechnen</em>:</p>
+          <ul>
+            <li>Im Zaehler: der <strong>untere</strong> Widerstand R<sub>2</sub> (der, an dem du U<sub>2</sub> abgreifst)</li>
+            <li>Im Nenner: die <strong>Summe beider</strong> Widerstaende</li>
+            <li>Mal die Gesamtspannung U<sub>ges</sub> (bei uns 5 V)</li>
+          </ul>
+        </div>
+
+        <div class="tip-box">
+          <strong>Eselsbruecke:</strong> &bdquo;Unten waechst, U<sub>2</sub> waechst." &mdash; je groesser R<sub>2</sub> (unten), desto groesser auch die abgegriffene Spannung U<sub>2</sub>. Andersrum: je groesser R<sub>1</sub> (oben), desto kleiner U<sub>2</sub>.
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Drei Faelle zum Mitdenken</h3>
+          <p>Bei 5 V Versorgungsspannung und verschiedenen Widerstaenden:</p>
+          <table class="icon-table">
+            <tr><th>R<sub>1</sub></th><th>R<sub>2</sub></th><th>U<sub>2</sub></th><th>Was passiert?</th></tr>
+            <tr><td>10 k&Omega;</td><td>10 k&Omega;</td><td><strong>2,5 V</strong></td><td>Gleich gross &rarr; Spannung wird genau halbiert</td></tr>
+            <tr><td>10 k&Omega;</td><td>20 k&Omega;</td><td><strong>3,33 V</strong></td><td>R<sub>2</sub> doppelt so gross &rarr; bekommt 2/3 der Spannung</td></tr>
+            <tr><td>20 k&Omega;</td><td>10 k&Omega;</td><td><strong>1,67 V</strong></td><td>R<sub>1</sub> doppelt so gross &rarr; nur 1/3 bleibt fuer U<sub>2</sub></td></tr>
+          </table>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Warum braucht man das &uuml;berhaupt?</h3>
+          <p>Der eigentliche Trick: Wenn einer der beiden Widerstaende <strong>nicht fest</strong> ist, sondern sich aendert, dann aendert sich auch U<sub>2</sub>. Genau so funktionieren <strong>alle analogen Sensoren</strong>:</p>
+
+          <table class="icon-table">
+            <tr><th>Sensor</th><th>Was aendert sich?</th><th>Folge</th></tr>
+            <tr><td><strong>NTC</strong> (Temperatursensor)</td><td>Widerstand sinkt bei Waerme</td><td>U<sub>2</sub> aendert sich mit Temperatur</td></tr>
+            <tr><td><strong>LDR</strong> (Lichtsensor)</td><td>Widerstand sinkt bei Licht</td><td>U<sub>2</sub> aendert sich mit Helligkeit</td></tr>
+            <tr><td><strong>Taster</strong> mit Pull-Down</td><td>Schaltet R<sub>2</sub> dazu/weg</td><td>U<sub>2</sub> springt zwischen 0 V und 5 V</td></tr>
+            <tr><td><strong>Potentiometer</strong></td><td>Du drehst R<sub>1</sub>/R<sub>2</sub></td><td>U<sub>2</sub> waehlbar zwischen 0&hellip;5 V</td></tr>
+          </table>
+
+          <div class="analogy-box" style="margin-top:1rem;">
+            <strong>Bild zum Festhalten:</strong> Ein fester Spannungsteiler ist wie ein <em>fest eingestellter Dimmer</em>. Ein Sensor-Spannungsteiler ist ein Dimmer, an dem die Umwelt selber dreht &ndash; an der NTC dreht die Temperatur, am LDR dreht die Helligkeit.
+          </div>
+        </div>
+
+        <div class="warning-box">
+          <strong>Wichtig fuer die Pruefung:</strong> Der Spannungsteiler taucht in der RSAP (Realschulabschlusspruefung) in vielen Aufgaben unter verschiedenen Namen auf &ndash; Temperaturanzeige, Daemmerungsschalter, Gewaechshaus-Belueftung. Wer das Prinzip verstanden hat, hat den halben Pflichtteil im Griff.
+        </div>
+      `
+    },
+    example: {
+      title: 'Rechenbeispiele: U2 fuer drei Widerstands-Kombinationen',
+      steps: [
+        {
+          label: 'Beide Widerstaende gleich gross',
+          html: `
+            <p>Du baust einen Spannungsteiler mit zwei <strong>gleich grossen</strong> Widerstaenden (z.&nbsp;B. beide 10&nbsp;k&Omega;) zwischen +5&nbsp;V und GND. Was misst dein Multimeter am Abgriff?</p>
+            <pre style="background:#f5f5f5;padding:0.8rem;border-left:3px solid #2980B9;">
+U<sub>2</sub> = U<sub>ges</sub> &middot; R<sub>2</sub> / (R<sub>1</sub> + R<sub>2</sub>)
+U<sub>2</sub> = 5 V &middot; 10 k&Omega; / (10 k&Omega; + 10 k&Omega;)
+U<sub>2</sub> = 5 V &middot; 10 / 20
+U<sub>2</sub> = 5 V &middot; 0,5
+U<sub>2</sub> = <strong>2,5 V</strong></pre>
+            <p>Das ist der einfachste Fall: gleiche Widerstaende, halbe Spannung. <strong>Merke dir das &ndash; in der Pruefung kommt dieser Fall sehr oft als Schaetzfrage vor.</strong></p>
+          `
+        },
+        {
+          label: 'Oberer Widerstand ist doppelt so gross',
+          html: `
+            <p>Jetzt steckst du oben einen 20-k&Omega;-Widerstand ein, unten weiterhin 10&nbsp;k&Omega;:</p>
+            <pre style="background:#f5f5f5;padding:0.8rem;border-left:3px solid #2980B9;">
+U<sub>2</sub> = 5 V &middot; 10 k&Omega; / (20 k&Omega; + 10 k&Omega;)
+U<sub>2</sub> = 5 V &middot; 10 / 30
+U<sub>2</sub> = 5 V &middot; 0,333&hellip;
+U<sub>2</sub> &asymp; <strong>1,67 V</strong></pre>
+            <p>Der grosse R<sub>1</sub> &bdquo;schluckt" 2/3 der Spannung &ndash; uebrig bleibt nur 1/3 fuer U<sub>2</sub>.</p>
+          `
+        },
+        {
+          label: 'Unterer Widerstand ist doppelt so gross',
+          html: `
+            <p>Du tauschst zurueck: R<sub>1</sub> = 10&nbsp;k&Omega;, R<sub>2</sub> = 20&nbsp;k&Omega;:</p>
+            <pre style="background:#f5f5f5;padding:0.8rem;border-left:3px solid #2980B9;">
+U<sub>2</sub> = 5 V &middot; 20 k&Omega; / (10 k&Omega; + 20 k&Omega;)
+U<sub>2</sub> = 5 V &middot; 20 / 30
+U<sub>2</sub> = 5 V &middot; 0,666&hellip;
+U<sub>2</sub> &asymp; <strong>3,33 V</strong></pre>
+            <p>Jetzt bekommt R<sub>2</sub> 2/3 der Spannung. <strong>Merke:</strong> Je groesser der untere Widerstand (im Verhaeltnis), desto mehr Spannung bleibt fuer U<sub>2</sub> uebrig.</p>
+          `
+        },
+        {
+          label: 'Was passiert, wenn R2 ein Sensor ist?',
+          html: `
+            <p>Stell dir vor, R<sub>2</sub> ist <strong>kein fester Widerstand</strong>, sondern ein <strong>NTC</strong>. Bei Zimmertemperatur hat er z.&nbsp;B. 10&nbsp;k&Omega;, bei Hitze nur noch 4&nbsp;k&Omega;. R<sub>1</sub> bleibt fest bei 10&nbsp;k&Omega;.</p>
+            <pre style="background:#f5f5f5;padding:0.8rem;border-left:3px solid #E67E22;">
+Zimmertemp.: U<sub>2</sub> = 5 V &middot; 10 / (10 + 10) = <strong>2,5 V</strong>
+Hitze:       U<sub>2</sub> = 5 V &middot; 4  / (10 + 4)  &asymp; <strong>1,43 V</strong></pre>
+            <p>Die <strong>aenderung der Spannung</strong> ist die Information, die der Arduino spaeter mit <code>analogRead()</code> einliest. So wird aus einer physikalischen Groesse (Temperatur, Licht) eine Zahl, die das Programm verarbeiten kann. &mdash; Das ist die Bruecke zur naechsten Lektion.</p>
+          `
+        }
+      ]
+    },
+    exercises: [
+      {
+        type: 'multiple-choice',
+        question: 'Du baust einen Spannungsteiler aus zwei gleich grossen 10-kΩ-Widerstaenden zwischen +5 V und GND. Welche Spannung misst du am Abgriff U2?',
+        options: ['0 V', '2,5 V', '5 V', '10 V'],
+        correct: 1,
+        explanation: 'Richtig! Bei gleichen Widerstaenden wird die Spannung halbiert: U2 = 5 V · 10/(10+10) = 2,5 V. Das ist der wichtigste Spezialfall.',
+        wrongExplanations: {
+          0: 'Nein, 0 V wuerde nur dann am Abgriff anliegen, wenn R2 = 0 (Kurzschluss nach GND).',
+          2: 'Nein, 5 V wuerde nur anliegen, wenn R1 = 0 (also gar kein Widerstand oben). Dann waere die volle Versorgung am Abgriff.',
+          3: 'Nein, die Ausgangsspannung kann nie hoeher sein als die Versorgungsspannung. 5 V rein, hoechstens 5 V raus.'
+        }
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Was passiert mit der Spannung U2 am Abgriff, wenn du den unteren Widerstand R2 vergroesserst (R1 bleibt gleich)?',
+        options: [
+          'U2 wird kleiner',
+          'U2 wird groesser',
+          'U2 bleibt gleich',
+          'U2 wird negativ'
+        ],
+        correct: 1,
+        explanation: 'Richtig! Eselsbruecke: "Unten waechst, U2 waechst." Je groesser R2, desto groesser das Stueck der Gesamtspannung, das ueber R2 abfaellt &ndash; und genau diese Spannung greifst du als U2 ab.',
+        wrongExplanations: {
+          0: 'Nein, das Gegenteil ist der Fall. Schau in die Formel: R2 steht im Zaehler &ndash; wird R2 groesser, wird der Bruch groesser, also auch U2.',
+          2: 'Nein, U2 haengt direkt vom Verhaeltnis R2 zu (R1+R2) ab. Aenderst du R2, aendert sich auch dieses Verhaeltnis.',
+          3: 'Negative Spannungen gibt es bei einem Spannungsteiler an 5 V/GND nicht. U2 liegt immer zwischen 0 V und 5 V.'
+        }
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Welche Formel beschreibt die Spannung U2 am Abgriff zwischen R1 (oben) und R2 (unten)?',
+        options: [
+          'U2 = Uges · R1 / (R1 + R2)',
+          'U2 = Uges · R2 / (R1 + R2)',
+          'U2 = Uges · (R1 + R2) / R2',
+          'U2 = Uges · R1 · R2'
+        ],
+        correct: 1,
+        explanation: 'Richtig! Im Zaehler steht immer der Widerstand, an dem du U2 abgreifst &ndash; das ist R2 (der untere). Im Nenner steht die Summe beider Widerstaende.',
+        wrongExplanations: {
+          0: 'Vorsicht: Da steht R1 im Zaehler. Diese Formel wuerde die Spannung ueber R1 berechnen (also den OBEREN Teil), nicht den Abgriff.',
+          2: 'Diese Formel ist der Kehrwert &ndash; sie wuerde immer einen Wert groesser als 1 ergeben. Eine Spannung kann aber nicht groesser sein als die Versorgung.',
+          3: 'Ein Produkt R1 · R2 ergibt keine Spannung &ndash; die Einheit waere kΩ² statt Volt. Das ist physikalisch unsinnig.'
+        }
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Ein NTC hat die Eigenschaft: heiss = niedriger Widerstand, kalt = hoher Widerstand. Du baust einen Spannungsteiler mit R1 = 10 kΩ (oben, fest) und NTC als R2 (unten). Was passiert mit U2, wenn der NTC erwaermt wird?',
+        options: [
+          'U2 steigt',
+          'U2 sinkt',
+          'U2 bleibt konstant',
+          'U2 wird negativ'
+        ],
+        correct: 1,
+        explanation: 'Richtig! NTC waermer &rarr; R2 sinkt. Kleineres R2 im Zaehler &rarr; kleineres U2. Genau dieses Verhalten nutzen wir spaeter, um Temperatur als Spannung zu messen.',
+        wrongExplanations: {
+          0: 'Nein, andersrum: Erwaermung senkt R2, also sinkt U2. Es ist genau das Gegenteil von dem, was man intuitiv vermuten koennte.',
+          2: 'Nein, der Sensor aendert ja gerade seinen Widerstand &ndash; und damit aendert sich auch U2. Das ist der ganze Punkt!',
+          3: 'U2 bleibt immer zwischen 0 V und der Versorgungsspannung. Negativ wird sie nie.'
+        }
+      },
+      {
+        type: 'matching',
+        question: 'Ordne die Sensoren / Bauteile ihrem typischen Einsatz im Spannungsteiler zu.',
+        pairs: [
+          { left: 'NTC', right: 'Temperatur messen' },
+          { left: 'LDR', right: 'Helligkeit messen' },
+          { left: 'Taster mit Pull-Down-Widerstand', right: 'Sauberen LOW-Pegel an einem digitalen Eingang erzeugen' },
+          { left: 'Potentiometer', right: 'Stufenlos einstellbare Spannung zwischen 0 V und 5 V' }
+        ]
+      }
+    ],
+    // === Praxis-Tab (Tab 4) ===
+    // Hardware-Uebung: Spannungsteiler bauen + Spannung in der Mitte messen.
+    // Kein Arduino-Code noetig &ndash; nur 5V/GND vom Arduino als Versorgung
+    // und ein Multimeter zur Spannungsmessung. Bruecke zu Lektionen 12+
+    // (analogRead).
+    praxis: {
+      aufgabe: {
+        titel: 'Spannungsteiler bauen und U2 messen',
+        auftrag: '<p>Baue einen festen Spannungsteiler auf dem Steckbrett aus <strong>zwei gleich grossen Widerstaenden (10&nbsp;k&Omega;)</strong>. Versorge ihn aus dem Arduino mit <code>+5V</code> und <code>GND</code>. Miss anschliessend mit dem Multimeter die Spannung U<sub>2</sub> am Abgriff zwischen den beiden Widerstaenden.</p><p><strong>Deine Aufgaben:</strong></p><ol><li><strong>Aufbau:</strong> Baue die Schaltung nach dem Schaltplan und dem Steckbrett-Bild unten auf.</li><li><strong>Messung:</strong> Stelle das Multimeter auf Gleichspannung (V&#8230;) ein und miss U<sub>2</sub>.</li><li><strong>Variante:</strong> Tausche R<sub>2</sub> gegen einen 20&nbsp;k&Omega;-Widerstand und miss erneut. Notiere beide Werte.</li></ol>',
+        lernziel: 'Du kannst einen Spannungsteiler aus zwei Widerstaenden aufbauen, U<sub>2</sub> mit einem Multimeter messen und die gemessenen Werte mit der berechneten Formel vergleichen.'
+      },
+      bauteile: [
+        { name: 'Arduino Uno (nur als 5V-Quelle)', anzahl: 1 },
+        { name: 'Steckbrett (Breadboard)', anzahl: 1 },
+        { name: 'Widerstand 10 kΩ', anzahl: 2, hinweis: 'Farbcode: braun-schwarz-orange' },
+        { name: 'Widerstand 20 kΩ', anzahl: 1, hinweis: 'Fuer den Vergleichs-Versuch' },
+        { name: 'Jumper-Kabel rot', anzahl: 1, hinweis: '5V &rarr; Breadboard' },
+        { name: 'Jumper-Kabel schwarz', anzahl: 1, hinweis: 'GND &rarr; Breadboard' },
+        { name: 'Multimeter mit Messleitungen', anzahl: 1, hinweis: 'Stellung: Gleichspannung (V= oder DCV)' }
+      ],
+      anschluss: {
+        svg: `
+          <figure class="schaltbild-figur">
+            <figcaption><strong>1. Schaltplan</strong> &mdash; so funktioniert die Schaltung elektrisch:</figcaption>
+            <img src="assets/lektion-30-spannungsteiler-schaltplan.svg?v=1" alt="Schaltplan Spannungsteiler: 5V - R1 - Abgriff U2 - R2 - GND, Multimeter zwischen Abgriff und GND" style="max-width: 100%; height: auto;" />
+          </figure>
+          <figure class="schaltbild-figur">
+            <figcaption><strong>2. Aufbau am Steckbrett</strong> &mdash; so sieht der echte Aufbau aus:</figcaption>
+            <img src="assets/lektion-30-spannungsteiler-aufbau.svg?v=1" alt="Steckbrett-Aufbau Spannungsteiler: zwei 10k-Widerstaende in Reihe zwischen 5V-Schiene und GND-Schiene, Multimeter misst in der Mitte" style="max-width: 100%; height: auto;" />
+          </figure>`,
+        schritte: [
+          'Stecke das <strong>rote Jumper-Kabel</strong> in den <strong>5V-Pin</strong> des Arduino und das andere Ende in die <strong>+Schiene (rot)</strong> oben am Breadboard.',
+          'Stecke das <strong>schwarze Jumper-Kabel</strong> in einen <strong>GND-Pin</strong> des Arduino und das andere Ende in die <strong>&minus;Schiene (blau)</strong> oben am Breadboard.',
+          'Stecke den ersten <strong>10&nbsp;k&Omega;-Widerstand (R<sub>1</sub>)</strong> waagrecht ein: ein Bein in die <strong>+Schiene</strong> (oben), das andere Bein in Loch <code>c8</code>. <em>(Damit fliesst der Strom von +5V nach c8.)</em>',
+          'Stecke den zweiten <strong>10&nbsp;k&Omega;-Widerstand (R<sub>2</sub>)</strong> waagrecht ein: ein Bein in Loch <code>c10</code>, das andere Bein in die <strong>&minus;Schiene</strong> (unten). <em>Wichtig: <code>c8</code> und <code>c10</code> liegen in der gleichen Reihe &ndash; ueber die Mittellinie des Breadboards musst du eventuell die Reihe wechseln, je nach Breadboard-Layout.</em>',
+          'Stelle dein <strong>Multimeter auf Gleichspannung</strong> ein (Bereich <code>V=</code> oder <code>20 V DC</code>). Halte die <strong>schwarze Messleitung</strong> an die &minus;Schiene (GND) und die <strong>rote Messleitung</strong> an den Punkt zwischen R<sub>1</sub> und R<sub>2</sub>.',
+          'Schliesse den Arduino mit dem USB-Kabel an den PC oder eine USB-Powerbank an &ndash; jetzt fliesst Strom. Lies den Wert am Multimeter ab. Erwartung: ca. <strong>2,5 V</strong>.',
+          'Variante: Tausche R<sub>2</sub> (unten) gegen einen <strong>20&nbsp;k&Omega;-Widerstand</strong> aus. Miss erneut. Erwartung: U<sub>2</sub> &asymp; <strong>3,33 V</strong>. Notiere beide Werte.'
+        ]
+      },
+      loesung: {
+        erklaerung: '<p>Mit zwei gleichen 10-k&Omega;-Widerstaenden wird die 5-V-Versorgung genau halbiert &ndash; das Multimeter zeigt ca. <strong>2,5 V</strong>. Kleine Abweichungen (z.&nbsp;B. 2,47 V oder 2,53 V) sind normal: Widerstaende haben eine Toleranz von typisch &plusmn;&nbsp;5&nbsp;% (Goldring) und die USB-Versorgungsspannung liegt selten genau bei 5,00 V.</p><p>Im Vergleichsversuch mit R<sub>2</sub> = 20 k&Omega; rechnet man nach: U<sub>2</sub> = 5 V &middot; 20/(10+20) = 5 V &middot; 2/3 &asymp; <strong>3,33 V</strong>. Auch hier sind kleine Abweichungen normal.</p><p><strong>Diagnose-Hilfen, wenn der Messwert deutlich abweicht:</strong></p><ul><li><strong>U<sub>2</sub> &asymp; 0 V:</strong> Multimeter misst direkt an der GND-Schiene, oder R<sub>2</sub> ist ueberbrueckt.</li><li><strong>U<sub>2</sub> &asymp; 5 V:</strong> Multimeter misst direkt an der +Schiene, oder R<sub>1</sub> ist ueberbrueckt.</li><li><strong>Wert wackelt stark:</strong> Multimeter steht auf Wechselspannung (V~) statt Gleichspannung (V=).</li></ul>',
+        haeufige_fehler: [
+          '<strong>Widerstaende vertauscht (oben/unten):</strong> Bei gleichen Widerstaenden faellt es nicht auf (beide 10 k&Omega; &rarr; immer 2,5 V), aber im Vergleichsversuch mit 20 k&Omega; merkt man\'s sofort: 1,67 V statt 3,33 V.',
+          '<strong>Falsche Multimeter-Stellung:</strong> Auf Wechselspannung (V~) wackelt der Wert. Auf Widerstandsmessung (Ω) misst man gar keine Spannung.',
+          '<strong>Messleitungen vertauscht:</strong> Vorzeichen wird negativ angezeigt &ndash; der Betrag stimmt aber. Bei "richtigen" Multimetern reicht es, die Klemmen zu tauschen.',
+          '<strong>Arduino nicht versorgt:</strong> Ohne USB-Kabel kein Strom &rarr; Multimeter zeigt 0 V. Sieht aus wie ein Schaltungsfehler, ist aber keiner.',
+          '<strong>Farbcode-Verwechslung:</strong> 10 k&Omega; = braun-schwarz-orange, 1 k&Omega; = braun-schwarz-rot. Wer 1 k&Omega; statt 10 k&Omega; nimmt, misst trotzdem 2,5 V (Verhaeltnis stimmt) &ndash; aber zieht 5 mA statt 0,25 mA, was bei laengerer Versorgung warm wird.'
+        ]
+      }
+    }
+  },
+
   // ===================== LEKTION 11 =====================
   {
     id: 11,

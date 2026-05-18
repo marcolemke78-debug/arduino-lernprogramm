@@ -12,6 +12,7 @@ const LESSONS = [
   { id: 9, title: 'LED mit Taster steuern', module: 'digital' },
   { id: 10, title: 'Einfache Ampelschaltung', module: 'digital' },
   // Modul 3: Analoge Welt
+  { id: 30, title: 'Spannungsteiler verstehen', module: 'analog' },
   { id: 11, title: 'Analoge Eingänge', module: 'analog' },
   { id: 12, title: 'PWM: Dimmen statt Schalten', module: 'analog' },
   { id: 13, title: 'Lichtsensor (LDR)', module: 'analog' },

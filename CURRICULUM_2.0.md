@@ -1,6 +1,7 @@
-# Curriculum 2.0 – Vorschlag für die Lektionsstruktur
+# Curriculum 2.0 – Lektionsstruktur (abgesegnet)
 
-**Stand:** 2026-05-17 · **Basis:** [Recherche-Synthese](RECHERCHE_PRUEFUNG.md)
+**Stand:** 2026-05-18 · **Basis:** [Recherche-Synthese](RECHERCHE_PRUEFUNG.md)
+**Entscheidung Marco 2026-05-18:** 4 Konzept-Lektionen werden zu Erklär-Boxen in Nachbar-Lektionen (didaktisch stärker, situiertes Lernen). Curriculum auf **24 Lektionen** gestrafft. RGB-LED bleibt eigene Lektion (eigene Hardware).
 
 ---
 
@@ -17,7 +18,14 @@
 
 ---
 
-## Soll-Zustand (28 Lektionen, 6 Module)
+## Soll-Zustand (24 Lektionen, 6 Module)
+
+### Erklär-Boxen statt Mini-Lektionen
+Vier Konzepte wandern als integrierte Lehr-Box in die nächste passende Schaltungs-Lektion:
+- **`const int` (Konstanten)** → Box in L5 LEDs ansteuern (am Code-Beispiel direkt eingeführt)
+- **`for`-Schleife** → Box in L7 LED-Lauflicht (entsteht aus dem Bedarf)
+- **`map()`-Funktion** → Box in L13 Potentiometer (wird beim PWM-Mapping gebraucht)
+- **Summer / Piezo** → Box in L21 Ampel mit Fußgängerüberweg (Akustik-Erweiterung des Projekts)
 
 ### Modul 1 – Grundlagen (4 Lektionen, unverändert)
 | ID | Titel | RSAP | Status |
@@ -27,52 +35,47 @@
 | 3 | Arduino IDE & erstes Programm | – | ✓ vorhanden |
 | 4 | setup() und loop() | – | ✓ vorhanden |
 
-### Modul 2 – Digital (8 Lektionen)
+### Modul 2 – Digital (6 Lektionen)
 | ID | Titel | RSAP | Status |
 |---|---|---|---|
-| 5 | LEDs ansteuern | basis | ✓ vorhanden (Pilot-Praxis) |
-| 6 | **Konstanten (`const int`)** | – | **NEU** (didaktisch) |
-| 7 | Wechselblinker | basis | ✓ vorhanden (war L6) |
-| 8 | **for-Schleife als Konzept** | – | **NEU** (didaktisch) |
-| 9 | LED-Lauflicht | basis | ✓ vorhanden (war L7) |
-| 10 | Taster als Eingabe (mit INPUT_PULLUP) | mehrere | ✓ erweitert (war L8) |
-| 11 | LED mit Taster steuern | mehrere | ✓ vorhanden (war L9) |
-| 12 | Einfache Ampelschaltung | Ampel | ✓ vorhanden (war L10) |
+| 5 | LEDs ansteuern *(+ Box: `const int`)* | basis | ✓ vorhanden (Pilot-Praxis) |
+| 6 | Wechselblinker | basis | ✓ vorhanden |
+| 7 | LED-Lauflicht *(+ Box: `for`-Schleife)* | basis | ✓ vorhanden |
+| 8 | Taster als Eingabe (mit INPUT_PULLUP) | mehrere | ✓ erweitert |
+| 9 | LED mit Taster steuern | mehrere | ✓ vorhanden |
+| 10 | Einfache Ampelschaltung | Ampel | ✓ vorhanden |
 
-### Modul 3 – Analog & Sensorik (9 Lektionen)
+### Modul 3 – Analog & Sensorik (8 Lektionen)
 | ID | Titel | RSAP | Status |
 |---|---|---|---|
-| 13 | **Spannungsteiler verstehen** | alle analog | **NEU** (Pflicht-Brücke) |
-| 14 | **AD-Wandler (0–1023)** | alle analog | **NEU** (Konzept-Lektion) |
-| 15 | Analoge Eingänge / Potentiometer | Dimmer, Treppe, Bohrmasch. | ✓ erweitert (war L11) |
-| 16 | PWM: Dimmen statt Schalten | Dimmer, Bohrmasch. | ✓ vorhanden (war L12) |
-| 17 | **`map()`-Funktion** | – | **NEU** (Tool-Lektion) |
-| 18 | Lichtsensor LDR | Außenbeleucht., Fahrradl. | ✓ vorhanden (war L13) |
-| 19 | **NTC-Temperatursensor** | Temp.anzeige, Gewächs., Lüft. | **NEU** (RSAP-Pflicht) |
-| 20 | Entscheidungen mit Sensorwerten (if/else) | alle Sensoraufgaben | ✓ vorhanden (war L14) |
-| 21 | **RGB-LED ansteuern** | Temperaturanzeige | **NEU** (RSAP) |
+| 11 | **Spannungsteiler verstehen** | alle analog | **NEU** (Pflicht-Brücke) |
+| 12 | **AD-Wandler (0–1023)** | alle analog | **NEU** (Konzept-Lektion) |
+| 13 | Analoge Eingänge / Potentiometer *(+ Box: `map()`)* | Dimmer, Treppe, Bohrmasch. | ✓ erweitert |
+| 14 | PWM: Dimmen statt Schalten | Dimmer, Bohrmasch. | ✓ vorhanden |
+| 15 | Lichtsensor LDR | Außenbeleucht., Fahrradl. | ✓ vorhanden |
+| 16 | **NTC-Temperatursensor** | Temp.anzeige, Gewächs., Lüft. | **NEU** (RSAP-Pflicht) |
+| 17 | Entscheidungen mit Sensorwerten (if/else) | alle Sensoraufgaben | ✓ vorhanden |
+| 18 | **RGB-LED ansteuern** | Temperaturanzeige | **NEU** (RSAP) |
 
-### Modul 4 – Aktoren erweitert (3 Lektionen, NEU)
+### Modul 4 – Aktoren erweitert (2 Lektionen, NEU)
 | ID | Titel | RSAP | Status |
 |---|---|---|---|
-| 22 | **Servomotor ansteuern** | Gewächs., Scheibenw., Kurvenl. | **NEU** (RSAP-Pflicht) |
-| 23 | **DC-Motor mit Transistor** | Lüftung, Bohrmasch. | **NEU** (RSAP-Pflicht) |
-| 24 | **Summer / Piezo** | Alarmanlage | **NEU** (klein) |
+| 19 | **Servomotor ansteuern** | Gewächs., Scheibenw., Kurvenl. | **NEU** (RSAP-Pflicht) |
+| 20 | **DC-Motor mit Transistor** | Lüftung, Bohrmasch. | **NEU** (RSAP-Pflicht) |
 
 ### Modul 5 – Prüfungsprojekte (3 Lektionen)
 | ID | Titel | RSAP | Status |
 |---|---|---|---|
-| 25 | Ampel mit Fußgängerüberweg | Ampel | ✓ vorhanden (war L15) |
-| 26 | Nachtabschaltung mit Lichtsensor | Außenbeleucht. | ✓ vorhanden (war L16) |
-| 27 | Prüfungsschaltung komplett (gelötet!) | RSAP-Pflichtteil | ✓ erweitert (war L17) |
+| 21 | Ampel mit Fußgängerüberweg *(+ Box: Summer)* | Ampel | ✓ erweitert |
+| 22 | Nachtabschaltung mit Lichtsensor | Außenbeleucht. | ✓ vorhanden |
+| 23 | Prüfungsschaltung komplett (gelötet!) | RSAP-Pflichtteil | ✓ erweitert |
 
-### Modul 6 – Hilfe & Referenz (1 Lektion + 3 Module)
+### Modul 6 – Hilfe & Referenz (1 Lektion)
 | ID | Titel | Typ |
 |---|---|---|
-| 28 | **Fehler erkennen (Syntax/Logik/Hardware)** | NEU Lektion |
-| – | **Glossar Arduino-Befehle** | NEU durchsuchbar |
-| – | **Bauteile-Bibliothek** | NEU durchsuchbar |
-| – | **Schaltsymbol-Trainer** | NEU interaktiv |
+| 24 | **Fehler erkennen (Syntax/Logik/Hardware)** | NEU Lektion |
+
+**Phase 2 (SaaS):** Glossar Arduino-Befehle, Bauteile-Bibliothek und Schaltsymbol-Trainer kommen als Datenbank-Module mit Filter/Suche — gehören nicht in Vanilla.
 
 ---
 
@@ -102,19 +105,16 @@ Hilfe (Fehler, Glossar, Bauteile, Symbole)
 **Ziel:** Score ≥16/20 im Lernapp-Framework + RSAP-Abdeckung ≥80 %
 
 **Priorität A (Pflicht für RSAP-Vollständigkeit):**
-1. L13 Spannungsteiler verstehen (Brücke)
-2. L19 NTC-Temperatursensor
-3. L22 Servomotor ansteuern
-4. L23 DC-Motor mit Transistor
-5. L27 Lektion 17 erweitern: Löten + RSAP-Pflichten explizit
+1. **L11 Spannungsteiler verstehen (Brücke)** ← Implementierung läuft (2026-05-18)
+2. L16 NTC-Temperatursensor
+3. L19 Servomotor ansteuern
+4. L20 DC-Motor mit Transistor
+5. L23 Komplettprojekt erweitern: Löten + RSAP-Pflichten explizit
 
 **Priorität B (Curriculum-Hygiene):**
-6. L6 Konstanten · L8 for-Schleife · L17 map() · L21 RGB-LED · L24 Summer
-7. L28 Fehler erkennen
-8. wrongExplanations für alle 28 Lektionen (Hattie d=0,73)
-
-**Priorität C (Nice-to-have, kann nach SaaS):**
-- Glossar, Bauteile-Bibliothek, Schaltsymbol-Trainer (gehören eher in Phase 2 als Datenbank-Module)
+6. Erklär-Boxen einbauen: `const int` (L5) · `for`-Schleife (L7) · `map()` (L13) · Summer (L21)
+7. L12 AD-Wandler · L18 RGB-LED · L24 Fehler erkennen
+8. wrongExplanations für alle 24 Lektionen (Hattie d=0,73)
 
 ### Phase 2 – SaaS-Transformation
 Siehe [WEBAPP_ARCHITEKTUR.md](WEBAPP_ARCHITEKTUR.md)

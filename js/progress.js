@@ -9,12 +9,13 @@ const Progress = {
     return (typeof LESSONS !== 'undefined' && Array.isArray(LESSONS)) ? LESSONS.length : 1;
   },
 
-  // Standard-Zustand: alle Lektionen auf not_started, letzte Lektion = 1
+  // Standard-Zustand: alle Lektionen auf not_started, letzte Lektion = 1.
+  // Iteriert ueber LESSONS, damit auch nicht-zusammenhaengende IDs
+  // (z.B. id 30 fuer Spannungsteiler) sauber angelegt werden.
   createDefault() {
     const data = { version: this.VERSION, lessons: {}, lastLesson: 1 };
-    const total = this.getTotalLessons();
-    for (let i = 1; i <= total; i++) {
-      data.lessons[i] = { status: 'not_started' };
+    if (typeof LESSONS !== 'undefined' && Array.isArray(LESSONS)) {
+      LESSONS.forEach(l => { data.lessons[l.id] = { status: 'not_started' }; });
     }
     return data;
   },
@@ -84,17 +85,19 @@ const Progress = {
     localStorage.removeItem(this.STORAGE_KEY);
   },
 
-  // Prozent der abgeschlossenen Lektionen im Bereich [start, end]
-  // z.B. getCompletionPercent(1, 10) fuer C1, getCompletionPercent(11, 17) fuer C2
+  // Prozent der abgeschlossenen Lektionen ueber alle LESSONS-Eintraege.
+  // start/end werden als alte API-Parameter ignoriert (Range-Splits
+  // werden nicht mehr genutzt) — Zaehlung laeuft jetzt ueber LESSONS,
+  // damit auch nicht-zusammenhaengende IDs (id 30) mitzaehlen.
   getCompletionPercent(start, end) {
+    if (typeof LESSONS === 'undefined' || !Array.isArray(LESSONS) || LESSONS.length === 0) return 0;
     const data = this.load();
     let completed = 0;
-    const total = end - start + 1;
-    for (let i = start; i <= end; i++) {
-      if (data.lessons[i] && data.lessons[i].status === 'completed') {
+    LESSONS.forEach(l => {
+      if (data.lessons[l.id] && data.lessons[l.id].status === 'completed') {
         completed++;
       }
-    }
-    return Math.round((completed / total) * 100);
+    });
+    return Math.round((completed / LESSONS.length) * 100);
   }
 };

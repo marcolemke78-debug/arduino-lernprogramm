@@ -63,7 +63,7 @@ const Exercises = {
     // Frage anzeigen
     const questionEl = document.createElement('p');
     questionEl.className = 'exercise-question';
-    questionEl.textContent = exercise.question;
+    questionEl.innerHTML = exercise.question;
     wrapper.appendChild(questionEl);
 
     // Container fuer die Antwort-Buttons
@@ -80,7 +80,7 @@ const Exercises = {
       const button = document.createElement('button');
       button.className = 'mc-option';
       button.setAttribute('data-index', index);
-      button.textContent = optionText;
+      button.innerHTML = optionText;
 
       button.addEventListener('click', function() {
         if (index === exercise.correct) {
@@ -88,7 +88,7 @@ const Exercises = {
           button.classList.add('correct');
 
           // Feedback mit Erklaerung anzeigen
-          feedbackEl.textContent = exercise.explanation;
+          feedbackEl.innerHTML = exercise.explanation;
           feedbackEl.className = 'exercise-feedback correct';
           feedbackEl.style.display = 'block';
 
@@ -117,7 +117,7 @@ const Exercises = {
           } else {
             feedbackText = 'Leider falsch. Versuch es nochmal!';
           }
-          feedbackEl.textContent = feedbackText;
+          feedbackEl.innerHTML = feedbackText;
           feedbackEl.className = 'exercise-feedback incorrect';
           feedbackEl.style.display = 'block';
         }
@@ -149,7 +149,7 @@ const Exercises = {
     // Frage anzeigen
     var questionEl = document.createElement('p');
     questionEl.className = 'exercise-question';
-    questionEl.textContent = exercise.question;
+    questionEl.innerHTML = exercise.question;
     wrapper.appendChild(questionEl);
 
     // Anzahl Variablen und Zeilen berechnen
@@ -323,7 +323,7 @@ const Exercises = {
     // Frage anzeigen
     var questionEl = document.createElement('p');
     questionEl.className = 'exercise-question';
-    questionEl.textContent = exercise.question;
+    questionEl.innerHTML = exercise.question;
     wrapper.appendChild(questionEl);
 
     // Eingabebereich: Textfeld + Symbol-Buttons
@@ -413,7 +413,7 @@ const Exercises = {
         onComplete();
       } else {
         // Falsch – Hint anzeigen
-        feedbackEl.textContent = exercise.hint;
+        feedbackEl.innerHTML = exercise.hint;
         feedbackEl.className = 'exercise-feedback incorrect';
         feedbackEl.style.display = 'block';
       }
@@ -440,7 +440,7 @@ const Exercises = {
     // Frage anzeigen
     var questionEl = document.createElement('p');
     questionEl.className = 'exercise-question';
-    questionEl.textContent = exercise.question;
+    questionEl.innerHTML = exercise.question;
     wrapper.appendChild(questionEl);
 
     var calc = document.createElement('div');
@@ -656,7 +656,7 @@ const Exercises = {
     // Frage anzeigen
     var questionEl = document.createElement('p');
     questionEl.className = 'exercise-question';
-    questionEl.textContent = exercise.question;
+    questionEl.innerHTML = exercise.question;
     wrapper.appendChild(questionEl);
 
     var numRows = exercise.inputs.length;
@@ -814,7 +814,7 @@ const Exercises = {
     // Frage anzeigen
     var questionEl = document.createElement('p');
     questionEl.className = 'exercise-question';
-    questionEl.textContent = exercise.question;
+    questionEl.innerHTML = exercise.question;
     wrapper.appendChild(questionEl);
 
     // Zuordnungsbereich (Grid: links | rechts)
@@ -863,7 +863,7 @@ const Exercises = {
       var item = document.createElement('div');
       item.className = 'match-item match-left';
       item.setAttribute('data-index', idx);
-      item.textContent = pair.left;
+      item.innerHTML = pair.left;
 
       item.addEventListener('click', function() {
         // Fall 1: Item ist bereits verbunden → Verbindung loesen
@@ -914,7 +914,7 @@ const Exercises = {
       var item = document.createElement('div');
       item.className = 'match-item match-right';
       item.setAttribute('data-index', originalIdx);
-      item.textContent = pair.right;
+      item.innerHTML = pair.right;
 
       item.addEventListener('click', function() {
         // Fall 1: Item ist bereits verbunden → Verbindung loesen
@@ -1047,7 +1047,7 @@ Exercises.renderCircuitExercise = function(exercise, container, onComplete) {
 
   const questionEl = document.createElement('p');
   questionEl.className = 'exercise-question';
-  questionEl.textContent = exercise.question;
+  questionEl.innerHTML = exercise.question;
   wrapper.appendChild(questionEl);
 
   // Schaltung rendern
@@ -1112,7 +1112,7 @@ Exercises.renderCircuitMatching = function(exercise, container, onComplete) {
 
   const questionEl = document.createElement('p');
   questionEl.className = 'exercise-question';
-  questionEl.textContent = exercise.question;
+  questionEl.innerHTML = exercise.question;
   wrapper.appendChild(questionEl);
 
   const matchArea = document.createElement('div');
@@ -1152,7 +1152,7 @@ Exercises.renderCircuitMatching = function(exercise, container, onComplete) {
     item.dataset.side = 'right';
     item.dataset.expression = pair.expression;
     item.dataset.circuit = pair.circuit;
-    item.textContent = pair.expression;
+    item.innerHTML = pair.expression;
     item.style.fontFamily = "'Courier New', monospace";
     item.style.fontSize = '1.1rem';
     rightCol.appendChild(item);
@@ -1238,7 +1238,7 @@ Exercises.renderExpressionTreeExercise = function(exercise, container, onComplet
 
   const questionEl = document.createElement('p');
   questionEl.className = 'exercise-question';
-  questionEl.textContent = exercise.question;
+  questionEl.innerHTML = exercise.question;
   wrapper.appendChild(questionEl);
 
   // Baum anzeigen MIT versteckten Knoten (als "?" dargestellt)
@@ -1335,7 +1335,7 @@ Exercises.renderBinaryDecimal = function(exercise, container, onComplete) {
   wrapper.className = 'exercise-block binary-decimal-exercise';
 
   const title = document.createElement('h3');
-  title.textContent = exercise.question;
+  title.innerHTML = exercise.question;
   wrapper.appendChild(title);
 
   const rounds = exercise.rounds;
@@ -1448,7 +1448,7 @@ Exercises.renderSubnetExercise = function(exercise, container, onComplete) {
   wrapper.className = 'exercise-block subnet-exercise';
 
   const title = document.createElement('h3');
-  title.textContent = exercise.question;
+  title.innerHTML = exercise.question;
   wrapper.appendChild(title);
 
   const info = document.createElement('p');
@@ -1544,7 +1544,7 @@ Exercises.renderNetworkLabeling = function(exercise, container, onComplete) {
   wrapper.className = 'exercise-block network-labeling';
 
   const title = document.createElement('h3');
-  title.textContent = exercise.question;
+  title.innerHTML = exercise.question;
   wrapper.appendChild(title);
 
   // Preset laden
@@ -1800,7 +1800,7 @@ Exercises.renderOrdering = function(exercise, container, onComplete) {
   // Frage anzeigen
   const questionEl = document.createElement('p');
   questionEl.className = 'exercise-question';
-  questionEl.textContent = exercise.question;
+  questionEl.innerHTML = exercise.question;
   wrapper.appendChild(questionEl);
 
   // Items mit Original-Index merken, dann mischen (Fisher-Yates)
@@ -1839,7 +1839,7 @@ Exercises.renderOrdering = function(exercise, container, onComplete) {
 
       const textSpan = document.createElement('span');
       textSpan.className = 'ordering-text';
-      textSpan.textContent = item.text;
+      textSpan.innerHTML = item.text;
       li.appendChild(textSpan);
 
       const btnGroup = document.createElement('div');

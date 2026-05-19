@@ -20,6 +20,7 @@ const LESSONS = [
   { id: 14, title: 'Entscheidungen mit Sensorwerten', module: 'analog' },
   // Modul 4: Aktoren erweitert
   { id: 32, title: 'Servomotor ansteuern', module: 'aktoren' },
+  { id: 33, title: 'DC-Motor mit Transistor', module: 'aktoren' },
   // Modul 5: Prüfungsprojekt
   { id: 15, title: 'Ampel mit Fußgängerüberweg', module: 'projekt' },
   { id: 16, title: 'Nachtabschaltung mit Lichtsensor', module: 'projekt' },

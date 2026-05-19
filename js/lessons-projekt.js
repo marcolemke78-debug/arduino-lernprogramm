@@ -791,11 +791,46 @@ const LESSONS_PROJEKT = [
         <hr class="section-divider">
 
         <div class="info-card">
+          <h3>Was musst du in der RSAP wirklich zeigen?</h3>
+          <p>Bevor wir loslegen: Die <strong>Realschulabschlussprüfung Technik</strong> (RSAP) hat ein paar harte Pflicht-Vorgaben, die du im Kopf haben musst. Wenn du eine davon vergisst, kostet das richtig Punkte.</p>
+
+          <table class="icon-table">
+            <tr><th>Pflicht</th><th>Was heißt das konkret?</th></tr>
+            <tr><td><strong>Sensoren &amp; Aktoren</strong></td><td>Mindestens <strong>1 Sensor + 2 Aktoren</strong> ODER <strong>2 Sensoren + 1 Aktor</strong>. Sie müssen <em>extern</em> sein – also außerhalb des Arduino-Chips, von dir auf der Lötplatine angeschlossen.</td></tr>
+            <tr><td><strong>Analoger Sensor</strong></td><td><strong>Mindestens 1</strong> externer Sensor muss <strong>analog</strong> sein (LDR, NTC, Potentiometer). Reines Taster-Setup reicht nicht!</td></tr>
+            <tr><td><strong>Schaltung gelötet</strong></td><td><strong>Kein Breadboard in der Prüfung!</strong> Du baust deine Schaltung auf einer Lötplatine auf. Dazu kommt unten Sektion 4.</td></tr>
+            <tr><td><strong>Konstruktion</strong></td><td>Werkstoffbereich: <strong>Messen, Anreißen</strong> <em>(= mit Stahlspitze markieren, wo gebohrt/gesägt wird)</em><strong>, Bohren, Sägen</strong>. Das Modell muss neben der Elektronik auch handwerklich entstanden sein.</td></tr>
+            <tr><td><strong>Vollständig</strong></td><td><strong>Computergestützte Steuerung oder Regelung</strong> muss komplett funktionieren – nicht nur ein Teilbereich.</td></tr>
+          </table>
+
+          <h4 style="margin-top:1.25rem;">Bewertungsbogen Praxis – 4 Kriterien, je 0–5 Punkte</h4>
+          <ul class="step-list">
+            <li><strong>Planung</strong> – Schaltplan, Pin-Belegung, Materialliste sauber dokumentiert</li>
+            <li><strong>Funktion</strong> – Schaltung erfüllt die Aufgabenstellung, alle Zustände werden korrekt durchlaufen</li>
+            <li><strong>Handwerkliche Umsetzung</strong> – saubere Lötstellen, ordentliche Verdrahtung, stabiler Aufbau</li>
+            <li><strong>Steuerung / Regelung</strong> ← <strong>das ist unser Arduino-Bereich</strong>: kommentierter Code, sinnvolle Bedingungen, Sensorwerte ausgewertet, Reaktion korrekt</li>
+          </ul>
+        </div>
+
+        <div class="tip-box">
+          <strong>Wie erfüllt die Ampel-Schaltung unten diese Pflichten?</strong>
+          <ul style="margin-top:0.5rem; margin-left:1.25rem;">
+            <li>2 Sensoren (LDR analog + Taster digital) ✅</li>
+            <li>5 Aktoren (5 LEDs) ✅</li>
+            <li>Analoger Sensor: LDR ✅</li>
+            <li>Steuerung mit if/else + Zustandsmaschine ✅</li>
+          </ul>
+          Die Ampel ist also ein <strong>RSAP-konformes Projekt</strong>. Weitere Pool-Aufgaben siehe Sektion 5 unten.
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
           <h3>Komplette Bauteilliste</h3>
           <table class="icon-table">
             <tr><th>Anzahl</th><th>Bauteil</th><th>Wozu?</th></tr>
             <tr><td>1x</td><td>Arduino Uno</td><td>Steuerung</td></tr>
-            <tr><td>1x</td><td>Steckbrett (Breadboard)</td><td>Aufbau ohne Löten</td></tr>
+            <tr><td>1x</td><td>Steckbrett (Breadboard)</td><td>nur für die <em>Test-Phase</em>! In der echten Prüfung verboten – du baust auf Lötplatine (siehe Sektion 4)</td></tr>
             <tr><td>2x</td><td>Rote LED</td><td>Auto Rot + Fußgänger Rot</td></tr>
             <tr><td>1x</td><td>Gelbe LED</td><td>Auto Gelb</td></tr>
             <tr><td>2x</td><td>Grüne LED</td><td>Auto Grün + Fußgänger Grün</td></tr>
@@ -1246,6 +1281,455 @@ const LESSONS_PROJEKT = [
         <hr class="section-divider">
 
         <div class="info-card">
+          <h3>Vom Breadboard zur gelöteten Schaltung</h3>
+          <p>Der Code läuft – aber jetzt kommt der Schritt, der in der Prüfung wirklich zählt: <strong>Du musst deine Schaltung löten</strong>. Breadboards sind in der RSAP nicht erlaubt, weil Wackelkontakte die Funktion unzuverlässig machen.</p>
+
+          <h4 style="margin-top:1.25rem;">Welche Platine? Lochraster oder Streifenraster?</h4>
+          <p>Es gibt zwei verbreitete Typen. Für Schul-Projekte ist <strong>Streifenraster</strong> oft einfacher, weil schon Verbindungen vorbereitet sind:</p>
+
+          <div style="margin:1rem 0; text-align:center;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" style="max-width:100%; height:auto; background:#f8f8f8; border:1px solid #ccc; border-radius:8px;">
+              <!-- Linke Platte: Lochraster -->
+              <text x="95" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Lochrasterplatine</text>
+              <rect x="20" y="30" width="150" height="120" rx="4" fill="#d9b97a" stroke="#8a6e3c" stroke-width="1.5"/>
+              <!-- Lochraster: 10 Spalten x 6 Reihen, Lochabstand 12 -->
+              <g fill="#f5e8c8" stroke="#6a4d20" stroke-width="0.8">
+                <!-- Reihen erzeugen -->
+                <circle cx="35" cy="45" r="2.5"/><circle cx="50" cy="45" r="2.5"/><circle cx="65" cy="45" r="2.5"/><circle cx="80" cy="45" r="2.5"/><circle cx="95" cy="45" r="2.5"/><circle cx="110" cy="45" r="2.5"/><circle cx="125" cy="45" r="2.5"/><circle cx="140" cy="45" r="2.5"/><circle cx="155" cy="45" r="2.5"/>
+                <circle cx="35" cy="60" r="2.5"/><circle cx="50" cy="60" r="2.5"/><circle cx="65" cy="60" r="2.5"/><circle cx="80" cy="60" r="2.5"/><circle cx="95" cy="60" r="2.5"/><circle cx="110" cy="60" r="2.5"/><circle cx="125" cy="60" r="2.5"/><circle cx="140" cy="60" r="2.5"/><circle cx="155" cy="60" r="2.5"/>
+                <circle cx="35" cy="75" r="2.5"/><circle cx="50" cy="75" r="2.5"/><circle cx="65" cy="75" r="2.5"/><circle cx="80" cy="75" r="2.5"/><circle cx="95" cy="75" r="2.5"/><circle cx="110" cy="75" r="2.5"/><circle cx="125" cy="75" r="2.5"/><circle cx="140" cy="75" r="2.5"/><circle cx="155" cy="75" r="2.5"/>
+                <circle cx="35" cy="90" r="2.5"/><circle cx="50" cy="90" r="2.5"/><circle cx="65" cy="90" r="2.5"/><circle cx="80" cy="90" r="2.5"/><circle cx="95" cy="90" r="2.5"/><circle cx="110" cy="90" r="2.5"/><circle cx="125" cy="90" r="2.5"/><circle cx="140" cy="90" r="2.5"/><circle cx="155" cy="90" r="2.5"/>
+                <circle cx="35" cy="105" r="2.5"/><circle cx="50" cy="105" r="2.5"/><circle cx="65" cy="105" r="2.5"/><circle cx="80" cy="105" r="2.5"/><circle cx="95" cy="105" r="2.5"/><circle cx="110" cy="105" r="2.5"/><circle cx="125" cy="105" r="2.5"/><circle cx="140" cy="105" r="2.5"/><circle cx="155" cy="105" r="2.5"/>
+                <circle cx="35" cy="120" r="2.5"/><circle cx="50" cy="120" r="2.5"/><circle cx="65" cy="120" r="2.5"/><circle cx="80" cy="120" r="2.5"/><circle cx="95" cy="120" r="2.5"/><circle cx="110" cy="120" r="2.5"/><circle cx="125" cy="120" r="2.5"/><circle cx="140" cy="120" r="2.5"/><circle cx="155" cy="120" r="2.5"/>
+              </g>
+              <text x="95" y="170" text-anchor="middle" font-size="9" fill="#555">Jedes Loch einzeln –</text>
+              <text x="95" y="183" text-anchor="middle" font-size="9" fill="#555">Verbindungen mit Drahtbrücken</text>
+
+              <!-- Rechte Platte: Streifenraster -->
+              <text x="305" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#333">Streifenrasterplatine</text>
+              <rect x="230" y="30" width="150" height="120" rx="4" fill="#d9b97a" stroke="#8a6e3c" stroke-width="1.5"/>
+              <!-- Kupferstreifen horizontal -->
+              <g fill="#c87a3a" stroke="#8a3e10" stroke-width="0.5" opacity="0.7">
+                <rect x="232" y="42" width="146" height="6" rx="2"/>
+                <rect x="232" y="57" width="146" height="6" rx="2"/>
+                <rect x="232" y="72" width="146" height="6" rx="2"/>
+                <rect x="232" y="87" width="146" height="6" rx="2"/>
+                <rect x="232" y="102" width="146" height="6" rx="2"/>
+                <rect x="232" y="117" width="146" height="6" rx="2"/>
+              </g>
+              <!-- Löcher in Streifen -->
+              <g fill="#f5e8c8" stroke="#6a4d20" stroke-width="0.6">
+                <circle cx="245" cy="45" r="2.2"/><circle cx="260" cy="45" r="2.2"/><circle cx="275" cy="45" r="2.2"/><circle cx="290" cy="45" r="2.2"/><circle cx="305" cy="45" r="2.2"/><circle cx="320" cy="45" r="2.2"/><circle cx="335" cy="45" r="2.2"/><circle cx="350" cy="45" r="2.2"/><circle cx="365" cy="45" r="2.2"/>
+                <circle cx="245" cy="60" r="2.2"/><circle cx="260" cy="60" r="2.2"/><circle cx="275" cy="60" r="2.2"/><circle cx="290" cy="60" r="2.2"/><circle cx="305" cy="60" r="2.2"/><circle cx="320" cy="60" r="2.2"/><circle cx="335" cy="60" r="2.2"/><circle cx="350" cy="60" r="2.2"/><circle cx="365" cy="60" r="2.2"/>
+                <circle cx="245" cy="75" r="2.2"/><circle cx="260" cy="75" r="2.2"/><circle cx="275" cy="75" r="2.2"/><circle cx="290" cy="75" r="2.2"/><circle cx="305" cy="75" r="2.2"/><circle cx="320" cy="75" r="2.2"/><circle cx="335" cy="75" r="2.2"/><circle cx="350" cy="75" r="2.2"/><circle cx="365" cy="75" r="2.2"/>
+                <circle cx="245" cy="90" r="2.2"/><circle cx="260" cy="90" r="2.2"/><circle cx="275" cy="90" r="2.2"/><circle cx="290" cy="90" r="2.2"/><circle cx="305" cy="90" r="2.2"/><circle cx="320" cy="90" r="2.2"/><circle cx="335" cy="90" r="2.2"/><circle cx="350" cy="90" r="2.2"/><circle cx="365" cy="90" r="2.2"/>
+                <circle cx="245" cy="105" r="2.2"/><circle cx="260" cy="105" r="2.2"/><circle cx="275" cy="105" r="2.2"/><circle cx="290" cy="105" r="2.2"/><circle cx="305" cy="105" r="2.2"/><circle cx="320" cy="105" r="2.2"/><circle cx="335" cy="105" r="2.2"/><circle cx="350" cy="105" r="2.2"/><circle cx="365" cy="105" r="2.2"/>
+                <circle cx="245" cy="120" r="2.2"/><circle cx="260" cy="120" r="2.2"/><circle cx="275" cy="120" r="2.2"/><circle cx="290" cy="120" r="2.2"/><circle cx="305" cy="120" r="2.2"/><circle cx="320" cy="120" r="2.2"/><circle cx="335" cy="120" r="2.2"/><circle cx="350" cy="120" r="2.2"/><circle cx="365" cy="120" r="2.2"/>
+              </g>
+              <!-- Hinweispfeil auf eine Reihe -->
+              <text x="395" y="78" font-size="9" fill="#8a3e10" font-weight="bold">→</text>
+              <text x="305" y="170" text-anchor="middle" font-size="9" fill="#555">Eine Reihe = ein Kupferstreifen.</text>
+              <text x="305" y="183" text-anchor="middle" font-size="9" fill="#555">Alle 9 Löcher schon verbunden!</text>
+            </svg>
+          </div>
+
+          <p><strong>Was heißt das beim Übertragen vom Breadboard?</strong> Beim Streifenraster musst du an manchen Stellen <strong>einen Streifen unterbrechen</strong>, weil sonst zwei Bauteile, die getrennt sein sollen, kurzgeschlossen wären. Dafür gibt es einen <em>Streifentrenner</em> (kleiner Bohrer, der den Kupferstreifen zwischen zwei Löchern auftrennt) oder du nimmst einfach einen scharfen Cuttermesser.</p>
+
+          <h4 style="margin-top:1.5rem;">Werkzeug- und Materialliste</h4>
+          <table class="icon-table">
+            <tr><th>Werkzeug / Material</th><th>Was machst du damit?</th></tr>
+            <tr><td>Lötkolben 30–40 Watt mit Temperaturregelung</td><td>Erhitzt Lötpad und Bauteilbein. <strong>320 °C</strong> für bleihaltiges Lot (60/40), <strong>340–360 °C</strong> für bleifreies Lot.</td></tr>
+            <tr><td>Lötzinn 0,8 mm</td><td>Schmilzt durch den heißen Kolben und verbindet Pad + Bein. In der Schule meist bleihaltig (60 % Zinn, 40 % Blei) – schmilzt einfacher und niedriger.</td></tr>
+            <tr><td>Streifenraster- oder Lochrasterplatine</td><td>Trägerplatine deiner Schaltung</td></tr>
+            <tr><td>Seitenschneider</td><td>Knipst überstehende Bauteilbeine ab (nach dem Löten)</td></tr>
+            <tr><td>Entlötlitze oder Entlötpumpe</td><td>Falls du dich verlötest – entfernt überschüssiges Lot</td></tr>
+            <tr><td>Schaltdraht (isoliert, 0,5 mm²)</td><td>Drahtbrücken auf der Platine, Verbindung zum Arduino</td></tr>
+            <tr><td>Multimeter</td><td>Durchgangsprüfung VOR dem Anschließen an den Arduino!</td></tr>
+            <tr><td>Streifentrenner oder Cuttermesser</td><td>Unterbricht Kupferstreifen bei Streifenraster</td></tr>
+          </table>
+
+          <h4 style="margin-top:1.5rem;">Der Lötvorgang Schritt für Schritt</h4>
+          <div style="margin:1rem 0; text-align:center;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 180" style="max-width:100%; height:auto; background:#f8f8f8; border:1px solid #ccc; border-radius:8px;">
+              <!-- Schritt 1: Bauteil platziert -->
+              <text x="65" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">1. Platzieren</text>
+              <!-- Platine seitlich -->
+              <rect x="20" y="90" width="90" height="14" fill="#d9b97a" stroke="#8a6e3c" stroke-width="1"/>
+              <!-- Lötpad oben -->
+              <ellipse cx="65" cy="90" rx="7" ry="3" fill="#c87a3a" stroke="#8a3e10" stroke-width="0.5"/>
+              <!-- Bauteilkörper oben -->
+              <rect x="50" y="40" width="30" height="14" rx="2" fill="#3a5a8a" stroke="#1a3a6a" stroke-width="0.6"/>
+              <text x="65" y="50" text-anchor="middle" font-size="6" fill="#fff">Bauteil</text>
+              <!-- Bauteilbein durch Pad -->
+              <line x1="65" y1="54" x2="65" y2="115" stroke="#888" stroke-width="1.4"/>
+              <text x="65" y="170" text-anchor="middle" font-size="8" fill="#555">Bein durch Loch stecken</text>
+
+              <!-- Schritt 2: Erhitzen -->
+              <text x="195" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">2. Erhitzen</text>
+              <rect x="150" y="90" width="90" height="14" fill="#d9b97a" stroke="#8a6e3c" stroke-width="1"/>
+              <ellipse cx="195" cy="90" rx="7" ry="3" fill="#c87a3a" stroke="#8a3e10" stroke-width="0.5"/>
+              <rect x="180" y="40" width="30" height="14" rx="2" fill="#3a5a8a" stroke="#1a3a6a" stroke-width="0.6"/>
+              <text x="195" y="50" text-anchor="middle" font-size="6" fill="#fff">Bauteil</text>
+              <line x1="195" y1="54" x2="195" y2="115" stroke="#888" stroke-width="1.4"/>
+              <!-- Lötkolben (schräg von links) -->
+              <polygon points="148,100 172,92 178,98 152,108" fill="#666" stroke="#333" stroke-width="0.5"/>
+              <polygon points="172,92 188,87 192,93 178,98" fill="#c33" stroke="#811" stroke-width="0.5"/>
+              <text x="190" y="95" font-size="6" fill="#811">Spitze</text>
+              <!-- Hitzewellen -->
+              <text x="195" y="118" text-anchor="middle" font-size="10" fill="#c33">∿</text>
+              <text x="195" y="170" text-anchor="middle" font-size="8" fill="#555">Kolben 1 Sek. auf Pad+Bein</text>
+
+              <!-- Schritt 3: Lot zuführen -->
+              <text x="325" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">3. Lot zuführen</text>
+              <rect x="280" y="90" width="90" height="14" fill="#d9b97a" stroke="#8a6e3c" stroke-width="1"/>
+              <ellipse cx="325" cy="90" rx="7" ry="3" fill="#c87a3a" stroke="#8a3e10" stroke-width="0.5"/>
+              <rect x="310" y="40" width="30" height="14" rx="2" fill="#3a5a8a" stroke="#1a3a6a" stroke-width="0.6"/>
+              <text x="325" y="50" text-anchor="middle" font-size="6" fill="#fff">Bauteil</text>
+              <line x1="325" y1="54" x2="325" y2="115" stroke="#888" stroke-width="1.4"/>
+              <!-- Lot von rechts -->
+              <line x1="380" y1="60" x2="338" y2="88" stroke="#aaa" stroke-width="1.4"/>
+              <text x="370" y="55" font-size="7" fill="#666">Lot</text>
+              <!-- Geschmolzene Lötstelle (Kegel) -->
+              <polygon points="318,90 332,90 325,82" fill="#ddd" stroke="#888" stroke-width="0.5"/>
+              <text x="325" y="170" text-anchor="middle" font-size="8" fill="#555">Lot von gegenüber zuführen</text>
+
+              <!-- Schritt 4: Aushärten + abknipsen -->
+              <text x="455" y="20" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">4. Fertig</text>
+              <rect x="410" y="90" width="90" height="14" fill="#d9b97a" stroke="#8a6e3c" stroke-width="1"/>
+              <ellipse cx="455" cy="90" rx="7" ry="3" fill="#c87a3a" stroke="#8a3e10" stroke-width="0.5"/>
+              <rect x="440" y="40" width="30" height="14" rx="2" fill="#3a5a8a" stroke="#1a3a6a" stroke-width="0.6"/>
+              <text x="455" y="50" text-anchor="middle" font-size="6" fill="#fff">Bauteil</text>
+              <line x1="455" y1="54" x2="455" y2="92" stroke="#888" stroke-width="1.4"/>
+              <!-- Fertiger Lötkegel, glänzend silbrig -->
+              <polygon points="446,93 464,93 455,80" fill="#e8e8e8" stroke="#666" stroke-width="0.6"/>
+              <ellipse cx="453" cy="86" rx="1.5" ry="3" fill="#fff" opacity="0.7"/>
+              <text x="455" y="170" text-anchor="middle" font-size="8" fill="#555">Bein abknipsen, Kontrolle</text>
+            </svg>
+          </div>
+
+          <ol class="step-list">
+            <li><strong>Bauteil platzieren:</strong> Stecke die Beine von oben durch die Löcher, so dass das Bauteil bündig auf der Platine sitzt. Beine auf der Lötseite leicht spreizen, damit es beim Drehen nicht herausfällt.</li>
+            <li><strong>Erhitzen:</strong> Lege die Lötkolbenspitze gleichzeitig auf Lötpad und Bauteilbein. Halte ca. 1 Sekunde – beides muss heiß sein, damit das Lot anständig fließt.</li>
+            <li><strong>Lot zuführen:</strong> Führe das Lötzinn von der <em>gegenüberliegenden</em> Seite zur Spitze. Das Lot schmilzt, breitet sich aus, bildet einen kleinen Kegel. <strong>Nicht zu viel!</strong> Eine Lötstelle braucht etwa 1–2 mm Lot, nicht einen Klumpen.</li>
+            <li><strong>Reihenfolge wichtig:</strong> Erst das Lot wegnehmen, dann den Kolben. Sonst reißt das Lot ab und es entsteht eine schlechte Verbindung.</li>
+            <li><strong>Aushärten:</strong> 2–3 Sekunden nicht bewegen! Das Lot muss erstarren, sonst wird die Stelle "kalt" (siehe unten).</li>
+            <li><strong>Abknipsen:</strong> Mit dem Seitenschneider den überstehenden Bein-Rest direkt an der Lötstelle abknipsen. Augen schützen – die Stücke springen weg!</li>
+            <li><strong>Sichtprüfung &amp; Multimeter:</strong> Jede Stelle ansehen (Kegelform? Glänzend?) und mit dem Multimeter Durchgangstöne prüfen, BEVOR du den Arduino anschließt.</li>
+          </ol>
+
+          <h4 style="margin-top:1.5rem;">Kalte Lötstelle vs. saubere Lötstelle – wie erkennst du den Unterschied?</h4>
+          <p>Das ist der Klassiker, an dem 80 % der Schul-Schaltungen scheitern. Eine kalte Lötstelle <strong>sieht nach Lot aus</strong>, leitet aber nicht. Du suchst dich tot.</p>
+
+          <div style="margin:1rem 0; text-align:center;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" style="max-width:100%; height:auto; background:#f8f8f8; border:1px solid #ccc; border-radius:8px;">
+              <!-- Linke Seite: KALT -->
+              <text x="80" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#c33">KALT</text>
+              <rect x="20" y="90" width="120" height="16" fill="#d9b97a" stroke="#8a6e3c" stroke-width="1"/>
+              <!-- Pad -->
+              <ellipse cx="80" cy="90" rx="14" ry="4" fill="#c87a3a" stroke="#8a3e10" stroke-width="0.6"/>
+              <!-- Bein -->
+              <line x1="80" y1="40" x2="80" y2="120" stroke="#888" stroke-width="1.6"/>
+              <!-- Lötzinn klumpig, matt, mit Spalt -->
+              <path d="M 64 90 Q 60 75 80 70 Q 100 75 96 90 L 92 95 L 88 92 L 84 96 L 80 92 L 76 95 L 72 92 L 68 95 Z" fill="#9a9a9a" stroke="#555" stroke-width="0.5"/>
+              <!-- Spalt zwischen Pad und Lot -->
+              <line x1="66" y1="88" x2="70" y2="86" stroke="#222" stroke-width="0.7"/>
+              <line x1="94" y1="88" x2="90" y2="86" stroke="#222" stroke-width="0.7"/>
+              <!-- Annotation -->
+              <text x="80" y="40" text-anchor="middle" font-size="8" fill="#c33">⚠</text>
+              <text x="155" y="80" font-size="8" fill="#c33" font-weight="bold">Spalt!</text>
+              <line x1="100" y1="86" x2="150" y2="80" stroke="#c33" stroke-width="0.6"/>
+              <!-- Beschriftung -->
+              <text x="80" y="140" text-anchor="middle" font-size="8" fill="#555">grau / matt / klumpig</text>
+              <text x="80" y="153" text-anchor="middle" font-size="8" fill="#555">Lot haftet nicht am Pad</text>
+              <text x="80" y="168" text-anchor="middle" font-size="8" fill="#c33" font-weight="bold">leitet schlecht oder gar nicht</text>
+
+              <!-- Trenner -->
+              <line x1="160" y1="35" x2="160" y2="170" stroke="#ccc" stroke-width="1" stroke-dasharray="3,2"/>
+
+              <!-- Rechte Seite: SAUBER -->
+              <text x="240" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#393">SAUBER</text>
+              <rect x="180" y="90" width="120" height="16" fill="#d9b97a" stroke="#8a6e3c" stroke-width="1"/>
+              <ellipse cx="240" cy="90" rx="14" ry="4" fill="#c87a3a" stroke="#8a3e10" stroke-width="0.6"/>
+              <line x1="240" y1="40" x2="240" y2="120" stroke="#888" stroke-width="1.6"/>
+              <!-- Sauberer Lötkegel, silbrig glänzend -->
+              <path d="M 226 90 Q 240 60 254 90 Z" fill="#e8e8e8" stroke="#666" stroke-width="0.6"/>
+              <!-- Glanzlicht -->
+              <ellipse cx="236" cy="78" rx="1.5" ry="4" fill="#fff" opacity="0.8"/>
+              <!-- Beschriftung -->
+              <text x="240" y="140" text-anchor="middle" font-size="8" fill="#555">silbrig / glänzend / kegelförmig</text>
+              <text x="240" y="153" text-anchor="middle" font-size="8" fill="#555">Lot umschließt Bein und Pad</text>
+              <text x="240" y="168" text-anchor="middle" font-size="8" fill="#393" font-weight="bold">perfekte Verbindung</text>
+            </svg>
+          </div>
+
+          <p><strong>Faustregel:</strong> Wenn deine Lötstelle aussieht wie eine kleine <em>Kuppel</em> oder ein <em>Berg mit spitzem Gipfel</em>, ist sie meist kalt. Eine gute Lötstelle ist <em>kegelförmig</em>, glänzt silbrig und du siehst, dass das Lot bis zur Padkante reicht. Wenn unsicher: Nochmal heiß machen, frisches Lot dazu, kurz halten.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Andere Pool-Aufgaben am Beispiel</h3>
+          <p>Die Ampel oben ist nur <strong>eine von 13 Aufgaben</strong>, die in der RSAP drankommen können. Du weißt vorher nicht, welche du bekommst. Damit du das Muster beherrschst, gehen wir zwei weitere Pool-Aufgaben durch – kompakter, ohne komplettes Schaltbild. Die Tiefe für die Einzel-Bauteile findest du in den verlinkten Vorgängerlektionen.</p>
+
+          <h4 style="margin-top:1.25rem;">Showcase 5a: Gewächshaus-Steuerung (Bautechnik)</h4>
+          <p><strong>Aufgabenbeschreibung:</strong> Im Gewächshaus misst ein NTC die Innentemperatur. Bei zu warmer Luft öffnet ein Servo das Dachfenster. Bei zu kalter Luft schaltet eine Glühlampe als Heizung an.</p>
+
+          <div style="margin:1rem 0; text-align:center;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 240" style="max-width:100%; height:auto; background:#f0f8e8; border:1px solid #ccc; border-radius:8px;">
+              <!-- Boden -->
+              <rect x="20" y="200" width="280" height="20" fill="#8a6a3a" stroke="#5a3e1c" stroke-width="0.8"/>
+              <text x="160" y="215" text-anchor="middle" font-size="7" fill="#fff">Erdboden mit Pflanzen</text>
+
+              <!-- Gewaechshaus-Struktur: schraege Daecher -->
+              <polygon points="40,200 40,120 160,60 280,120 280,200" fill="#e8f4ff" fill-opacity="0.5" stroke="#558" stroke-width="1.5"/>
+              <!-- Glas-Streben -->
+              <line x1="40" y1="120" x2="280" y2="120" stroke="#558" stroke-width="0.8"/>
+              <line x1="160" y1="60" x2="160" y2="200" stroke="#558" stroke-width="0.4" stroke-dasharray="2,2"/>
+              <line x1="40" y1="200" x2="40" y2="120" stroke="#558" stroke-width="0.8"/>
+              <line x1="280" y1="200" x2="280" y2="120" stroke="#558" stroke-width="0.8"/>
+
+              <!-- Dachfenster (Klappe halboffen, rechts oben) -->
+              <polygon points="160,60 220,90 220,75 160,45" fill="#aacfe8" stroke="#446" stroke-width="0.8"/>
+              <text x="195" y="68" font-size="7" fill="#224" font-weight="bold">FENSTER</text>
+
+              <!-- Servo (auf dem Dachrahmen, klein) -->
+              <rect x="218" y="83" width="14" height="10" rx="1" fill="#222" stroke="#000" stroke-width="0.5"/>
+              <circle cx="225" cy="88" r="3" fill="#888"/>
+              <text x="225" y="103" text-anchor="middle" font-size="6" fill="#333" font-weight="bold">Servo</text>
+              <!-- Verbindung Servo zu Fenster -->
+              <line x1="225" y1="85" x2="220" y2="78" stroke="#666" stroke-width="0.8" stroke-dasharray="1,1"/>
+
+              <!-- Gluehlampe oben in der Mitte (Heizung) -->
+              <circle cx="160" cy="100" r="11" fill="#ffe066" stroke="#aa6" stroke-width="1"/>
+              <line x1="160" y1="111" x2="160" y2="120" stroke="#666" stroke-width="1.5"/>
+              <text x="160" y="103" text-anchor="middle" font-size="6" fill="#660" font-weight="bold">LAMPE</text>
+              <!-- Lichtstrahlen -->
+              <line x1="148" y1="92" x2="142" y2="86" stroke="#cc6" stroke-width="0.6"/>
+              <line x1="172" y1="92" x2="178" y2="86" stroke="#cc6" stroke-width="0.6"/>
+              <line x1="160" y1="86" x2="160" y2="80" stroke="#cc6" stroke-width="0.6"/>
+
+              <!-- NTC im Inneren (an Strebe) -->
+              <rect x="80" y="155" width="14" height="8" rx="1" fill="#445" stroke="#223" stroke-width="0.4"/>
+              <text x="87" y="161" text-anchor="middle" font-size="5" fill="#fff" font-weight="bold">NTC</text>
+              <text x="87" y="173" text-anchor="middle" font-size="6" fill="#333">Temperatur</text>
+
+              <!-- Pflanze als Symbol, sitzt auf dem Boden -->
+              <line x1="220" y1="200" x2="220" y2="192" stroke="#252" stroke-width="1.5"/>
+              <ellipse cx="220" cy="190" rx="8" ry="4" fill="#393"/>
+
+              <!-- Arduino-Box rechts -->
+              <rect x="330" y="80" width="90" height="100" rx="6" fill="#2176AE" stroke="#1a5f8a" stroke-width="1.5"/>
+              <text x="375" y="98" text-anchor="middle" font-size="10" fill="white" font-weight="bold">Arduino</text>
+              <text x="375" y="111" text-anchor="middle" font-size="6" fill="#aad">Steuerung</text>
+
+              <!-- Pin-Labels -->
+              <rect x="336" y="120" width="35" height="9" rx="1" fill="#1a5f8a"/>
+              <text x="353" y="127" text-anchor="middle" font-size="6" fill="white">A0 NTC</text>
+              <rect x="336" y="133" width="35" height="9" rx="1" fill="#1a5f8a"/>
+              <text x="353" y="140" text-anchor="middle" font-size="6" fill="white">Pin 9 Servo</text>
+              <rect x="336" y="146" width="35" height="9" rx="1" fill="#1a5f8a"/>
+              <text x="353" y="153" text-anchor="middle" font-size="6" fill="white">Pin 7 Lampe</text>
+
+              <!-- Verbindungspfeile NTC -> Arduino -> Servo + Lampe -->
+              <path d="M 94 159 Q 200 159 336 124" fill="none" stroke="#a44" stroke-width="1" stroke-dasharray="3,2"/>
+              <path d="M 414 137 Q 280 137 232 88" fill="none" stroke="#446" stroke-width="1" stroke-dasharray="3,2"/>
+              <path d="M 414 150 Q 280 175 160 115" fill="none" stroke="#660" stroke-width="1" stroke-dasharray="3,2"/>
+
+              <!-- Legende unten -->
+              <text x="220" y="232" text-anchor="middle" font-size="8" fill="#555" font-style="italic">Wirkprinzip: NTC misst Temperatur &rarr; Arduino entscheidet &rarr; Servo oder Lampe reagiert</text>
+            </svg>
+          </div>
+
+          <table class="icon-table">
+            <tr><th>Bauteil</th><th>Anschluss</th></tr>
+            <tr><td>Vorwiderstand 10 kOhm</td><td>5V &rarr; A0 (oben im Spannungsteiler, Konvention aus L16)</td></tr>
+            <tr><td>NTC (10 kOhm bei 25 &deg;C)</td><td>A0 &rarr; GND (unten im Spannungsteiler)</td></tr>
+            <tr><td>Servomotor (SG90)</td><td>Signal &rarr; Pin 9 (PWM), Rot &rarr; 5V, Braun/Schwarz &rarr; GND</td></tr>
+            <tr><td>Glühlampe über <strong>Relais-Modul</strong></td><td>Steuersignal &rarr; Pin 7 (5 V). <strong>Wichtig:</strong> Die Glühlampe hängt an der <em>getrennten Lastseite</em> des Relais (230 V), niemals direkt am Arduino!</td></tr>
+          </table>
+
+          <div class="code-card">
+            <h4>GEWAECHSHAUS-SKELETT</h4>
+            <pre><code><span class="comment">// Pins</span>
+<span class="keyword">int</span> ntcPin    = A0;
+<span class="keyword">int</span> servoPin  = <span class="value">9</span>;
+<span class="keyword">int</span> lampePin  = <span class="value">7</span>;
+
+<span class="comment">// Schwellenwerte (Rohwerte vom Spannungsteiler, mit Serial Monitor kalibrieren!)</span>
+<span class="comment">// NTC unten am GND, Festwiderstand 10k oben an 5V (Konvention aus L16):</span>
+<span class="comment">//   warm  =&gt; NTC-Widerstand sinkt =&gt; analogRead-Wert sinkt</span>
+<span class="comment">//   kalt  =&gt; NTC-Widerstand steigt =&gt; analogRead-Wert steigt</span>
+<span class="keyword">int</span> SCHWELLE_HEISS = <span class="value">450</span>;  <span class="comment">// Wert UNTER 450 = warm = Fenster auf</span>
+<span class="keyword">int</span> SCHWELLE_KALT  = <span class="value">700</span>;  <span class="comment">// Wert UEBER 700 = kalt = Lampe an</span>
+
+<span class="preprocessor">#include</span> <span class="string">&lt;Servo.h&gt;</span>
+Servo dachFenster;
+
+<span class="keyword">void</span> <span class="function">setup</span>() {
+  <span class="function">pinMode</span>(lampePin, OUTPUT);
+  dachFenster.<span class="function">attach</span>(servoPin);
+  dachFenster.<span class="function">write</span>(<span class="value">10</span>);  <span class="comment">// Fenster zu beim Start (10&deg; statt 0&deg; vermeidet Brummen)</span>
+  <span class="function">Serial.begin</span>(<span class="value">9600</span>);
+}
+
+<span class="keyword">void</span> <span class="function">loop</span>() {
+  <span class="keyword">int</span> temp = <span class="function">analogRead</span>(ntcPin);
+  <span class="function">Serial.println</span>(temp);
+
+  <span class="keyword">if</span> (temp &lt; SCHWELLE_HEISS) {
+    dachFenster.<span class="function">write</span>(<span class="value">90</span>);          <span class="comment">// Fenster auf</span>
+    <span class="function">digitalWrite</span>(lampePin, LOW);
+  } <span class="keyword">else</span> <span class="keyword">if</span> (temp &gt; SCHWELLE_KALT) {
+    dachFenster.<span class="function">write</span>(<span class="value">10</span>);          <span class="comment">// Fenster zu</span>
+    <span class="function">digitalWrite</span>(lampePin, HIGH);       <span class="comment">// Heizen (Pin 7 schaltet Relais!)</span>
+  } <span class="keyword">else</span> {
+    dachFenster.<span class="function">write</span>(<span class="value">10</span>);          <span class="comment">// Wohlfuehlzone: alles aus</span>
+    <span class="function">digitalWrite</span>(lampePin, LOW);
+  }
+  <span class="function">delay</span>(<span class="value">500</span>);
+}</code></pre>
+          </div>
+
+          <p><strong>Wenn dich dieses Projekt erwartet, schaue in:</strong> Lektion 16 (NTC verstehen und auslesen) und Lektion 19 (Servomotor ansteuern). Die Schwellwerte musst du in der Prüfung selbst kalibrieren.</p>
+
+          <h4 style="margin-top:1.5rem;">Showcase 5b: Lüftungs-Steuerung (Bautechnik)</h4>
+          <p><strong>Aufgabenbeschreibung:</strong> Ein Lüfter (DC-Motor) wird per Taster ein- und ausgeschaltet. Zusätzlich misst ein NTC die Raumtemperatur und schaltet bei Überhitzung automatisch auf volle Drehzahl.</p>
+
+          <div style="margin:1rem 0; text-align:center;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 240" style="max-width:100%; height:auto; background:#eef0f5; border:1px solid #ccc; border-radius:8px;">
+              <!-- Raum-Outline -->
+              <rect x="20" y="40" width="280" height="180" fill="#fafafa" stroke="#666" stroke-width="1.5"/>
+              <text x="160" y="55" text-anchor="middle" font-size="8" fill="#888" font-style="italic">Raum</text>
+
+              <!-- Decke -->
+              <line x1="20" y1="65" x2="300" y2="65" stroke="#aaa" stroke-width="0.6"/>
+
+              <!-- DC-Motor mit Luefter-Fluegeln, hängt an Decke -->
+              <line x1="160" y1="65" x2="160" y2="90" stroke="#444" stroke-width="1.5"/>
+              <circle cx="160" cy="95" r="8" fill="#333" stroke="#000" stroke-width="0.8"/>
+              <text x="160" y="98" text-anchor="middle" font-size="5" fill="#fff" font-weight="bold">DC</text>
+              <!-- Fluegel (drei Streben in 120-Grad-Anordnung, visualisiert die Drehung) -->
+              <ellipse cx="160" cy="95" rx="32" ry="3.5" fill="#888" stroke="#444" stroke-width="0.5" opacity="0.6"/>
+              <ellipse cx="160" cy="95" rx="32" ry="3.5" fill="#888" stroke="#444" stroke-width="0.5" opacity="0.45" transform="rotate(60 160 95)"/>
+              <ellipse cx="160" cy="95" rx="32" ry="3.5" fill="#888" stroke="#444" stroke-width="0.5" opacity="0.45" transform="rotate(-60 160 95)"/>
+              <text x="160" y="143" text-anchor="middle" font-size="8" fill="#333" font-weight="bold">Lüfter</text>
+
+              <!-- Luftpfeile nach unten -->
+              <path d="M 130 145 L 130 175 M 125 170 L 130 178 L 135 170" fill="none" stroke="#46a" stroke-width="1.2"/>
+              <path d="M 190 145 L 190 175 M 185 170 L 190 178 L 195 170" fill="none" stroke="#46a" stroke-width="1.2"/>
+              <path d="M 160 150 L 160 180 M 155 175 L 160 183 L 165 175" fill="none" stroke="#46a" stroke-width="1.2"/>
+
+              <!-- NTC an der Wand -->
+              <rect x="55" y="155" width="14" height="8" rx="1" fill="#445" stroke="#223" stroke-width="0.4"/>
+              <text x="62" y="161" text-anchor="middle" font-size="5" fill="#fff" font-weight="bold">NTC</text>
+              <text x="62" y="173" text-anchor="middle" font-size="6" fill="#333">Temperatur</text>
+
+              <!-- Taster an Wand rechts -->
+              <rect x="255" y="155" width="20" height="14" rx="2" fill="#888" stroke="#555" stroke-width="0.6"/>
+              <circle cx="265" cy="162" r="4" fill="#bbb" stroke="#666" stroke-width="0.4"/>
+              <text x="265" y="183" text-anchor="middle" font-size="6" fill="#333">Taster</text>
+
+              <!-- Arduino rechts ausserhalb -->
+              <rect x="330" y="80" width="90" height="100" rx="6" fill="#2176AE" stroke="#1a5f8a" stroke-width="1.5"/>
+              <text x="375" y="98" text-anchor="middle" font-size="10" fill="white" font-weight="bold">Arduino</text>
+              <text x="375" y="111" text-anchor="middle" font-size="6" fill="#aad">Steuerung</text>
+
+              <rect x="336" y="120" width="35" height="9" rx="1" fill="#1a5f8a"/>
+              <text x="353" y="127" text-anchor="middle" font-size="6" fill="white">A0 NTC</text>
+              <rect x="336" y="133" width="35" height="9" rx="1" fill="#1a5f8a"/>
+              <text x="353" y="140" text-anchor="middle" font-size="6" fill="white">Pin 8 Taster</text>
+              <rect x="336" y="146" width="35" height="9" rx="1" fill="#1a5f8a"/>
+              <text x="353" y="153" text-anchor="middle" font-size="6" fill="white">Pin 9 Motor</text>
+
+              <!-- Verbindungspfeile -->
+              <path d="M 69 159 Q 200 175 336 124" fill="none" stroke="#a44" stroke-width="1" stroke-dasharray="3,2"/>
+              <path d="M 275 163 Q 300 145 336 137" fill="none" stroke="#446" stroke-width="1" stroke-dasharray="3,2"/>
+              <path d="M 414 150 Q 250 130 160 95" fill="none" stroke="#660" stroke-width="1" stroke-dasharray="3,2"/>
+
+              <text x="220" y="232" text-anchor="middle" font-size="8" fill="#555" font-style="italic">Wirkprinzip: Taster &rarr; an/aus &nbsp;|&nbsp; NTC misst &rarr; bei Hitze auf volle Drehzahl</text>
+            </svg>
+          </div>
+
+          <table class="icon-table">
+            <tr><th>Bauteil</th><th>Anschluss</th></tr>
+            <tr><td>DC-Motor (max. 100 mA)</td><td>per NPN-Transistor (BC547) + Freilaufdiode an Pin 9 (PWM). Stärkerer Motor &rarr; BC337 (800 mA) oder TIP120 (5 A).</td></tr>
+            <tr><td>Vorwiderstand 10 kOhm</td><td>5V &rarr; A0 (oben im Spannungsteiler, Konvention aus L16)</td></tr>
+            <tr><td>NTC (10 kOhm bei 25 &deg;C)</td><td>A0 &rarr; GND (unten im Spannungsteiler)</td></tr>
+            <tr><td>Taster</td><td>zwischen Pin 8 und GND (INPUT_PULLUP)</td></tr>
+            <tr><td>Freilaufdiode 1N4148</td><td>parallel zum Motor (Kathode/Ring an +5V) &mdash; schützt den Arduino vor Spannungsspitzen</td></tr>
+          </table>
+
+          <div class="code-card">
+            <h4>LUEFTUNG-SKELETT</h4>
+            <pre><code><span class="comment">// Pins</span>
+<span class="keyword">int</span> ntcPin    = A0;
+<span class="keyword">int</span> tasterPin = <span class="value">8</span>;
+<span class="keyword">int</span> motorPin  = <span class="value">9</span>;
+
+<span class="comment">// Zustand</span>
+<span class="keyword">bool</span> lueftungAn = <span class="value">false</span>;
+<span class="comment">// NTC unten am GND, Festwiderstand 10k oben an 5V (Konvention aus L16):</span>
+<span class="comment">// warm =&gt; analogRead-Wert SINKT. Daher: kleiner Wert = sehr warm.</span>
+<span class="keyword">int</span> SCHWELLE_HEISS = <span class="value">400</span>;  <span class="comment">// Wert UNTER 400 = sehr warm = volle Drehzahl</span>
+
+<span class="keyword">void</span> <span class="function">setup</span>() {
+  <span class="function">pinMode</span>(tasterPin, INPUT_PULLUP);
+  <span class="function">pinMode</span>(motorPin, OUTPUT);
+  <span class="function">Serial.begin</span>(<span class="value">9600</span>);
+}
+
+<span class="keyword">void</span> <span class="function">loop</span>() {
+  <span class="comment">// Taster: ein/aus umschalten</span>
+  <span class="keyword">if</span> (<span class="function">digitalRead</span>(tasterPin) == LOW) {
+    lueftungAn = !lueftungAn;
+    <span class="function">delay</span>(<span class="value">300</span>);   <span class="comment">// Entprellung</span>
+  }
+
+  <span class="keyword">int</span> temp = <span class="function">analogRead</span>(ntcPin);
+  <span class="function">Serial.println</span>(temp);
+
+  <span class="keyword">if</span> (temp &lt; SCHWELLE_HEISS) {
+    <span class="function">analogWrite</span>(motorPin, <span class="value">255</span>);     <span class="comment">// Hitze-Notfall: volle Drehzahl</span>
+  } <span class="keyword">else</span> <span class="keyword">if</span> (lueftungAn) {
+    <span class="function">analogWrite</span>(motorPin, <span class="value">160</span>);     <span class="comment">// Normalbetrieb mittlere Drehzahl</span>
+  } <span class="keyword">else</span> {
+    <span class="function">analogWrite</span>(motorPin, <span class="value">0</span>);       <span class="comment">// Aus</span>
+  }
+  <span class="function">delay</span>(<span class="value">100</span>);
+}</code></pre>
+          </div>
+
+          <p><strong>Wenn dich dieses Projekt erwartet, schaue in:</strong> Lektion 20 (DC-Motor mit Transistor – inklusive Freilaufdiode!) und Lektion 16 (NTC). Achtung: Transistor und Freilaufdiode sind Pflicht für den DC-Motor, sonst geht der Arduino kaputt.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Querverweis: Pool-Aufgabe &harr; Lektionen</h3>
+          <p>Diese Tabelle zeigt dir für jede der RSAP-Pool-Aufgaben, in welchen Lektionen du die Bauteile gelernt hast. Wenn du in der Prüfung eine Aufgabe bekommst, schlage hier nach.</p>
+
+          <table class="icon-table">
+            <tr><th>Pool-Aufgabe</th><th>Bauteile</th><th>Vorlauf-Lektionen</th><th>In dieser Lektion gezeigt?</th></tr>
+            <tr><td><strong>Ampel</strong> (Mobilität)</td><td>5 LEDs, Taster, LDR</td><td>L5, L8, L10, L15, L21</td><td>&#10003; Sektion 3 (oben)</td></tr>
+            <tr><td><strong>Gewächshaus</strong> (Bautechnik)</td><td>NTC, Servo, Glühlampe</td><td>L16, L19</td><td>&#10003; Sektion 5a</td></tr>
+            <tr><td><strong>Lüftung</strong> (Bautechnik)</td><td>DC-Motor, NTC, Taster</td><td>L16, L20</td><td>&#10003; Sektion 5b</td></tr>
+            <tr><td>Außenbeleuchtung</td><td>LED, Taster, LDR</td><td>L5, L8, L15</td><td>sinngemäß Sektion 3</td></tr>
+            <tr><td>Temperaturanzeige (Farbe)</td><td>RGB-LED, Taster, NTC</td><td>L16, L18*</td><td>L18 noch nicht im Programm – frag deine Lehrkraft</td></tr>
+            <tr><td>Dimmer</td><td>LED, Taster, Poti</td><td>L13, L14</td><td>aus L13/L14</td></tr>
+            <tr><td>Treppenhauslicht</td><td>LED, 2× Taster, Poti</td><td>L8, L13, L14</td><td>aus L8/L13</td></tr>
+            <tr><td>Scheibenwischer</td><td>Servo, Umschalter, Regensensor</td><td>L19, (Regensensor = LDR-Variante)</td><td>aus L19</td></tr>
+            <tr><td>Kurvenlicht</td><td>LED, Servo, Poti</td><td>L13, L19</td><td>aus L13/L19</td></tr>
+            <tr><td>Fahrradlicht</td><td>LED, Umschalter, LDR</td><td>L8, L15</td><td>aus L15/L8</td></tr>
+            <tr><td>Bohrmaschine</td><td>DC-Motor, Schalter, Poti</td><td>L13, L20</td><td>aus L20/L13</td></tr>
+            <tr><td>Alarmanlage</td><td>Summer, Taster, Lichtschranke</td><td>L8, L21 (Box Summer)</td><td>Summer = Box in L21</td></tr>
+          </table>
+
+          <p style="margin-top:1rem;"><strong>Faustregel:</strong> Egal welche Aufgabe du bekommst – das Muster ist immer: Sensor messen &rarr; if/else entscheiden &rarr; Aktor schalten. Den Rest hast du in den Vorgängerlektionen schon geübt.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
           <h3>Tipps für die Prüfung</h3>
 
           <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
@@ -1291,6 +1775,12 @@ const LESSONS_PROJEKT = [
             <li><strong>Taster falsch gesteckt</strong> – Muss über die Mittelrille des Steckbretts</li>
             <li><strong>LDR-Widerstand vertauscht</strong> – LDR an 5V, Festwiderstand an GND</li>
             <li><strong>Pin-Nummern im Code falsch</strong> – Immer mit der Verkabelung vergleichen!</li>
+            <li><strong>Kalte Lötstelle</strong> – Sieht aus wie eine Kuppel statt Kegel, grau und matt. Leitet nicht. Nochmal heiß machen, frisches Lot dazu.</li>
+            <li><strong>Lötbrücke</strong> – Zu viel Lot, das benachbarte Pads verbindet. Mit Entlötlitze entfernen und neu löten.</li>
+            <li><strong>Streifenraster nicht unterbrochen</strong> – Wenn zwei Bauteile auf demselben Streifen sind, die nicht verbunden sein sollen, ist alles kurzgeschlossen. Streifen mit Cutter zwischen den Löchern auftrennen.</li>
+            <li><strong>Bauteil überhitzt</strong> – Lötkolben zu lange auf dem Pad. LEDs und Transistoren sterben bei >5 Sek. Lötkolben weg, abkühlen lassen.</li>
+            <li><strong>DC-Motor ohne Freilaufdiode</strong> – Spannungsspitzen zerstören den Arduino. Diode 1N4148 immer parallel zum Motor (Kathode/Ring an +5V).</li>
+            <li><strong>Schwellenwert nicht kalibriert</strong> – LDR/NTC-Werte unterscheiden sich je nach Raum. Mit Serial Monitor messen und im Code anpassen.</li>
           </ul>
         </div>
       `
@@ -1341,6 +1831,66 @@ const LESSONS_PROJEKT = [
         ],
         correct: 2,
         explanation: 'Wenn der LDR-Wert über dem Schwellenwert liegt, bedeutet das: Es ist hell (Tag). Im Code steht dann der else-Zweig: Alle LEDs werden ausgeschaltet. Die Ampel "schläft" und reagiert auch nicht auf den Taster.'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Welche dieser Schaltungen erfüllt <strong>alle</strong> RSAP-Pflichten (Sensor-Aktor-Mix + mindestens 1 analoger Sensor)?',
+        options: [
+          '3 LEDs + 1 Taster',
+          '2 LEDs + 1 Taster + 1 Servo',
+          '1 NTC + 1 Taster + 1 DC-Motor + 1 LED',
+          '2 Taster + 1 LED + 1 Summer'
+        ],
+        correct: 2,
+        explanation: 'Diese Schaltung hat 2 Sensoren (NTC analog + Taster digital) und 2 Aktoren (DC-Motor + LED). Sensor-Aktor-Mix passt (1 Sensor + 2 Aktoren ODER 2 Sensoren + 1 Aktor – hier 2 + 2 erfüllt die Mindestpflicht). Der NTC liefert den analogen Pflicht-Sensor.',
+        wrongExplanations: [
+          'Sensor-Aktor-Mix passt zwar (1 Sensor + 3 Aktoren), aber der Taster ist ein <strong>digitaler</strong> Sensor. Es fehlt der Pflicht-<strong>analoge</strong> Sensor (LDR, NTC, Poti).',
+          'Sensor-Aktor-Mix passt (1 Sensor + 3 Aktoren), aber der Taster ist <strong>digital</strong>. Es fehlt der Pflicht-<strong>analoge</strong> Sensor. Tausche den Taster gegen einen LDR/NTC/Poti und es würde passen.',
+          null,
+          'Hier sind 2 Taster (beide <strong>digital</strong>) und 2 Aktoren (LED + Summer). Sensor-Aktor-Mix passt, aber es fehlt der Pflicht-<strong>analoge</strong> Sensor. Mindestens einer der Sensoren muss LDR, NTC oder Poti sein.'
+        ],
+        hint: 'Prüfe zwei Pflichten: (1) mind. 1 Sensor + 2 Aktoren ODER 2 Sensoren + 1 Aktor. (2) mind. 1 Sensor muss <em>analog</em> sein (LDR, NTC, Poti) – Taster und Schalter sind digital!'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Was ist eine <strong>kalte Lötstelle</strong>?',
+        options: [
+          'Eine Lötstelle, die nicht warm wurde, weil der Lötkolben kaputt war',
+          'Eine Lötstelle, bei der das Lot zwar erstarrt ist, aber Pad und Bein nicht richtig benetzt hat – sie sieht klumpig und matt aus und leitet schlecht oder gar nicht',
+          'Eine ganz normal abgekühlte Lötstelle nach dem Löten',
+          'Eine Lötstelle ohne Lot'
+        ],
+        correct: 1,
+        explanation: 'Eine kalte Lötstelle entsteht, wenn das Lot nicht heiß genug war oder das Bauteil zu früh bewegt wurde. Das Lot erstarrt zwar, bildet aber keine richtige Legierung mit Pad und Bein. Optisch erkennt man sie an matter, klumpiger, grauer Oberfläche. Elektrisch hat sie Widerstand oder gar keinen Durchgang. Lösung: Nochmal heiß machen, frisches Lot dazu, warten bis Lot fließt.',
+        wrongExplanations: [
+          'Nein – wenn der Kolben kaputt wäre, würde das Lot gar nicht schmelzen und es entstünde keine Lötstelle. Eine kalte Lötstelle entsteht trotz funktionierendem Kolben, wenn das Lot zu früh erstarrt.',
+          null,
+          'Falsch – jede gute Lötstelle kühlt nach dem Löten ab. "Kalt" meint in diesem Zusammenhang nicht die Temperatur nachher, sondern dass das Lot nicht heiß genug wurde, um eine richtige Verbindung einzugehen.',
+          'Nein – ohne Lot gibt es gar keine Lötstelle. Eine kalte Lötstelle hat Lot, aber das Lot hat sich nicht richtig mit Pad und Bein verbunden.'
+        ],
+        hint: 'Schau dir die SVG-Skizze oben an: KALT = klumpig, matt, grau, oft mit einem Spalt zwischen Lot und Pad. SAUBER = silbrig, glänzend, kegelförmig.'
+      },
+      {
+        type: 'matching',
+        question: 'Ordne jeder Pool-Aufgabe das wichtigste Bauteil zu, das du dafür brauchst:',
+        pairs: [
+          { left: 'Gewächshaus-Steuerung', right: 'NTC + Servo' },
+          { left: 'Lüftung', right: 'DC-Motor mit Transistor' },
+          { left: 'Ampel mit Nachtabschaltung', right: 'LDR im Spannungsteiler' },
+          { left: 'Dimmer / Bohrmaschine-Drehzahl', right: 'Potentiometer + PWM' }
+        ]
+      },
+      {
+        type: 'ordering',
+        question: 'In welcher Reihenfolge führst du den Lötvorgang an einer Lötstelle durch?',
+        items: [
+          'Lot von der gegenüberliegenden Seite zur Kolbenspitze zuführen',
+          'Bauteilbein durch das Loch in der Platine stecken',
+          'Überstehenden Bein-Rest mit dem Seitenschneider abknipsen',
+          'Erst das Lot wegnehmen, dann den Lötkolben',
+          'Lötkolben für ca. 1 Sekunde auf Pad und Bein gleichzeitig halten'
+        ],
+        correctOrder: [1, 4, 0, 3, 2]
       }
     ]
   }

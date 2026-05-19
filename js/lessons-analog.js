@@ -1896,7 +1896,7 @@ void loop() {
       },
       {
         type: 'multiple-choice',
-        question: 'Im Nachtlicht-Code steht: if (helligkeit < 250). Welche Aussage stimmt?',
+        question: 'Im Nachtlicht-Code steht: if (helligkeit &lt; 250). Welche Aussage stimmt?',
         options: [
           'Wenn der LDR-Wert groesser als 250 ist, geht die LED an',
           'Wenn es dunkel ist (niedriger Wert), geht die LED an',

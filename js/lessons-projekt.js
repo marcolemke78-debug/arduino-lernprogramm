@@ -1469,7 +1469,7 @@ const LESSONS_PROJEKT = [
 
         <div class="info-card">
           <h3>Andere Pool-Aufgaben am Beispiel</h3>
-          <p>Die Ampel oben ist nur <strong>eine von 13 Aufgaben</strong>, die in der RSAP drankommen können. Du weißt vorher nicht, welche du bekommst. Damit du das Muster beherrschst, gehen wir zwei weitere Pool-Aufgaben durch – kompakter, ohne komplettes Schaltbild. Die Tiefe für die Einzel-Bauteile findest du in den verlinkten Vorgängerlektionen.</p>
+          <p>Die Ampel oben ist nur <strong>eine von 12 Aufgaben</strong>, die in der RSAP drankommen können. Du weißt vorher nicht, welche du bekommst. Damit du das Muster beherrschst, gehen wir zwei weitere Pool-Aufgaben durch – kompakter, ohne komplettes Schaltbild. Die Tiefe für die Einzel-Bauteile findest du in den verlinkten Vorgängerlektionen.</p>
 
           <h4 style="margin-top:1.25rem;">Showcase 5a: Gewächshaus-Steuerung (Bautechnik)</h4>
           <p><strong>Aufgabenbeschreibung:</strong> Im Gewächshaus misst ein NTC die Innentemperatur. Bei zu warmer Luft öffnet ein Servo das Dachfenster. Bei zu kalter Luft schaltet eine Glühlampe als Heizung an.</p>
@@ -1542,10 +1542,10 @@ const LESSONS_PROJEKT = [
 
           <table class="icon-table">
             <tr><th>Bauteil</th><th>Anschluss</th></tr>
-            <tr><td>Vorwiderstand 10 kOhm</td><td>5V &rarr; A0 (oben im Spannungsteiler, Konvention aus L16)</td></tr>
+            <tr><td>Festwiderstand 10 kOhm</td><td>5V &rarr; A0 (oben im Spannungsteiler, Konvention aus L16)</td></tr>
             <tr><td>NTC (10 kOhm bei 25 &deg;C)</td><td>A0 &rarr; GND (unten im Spannungsteiler)</td></tr>
             <tr><td>Servomotor (SG90)</td><td>Signal &rarr; Pin 9 (PWM), Rot &rarr; 5V, Braun/Schwarz &rarr; GND</td></tr>
-            <tr><td>Glühlampe über <strong>Relais-Modul</strong></td><td>Steuersignal &rarr; Pin 7 (5 V). <strong>Wichtig:</strong> Die Glühlampe hängt an der <em>getrennten Lastseite</em> des Relais (230 V), niemals direkt am Arduino!</td></tr>
+            <tr><td>Glühlampe über <strong>Relais-Modul</strong></td><td>Relais = elektronischer Schalter, der mit einem 5-V-Signal vom Arduino eine getrennte Last (z.&nbsp;B. 230 V) schaltet. Steuersignal &rarr; Pin 7. <strong>Wichtig:</strong> Die Glühlampe hängt an der <em>getrennten Lastseite</em> des Relais, niemals direkt am Arduino-Pin!</td></tr>
           </table>
 
           <div class="code-card">
@@ -1653,7 +1653,7 @@ Servo dachFenster;
           <table class="icon-table">
             <tr><th>Bauteil</th><th>Anschluss</th></tr>
             <tr><td>DC-Motor (max. 100 mA)</td><td>per NPN-Transistor (BC547) + Freilaufdiode an Pin 9 (PWM). Stärkerer Motor &rarr; BC337 (800 mA) oder TIP120 (5 A).</td></tr>
-            <tr><td>Vorwiderstand 10 kOhm</td><td>5V &rarr; A0 (oben im Spannungsteiler, Konvention aus L16)</td></tr>
+            <tr><td>Festwiderstand 10 kOhm</td><td>5V &rarr; A0 (oben im Spannungsteiler, Konvention aus L16)</td></tr>
             <tr><td>NTC (10 kOhm bei 25 &deg;C)</td><td>A0 &rarr; GND (unten im Spannungsteiler)</td></tr>
             <tr><td>Taster</td><td>zwischen Pin 8 und GND (INPUT_PULLUP)</td></tr>
             <tr><td>Freilaufdiode 1N4148</td><td>parallel zum Motor (Kathode/Ring an +5V) &mdash; schützt den Arduino vor Spannungsspitzen</td></tr>
@@ -1680,6 +1680,8 @@ Servo dachFenster;
 
 <span class="keyword">void</span> <span class="function">loop</span>() {
   <span class="comment">// Taster: ein/aus umschalten</span>
+  <span class="comment">// Hinweis: vereinfacht. In der echten Pruefung Edge-Detection (alten</span>
+  <span class="comment">// Zustand vs. neuen vergleichen), sonst togglet es waehrend des Druecks.</span>
   <span class="keyword">if</span> (<span class="function">digitalRead</span>(tasterPin) == LOW) {
     lueftungAn = !lueftungAn;
     <span class="function">delay</span>(<span class="value">300</span>);   <span class="comment">// Entprellung</span>
@@ -1688,6 +1690,8 @@ Servo dachFenster;
   <span class="keyword">int</span> temp = <span class="function">analogRead</span>(ntcPin);
   <span class="function">Serial.println</span>(temp);
 
+  <span class="comment">// analogWrite() ist die PWM-Drehzahlsteuerung (siehe L20 Plus-Box).</span>
+  <span class="comment">// 0 = aus, 255 = volle Drehzahl. Funktioniert nur an PWM-Pins (3,5,6,9,10,11).</span>
   <span class="keyword">if</span> (temp &lt; SCHWELLE_HEISS) {
     <span class="function">analogWrite</span>(motorPin, <span class="value">255</span>);     <span class="comment">// Hitze-Notfall: volle Drehzahl</span>
   } <span class="keyword">else</span> <span class="keyword">if</span> (lueftungAn) {
@@ -1714,7 +1718,7 @@ Servo dachFenster;
             <tr><td><strong>Gewächshaus</strong> (Bautechnik)</td><td>NTC, Servo, Glühlampe</td><td>L16, L19</td><td>&#10003; Sektion 5a</td></tr>
             <tr><td><strong>Lüftung</strong> (Bautechnik)</td><td>DC-Motor, NTC, Taster</td><td>L16, L20</td><td>&#10003; Sektion 5b</td></tr>
             <tr><td>Außenbeleuchtung</td><td>LED, Taster, LDR</td><td>L5, L8, L15</td><td>sinngemäß Sektion 3</td></tr>
-            <tr><td>Temperaturanzeige (Farbe)</td><td>RGB-LED, Taster, NTC</td><td>L16, L18*</td><td>L18 noch nicht im Programm – frag deine Lehrkraft</td></tr>
+            <tr><td>Temperaturanzeige (Farbe)</td><td>RGB-LED, Taster, NTC</td><td>L16 (RGB-LED-Lektion folgt noch)</td><td>nicht direkt – frag deine Lehrkraft, sobald die RGB-Lektion da ist</td></tr>
             <tr><td>Dimmer</td><td>LED, Taster, Poti</td><td>L13, L14</td><td>aus L13/L14</td></tr>
             <tr><td>Treppenhauslicht</td><td>LED, 2× Taster, Poti</td><td>L8, L13, L14</td><td>aus L8/L13</td></tr>
             <tr><td>Scheibenwischer</td><td>Servo, Umschalter, Regensensor</td><td>L19, (Regensensor = LDR-Variante)</td><td>aus L19</td></tr>

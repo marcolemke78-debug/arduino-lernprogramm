@@ -552,7 +552,7 @@ const LESSONS_PROJEKT = [
 
             <!-- ===== BAUTEILE: Auto-Ampel (3 LEDs, Sp.3/4/5, 7/8/9, 11/12/13) ===== -->
             <rect x="92" y="266" width="220" height="84" rx="4" fill="none" stroke="#e44" stroke-width="1" stroke-dasharray="4,2"/>
-            <text x="200" y="200" text-anchor="middle" font-size="12" fill="#c44" font-weight="bold">⬇ AUTO-AMPEL</text>
+            <text x="200" y="200" text-anchor="middle" font-size="12" fill="#c44" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">⬇ AUTO-AMPEL</text>
 
             <!-- ROT (Sp.3-4-5) -->
             <rect x="98" y="306" width="24" height="8" rx="2" fill="#e8d0a0" stroke="#864" stroke-width="1"/>
@@ -595,7 +595,7 @@ const LESSONS_PROJEKT = [
 
             <!-- ===== Fußg-Ampel (Sp.15-21) ===== -->
             <rect x="332" y="266" width="140" height="84" rx="4" fill="none" stroke="#66c" stroke-width="1" stroke-dasharray="4,2"/>
-            <text x="402" y="200" text-anchor="middle" font-size="12" fill="#44a" font-weight="bold">⬇ FUSSGÄNGER</text>
+            <text x="402" y="200" text-anchor="middle" font-size="12" fill="#44a" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">⬇ FUSSGÄNGER</text>
 
             <!-- F-ROT (Sp.15-16-17) -->
             <rect x="338" y="306" width="24" height="8" rx="2" fill="#e8d0a0" stroke="#864" stroke-width="1"/>
@@ -625,7 +625,7 @@ const LESSONS_PROJEKT = [
 
             <!-- ===== Taster (Sp.23-24) ===== -->
             <rect x="488" y="334" width="44" height="60" rx="4" fill="none" stroke="#66f" stroke-width="1" stroke-dasharray="4,2"/>
-            <text x="510" y="200" text-anchor="middle" font-size="12" fill="#44c" font-weight="bold">⬇ TASTER</text>
+            <text x="510" y="200" text-anchor="middle" font-size="12" fill="#44c" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">⬇ TASTER</text>
             <rect x="494" y="340" width="32" height="42" rx="3" fill="#888" stroke="#555" stroke-width="1"/>
             <circle cx="510" cy="361" r="10" fill="#aaa" stroke="#666" stroke-width="1"/>
             <text x="510" y="364" text-anchor="middle" font-size="6" fill="#444">drücken</text>
@@ -636,7 +636,7 @@ const LESSONS_PROJEKT = [
 
             <!-- ===== LDR-Spannungsteiler (Sp.26-28, NEU) ===== -->
             <rect x="548" y="266" width="80" height="84" rx="4" fill="#ffe8cc" opacity="0.25" stroke="#f90" stroke-width="1" stroke-dasharray="4,2"/>
-            <text x="588" y="200" text-anchor="middle" font-size="12" fill="#c60" font-weight="bold">⬇ LDR-SENSOR (NEU!)</text>
+            <text x="588" y="200" text-anchor="middle" font-size="12" fill="#c60" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">⬇ LDR-SENSOR (NEU!)</text>
 
             <ellipse cx="570" cy="280" rx="13" ry="8" fill="#ffe066" stroke="#c90" stroke-width="1.5"/>
             <text x="570" y="278" text-anchor="middle" font-size="6" fill="#864" font-weight="bold">LDR</text>
@@ -1040,7 +1040,7 @@ const LESSONS_PROJEKT = [
 
             <!-- ===== AUTO-AMPEL Bereich (Sp.3-13) ===== -->
             <rect x="92" y="266" width="220" height="84" rx="4" fill="none" stroke="#e44" stroke-width="1" stroke-dasharray="4,2"/>
-            <text x="200" y="200" text-anchor="middle" font-size="12" fill="#c44" font-weight="bold">⬇ AUTO-AMPEL (3 LEDs)</text>
+            <text x="200" y="200" text-anchor="middle" font-size="12" fill="#c44" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">⬇ AUTO-AMPEL (3 LEDs)</text>
 
             <!-- AUTO-ROT (Sp.3 Pin → Sp.4 Anode → Sp.5 Kathode) -->
             <!-- Widerstand 220Ω horizontal Sp.3-4, Reihe c -->
@@ -1101,7 +1101,7 @@ const LESSONS_PROJEKT = [
 
             <!-- ===== FUSSGÄNGER-AMPEL Bereich (Sp.15-21) ===== -->
             <rect x="332" y="266" width="140" height="84" rx="4" fill="none" stroke="#66c" stroke-width="1" stroke-dasharray="4,2"/>
-            <text x="402" y="200" text-anchor="middle" font-size="12" fill="#44a" font-weight="bold">⬇ FUSSGÄNGER (2 LEDs)</text>
+            <text x="402" y="200" text-anchor="middle" font-size="12" fill="#44a" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">⬇ FUSSGÄNGER (2 LEDs)</text>
 
             <!-- F-ROT (Sp.15 Pin → Sp.16 Anode → Sp.17 Kathode) -->
             <rect x="338" y="306" width="24" height="8" rx="2" fill="#e8d0a0" stroke="#864" stroke-width="1"/>
@@ -1141,7 +1141,7 @@ const LESSONS_PROJEKT = [
 
             <!-- ===== TASTER (Sp.23-24, über Mittelrinne) ===== -->
             <rect x="488" y="334" width="44" height="60" rx="4" fill="none" stroke="#66f" stroke-width="1" stroke-dasharray="4,2"/>
-            <text x="510" y="200" text-anchor="middle" font-size="12" fill="#44c" font-weight="bold">⬇ TASTER</text>
+            <text x="510" y="200" text-anchor="middle" font-size="12" fill="#44c" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">⬇ TASTER</text>
             <rect x="494" y="340" width="32" height="42" rx="3" fill="#888" stroke="#555" stroke-width="1"/>
             <circle cx="510" cy="361" r="10" fill="#aaa" stroke="#666" stroke-width="1"/>
             <text x="510" y="364" text-anchor="middle" font-size="6" fill="#444">drücken</text>
@@ -1157,7 +1157,7 @@ const LESSONS_PROJEKT = [
 
             <!-- ===== LDR-SPANNUNGSTEILER (Sp.26-28) ===== -->
             <rect x="548" y="266" width="80" height="84" rx="4" fill="none" stroke="#f90" stroke-width="1" stroke-dasharray="4,2"/>
-            <text x="588" y="200" text-anchor="middle" font-size="12" fill="#c60" font-weight="bold">⬇ LDR-SENSOR</text>
+            <text x="588" y="200" text-anchor="middle" font-size="12" fill="#c60" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">⬇ LDR-SENSOR</text>
 
             <!-- LDR horizontal: Anschluss A Sp.26 (x=560, Reihe a), Anschluss B Sp.27 (x=580, Reihe a) -->
             <ellipse cx="570" cy="280" rx="13" ry="8" fill="#ffe066" stroke="#c90" stroke-width="1.5"/>

@@ -1187,9 +1187,12 @@ void loop() {
             <!-- Bein 2: Sp.10 Reihe f (zur unteren -Schiene unten) -->
             <circle cx="240" cy="320" r="2.5" fill="#888" stroke="#444" stroke-width="0.8"/>
             <line x1="240" y1="320" x2="240" y2="328" stroke="#555" stroke-width="1.5"/>
-            <!-- Jumper Sp.10 Reihe f → untere -Schiene -->
-            <line x1="240" y1="320" x2="240" y2="389" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
-            <text x="260" y="360" font-size="8" fill="#333" font-style="italic">→ untere GND-Schiene</text>
+            <!-- Jumper Sp.10 Reihe f → untere -Schiene (durchgezogen, klar sichtbar) -->
+            <line x1="240" y1="320" x2="240" y2="393" stroke="#1565C0" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="240" cy="320" r="3" fill="#1565C0" stroke="#0a3a78" stroke-width="0.8"/>
+            <circle cx="240" cy="393" r="3.5" fill="#1565C0" stroke="#0a3a78" stroke-width="0.8"/>
+            <text x="260" y="385" font-size="8" fill="#0a3a78" font-weight="bold">Jumper</text>
+            <text x="260" y="397" font-size="7" fill="#0a3a78" font-style="italic">zur untere −Schiene (GND)</text>
 
             <!-- ===== GND-BRÜCKE rechts ===== -->
             <path d="M 690 213 L 712 213 L 712 393 L 690 393" stroke="#333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
@@ -1513,9 +1516,12 @@ void loop() {
             <!-- Bein 2: Sp.7 Reihe f (zur unteren -Schiene) -->
             <circle cx="180" cy="320" r="2.5" fill="#888" stroke="#444" stroke-width="0.8"/>
             <line x1="180" y1="320" x2="180" y2="328" stroke="#555" stroke-width="1.5"/>
-            <!-- Jumper Sp.7 Reihe f → untere -Schiene -->
-            <line x1="180" y1="320" x2="180" y2="389" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
-            <text x="195" y="360" font-size="7" fill="#333" font-style="italic">→ GND</text>
+            <!-- Jumper Sp.7 Reihe f → untere -Schiene (durchgezogen, klar sichtbar) -->
+            <line x1="180" y1="320" x2="180" y2="393" stroke="#1565C0" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="180" cy="320" r="3" fill="#1565C0" stroke="#0a3a78" stroke-width="0.8"/>
+            <circle cx="180" cy="393" r="3.5" fill="#1565C0" stroke="#0a3a78" stroke-width="0.8"/>
+            <text x="200" y="385" font-size="8" fill="#0a3a78" font-weight="bold">Jumper</text>
+            <text x="200" y="397" font-size="7" fill="#0a3a78" font-style="italic">zur untere −Schiene (GND)</text>
 
             <!-- ===== LED-Schaltung (Sp.11 → Sp.12 → Sp.13) ===== -->
             <rect x="252" y="266" width="80" height="84" rx="4" fill="none" stroke="#e44" stroke-width="1" stroke-dasharray="4,2"/>

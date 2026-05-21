@@ -832,12 +832,21 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
             <text x="100" y="72" text-anchor="middle" font-size="5" fill="#2980B9">A0</text>
             <text x="120" y="72" text-anchor="middle" font-size="5" fill="#555">GND</text>
 
-            <!-- 220R Widerstand: Spalte 9 Reihe d → Spalte 10 Reihe d -->
-            <rect x="201" y="100" width="18" height="8" rx="3" fill="#E8D5B0" stroke="#A0522D" stroke-width="1"/>
-            <line x1="205" y1="100" x2="205" y2="108" stroke="#C0392B" stroke-width="1"/>
-            <line x1="209" y1="100" x2="209" y2="108" stroke="#C0392B" stroke-width="1"/>
-            <line x1="213" y1="100" x2="213" y2="108" stroke="#A0522D" stroke-width="1"/>
-            <text x="210" y="97" text-anchor="middle" font-size="6" fill="#8B4513">220R</text>
+            <!-- 220R Widerstand: liegt waagrecht zwischen Sp.9 Reihe d und Sp.10 Reihe d -->
+            <!-- Beinchen vom Widerstand klar markiert -->
+            <line x1="200" y1="104" x2="200" y2="112" stroke="#8B4513" stroke-width="1.5"/>
+            <line x1="220" y1="104" x2="220" y2="112" stroke="#8B4513" stroke-width="1.5"/>
+            <circle cx="200" cy="104" r="2.5" fill="#E8D5B0" stroke="#8B4513" stroke-width="1"/>
+            <circle cx="220" cy="104" r="2.5" fill="#E8D5B0" stroke="#8B4513" stroke-width="1"/>
+            <!-- Widerstand-Koerper liegt waagrecht zwischen den Beinchen -->
+            <rect x="200" y="98" width="20" height="12" rx="3" fill="#E8D5B0" stroke="#A0522D" stroke-width="1.2"/>
+            <line x1="206" y1="98" x2="206" y2="110" stroke="#C0392B" stroke-width="1.5"/>
+            <line x1="210" y1="98" x2="210" y2="110" stroke="#C0392B" stroke-width="1.5"/>
+            <line x1="214" y1="98" x2="214" y2="110" stroke="#A0522D" stroke-width="1.5"/>
+            <text x="210" y="94" text-anchor="middle" font-size="6.5" fill="#8B4513" font-weight="bold">220Ω</text>
+            <!-- Bein-Beschriftung -->
+            <text x="200" y="125" text-anchor="middle" font-size="4.5" fill="#666">Sp.9</text>
+            <text x="220" y="125" text-anchor="middle" font-size="4.5" fill="#666">Sp.10</text>
 
             <!-- LED: Spalte 10 Reihe b (Anode +) → Spalte 11 Reihe b (Kathode -) -->
             <!-- Dreieck zeigt nach rechts (Anode→Kathode = Stromflussrichtung) -->
@@ -898,13 +907,13 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
             <path d="M 394 72 C 360 72, 345 43, 285 43" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/>
             <circle cx="285" cy="43" r="3" fill="#333"/>
 
-            <!-- BLAU: Arduino A0 → Spalte 4 Reihe c (Poti Mitte) -->
-            <path d="M 394 102 C 350 102, 230 110, 100 92" stroke="#2980B9" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <!-- BLAU: Arduino A0 → Spalte 4 Reihe c (Poti Mitte) - unten herum durch leere untere Breadboard-Haelfte -->
+            <path d="M 394 102 C 300 180, 200 200, 100 92" stroke="#2980B9" stroke-width="3" fill="none" stroke-linecap="round"/>
             <circle cx="100" cy="92" r="3" fill="#2980B9"/>
 
-            <!-- GRUEN: Arduino Pin ~9 → Spalte 9 Reihe a -->
-            <path d="M 626 162 C 500 162, 350 100, 200 68" stroke="#22C55E" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <circle cx="200" cy="68" r="3" fill="#22C55E"/>
+            <!-- GRUEN: Arduino Pin ~9 → Spalte 9 Reihe a - eckig außen rum, klar oberhalb aller Bauteile -->
+            <path d="M 626 162 L 655 162 L 655 35 L 200 35 L 200 68" stroke="#22C55E" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+            <circle cx="200" cy="68" r="3" fill="#22C55E" stroke="#040" stroke-width="0.8"/>
 
             <!-- ===== LEGENDE ===== -->
             <g font-size="9" fill="#555">

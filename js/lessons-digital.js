@@ -429,7 +429,7 @@ void loop() {
 
             <!-- ===== BREADBOARD (unten, volle Breite) ===== -->
             <rect x="20" y="180" width="660" height="260" rx="6" fill="#e8e0d0" stroke="#999" stroke-width="1.5"/>
-            <text x="350" y="175" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
+            <text x="350" y="453" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
 
             <!-- Stromschienen oben -->
             <rect x="50" y="195" width="620" height="9" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
@@ -717,7 +717,7 @@ void loop() {
 
             <!-- ===== BREADBOARD ===== -->
             <rect x="20" y="180" width="660" height="260" rx="6" fill="#e8e0d0" stroke="#999" stroke-width="1.5"/>
-            <text x="350" y="175" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
+            <text x="350" y="453" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
 
             <!-- Stromschienen oben -->
             <rect x="50" y="195" width="620" height="9" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
@@ -1127,16 +1127,16 @@ void loop() {
             </g>
 
             <!-- ===== KABEL: senkrecht ===== -->
-            <!-- Pin 7 → Sp.8 Reihe e (Taster Bein 1) - Pin-Position x=200 = Sp.8 (60+7*20=200) -->
-            <line x1="200" y1="118" x2="200" y2="342" stroke="#66f" stroke-width="2.8" stroke-linecap="round"/>
-            <circle cx="200" cy="342" r="3.5" fill="#66f" stroke="#008" stroke-width="0.8"/>
-            <!-- GND → Sp.18 (x=400) untere -Schiene -->
+            <!-- Pin 7 → Sp.8 Reihe e (Taster Bein 1 oben) - Pin-Position x=200 = Sp.8 (60+7*20=200) -->
+            <line x1="200" y1="118" x2="200" y2="296" stroke="#66f" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="200" cy="296" r="3.5" fill="#66f" stroke="#008" stroke-width="0.8"/>
+            <!-- GND → obere -Schiene (x=380) -->
             <line x1="380" y1="118" x2="380" y2="210" stroke="#333" stroke-width="2.8" stroke-linecap="round"/>
             <circle cx="380" cy="210" r="3.5" fill="#333"/>
 
             <!-- ===== BREADBOARD ===== -->
             <rect x="20" y="180" width="660" height="260" rx="6" fill="#e8e0d0" stroke="#999" stroke-width="1.5"/>
-            <text x="350" y="175" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
+            <text x="350" y="453" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
 
             <rect x="50" y="195" width="620" height="9" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
             <text x="38" y="202" font-size="8" fill="#c00" font-weight="bold">+</text>
@@ -1174,21 +1174,22 @@ void loop() {
             <rect x="50" y="389" width="620" height="9" rx="2" fill="#ddf" stroke="#00c" stroke-width="0.8"/>
             <rect x="50" y="401" width="620" height="9" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
 
-            <!-- ===== TASTER über Mittelrinne (Sp.8 → Sp.9 oder Sp.8 Reihe e + Sp.9 Reihe f) ===== -->
-            <rect x="180" y="320" width="80" height="60" rx="4" fill="none" stroke="#66f" stroke-width="1" stroke-dasharray="4,2"/>
-            <text x="220" y="200" text-anchor="middle" font-size="11" fill="#44c" font-weight="bold">⬇ TASTER (Sp.8 + Sp.9)</text>
-            <!-- Taster-Körper -->
-            <rect x="190" y="335" width="50" height="30" rx="4" fill="#888" stroke="#555" stroke-width="1"/>
-            <circle cx="215" cy="350" r="10" fill="#aaa" stroke="#666" stroke-width="1"/>
-            <text x="215" y="354" text-anchor="middle" font-size="6" fill="#444">drücken</text>
-            <!-- Beinchen: Sp.8 Reihe e (Pin 7) + Sp.9 Reihe f (zur GND-Schiene über Brücke) -->
-            <circle cx="200" cy="342" r="2.5" fill="#888" stroke="#444" stroke-width="0.8"/>
-            <line x1="200" y1="342" x2="200" y2="335" stroke="#555" stroke-width="1.5"/>
-            <circle cx="220" cy="372" r="2.5" fill="#888" stroke="#444" stroke-width="0.8"/>
-            <line x1="220" y1="372" x2="220" y2="365" stroke="#555" stroke-width="1.5"/>
-            <!-- Jumper Sp.9 Reihe f → untere -Schiene -->
-            <line x1="220" y1="372" x2="220" y2="389" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
-            <text x="265" y="380" font-size="8" fill="#333" font-style="italic">→ untere GND-Schiene</text>
+            <!-- ===== TASTER über Mittelrinne (Sp.8 Reihe e + Sp.10 Reihe f, diagonal) ===== -->
+            <rect x="185" y="288" width="70" height="44" rx="4" fill="none" stroke="#66f" stroke-width="1" stroke-dasharray="4,2"/>
+            <text x="220" y="200" text-anchor="middle" font-size="11" fill="#44c" font-weight="bold">⬇ TASTER (über Mittelrinne)</text>
+            <!-- Taster-Körper überspannt die Mittelrinne von Sp.8 bis Sp.10 -->
+            <rect x="190" y="292" width="60" height="36" rx="3" fill="#888" stroke="#555" stroke-width="1"/>
+            <circle cx="220" cy="310" r="8" fill="#aaa" stroke="#666" stroke-width="1"/>
+            <text x="220" y="313" text-anchor="middle" font-size="5" fill="#444">drücken</text>
+            <!-- Bein 1: Sp.8 Reihe e (Pin 7 oben) -->
+            <circle cx="200" cy="296" r="2.5" fill="#888" stroke="#444" stroke-width="0.8"/>
+            <line x1="200" y1="296" x2="200" y2="292" stroke="#555" stroke-width="1.5"/>
+            <!-- Bein 2: Sp.10 Reihe f (zur unteren -Schiene unten) -->
+            <circle cx="240" cy="320" r="2.5" fill="#888" stroke="#444" stroke-width="0.8"/>
+            <line x1="240" y1="320" x2="240" y2="328" stroke="#555" stroke-width="1.5"/>
+            <!-- Jumper Sp.10 Reihe f → untere -Schiene -->
+            <line x1="240" y1="320" x2="240" y2="389" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <text x="260" y="360" font-size="8" fill="#333" font-style="italic">→ untere GND-Schiene</text>
 
             <!-- ===== GND-BRÜCKE rechts ===== -->
             <path d="M 690 213 L 712 213 L 712 393 L 690 393" stroke="#333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
@@ -1208,7 +1209,7 @@ void loop() {
             <line x1="32" y1="492" x2="62" y2="492" stroke="#66f" stroke-width="3" stroke-linecap="round"/>
             <text x="68" y="495" font-size="9" fill="#555">Pin 7 → Sp.8 (Signal)</text>
             <line x1="220" y1="492" x2="250" y2="492" stroke="#333" stroke-width="3" stroke-linecap="round"/>
-            <text x="256" y="495" font-size="9" fill="#555">GND → Schiene → Sp.9 (Masse)</text>
+            <text x="256" y="495" font-size="9" fill="#555">GND → untere −Schiene → Sp.10 (Masse)</text>
             <text x="450" y="495" font-size="9" fill="#888" font-style="italic">Nur 2 Kabel – so einfach!</text>
           </svg>
 
@@ -1449,10 +1450,10 @@ void loop() {
             </g>
 
             <!-- ===== KABEL: senkrecht ===== -->
-            <!-- Pin 7 → Sp.5 Reihe e (Taster) -->
-            <line x1="140" y1="118" x2="140" y2="342" stroke="#66f" stroke-width="2.8" stroke-linecap="round"/>
-            <circle cx="140" cy="342" r="3.5" fill="#66f" stroke="#008" stroke-width="0.8"/>
-            <!-- Pin 8 → Sp.11 Reihe e (LED-Widerstand) -->
+            <!-- Pin 7 → Sp.5 Reihe e (Taster Bein 1 oben) -->
+            <line x1="140" y1="118" x2="140" y2="296" stroke="#66f" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="140" cy="296" r="3.5" fill="#66f" stroke="#008" stroke-width="0.8"/>
+            <!-- Pin 8 → Sp.11 Reihe a (LED-Widerstand) -->
             <line x1="260" y1="118" x2="260" y2="240" stroke="#E74C3C" stroke-width="2.8" stroke-linecap="round"/>
             <circle cx="260" cy="240" r="3.5" fill="#E74C3C" stroke="#800" stroke-width="0.8"/>
             <!-- GND → obere -Schiene -->
@@ -1461,7 +1462,7 @@ void loop() {
 
             <!-- ===== BREADBOARD ===== -->
             <rect x="20" y="180" width="660" height="260" rx="6" fill="#e8e0d0" stroke="#999" stroke-width="1.5"/>
-            <text x="350" y="175" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
+            <text x="350" y="453" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
 
             <rect x="50" y="195" width="620" height="9" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
             <text x="38" y="202" font-size="8" fill="#c00" font-weight="bold">+</text>
@@ -1499,17 +1500,22 @@ void loop() {
             <rect x="50" y="389" width="620" height="9" rx="2" fill="#ddf" stroke="#00c" stroke-width="0.8"/>
             <rect x="50" y="401" width="620" height="9" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
 
-            <!-- ===== TASTER (Sp.5 + Sp.6, über Mittelrinne) ===== -->
-            <rect x="120" y="330" width="60" height="50" rx="4" fill="none" stroke="#66f" stroke-width="1" stroke-dasharray="4,2"/>
-            <text x="150" y="200" text-anchor="middle" font-size="11" fill="#44c" font-weight="bold">⬇ TASTER</text>
-            <rect x="130" y="335" width="40" height="40" rx="3" fill="#888" stroke="#555" stroke-width="1"/>
-            <circle cx="150" cy="355" r="10" fill="#aaa" stroke="#666" stroke-width="1"/>
-            <text x="150" y="358" text-anchor="middle" font-size="6" fill="#444">drücken</text>
-            <circle cx="140" cy="342" r="2.5" fill="#888" stroke="#444" stroke-width="0.8"/>
-            <line x1="140" y1="342" x2="140" y2="335" stroke="#555" stroke-width="1.5"/>
-            <circle cx="160" cy="372" r="2.5" fill="#888" stroke="#444" stroke-width="0.8"/>
-            <line x1="160" y1="372" x2="160" y2="375" stroke="#555" stroke-width="1.5"/>
-            <line x1="160" y1="372" x2="160" y2="389" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <!-- ===== TASTER (Sp.5 Reihe e + Sp.7 Reihe f, über Mittelrinne) ===== -->
+            <rect x="125" y="288" width="70" height="44" rx="4" fill="none" stroke="#66f" stroke-width="1" stroke-dasharray="4,2"/>
+            <text x="160" y="200" text-anchor="middle" font-size="11" fill="#44c" font-weight="bold">⬇ TASTER (Eingabe)</text>
+            <!-- Taster-Körper überspannt Mittelrinne -->
+            <rect x="130" y="292" width="60" height="36" rx="3" fill="#888" stroke="#555" stroke-width="1"/>
+            <circle cx="160" cy="310" r="8" fill="#aaa" stroke="#666" stroke-width="1"/>
+            <text x="160" y="313" text-anchor="middle" font-size="5" fill="#444">drücken</text>
+            <!-- Bein 1: Sp.5 Reihe e (Pin 7 oben) -->
+            <circle cx="140" cy="296" r="2.5" fill="#888" stroke="#444" stroke-width="0.8"/>
+            <line x1="140" y1="296" x2="140" y2="292" stroke="#555" stroke-width="1.5"/>
+            <!-- Bein 2: Sp.7 Reihe f (zur unteren -Schiene) -->
+            <circle cx="180" cy="320" r="2.5" fill="#888" stroke="#444" stroke-width="0.8"/>
+            <line x1="180" y1="320" x2="180" y2="328" stroke="#555" stroke-width="1.5"/>
+            <!-- Jumper Sp.7 Reihe f → untere -Schiene -->
+            <line x1="180" y1="320" x2="180" y2="389" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <text x="195" y="360" font-size="7" fill="#333" font-style="italic">→ GND</text>
 
             <!-- ===== LED-Schaltung (Sp.11 → Sp.12 → Sp.13) ===== -->
             <rect x="252" y="266" width="80" height="84" rx="4" fill="none" stroke="#e44" stroke-width="1" stroke-dasharray="4,2"/>
@@ -1674,7 +1680,7 @@ void loop() {
 
             <!-- ===== BREADBOARD ===== -->
             <rect x="20" y="180" width="660" height="260" rx="6" fill="#e8e0d0" stroke="#999" stroke-width="1.5"/>
-            <text x="350" y="175" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
+            <text x="350" y="453" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
 
             <rect x="50" y="195" width="620" height="9" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
             <text x="38" y="202" font-size="8" fill="#c00" font-weight="bold">+</text>

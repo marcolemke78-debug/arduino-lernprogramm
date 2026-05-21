@@ -466,7 +466,7 @@ const LESSONS_GRUNDLAGEN = [
 
             <!-- ===== BREADBOARD (UNTEN, volle Breite) ===== -->
             <rect x="20" y="180" width="660" height="240" rx="6" fill="#e8e0d0" stroke="#999" stroke-width="1.5"/>
-            <text x="350" y="175" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
+            <text x="350" y="433" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
 
             <!-- Stromschienen oben + GND -->
             <rect x="50" y="195" width="620" height="9" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>

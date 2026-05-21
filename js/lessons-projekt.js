@@ -520,7 +520,7 @@ const LESSONS_PROJEKT = [
 
             <!-- ===== BREADBOARD (32 Spalten) ===== -->
             <rect x="20" y="215" width="680" height="320" rx="6" fill="#e8e0d0" stroke="#999" stroke-width="1.5"/>
-            <text x="370" y="210" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
+            <text x="370" y="550" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
 
             <rect x="50" y="225" width="640" height="10" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
             <text x="38" y="232" font-size="8" fill="#c00" font-weight="bold">+</text>
@@ -981,7 +981,7 @@ const LESSONS_PROJEKT = [
             <!-- ===== BREADBOARD (UNTEN, volle Breite) ====== -->
             <!-- =============================================== -->
             <rect x="20" y="215" width="680" height="320" rx="6" fill="#e8e0d0" stroke="#999" stroke-width="1.5"/>
-            <text x="360" y="210" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Prüfungs-Breadboard (32 Spalten)</text>
+            <text x="360" y="550" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Prüfungs-Breadboard (32 Spalten)</text>
 
             <!-- Stromschienen oben (rot=5V, blau=GND) -->
             <rect x="50" y="225" width="640" height="10" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>

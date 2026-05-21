@@ -379,148 +379,118 @@ Hitze:       U<sub>2</sub> = 5 V &middot; 4  / (10 + 4)  &asymp; <strong>1,43 V<
 
         <div class="info-card">
           <h3>So sieht es auf dem Breadboard aus</h3>
-          <svg viewBox="0 0 660 290" style="width:100%;max-width:660px;margin:1em auto;display:block;font-family:system-ui,sans-serif;">
-            <!-- ===== LAYOUT =====
-              Breadboard links: Spalten bei x=40,60,80,100,120,140,160,180,200,220,240,260,280
-              Reihen: +rail y=28, -rail y=44, a=68, b=80, c=92, d=104, e=116, gap=130, f=144, g=156, h=168, i=180, j=192
-              Arduino rechts: x=400-640
+          <svg viewBox="0 0 700 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;margin:1em auto;display:block;background:#fdfcf6;border:1px solid #ccc;border-radius:8px;font-family:system-ui,sans-serif;">
 
-              SCHALTUNG (elektrisch korrekt):
-              - Spalte 4 (x=100): Poti linkes Bein + Draht von +Schiene (5V)
-              - Spalte 5 (x=120): Poti mittleres Bein + A0-Draht
-              - Spalte 6 (x=140): Poti rechtes Bein + Draht zu -Schiene (GND)
-            -->
+            <!-- ===== ARDUINO UNO (oben) ===== -->
+            <rect x="80" y="20" width="540" height="100" rx="10" fill="#2176AE" stroke="#1a5f8a" stroke-width="2"/>
+            <text x="350" y="48" text-anchor="middle" font-size="14" fill="white" font-weight="bold">Arduino Uno</text>
+            <text x="350" y="64" text-anchor="middle" font-size="9" fill="#aad" font-style="italic">Potentiometer an A0 – stufenlos 0 bis 1023</text>
 
-            <!-- BREADBOARD -->
-            <rect x="10" y="10" width="310" height="240" rx="5" fill="#E8E4D8" stroke="#B8B4A8" stroke-width="1.5"/>
+            <rect x="60" y="55" width="20" height="28" rx="2" fill="#aaa" stroke="#888" stroke-width="1"/>
+            <text x="70" y="73" text-anchor="middle" font-size="7" fill="#444">USB</text>
 
-            <!-- Stromschienen oben -->
-            <rect x="25" y="22" width="280" height="10" rx="2" fill="#FECACA" stroke="#EF4444" stroke-width="0.7"/>
-            <text x="16" y="31" font-size="9" fill="#EF4444" font-weight="bold">+</text>
-            <rect x="25" y="38" width="280" height="10" rx="2" fill="#BFDBFE" stroke="#3B82F6" stroke-width="0.7"/>
-            <text x="16" y="47" font-size="9" fill="#3B82F6" font-weight="bold">−</text>
-
-            <!-- Spaltennummern -->
-            <g font-size="7" fill="#AAA" text-anchor="middle">
-              <text x="40" y="60">1</text><text x="60" y="60">2</text><text x="80" y="60">3</text><text x="100" y="60">4</text><text x="120" y="60">5</text><text x="140" y="60">6</text><text x="160" y="60">7</text><text x="180" y="60">8</text><text x="200" y="60">9</text><text x="220" y="60">10</text><text x="240" y="60">11</text><text x="260" y="60">12</text><text x="280" y="60">13</text>
+            <!-- Pin-Labels -->
+            <g font-size="9" font-weight="bold" text-anchor="middle">
+              <text x="180" y="93" fill="#ff5555">5V</text>
+              <text x="260" y="93" fill="#5cf">A0</text>
+              <text x="340" y="93" fill="#ddd">GND</text>
             </g>
 
-            <!-- Reihen-Beschriftung -->
-            <g font-size="7" fill="#999">
-              <text x="16" y="71">a</text><text x="16" y="83">b</text><text x="16" y="95">c</text><text x="16" y="107">d</text><text x="16" y="119">e</text>
-              <text x="16" y="147">f</text><text x="16" y="159">g</text><text x="16" y="171">h</text><text x="16" y="183">i</text><text x="16" y="195">j</text>
+            <!-- Pin-Boxen (5V → Sp.7, A0 → Sp.11, GND → Sp.15) -->
+            <g font-size="10" fill="white" font-weight="bold" text-anchor="middle">
+              <rect x="165" y="96" width="30" height="22" rx="2" fill="#ff5555" stroke="white" stroke-width="0.5"/>
+              <text x="180" y="112">5V</text>
+              <rect x="245" y="96" width="30" height="22" rx="2" fill="#f90" stroke="white" stroke-width="0.5"/>
+              <text x="260" y="112">A0</text>
+              <rect x="325" y="96" width="30" height="22" rx="2" fill="#333" stroke="white" stroke-width="0.5"/>
+              <text x="340" y="112" font-size="9">GND</text>
             </g>
 
-            <!-- Loecher obere Haelfte (a-e) -->
-            <g fill="#BBB">
-              <!-- Reihe a (y=68) -->
-              <circle cx="40" cy="68" r="2"/><circle cx="60" cy="68" r="2"/><circle cx="80" cy="68" r="2"/><circle cx="100" cy="68" r="2"/><circle cx="120" cy="68" r="2"/><circle cx="140" cy="68" r="2"/><circle cx="160" cy="68" r="2"/><circle cx="180" cy="68" r="2"/><circle cx="200" cy="68" r="2"/><circle cx="220" cy="68" r="2"/><circle cx="240" cy="68" r="2"/><circle cx="260" cy="68" r="2"/><circle cx="280" cy="68" r="2"/>
-              <!-- Reihe b (y=80) -->
-              <circle cx="40" cy="80" r="2"/><circle cx="60" cy="80" r="2"/><circle cx="80" cy="80" r="2"/><circle cx="100" cy="80" r="2"/><circle cx="120" cy="80" r="2"/><circle cx="140" cy="80" r="2"/><circle cx="160" cy="80" r="2"/><circle cx="180" cy="80" r="2"/><circle cx="200" cy="80" r="2"/><circle cx="220" cy="80" r="2"/><circle cx="240" cy="80" r="2"/><circle cx="260" cy="80" r="2"/><circle cx="280" cy="80" r="2"/>
-              <!-- Reihe c (y=92) -->
-              <circle cx="40" cy="92" r="2"/><circle cx="60" cy="92" r="2"/><circle cx="80" cy="92" r="2"/><circle cx="100" cy="92" r="2"/><circle cx="120" cy="92" r="2"/><circle cx="140" cy="92" r="2"/><circle cx="160" cy="92" r="2"/><circle cx="180" cy="92" r="2"/><circle cx="200" cy="92" r="2"/><circle cx="220" cy="92" r="2"/><circle cx="240" cy="92" r="2"/><circle cx="260" cy="92" r="2"/><circle cx="280" cy="92" r="2"/>
-              <!-- Reihe d (y=104) -->
-              <circle cx="40" cy="104" r="2"/><circle cx="60" cy="104" r="2"/><circle cx="80" cy="104" r="2"/><circle cx="100" cy="104" r="2"/><circle cx="120" cy="104" r="2"/><circle cx="140" cy="104" r="2"/><circle cx="160" cy="104" r="2"/><circle cx="180" cy="104" r="2"/><circle cx="200" cy="104" r="2"/><circle cx="220" cy="104" r="2"/><circle cx="240" cy="104" r="2"/><circle cx="260" cy="104" r="2"/><circle cx="280" cy="104" r="2"/>
-              <!-- Reihe e (y=116) -->
-              <circle cx="40" cy="116" r="2"/><circle cx="60" cy="116" r="2"/><circle cx="80" cy="116" r="2"/><circle cx="100" cy="116" r="2"/><circle cx="120" cy="116" r="2"/><circle cx="140" cy="116" r="2"/><circle cx="160" cy="116" r="2"/><circle cx="180" cy="116" r="2"/><circle cx="200" cy="116" r="2"/><circle cx="220" cy="116" r="2"/><circle cx="240" cy="116" r="2"/><circle cx="260" cy="116" r="2"/><circle cx="280" cy="116" r="2"/>
+            <!-- ===== KABEL: senkrecht (5V→Sp.7, A0→Sp.11, GND→Sp.15) ===== -->
+            <line x1="180" y1="118" x2="180" y2="240" stroke="#EF4444" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="180" cy="240" r="3.5" fill="#EF4444" stroke="#800" stroke-width="0.8"/>
+            <line x1="260" y1="118" x2="260" y2="240" stroke="#f90" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="260" cy="240" r="3.5" fill="#f90" stroke="#c60" stroke-width="0.8"/>
+            <line x1="340" y1="118" x2="340" y2="240" stroke="#333" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="340" cy="240" r="3.5" fill="#333"/>
+
+            <!-- ===== BREADBOARD ===== -->
+            <rect x="20" y="180" width="660" height="260" rx="6" fill="#e8e0d0" stroke="#999" stroke-width="1.5"/>
+            <text x="350" y="175" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
+
+            <rect x="50" y="195" width="620" height="9" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
+            <text x="38" y="202" font-size="8" fill="#c00" font-weight="bold">+</text>
+            <rect x="50" y="207" width="620" height="9" rx="2" fill="#ddf" stroke="#00c" stroke-width="0.8"/>
+            <text x="38" y="214" font-size="8" fill="#00c" font-weight="bold">−</text>
+
+            <g font-size="6" fill="#888" text-anchor="middle">
+              <text x="60" y="230">1</text><text x="80" y="230">2</text><text x="100" y="230">3</text><text x="120" y="230">4</text><text x="140" y="230">5</text><text x="160" y="230">6</text><text x="180" y="230">7</text><text x="200" y="230">8</text><text x="220" y="230">9</text><text x="240" y="230">10</text><text x="260" y="230">11</text><text x="280" y="230">12</text><text x="300" y="230">13</text><text x="320" y="230">14</text><text x="340" y="230">15</text><text x="360" y="230">16</text><text x="380" y="230">17</text><text x="400" y="230">18</text><text x="420" y="230">19</text><text x="440" y="230">20</text><text x="460" y="230">21</text><text x="480" y="230">22</text><text x="500" y="230">23</text><text x="520" y="230">24</text><text x="540" y="230">25</text><text x="560" y="230">26</text><text x="580" y="230">27</text><text x="600" y="230">28</text><text x="620" y="230">29</text><text x="640" y="230">30</text><text x="660" y="230">31</text>
             </g>
 
-            <!-- Mittelrinne -->
-            <rect x="25" y="126" width="280" height="8" rx="1" fill="#D1D5DB"/>
-
-            <!-- Loecher untere Haelfte (f-j) -->
-            <g fill="#BBB">
-              <circle cx="40" cy="144" r="2"/><circle cx="60" cy="144" r="2"/><circle cx="80" cy="144" r="2"/><circle cx="100" cy="144" r="2"/><circle cx="120" cy="144" r="2"/><circle cx="140" cy="144" r="2"/><circle cx="160" cy="144" r="2"/><circle cx="180" cy="144" r="2"/><circle cx="200" cy="144" r="2"/><circle cx="220" cy="144" r="2"/><circle cx="240" cy="144" r="2"/><circle cx="260" cy="144" r="2"/><circle cx="280" cy="144" r="2"/>
-              <circle cx="40" cy="156" r="2"/><circle cx="60" cy="156" r="2"/><circle cx="80" cy="156" r="2"/><circle cx="100" cy="156" r="2"/><circle cx="120" cy="156" r="2"/><circle cx="140" cy="156" r="2"/><circle cx="160" cy="156" r="2"/><circle cx="180" cy="156" r="2"/><circle cx="200" cy="156" r="2"/><circle cx="220" cy="156" r="2"/><circle cx="240" cy="156" r="2"/><circle cx="260" cy="156" r="2"/><circle cx="280" cy="156" r="2"/>
-              <circle cx="40" cy="168" r="2"/><circle cx="60" cy="168" r="2"/><circle cx="80" cy="168" r="2"/><circle cx="100" cy="168" r="2"/><circle cx="120" cy="168" r="2"/><circle cx="140" cy="168" r="2"/><circle cx="160" cy="168" r="2"/><circle cx="180" cy="168" r="2"/><circle cx="200" cy="168" r="2"/><circle cx="220" cy="168" r="2"/><circle cx="240" cy="168" r="2"/><circle cx="260" cy="168" r="2"/><circle cx="280" cy="168" r="2"/>
-              <circle cx="40" cy="180" r="2"/><circle cx="60" cy="180" r="2"/><circle cx="80" cy="180" r="2"/><circle cx="100" cy="180" r="2"/><circle cx="120" cy="180" r="2"/><circle cx="140" cy="180" r="2"/><circle cx="160" cy="180" r="2"/><circle cx="180" cy="180" r="2"/><circle cx="200" cy="180" r="2"/><circle cx="220" cy="180" r="2"/><circle cx="240" cy="180" r="2"/><circle cx="260" cy="180" r="2"/><circle cx="280" cy="180" r="2"/>
-              <circle cx="40" cy="192" r="2"/><circle cx="60" cy="192" r="2"/><circle cx="80" cy="192" r="2"/><circle cx="100" cy="192" r="2"/><circle cx="120" cy="192" r="2"/><circle cx="140" cy="192" r="2"/><circle cx="160" cy="192" r="2"/><circle cx="180" cy="192" r="2"/><circle cx="200" cy="192" r="2"/><circle cx="220" cy="192" r="2"/><circle cx="240" cy="192" r="2"/><circle cx="260" cy="192" r="2"/><circle cx="280" cy="192" r="2"/>
+            <g font-size="8" fill="#666" font-style="italic">
+              <text x="36" y="244">a</text><text x="36" y="258">b</text><text x="36" y="272">c</text><text x="36" y="286">d</text><text x="36" y="300">e</text>
+            </g>
+            <g stroke="#aaa" stroke-width="3" stroke-linecap="round" stroke-dasharray="0.1,19.9" fill="none">
+              <line x1="60" y1="240" x2="660" y2="240"/>
+              <line x1="60" y1="254" x2="660" y2="254"/>
+              <line x1="60" y1="268" x2="660" y2="268"/>
+              <line x1="60" y1="282" x2="660" y2="282"/>
+              <line x1="60" y1="296" x2="660" y2="296"/>
             </g>
 
-            <!-- Stromschienen unten -->
-            <rect x="25" y="206" width="280" height="10" rx="2" fill="#BFDBFE" stroke="#3B82F6" stroke-width="0.7"/>
-            <rect x="25" y="222" width="280" height="10" rx="2" fill="#FECACA" stroke="#EF4444" stroke-width="0.7"/>
+            <rect x="50" y="304" width="620" height="12" rx="2" fill="#d0c8b8"/>
 
-            <!-- Spalten-Markierungen -->
-            <!-- Spalte 4: gelb (Poti linkes Bein = 5V) -->
-            <rect x="96" y="64" width="8" height="56" rx="2" fill="#FEF3C7" opacity="0.5"/>
-            <!-- Spalte 5: gelb (Poti mittleres Bein = A0) -->
-            <rect x="116" y="64" width="8" height="56" rx="2" fill="#FEF3C7" opacity="0.5"/>
-            <!-- Spalte 6: gelb (Poti rechtes Bein = GND) -->
-            <rect x="136" y="64" width="8" height="56" rx="2" fill="#FEF3C7" opacity="0.5"/>
-
-            <!-- ===== BAUTEILE ===== -->
-
-            <!-- Potentiometer: Spalte 4/5/6, Reihe b-d -->
-            <rect x="93" y="76" width="54" height="32" rx="6" fill="#e8e8e8" stroke="#999" stroke-width="1.5"/>
-            <text x="120" y="90" text-anchor="middle" font-size="8" font-weight="bold" fill="#333">Potentiometer</text>
-            <circle cx="120" cy="100" r="5" fill="#ccc" stroke="#888" stroke-width="1.5"/>
-            <line x1="120" y1="95" x2="120" y2="98" stroke="#555" stroke-width="1.5"/>
-            <!-- 3 Beinchen in Spalte 4, 5, 6 Reihe e -->
-            <line x1="100" y1="108" x2="100" y2="116" stroke="#777" stroke-width="2"/>
-            <line x1="120" y1="108" x2="120" y2="116" stroke="#777" stroke-width="2"/>
-            <line x1="140" y1="108" x2="140" y2="116" stroke="#777" stroke-width="2"/>
-            <!-- Beschriftung der Beinchen -->
-            <text x="100" y="72" text-anchor="middle" font-size="5" fill="#C0392B">5V</text>
-            <text x="120" y="72" text-anchor="middle" font-size="5" fill="#2980B9">A0</text>
-            <text x="140" y="72" text-anchor="middle" font-size="5" fill="#555">GND</text>
-
-            <!-- ===== DRAEHTE AUF DEM BREADBOARD ===== -->
-
-            <!-- Draht: +Schiene → Spalte 4 Reihe a (5V zum Poti linkes Bein) -->
-            <line x1="100" y1="27" x2="100" y2="68" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="100" cy="27" r="2.5" fill="#EF4444"/>
-            <circle cx="100" cy="68" r="2.5" fill="#EF4444"/>
-
-            <!-- Draht: Spalte 6 Reihe a → obere -Schiene (Poti rechtes Bein nach GND) -->
-            <line x1="140" y1="68" x2="140" y2="43" stroke="#333" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="140" cy="68" r="2.5" fill="#333"/>
-            <circle cx="140" cy="43" r="2.5" fill="#333"/>
-
-            <!-- ===== ARDUINO ===== -->
-            <rect x="400" y="10" width="250" height="240" rx="8" fill="#0068B5" stroke="#004080" stroke-width="2"/>
-            <text x="525" y="130" text-anchor="middle" font-size="20" fill="white" opacity="0.25" font-weight="bold">Arduino UNO</text>
-
-            <!-- Arduino Pins -->
-            <g font-size="8" font-weight="bold">
-              <!-- 5V Pin -->
-              <rect x="394" y="45" width="24" height="13" rx="2" fill="#C0392B"/>
-              <text x="406" y="55" text-anchor="middle" fill="white">5V</text>
-              <!-- GND Pin -->
-              <rect x="394" y="65" width="24" height="13" rx="2" fill="#333"/>
-              <text x="406" y="75" text-anchor="middle" fill="white">GND</text>
-              <!-- A0 Pin -->
-              <rect x="394" y="95" width="24" height="13" rx="2" fill="#2980B9"/>
-              <text x="406" y="105" text-anchor="middle" fill="white">A0</text>
+            <g font-size="8" fill="#666" font-style="italic">
+              <text x="36" y="324">f</text><text x="36" y="338">g</text><text x="36" y="352">h</text><text x="36" y="366">i</text><text x="36" y="380">j</text>
+            </g>
+            <g stroke="#aaa" stroke-width="3" stroke-linecap="round" stroke-dasharray="0.1,19.9" fill="none">
+              <line x1="60" y1="320" x2="660" y2="320"/>
+              <line x1="60" y1="334" x2="660" y2="334"/>
+              <line x1="60" y1="348" x2="660" y2="348"/>
+              <line x1="60" y1="362" x2="660" y2="362"/>
+              <line x1="60" y1="376" x2="660" y2="376"/>
             </g>
 
-            <!-- ===== KABEL ARDUINO → BREADBOARD ===== -->
+            <rect x="50" y="389" width="620" height="9" rx="2" fill="#ddf" stroke="#00c" stroke-width="0.8"/>
+            <rect x="50" y="401" width="620" height="9" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
 
-            <!-- ROT: Arduino 5V → +Schiene Breadboard -->
-            <path d="M 394 52 C 370 52, 340 27, 305 27" stroke="#EF4444" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <circle cx="305" cy="27" r="3" fill="#EF4444"/>
+            <!-- ===== POTENTIOMETER (Sp.7-8-9-10-11, 3 Beine in Sp.7, Sp.11, Sp.15) ===== -->
+            <!-- Eigentlich liegt der Poti über 3 Sp mit 4 Sp Abstand (Sp.7, Sp.11, Sp.15) - so wie die Pin-Anschlüsse -->
+            <rect x="160" y="246" width="200" height="44" rx="6" fill="#e8e8e8" stroke="#666" stroke-width="1.5"/>
+            <text x="260" y="262" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Potentiometer</text>
+            <circle cx="260" cy="276" r="8" fill="#ccc" stroke="#888" stroke-width="1.5"/>
+            <line x1="260" y1="268" x2="260" y2="272" stroke="#555" stroke-width="2"/>
+            <text x="260" y="282" text-anchor="middle" font-size="6" fill="#555">drehen</text>
 
-            <!-- SCHWARZ: Arduino GND → -Schiene Breadboard -->
-            <path d="M 394 72 C 360 72, 345 43, 285 43" stroke="#333" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <circle cx="285" cy="43" r="3" fill="#333"/>
+            <!-- 3 Beinchen: Sp.7 (links, 5V), Sp.11 (mitte, A0), Sp.15 (rechts, GND) -->
+            <line x1="180" y1="288" x2="180" y2="240" stroke="#864" stroke-width="2"/>
+            <line x1="260" y1="288" x2="260" y2="240" stroke="#864" stroke-width="2"/>
+            <line x1="340" y1="288" x2="340" y2="240" stroke="#864" stroke-width="2"/>
+            <circle cx="180" cy="240" r="2.5" fill="#864"/>
+            <circle cx="260" cy="240" r="2.5" fill="#864"/>
+            <circle cx="340" cy="240" r="2.5" fill="#864"/>
+            <text x="180" y="304" text-anchor="middle" font-size="6.5" fill="#c00" font-weight="bold">5V</text>
+            <text x="260" y="304" text-anchor="middle" font-size="6.5" fill="#c60" font-weight="bold">A0</text>
+            <text x="340" y="304" text-anchor="middle" font-size="6.5" fill="#333" font-weight="bold">GND</text>
 
-            <!-- BLAU: Arduino A0 → Spalte 5 Reihe c (Poti Mitte) -->
-            <path d="M 394 102 C 350 102, 250 110, 120 92" stroke="#2980B9" stroke-width="3" fill="none" stroke-linecap="round"/>
-            <circle cx="120" cy="92" r="3" fill="#2980B9"/>
+            <!-- Beschriftungs-Box rechts -->
+            <rect x="430" y="240" width="220" height="80" rx="6" fill="#FFF8E1" stroke="#FFA000" stroke-width="1.5"/>
+            <text x="540" y="258" text-anchor="middle" font-size="10" fill="#E65100" font-weight="bold">So funktioniert's:</text>
+            <text x="440" y="276" font-size="9" fill="#555">► Drehen am Poti = Spannung ändern</text>
+            <text x="440" y="290" font-size="9" fill="#555">► Links: 0 V → analogRead() = 0</text>
+            <text x="440" y="304" font-size="9" fill="#555">► Mitte: 2,5 V → analogRead() = 512</text>
+            <text x="440" y="318" font-size="9" fill="#555">► Rechts: 5 V → analogRead() = 1023</text>
 
             <!-- ===== LEGENDE ===== -->
-            <g font-size="9" fill="#555">
-              <rect x="10" y="258" width="640" height="28" rx="5" fill="white" stroke="#DDD" stroke-width="1"/>
-              <text x="25" y="276" font-weight="bold" font-size="10" fill="#333">Verbindungen:</text>
-
-              <line x1="115" y1="276" x2="135" y2="276" stroke="#EF4444" stroke-width="3"/>
-              <text x="140" y="279" font-size="8">5V → +Schiene → Sp.4 (Poti links)</text>
-
-              <line x1="310" y1="276" x2="330" y2="276" stroke="#2980B9" stroke-width="3"/>
-              <text x="335" y="279" font-size="8">A0 → Sp.5 (Poti Mitte)</text>
-
-              <line x1="480" y1="276" x2="500" y2="276" stroke="#333" stroke-width="3"/>
-              <text x="505" y="279" font-size="8">GND → -Schiene → Sp.6 (Poti rechts)</text>
+            <rect x="20" y="460" width="660" height="50" rx="6" fill="#fff" stroke="#ddd" stroke-width="1"/>
+            <text x="32" y="478" font-size="10" fill="#333" font-weight="bold">Legende – Potentiometer-Anschluss:</text>
+            <line x1="32" y1="492" x2="62" y2="492" stroke="#EF4444" stroke-width="3" stroke-linecap="round"/>
+            <text x="68" y="495" font-size="9" fill="#555">5V → Sp.7 (Poti linkes Bein)</text>
+            <line x1="240" y1="492" x2="270" y2="492" stroke="#f90" stroke-width="3" stroke-linecap="round"/>
+            <text x="276" y="495" font-size="9" fill="#555">A0 → Sp.11 (Poti Mitte)</text>
+            <line x1="440" y1="492" x2="470" y2="492" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+            <text x="476" y="495" font-size="9" fill="#555">GND → Sp.15 (Poti rechtes Bein)</text>
+            <text x="32" y="510" font-size="9" fill="#888" font-style="italic">Spannungsteiler: 5V → Poti → GND. Mittel-Abgriff = variable Spannung 0–5V an A0.</text>
             </g>
           </svg>
         </div>
@@ -1076,22 +1046,149 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
 
         <div class="info-card">
           <h3>So sieht es auf dem Breadboard aus</h3>
-          <svg viewBox="0 0 660 320" style="width:100%;max-width:660px;margin:1em auto;display:block;font-family:system-ui,sans-serif;">
-            <!-- ===== LAYOUT =====
-              Breadboard links: Spalten bei x=40,60,80,100,120,140,160,180,200,220,240,260,280
-              Reihen: +rail y=28, -rail y=44, a=68, b=80, c=92, d=104, e=116, gap=130, f=144, g=156, h=168, i=180, j=192, -rail=212, +rail=228
-              Arduino rechts: x=400-640
+          <svg viewBox="0 0 700 580" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;margin:1em auto;display:block;background:#fdfcf6;border:1px solid #ccc;border-radius:8px;font-family:system-ui,sans-serif;">
 
-              SCHALTUNG (elektrisch korrekt):
-              - Spalte 3 (x=80): LDR Bein 1 + Draht von +Schiene
-              - Spalte 5 (x=120): LDR Bein 2 + 10k Bein 1 + A0-Draht (alles verbunden ueber Spalte 5 a-e)
-              - Spalte 7 (x=160): 10k Bein 2 + Draht zu -Schiene
-              - Spalte 10 (x=220): Pin2-Draht + 220R Bein 1 (verbunden ueber Spalte 10 a-e)
-              - Spalte 12 (x=260): 220R Bein 2 + LED Anode (verbunden ueber Spalte 12 a-e)
-              - Spalte 13 (x=280): LED Kathode + Draht zu -Schiene
-            -->
+            <!-- ===== ARDUINO UNO (oben) ===== -->
+            <rect x="80" y="20" width="540" height="100" rx="10" fill="#2176AE" stroke="#1a5f8a" stroke-width="2"/>
+            <text x="350" y="48" text-anchor="middle" font-size="14" fill="white" font-weight="bold">Arduino Uno</text>
+            <text x="350" y="64" text-anchor="middle" font-size="9" fill="#aad" font-style="italic">LDR-Nachtlicht – Spannungsteiler an A0 + LED an Pin 2</text>
+
+            <rect x="60" y="55" width="20" height="28" rx="2" fill="#aaa" stroke="#888" stroke-width="1"/>
+            <text x="70" y="73" text-anchor="middle" font-size="7" fill="#444">USB</text>
+
+            <!-- Pin-Labels -->
+            <g font-size="9" font-weight="bold" text-anchor="middle">
+              <text x="140" y="93" fill="#ff5555">5V</text>
+              <text x="220" y="93" fill="#f90">A0</text>
+              <text x="380" y="93" fill="#6f6">LED</text>
+              <text x="500" y="93" fill="#ddd">GND</text>
+            </g>
+
+            <!-- Pin-Boxen (5V→Sp.5, A0→Sp.9, Pin2→Sp.17, GND→Sp.23) -->
+            <g font-size="10" fill="white" font-weight="bold" text-anchor="middle">
+              <rect x="125" y="96" width="30" height="22" rx="2" fill="#ff5555" stroke="white" stroke-width="0.5"/>
+              <text x="140" y="112">5V</text>
+              <rect x="205" y="96" width="30" height="22" rx="2" fill="#f90" stroke="white" stroke-width="0.5"/>
+              <text x="220" y="112">A0</text>
+              <rect x="365" y="96" width="30" height="22" rx="2" fill="#1a5f8a" stroke="white" stroke-width="0.5"/>
+              <text x="380" y="112">2</text>
+              <rect x="485" y="96" width="30" height="22" rx="2" fill="#333" stroke="white" stroke-width="0.5"/>
+              <text x="500" y="112" font-size="9">GND</text>
+            </g>
+
+            <!-- ===== KABEL: senkrecht ===== -->
+            <!-- 5V → Sp.5 Reihe a (LDR-Anschluss A) -->
+            <line x1="140" y1="118" x2="140" y2="240" stroke="#EF4444" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="140" cy="240" r="3.5" fill="#EF4444" stroke="#800" stroke-width="0.8"/>
+            <!-- A0 → Sp.9 (Knotenpunkt LDR+10k) -->
+            <line x1="220" y1="118" x2="220" y2="282" stroke="#f90" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="220" cy="282" r="3.5" fill="#f90" stroke="#c60" stroke-width="0.8"/>
+            <!-- Pin 2 → Sp.17 Reihe e (220R Bein 1) -->
+            <line x1="380" y1="118" x2="380" y2="342" stroke="#0a0" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="380" cy="342" r="3.5" fill="#0a0" stroke="#040" stroke-width="0.8"/>
+            <!-- GND → obere -Schiene Sp.23 -->
+            <line x1="500" y1="118" x2="500" y2="210" stroke="#333" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="500" cy="210" r="3.5" fill="#333"/>
 
             <!-- BREADBOARD -->
+            <rect x="20" y="180" width="660" height="280" rx="6" fill="#e8e0d0" stroke="#999" stroke-width="1.5"/>
+            <text x="350" y="175" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
+
+            <rect x="50" y="195" width="620" height="9" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
+            <text x="38" y="202" font-size="8" fill="#c00" font-weight="bold">+</text>
+            <rect x="50" y="207" width="620" height="9" rx="2" fill="#ddf" stroke="#00c" stroke-width="0.8"/>
+            <text x="38" y="214" font-size="8" fill="#00c" font-weight="bold">−</text>
+
+            <g font-size="6" fill="#888" text-anchor="middle">
+              <text x="60" y="230">1</text><text x="80" y="230">2</text><text x="100" y="230">3</text><text x="120" y="230">4</text><text x="140" y="230">5</text><text x="160" y="230">6</text><text x="180" y="230">7</text><text x="200" y="230">8</text><text x="220" y="230">9</text><text x="240" y="230">10</text><text x="260" y="230">11</text><text x="280" y="230">12</text><text x="300" y="230">13</text><text x="320" y="230">14</text><text x="340" y="230">15</text><text x="360" y="230">16</text><text x="380" y="230">17</text><text x="400" y="230">18</text><text x="420" y="230">19</text><text x="440" y="230">20</text><text x="460" y="230">21</text><text x="480" y="230">22</text><text x="500" y="230">23</text><text x="520" y="230">24</text><text x="540" y="230">25</text><text x="560" y="230">26</text><text x="580" y="230">27</text><text x="600" y="230">28</text><text x="620" y="230">29</text><text x="640" y="230">30</text><text x="660" y="230">31</text>
+            </g>
+
+            <g font-size="8" fill="#666" font-style="italic">
+              <text x="36" y="244">a</text><text x="36" y="258">b</text><text x="36" y="272">c</text><text x="36" y="286">d</text><text x="36" y="300">e</text>
+            </g>
+            <g stroke="#aaa" stroke-width="3" stroke-linecap="round" stroke-dasharray="0.1,19.9" fill="none">
+              <line x1="60" y1="240" x2="660" y2="240"/>
+              <line x1="60" y1="254" x2="660" y2="254"/>
+              <line x1="60" y1="268" x2="660" y2="268"/>
+              <line x1="60" y1="282" x2="660" y2="282"/>
+              <line x1="60" y1="296" x2="660" y2="296"/>
+            </g>
+
+            <rect x="50" y="304" width="620" height="12" rx="2" fill="#d0c8b8"/>
+
+            <g font-size="8" fill="#666" font-style="italic">
+              <text x="36" y="324">f</text><text x="36" y="338">g</text><text x="36" y="352">h</text><text x="36" y="366">i</text><text x="36" y="380">j</text>
+            </g>
+            <g stroke="#aaa" stroke-width="3" stroke-linecap="round" stroke-dasharray="0.1,19.9" fill="none">
+              <line x1="60" y1="320" x2="660" y2="320"/>
+              <line x1="60" y1="334" x2="660" y2="334"/>
+              <line x1="60" y1="348" x2="660" y2="348"/>
+              <line x1="60" y1="362" x2="660" y2="362"/>
+              <line x1="60" y1="376" x2="660" y2="376"/>
+            </g>
+
+            <rect x="50" y="389" width="620" height="9" rx="2" fill="#ddf" stroke="#00c" stroke-width="0.8"/>
+            <rect x="50" y="401" width="620" height="9" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
+
+            <!-- ===== LDR-SPANNUNGSTEILER (Sp.5-Sp.9-Sp.13) ===== -->
+            <rect x="125" y="246" width="200" height="60" rx="4" fill="#ffe8cc" opacity="0.3" stroke="#f90" stroke-width="1" stroke-dasharray="4,2"/>
+            <text x="225" y="200" text-anchor="middle" font-size="11" fill="#c60" font-weight="bold">⬇ LDR-Spannungsteiler</text>
+
+            <!-- LDR Anschluss A Sp.5 (5V), Anschluss B Sp.9 (Knoten) -->
+            <ellipse cx="180" cy="262" rx="38" ry="10" fill="#ffe066" stroke="#c90" stroke-width="1.5"/>
+            <text x="180" y="266" text-anchor="middle" font-size="9" fill="#864" font-weight="bold">LDR</text>
+            <!-- Sonnenstrahlen -->
+            <line x1="156" y1="252" x2="152" y2="246" stroke="#c90" stroke-width="1"/>
+            <line x1="180" y1="248" x2="180" y2="242" stroke="#c90" stroke-width="1"/>
+            <line x1="204" y1="252" x2="208" y2="246" stroke="#c90" stroke-width="1"/>
+            <circle cx="140" cy="240" r="2.5" fill="#864"/>
+            <circle cx="220" cy="240" r="2.5" fill="#864"/>
+
+            <!-- Knotenpunkt (Sp.9) markieren -->
+            <circle cx="220" cy="282" r="4" fill="#f90" stroke="#c60" stroke-width="1.2"/>
+            <text x="220" y="276" text-anchor="middle" font-size="6" fill="#c60" font-weight="bold">A0-Knoten</text>
+
+            <!-- 10kΩ horizontal Sp.9 ↔ Sp.13 (Reihe c) -->
+            <rect x="220" y="292" width="80" height="8" rx="2" fill="#c0a060" stroke="#864" stroke-width="1"/>
+            <line x1="232" y1="292" x2="232" y2="300" stroke="#a52" stroke-width="1.2"/>
+            <line x1="244" y1="292" x2="244" y2="300" stroke="#c00" stroke-width="1.2"/>
+            <line x1="256" y1="292" x2="256" y2="300" stroke="#a52" stroke-width="1.2"/>
+            <line x1="268" y1="292" x2="268" y2="300" stroke="#fb0" stroke-width="1.2"/>
+            <text x="260" y="290" text-anchor="middle" font-size="6" fill="#654" font-weight="bold">10kΩ</text>
+            <circle cx="220" cy="296" r="2.2" fill="#c0a060" stroke="#864" stroke-width="0.8"/>
+            <circle cx="300" cy="296" r="2.2" fill="#c0a060" stroke="#864" stroke-width="0.8"/>
+            <line x1="300" y1="296" x2="300" y2="212" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <text x="320" y="262" font-size="7" fill="#333" font-style="italic">→ GND</text>
+
+            <!-- ===== LED-Kreis (Sp.17 → Sp.18 → Sp.19) ===== -->
+            <rect x="372" y="266" width="80" height="84" rx="4" fill="none" stroke="#0a0" stroke-width="1" stroke-dasharray="4,2"/>
+            <text x="412" y="200" text-anchor="middle" font-size="11" fill="#080" font-weight="bold">⬇ LED-Nachtlicht</text>
+
+            <rect x="378" y="306" width="24" height="8" rx="2" fill="#e8d5a3" stroke="#a08050" stroke-width="1"/>
+            <line x1="384" y1="306" x2="384" y2="314" stroke="#e53935" stroke-width="1.2"/>
+            <line x1="389" y1="306" x2="389" y2="314" stroke="#e53935" stroke-width="1.2"/>
+            <line x1="394" y1="306" x2="394" y2="314" stroke="#6d4c41" stroke-width="1.2"/>
+            <text x="390" y="304" text-anchor="middle" font-size="5.5" fill="#654" font-weight="bold">220Ω</text>
+            <circle cx="380" cy="310" r="2.2" fill="#e8d5a3" stroke="#864" stroke-width="0.8"/>
+            <circle cx="400" cy="310" r="2.2" fill="#e8d5a3" stroke="#864" stroke-width="0.8"/>
+            <line x1="380" y1="310" x2="380" y2="342" stroke="#864" stroke-width="1.5"/>
+            <line x1="400" y1="310" x2="400" y2="240" stroke="#864" stroke-width="1.5"/>
+            <polygon points="398,234 398,246 412,240" fill="#0c0" stroke="#090" stroke-width="1.2"/>
+            <line x1="412" y1="234" x2="412" y2="246" stroke="#090" stroke-width="2"/>
+            <text x="405" y="222" text-anchor="middle" font-size="7" fill="#090" font-weight="bold">LED</text>
+            <circle cx="400" cy="240" r="2.2" fill="#0c0"/>
+            <circle cx="420" cy="240" r="2.2" fill="#864"/>
+            <line x1="420" y1="240" x2="420" y2="212" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+
+            <!-- ===== LEGENDE ===== -->
+            <rect x="20" y="475" width="660" height="80" rx="6" fill="#fff" stroke="#ddd" stroke-width="1"/>
+            <text x="32" y="495" font-size="10" fill="#333" font-weight="bold">Legende – LDR-Nachtlicht:</text>
+            <text x="32" y="513" font-size="9" fill="#555">► LDR-Spannungsteiler: 5V → Sp.5 → LDR → Sp.9 (A0-Knoten) → 10kΩ → Sp.13 → GND-Schiene</text>
+            <text x="32" y="528" font-size="9" fill="#555">► LED-Kreis: Pin 2 → Sp.17 → 220Ω → Sp.18 → LED Anode → LED Kathode → Sp.19 → GND-Schiene</text>
+            <text x="32" y="545" font-size="9" fill="#666" font-style="italic">► Hell → LDR-Widerstand sinkt → A0-Wert steigt (~920) | Dunkel → A0-Wert sinkt (~50)</text>
+          </svg>
+          <!-- OLDSVG-MARKER-START -->
+          <svg style="display:none" xmlns="http://www.w3.org/2000/svg"><!-- alte SVG-Reste ausgeblendet -->
             <rect x="10" y="10" width="310" height="240" rx="5" fill="#E8E4D8" stroke="#B8B4A8" stroke-width="1.5"/>
 
             <!-- Stromschienen oben -->

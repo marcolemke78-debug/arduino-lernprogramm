@@ -1114,7 +1114,7 @@ void loop() {
 
             <!-- Pin-Labels -->
             <g font-size="9" font-weight="bold" text-anchor="middle">
-              <text x="200" y="93" fill="#66f">Signal</text>
+              <text x="200" y="93" fill="#aaccff">Signal</text>
               <text x="380" y="93" fill="#ddd">Masse</text>
             </g>
 
@@ -1187,12 +1187,12 @@ void loop() {
             <!-- Bein 2: Sp.10 Reihe f (zur unteren -Schiene unten) -->
             <circle cx="240" cy="320" r="2.5" fill="#888" stroke="#444" stroke-width="0.8"/>
             <line x1="240" y1="320" x2="240" y2="328" stroke="#555" stroke-width="1.5"/>
-            <!-- Jumper Sp.10 Reihe f → untere -Schiene (durchgezogen, klar sichtbar) -->
-            <line x1="240" y1="320" x2="240" y2="393" stroke="#1565C0" stroke-width="2.8" stroke-linecap="round"/>
-            <circle cx="240" cy="320" r="3" fill="#1565C0" stroke="#0a3a78" stroke-width="0.8"/>
-            <circle cx="240" cy="393" r="3.5" fill="#1565C0" stroke="#0a3a78" stroke-width="0.8"/>
-            <text x="260" y="385" font-size="8" fill="#0a3a78" font-weight="bold">Jumper</text>
-            <text x="260" y="397" font-size="7" fill="#0a3a78" font-style="italic">zur untere −Schiene (GND)</text>
+            <!-- Jumper Sp.10 Reihe f → untere -Schiene (SCHWARZ = GND-Konvention, durchgezogen) -->
+            <line x1="240" y1="320" x2="240" y2="393" stroke="#222" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="240" cy="320" r="3" fill="#222" stroke="#000" stroke-width="0.8"/>
+            <circle cx="240" cy="393" r="3.5" fill="#222" stroke="#000" stroke-width="0.8"/>
+            <text x="260" y="385" font-size="8" fill="#222" font-weight="bold">Jumper (GND)</text>
+            <text x="260" y="397" font-size="7" fill="#222" font-style="italic">zur untere −Schiene</text>
 
             <!-- ===== GND-BRÜCKE rechts ===== -->
             <path d="M 690 213 L 712 213 L 712 393 L 690 393" stroke="#333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>

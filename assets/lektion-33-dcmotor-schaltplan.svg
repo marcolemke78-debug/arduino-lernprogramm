@@ -103,9 +103,10 @@
     <line x1="358" y1="311" x2="370" y2="320" stroke="#000" stroke-width="2" marker-end="url(#npnArrow)"/>
 
     <!-- Labels: C oben, B links, E unten, Bauteilbezeichnung daneben -->
-    <text x="370" y="252" text-anchor="middle" font-size="10" font-weight="bold" fill="#C0392B">C</text>
-    <text x="324" y="294" font-size="10" font-weight="bold" fill="#2980B9">B</text>
-    <text x="370" y="354" text-anchor="middle" font-size="10" font-weight="bold" fill="#27AE60">E</text>
+    <!-- weisser Outline (paint-order), damit Buchstaben ueber dem Draht/Anschluss lesbar bleiben -->
+    <text x="370" y="246" text-anchor="middle" font-size="10" font-weight="bold" fill="#C0392B" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">C</text>
+    <text x="318" y="294" text-anchor="end" font-size="10" font-weight="bold" fill="#2980B9" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">B</text>
+    <text x="382" y="342" font-size="10" font-weight="bold" fill="#27AE60" paint-order="stroke" stroke="#fff" stroke-width="3" stroke-linejoin="round">E</text>
     <text x="402" y="294" font-size="11" font-weight="bold" fill="#333">BC547</text>
     <text x="402" y="306" font-size="9" fill="#666">NPN</text>
 

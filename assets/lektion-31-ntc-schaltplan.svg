@@ -17,8 +17,8 @@
   <text x="210" y="115" font-size="14" font-weight="bold" fill="#222">R<tspan font-size="10" baseline-shift="sub">1</tspan> = 10 k&#937;</text>
   <text x="210" y="132" font-size="11" fill="#666">(fester Widerstand)</text>
 
-  <!-- Verbindung R1 zu Mittelpunkt -->
-  <line x1="170" y1="145" x2="170" y2="190" stroke="#222" stroke-width="2"/>
+  <!-- Verbindung R1 zu Mittelpunkt M zu NTC-Top (durchgezogen, keine Luecke) -->
+  <line x1="170" y1="145" x2="170" y2="200" stroke="#222" stroke-width="2"/>
 
   <!-- Mittelpunkt M (Knoten) -->
   <circle cx="170" cy="180" r="4" fill="#2980B9"/>
@@ -52,7 +52,7 @@
   <line x1="75" y1="85" x2="85" y2="85" stroke="#888" stroke-width="1"/>
   <line x1="75" y1="295" x2="85" y2="295" stroke="#888" stroke-width="1"/>
   <text x="50" y="195" font-size="13" font-weight="bold" fill="#888">U<tspan font-size="10" baseline-shift="sub">ges</tspan></text>
-  <text x="50" y="210" font-size="11" fill="#888">= 5 V</text>
+  <text x="50" y="220" font-size="11" fill="#888">= 5 V</text>
 
   <!-- Hinweis-Text unten -->
   <text x="230" y="340" text-anchor="middle" font-size="11" fill="#666" font-style="italic">heiss &#8594; NTC-Widerstand sinkt &#8594; U&#8322; sinkt &#8594; analogRead sinkt</text>

@@ -652,8 +652,8 @@ const LESSONS_GRUNDLAGEN = [
           <text x="25" y="55" font-size="11" fill="#78350F">Pin-Nummern, Zähler, Zustände – werden VOR setup() festgelegt</text>
           <text x="460" y="45" text-anchor="end" font-size="22" fill="#F59E0B" opacity="0.5" font-weight="bold">📋</text>
 
-          <!-- Pfeil -->
-          <polygon points="250,75 240,85 260,85" fill="#999"/>
+          <!-- Pfeil Variablen -> setup() (Spitze nach UNTEN) -->
+          <polygon points="250,85 240,75 260,75" fill="#999"/>
 
           <!-- Bereich 2: setup() -->
           <rect x="10" y="90" width="480" height="60" rx="8" fill="#DBEAFE" stroke="#2563EB" stroke-width="2"/>
@@ -661,8 +661,8 @@ const LESSONS_GRUNDLAGEN = [
           <text x="25" y="135" font-size="11" fill="#1E3A8A">Pins konfigurieren, Serial starten – läuft EINMAL beim Start</text>
           <text x="460" y="125" text-anchor="end" font-size="16" fill="#2563EB" opacity="0.5" font-weight="bold">1×</text>
 
-          <!-- Pfeil -->
-          <polygon points="250,155 240,165 260,165" fill="#999"/>
+          <!-- Pfeil setup() -> loop() (Spitze nach UNTEN) -->
+          <polygon points="250,165 240,155 260,155" fill="#999"/>
 
           <!-- Bereich 3: loop() -->
           <rect x="10" y="170" width="480" height="60" rx="8" fill="#DCFCE7" stroke="#16A34A" stroke-width="2"/>

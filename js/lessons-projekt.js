@@ -30,224 +30,266 @@ const LESSONS_PROJEKT = [
 
         <div style="margin:1.5rem 0;text-align:center;">
           <h3>Breadboard-Aufbau: Ampel mit Fußgängerüberweg</h3>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" style="max-width:100%;height:auto;background:#f8f8f8;border:1px solid #ccc;border-radius:8px;">
-            <!-- ===== BREADBOARD ===== -->
-            <rect x="10" y="10" width="350" height="230" rx="6" fill="#e8e0d0" stroke="#999" stroke-width="1.5"/>
-            <text x="185" y="253" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 700" style="max-width:100%;height:auto;background:#fdfcf6;border:1px solid #ccc;border-radius:8px;">
 
-            <!-- Obere +Schiene (rot) -->
-            <rect x="30" y="22" width="310" height="10" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
-            <text x="22" y="30" font-size="7" fill="#c00" font-weight="bold">+</text>
-            <!-- Obere -Schiene (blau) = GND -->
-            <rect x="30" y="38" width="310" height="10" rx="2" fill="#ddf" stroke="#00c" stroke-width="0.8"/>
-            <text x="22" y="46" font-size="7" fill="#00c" font-weight="bold">−</text>
+            <!-- ===== ARDUINO UNO (OBEN, volle Breite) ====== -->
+            <rect x="20" y="30" width="700" height="120" rx="10" fill="#2176AE" stroke="#1a5f8a" stroke-width="2"/>
+            <text x="370" y="55" text-anchor="middle" font-size="16" fill="white" font-weight="bold">Arduino Uno</text>
+            <text x="370" y="72" text-anchor="middle" font-size="9" fill="#aad" font-style="italic">Ampel mit Fussgaengerueberweg &#8211; Pin 2&#8722;7 + GND</text>
+
+            <!-- USB-Buchse links -->
+            <rect x="0" y="65" width="20" height="28" rx="2" fill="#aaa" stroke="#888" stroke-width="1"/>
+            <text x="10" y="83" text-anchor="middle" font-size="7" fill="#444">USB</text>
+
+            <!-- Pin-Labels UEBER der Pin-Nummer -->
+            <g font-size="9" font-weight="bold" text-anchor="middle">
+              <text x="100" y="103" fill="#ff5555">ROT</text>
+              <text x="180" y="103" fill="#ffe033">GELB</text>
+              <text x="260" y="103" fill="#6f6">GRUEN</text>
+              <text x="340" y="103" fill="#ff5555">F-ROT</text>
+              <text x="420" y="103" fill="#6f6">F-GRUEN</text>
+              <text x="500" y="103" fill="#aaf">Taster</text>
+              <text x="640" y="103" fill="#ddd">Masse</text>
+            </g>
+
+            <!-- Pin-Boxen -->
+            <g font-size="10" fill="white" font-weight="bold" text-anchor="middle">
+              <rect x="90" y="110" width="20" height="28" rx="2" fill="#1a5f8a" stroke="white" stroke-width="0.5"/>
+              <text x="100" y="129">2</text>
+              <rect x="170" y="110" width="20" height="28" rx="2" fill="#1a5f8a" stroke="white" stroke-width="0.5"/>
+              <text x="180" y="129">3</text>
+              <rect x="250" y="110" width="20" height="28" rx="2" fill="#1a5f8a" stroke="white" stroke-width="0.5"/>
+              <text x="260" y="129">4</text>
+              <rect x="330" y="110" width="20" height="28" rx="2" fill="#1a5f8a" stroke="white" stroke-width="0.5"/>
+              <text x="340" y="129">5</text>
+              <rect x="410" y="110" width="20" height="28" rx="2" fill="#1a5f8a" stroke="white" stroke-width="0.5"/>
+              <text x="420" y="129">6</text>
+              <rect x="490" y="110" width="20" height="28" rx="2" fill="#1a5f8a" stroke="white" stroke-width="0.5"/>
+              <text x="500" y="129">7</text>
+              <rect x="628" y="110" width="24" height="28" rx="2" fill="#333" stroke="white" stroke-width="0.5"/>
+              <text x="640" y="129" font-size="9">GND</text>
+            </g>
+
+            <!-- ===== KABEL: ARDUINO -&gt; BREADBOARD ===== -->
+            <!-- Pin 2 -> Sp.3 Reihe e (Auto Rot, x=100) -->
+            <line x1="100" y1="138" x2="100" y2="342" stroke="#e44" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="100" cy="342" r="3.5" fill="#e44" stroke="#800" stroke-width="0.8"/>
+
+            <!-- Pin 3 -> Sp.7 Reihe e (Auto Gelb, x=180) -->
+            <line x1="180" y1="138" x2="180" y2="342" stroke="#cc0" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="180" cy="342" r="3.5" fill="#cc0" stroke="#660" stroke-width="0.8"/>
+
+            <!-- Pin 4 -> Sp.11 Reihe e (Auto Gruen, x=260) -->
+            <line x1="260" y1="138" x2="260" y2="342" stroke="#0a0" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="260" cy="342" r="3.5" fill="#0a0" stroke="#040" stroke-width="0.8"/>
+
+            <!-- Pin 5 -> Sp.15 Reihe e (Fussg. Rot, gestrichelt zur visuellen Unterscheidung von Auto Rot) -->
+            <line x1="340" y1="138" x2="340" y2="342" stroke="#e44" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6,3"/>
+            <circle cx="340" cy="342" r="3.5" fill="#e44" stroke="#800" stroke-width="0.8"/>
+
+            <!-- Pin 6 -> Sp.19 Reihe e (Fussg. Gruen, gestrichelt) -->
+            <line x1="420" y1="138" x2="420" y2="342" stroke="#0a0" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="6,3"/>
+            <circle cx="420" cy="342" r="3.5" fill="#0a0" stroke="#040" stroke-width="0.8"/>
+
+            <!-- Pin 7 -> Sp.23 Reihe e (Taster, x=500) -->
+            <line x1="500" y1="138" x2="500" y2="342" stroke="#66f" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="500" cy="342" r="3.5" fill="#66f" stroke="#008" stroke-width="0.8"/>
+
+            <!-- GND -> obere -Schiene bei Sp.30 (x=640) -->
+            <line x1="640" y1="138" x2="640" y2="250" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="640" cy="250" r="3.5" fill="#333"/>
+
+            <!-- GND-BRUECKE: obere -Schiene &lt;-&gt; untere -Schiene (rechts aussen, fuer Taster-Anschluss) -->
+            <path d="M 690 245 L 712 245 L 712 460 L 690 460" stroke="#333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="690" cy="245" r="3" fill="#333"/>
+            <circle cx="690" cy="460" r="3" fill="#333"/>
+            <text x="712" y="355" text-anchor="middle" font-size="7" fill="#333" font-style="italic" font-weight="bold">GND</text>
+
+            <!-- ===== BREADBOARD (UNTEN, volle Breite) ===== -->
+            <rect x="20" y="215" width="680" height="320" rx="6" fill="#e8e0d0" stroke="#999" stroke-width="1.5"/>
+            <text x="360" y="550" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
+
+            <!-- Stromschienen oben -->
+            <rect x="50" y="225" width="640" height="10" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
+            <text x="38" y="232" font-size="8" fill="#c00" font-weight="bold">+</text>
+            <rect x="50" y="240" width="640" height="10" rx="2" fill="#ddf" stroke="#00c" stroke-width="0.8"/>
+            <text x="38" y="247" font-size="8" fill="#00c" font-weight="bold">&#8722;</text>
+            <text x="696" y="247" font-size="7" fill="#00c" font-weight="bold">GND</text>
+
+            <!-- Spaltennummern -->
+            <g font-size="7" fill="#888" text-anchor="middle">
+              <text x="60" y="265">1</text><text x="80" y="265">2</text><text x="100" y="265">3</text><text x="120" y="265">4</text><text x="140" y="265">5</text><text x="160" y="265">6</text><text x="180" y="265">7</text><text x="200" y="265">8</text><text x="220" y="265">9</text><text x="240" y="265">10</text><text x="260" y="265">11</text><text x="280" y="265">12</text><text x="300" y="265">13</text><text x="320" y="265">14</text><text x="340" y="265">15</text><text x="360" y="265">16</text><text x="380" y="265">17</text><text x="400" y="265">18</text><text x="420" y="265">19</text><text x="440" y="265">20</text><text x="460" y="265">21</text><text x="480" y="265">22</text><text x="500" y="265">23</text><text x="520" y="265">24</text><text x="540" y="265">25</text><text x="560" y="265">26</text><text x="580" y="265">27</text><text x="600" y="265">28</text><text x="620" y="265">29</text><text x="640" y="265">30</text><text x="660" y="265">31</text><text x="680" y="265">32</text>
+            </g>
 
             <!-- Reihen a-e -->
-            <text x="22" y="72" font-size="6" fill="#666">a</text>
-            <text x="22" y="84" font-size="6" fill="#666">b</text>
-            <text x="22" y="96" font-size="6" fill="#666">c</text>
-            <text x="22" y="108" font-size="6" fill="#666">d</text>
-            <text x="22" y="120" font-size="6" fill="#666">e</text>
-
-            <!-- Breadboard-Loecher a-e (Spalten 1-30) als Punktlinien -->
-            <g stroke="#777" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0.1,7.8" fill="none">
-              <line x1="34" y1="68" x2="324" y2="68"/>
-              <line x1="34" y1="80" x2="324" y2="80"/>
-              <line x1="34" y1="92" x2="324" y2="92"/>
-              <line x1="34" y1="104" x2="324" y2="104"/>
-              <line x1="34" y1="116" x2="324" y2="116"/>
+            <g font-size="9" fill="#666" font-style="italic">
+              <text x="36" y="282">a</text><text x="36" y="298">b</text><text x="36" y="314">c</text><text x="36" y="330">d</text><text x="36" y="346">e</text>
+            </g>
+            <g stroke="#aaa" stroke-width="4" stroke-linecap="round" stroke-dasharray="0.1,19.9" fill="none">
+              <line x1="60" y1="278" x2="680" y2="278"/>
+              <line x1="60" y1="294" x2="680" y2="294"/>
+              <line x1="60" y1="310" x2="680" y2="310"/>
+              <line x1="60" y1="326" x2="680" y2="326"/>
+              <line x1="60" y1="342" x2="680" y2="342"/>
             </g>
 
             <!-- Mittelrinne -->
-            <rect x="30" y="124" width="310" height="8" rx="1" fill="#d0c8b8"/>
+            <rect x="50" y="350" width="640" height="14" rx="2" fill="#d0c8b8"/>
+            <text x="360" y="360" text-anchor="middle" font-size="7" fill="#aaa" font-style="italic">Mittelrinne (trennt obere und untere Haelfte)</text>
 
             <!-- Reihen f-j -->
-            <text x="22" y="144" font-size="6" fill="#666">f</text>
-            <text x="22" y="156" font-size="6" fill="#666">g</text>
-            <text x="22" y="168" font-size="6" fill="#666">h</text>
-            <text x="22" y="180" font-size="6" fill="#666">i</text>
-            <text x="22" y="192" font-size="6" fill="#666">j</text>
-
-            <!-- Breadboard-Loecher f-j -->
-            <g stroke="#777" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="0.1,7.8" fill="none">
-              <line x1="34" y1="140" x2="324" y2="140"/>
-              <line x1="34" y1="152" x2="324" y2="152"/>
-              <line x1="34" y1="164" x2="324" y2="164"/>
-              <line x1="34" y1="176" x2="324" y2="176"/>
-              <line x1="34" y1="188" x2="324" y2="188"/>
+            <g font-size="9" fill="#666" font-style="italic">
+              <text x="36" y="376">f</text><text x="36" y="392">g</text><text x="36" y="408">h</text><text x="36" y="424">i</text><text x="36" y="440">j</text>
+            </g>
+            <g stroke="#aaa" stroke-width="4" stroke-linecap="round" stroke-dasharray="0.1,19.9" fill="none">
+              <line x1="60" y1="372" x2="680" y2="372"/>
+              <line x1="60" y1="388" x2="680" y2="388"/>
+              <line x1="60" y1="404" x2="680" y2="404"/>
+              <line x1="60" y1="420" x2="680" y2="420"/>
+              <line x1="60" y1="436" x2="680" y2="436"/>
             </g>
 
-            <!-- Untere +Schiene -->
-            <rect x="30" y="206" width="310" height="10" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
-            <text x="22" y="214" font-size="7" fill="#c00" font-weight="bold">+</text>
-            <!-- Untere -Schiene -->
-            <rect x="30" y="222" width="310" height="10" rx="2" fill="#ddf" stroke="#00c" stroke-width="0.8"/>
-            <text x="22" y="230" font-size="7" fill="#00c" font-weight="bold">−</text>
-
-            <!-- Spaltennummern -->
-            <g font-size="5" fill="#888" text-anchor="middle">
-              <text x="34" y="60">1</text><text x="44" y="60">2</text><text x="54" y="60">3</text><text x="64" y="60">4</text><text x="74" y="60">5</text><text x="84" y="60">6</text><text x="94" y="60">7</text><text x="104" y="60">8</text><text x="114" y="60">9</text><text x="124" y="60">10</text><text x="134" y="60">11</text><text x="144" y="60">12</text><text x="154" y="60">13</text><text x="164" y="60">14</text><text x="174" y="60">15</text><text x="184" y="60">16</text><text x="194" y="60">17</text><text x="204" y="60">18</text><text x="214" y="60">19</text><text x="224" y="60">20</text><text x="234" y="60">21</text><text x="244" y="60">22</text><text x="254" y="60">23</text><text x="264" y="60">24</text><text x="274" y="60">25</text><text x="284" y="60">26</text><text x="294" y="60">27</text><text x="304" y="60">28</text><text x="314" y="60">29</text><text x="324" y="60">30</text>
-            </g>
+            <!-- Stromschienen unten -->
+            <rect x="50" y="455" width="640" height="10" rx="2" fill="#ddf" stroke="#00c" stroke-width="0.8"/>
+            <text x="38" y="462" font-size="8" fill="#00c" font-weight="bold">&#8722;</text>
+            <rect x="50" y="470" width="640" height="10" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
+            <text x="38" y="477" font-size="8" fill="#c00" font-weight="bold">+</text>
 
             <!-- ===== BAUTEILE ===== -->
+            <!-- Schema pro LED-Kreis (3 Spalten): Sp.N Pin -&gt; 220&#937; horizontal -&gt; Sp.N+1 Anode -&gt; LED -&gt; Sp.N+2 Kathode -&gt; GND-Schiene -->
 
-            <!-- === AUTO-AMPEL: Spalten 2-7 === -->
-            <!-- Spalten-Markierungen -->
-            <rect x="39" y="62" width="12" height="60" rx="2" fill="#ff5555" opacity="0.3"/>
-            <rect x="59" y="62" width="12" height="60" rx="2" fill="#ffc" opacity="0.3"/>
-            <rect x="79" y="62" width="12" height="60" rx="2" fill="#cfc" opacity="0.3"/>
+            <!-- AUTO-AMPEL Gruppen-Rahmen (Sp.3-13) -->
+            <rect x="92" y="266" width="220" height="84" rx="4" fill="none" stroke="#e44" stroke-width="1" stroke-dasharray="4,2"/>
+            <text x="200" y="200" text-anchor="middle" font-size="12" fill="#c44" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">&#8595; AUTO-AMPEL (3 LEDs)</text>
 
-            <!-- LED rot Auto (Spalte 3, Reihe a-b): Dreieck zeigt nach rechts (Anode links=a, Kathode rechts=b) -->
-            <polygon points="42,65 42,71 48,68" fill="#e00" stroke="#a00" stroke-width="0.5"/>
-            <line x1="48" y1="68" x2="44" y2="80" stroke="#a00" stroke-width="1"/>
-            <text x="44" y="62" text-anchor="middle" font-size="5" fill="#c00" font-weight="bold">R</text>
-            <!-- 220R Widerstand (Spalte 3, Reihe c-d) -->
-            <rect x="40" y="90" width="8" height="16" rx="1.5" fill="#e8d0a0" stroke="#986" stroke-width="0.6"/>
-            <text x="44" y="100" text-anchor="middle" font-size="4" fill="#654">220</text>
-            <!-- Kathode → obere -Schiene (GND) -->
-            <line x1="44" y1="80" x2="44" y2="48" stroke="#333" stroke-width="0.8" stroke-dasharray="2,1"/>
+            <!-- AUTO-ROT (Sp.3 Pin -&gt; Sp.4 Anode -&gt; Sp.5 Kathode) -->
+            <rect x="98" y="306" width="24" height="8" rx="2" fill="#e8d0a0" stroke="#864" stroke-width="1"/>
+            <line x1="104" y1="306" x2="104" y2="314" stroke="#c00" stroke-width="1.2"/>
+            <line x1="109" y1="306" x2="109" y2="314" stroke="#c00" stroke-width="1.2"/>
+            <line x1="114" y1="306" x2="114" y2="314" stroke="#a52" stroke-width="1.2"/>
+            <line x1="118" y1="306" x2="118" y2="314" stroke="#fb0" stroke-width="1.2"/>
+            <text x="110" y="304" text-anchor="middle" font-size="5.5" fill="#654" font-weight="bold">220&#937;</text>
+            <circle cx="100" cy="310" r="2.2" fill="#e8d0a0" stroke="#864" stroke-width="0.8"/>
+            <circle cx="120" cy="310" r="2.2" fill="#e8d0a0" stroke="#864" stroke-width="0.8"/>
+            <line x1="100" y1="310" x2="100" y2="342" stroke="#864" stroke-width="1.5"/>
+            <line x1="120" y1="310" x2="120" y2="282" stroke="#864" stroke-width="1.5"/>
+            <polygon points="119,274 119,286 132,280" fill="#e00" stroke="#a00" stroke-width="1.2"/>
+            <line x1="132" y1="274" x2="132" y2="286" stroke="#a00" stroke-width="2"/>
+            <text x="125" y="262" text-anchor="middle" font-size="7" fill="#c00" font-weight="bold">ROT</text>
+            <circle cx="120" cy="280" r="2.2" fill="#e00" stroke="#600" stroke-width="0.6"/>
+            <circle cx="140" cy="280" r="2.2" fill="#864" stroke="#444" stroke-width="0.6"/>
+            <line x1="140" y1="280" x2="140" y2="250" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
-            <!-- LED gelb Auto (Spalte 5, Reihe a-b) -->
-            <polygon points="62,65 62,71 68,68" fill="#ee0" stroke="#aa0" stroke-width="0.5"/>
-            <line x1="68" y1="68" x2="64" y2="80" stroke="#aa0" stroke-width="1"/>
-            <text x="64" y="62" text-anchor="middle" font-size="5" fill="#aa0" font-weight="bold">Ge</text>
-            <!-- 220R -->
-            <rect x="60" y="90" width="8" height="16" rx="1.5" fill="#e8d0a0" stroke="#986" stroke-width="0.6"/>
-            <text x="64" y="100" text-anchor="middle" font-size="4" fill="#654">220</text>
-            <line x1="64" y1="80" x2="64" y2="48" stroke="#333" stroke-width="0.8" stroke-dasharray="2,1"/>
+            <!-- AUTO-GELB (Sp.7 -&gt; Sp.8 -&gt; Sp.9) -->
+            <rect x="178" y="306" width="24" height="8" rx="2" fill="#e8d0a0" stroke="#864" stroke-width="1"/>
+            <line x1="184" y1="306" x2="184" y2="314" stroke="#c00" stroke-width="1.2"/>
+            <line x1="189" y1="306" x2="189" y2="314" stroke="#c00" stroke-width="1.2"/>
+            <line x1="194" y1="306" x2="194" y2="314" stroke="#a52" stroke-width="1.2"/>
+            <line x1="198" y1="306" x2="198" y2="314" stroke="#fb0" stroke-width="1.2"/>
+            <text x="190" y="304" text-anchor="middle" font-size="5.5" fill="#654" font-weight="bold">220&#937;</text>
+            <circle cx="180" cy="310" r="2.2" fill="#e8d0a0" stroke="#864" stroke-width="0.8"/>
+            <circle cx="200" cy="310" r="2.2" fill="#e8d0a0" stroke="#864" stroke-width="0.8"/>
+            <line x1="180" y1="310" x2="180" y2="342" stroke="#864" stroke-width="1.5"/>
+            <line x1="200" y1="310" x2="200" y2="282" stroke="#864" stroke-width="1.5"/>
+            <polygon points="199,274 199,286 212,280" fill="#ee0" stroke="#aa0" stroke-width="1.2"/>
+            <line x1="212" y1="274" x2="212" y2="286" stroke="#aa0" stroke-width="2"/>
+            <text x="205" y="262" text-anchor="middle" font-size="7" fill="#aa0" font-weight="bold">GELB</text>
+            <circle cx="200" cy="280" r="2.2" fill="#ee0" stroke="#660" stroke-width="0.6"/>
+            <circle cx="220" cy="280" r="2.2" fill="#864" stroke="#444" stroke-width="0.6"/>
+            <line x1="220" y1="280" x2="220" y2="250" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
-            <!-- LED gruen Auto (Spalte 7, Reihe a-b) -->
-            <polygon points="82,65 82,71 88,68" fill="#0c0" stroke="#090" stroke-width="0.5"/>
-            <line x1="88" y1="68" x2="84" y2="80" stroke="#090" stroke-width="1"/>
-            <text x="84" y="62" text-anchor="middle" font-size="5" fill="#090" font-weight="bold">Gr</text>
-            <!-- 220R -->
-            <rect x="80" y="90" width="8" height="16" rx="1.5" fill="#e8d0a0" stroke="#986" stroke-width="0.6"/>
-            <text x="84" y="100" text-anchor="middle" font-size="4" fill="#654">220</text>
-            <line x1="84" y1="80" x2="84" y2="48" stroke="#333" stroke-width="0.8" stroke-dasharray="2,1"/>
+            <!-- AUTO-GRUEN (Sp.11 -&gt; Sp.12 -&gt; Sp.13) -->
+            <rect x="258" y="306" width="24" height="8" rx="2" fill="#e8d0a0" stroke="#864" stroke-width="1"/>
+            <line x1="264" y1="306" x2="264" y2="314" stroke="#c00" stroke-width="1.2"/>
+            <line x1="269" y1="306" x2="269" y2="314" stroke="#c00" stroke-width="1.2"/>
+            <line x1="274" y1="306" x2="274" y2="314" stroke="#a52" stroke-width="1.2"/>
+            <line x1="278" y1="306" x2="278" y2="314" stroke="#fb0" stroke-width="1.2"/>
+            <text x="270" y="304" text-anchor="middle" font-size="5.5" fill="#654" font-weight="bold">220&#937;</text>
+            <circle cx="260" cy="310" r="2.2" fill="#e8d0a0" stroke="#864" stroke-width="0.8"/>
+            <circle cx="280" cy="310" r="2.2" fill="#e8d0a0" stroke="#864" stroke-width="0.8"/>
+            <line x1="260" y1="310" x2="260" y2="342" stroke="#864" stroke-width="1.5"/>
+            <line x1="280" y1="310" x2="280" y2="282" stroke="#864" stroke-width="1.5"/>
+            <polygon points="279,274 279,286 292,280" fill="#0c0" stroke="#090" stroke-width="1.2"/>
+            <line x1="292" y1="274" x2="292" y2="286" stroke="#090" stroke-width="2"/>
+            <text x="285" y="262" text-anchor="middle" font-size="7" fill="#090" font-weight="bold">GRUEN</text>
+            <circle cx="280" cy="280" r="2.2" fill="#0c0" stroke="#040" stroke-width="0.6"/>
+            <circle cx="300" cy="280" r="2.2" fill="#864" stroke="#444" stroke-width="0.6"/>
+            <line x1="300" y1="280" x2="300" y2="250" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
-            <!-- Label Auto-Ampel -->
-            <text x="64" y="125" text-anchor="middle" font-size="6" fill="#555" font-weight="bold">Auto-Ampel</text>
+            <!-- FUSSGAENGER-AMPEL Gruppen-Rahmen (Sp.15-21) -->
+            <rect x="332" y="266" width="140" height="84" rx="4" fill="none" stroke="#66c" stroke-width="1" stroke-dasharray="4,2"/>
+            <text x="402" y="200" text-anchor="middle" font-size="12" fill="#44a" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">&#8595; FUSSGAENGER (2 LEDs)</text>
 
-            <!-- === FUSSGAENGER-AMPEL: Spalten 10-13 === -->
-            <rect x="119" y="62" width="12" height="60" rx="2" fill="#ff5555" opacity="0.3"/>
-            <rect x="139" y="62" width="12" height="60" rx="2" fill="#cfc" opacity="0.3"/>
+            <!-- F-ROT (Sp.15 -&gt; Sp.16 -&gt; Sp.17) -->
+            <rect x="338" y="306" width="24" height="8" rx="2" fill="#e8d0a0" stroke="#864" stroke-width="1"/>
+            <line x1="344" y1="306" x2="344" y2="314" stroke="#c00" stroke-width="1.2"/>
+            <line x1="349" y1="306" x2="349" y2="314" stroke="#c00" stroke-width="1.2"/>
+            <line x1="354" y1="306" x2="354" y2="314" stroke="#a52" stroke-width="1.2"/>
+            <line x1="358" y1="306" x2="358" y2="314" stroke="#fb0" stroke-width="1.2"/>
+            <text x="350" y="304" text-anchor="middle" font-size="5.5" fill="#654" font-weight="bold">220&#937;</text>
+            <circle cx="340" cy="310" r="2.2" fill="#e8d0a0" stroke="#864" stroke-width="0.8"/>
+            <circle cx="360" cy="310" r="2.2" fill="#e8d0a0" stroke="#864" stroke-width="0.8"/>
+            <line x1="340" y1="310" x2="340" y2="342" stroke="#864" stroke-width="1.5"/>
+            <line x1="360" y1="310" x2="360" y2="282" stroke="#864" stroke-width="1.5"/>
+            <polygon points="359,274 359,286 372,280" fill="#e00" stroke="#a00" stroke-width="1.2"/>
+            <line x1="372" y1="274" x2="372" y2="286" stroke="#a00" stroke-width="2"/>
+            <text x="365" y="262" text-anchor="middle" font-size="7" fill="#c00" font-weight="bold">F-ROT</text>
+            <circle cx="360" cy="280" r="2.2" fill="#e00" stroke="#600" stroke-width="0.6"/>
+            <circle cx="380" cy="280" r="2.2" fill="#864" stroke="#444" stroke-width="0.6"/>
+            <line x1="380" y1="280" x2="380" y2="250" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
-            <!-- LED rot Fussgaenger (Spalte 10) -->
-            <polygon points="122,65 122,71 128,68" fill="#e00" stroke="#a00" stroke-width="0.5"/>
-            <line x1="128" y1="68" x2="124" y2="80" stroke="#a00" stroke-width="1"/>
-            <text x="124" y="62" text-anchor="middle" font-size="5" fill="#c00" font-weight="bold">FR</text>
-            <rect x="120" y="90" width="8" height="16" rx="1.5" fill="#e8d0a0" stroke="#986" stroke-width="0.6"/>
-            <text x="124" y="100" text-anchor="middle" font-size="4" fill="#654">220</text>
-            <line x1="124" y1="80" x2="124" y2="48" stroke="#333" stroke-width="0.8" stroke-dasharray="2,1"/>
+            <!-- F-GRUEN (Sp.19 -&gt; Sp.20 -&gt; Sp.21) -->
+            <rect x="418" y="306" width="24" height="8" rx="2" fill="#e8d0a0" stroke="#864" stroke-width="1"/>
+            <line x1="424" y1="306" x2="424" y2="314" stroke="#c00" stroke-width="1.2"/>
+            <line x1="429" y1="306" x2="429" y2="314" stroke="#c00" stroke-width="1.2"/>
+            <line x1="434" y1="306" x2="434" y2="314" stroke="#a52" stroke-width="1.2"/>
+            <line x1="438" y1="306" x2="438" y2="314" stroke="#fb0" stroke-width="1.2"/>
+            <text x="430" y="304" text-anchor="middle" font-size="5.5" fill="#654" font-weight="bold">220&#937;</text>
+            <circle cx="420" cy="310" r="2.2" fill="#e8d0a0" stroke="#864" stroke-width="0.8"/>
+            <circle cx="440" cy="310" r="2.2" fill="#e8d0a0" stroke="#864" stroke-width="0.8"/>
+            <line x1="420" y1="310" x2="420" y2="342" stroke="#864" stroke-width="1.5"/>
+            <line x1="440" y1="310" x2="440" y2="282" stroke="#864" stroke-width="1.5"/>
+            <polygon points="439,274 439,286 452,280" fill="#0c0" stroke="#090" stroke-width="1.2"/>
+            <line x1="452" y1="274" x2="452" y2="286" stroke="#090" stroke-width="2"/>
+            <text x="445" y="262" text-anchor="middle" font-size="7" fill="#090" font-weight="bold">F-GRUEN</text>
+            <circle cx="440" cy="280" r="2.2" fill="#0c0" stroke="#040" stroke-width="0.6"/>
+            <circle cx="460" cy="280" r="2.2" fill="#864" stroke="#444" stroke-width="0.6"/>
+            <line x1="460" y1="280" x2="460" y2="250" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
-            <!-- LED gruen Fussgaenger (Spalte 12) -->
-            <polygon points="142,65 142,71 148,68" fill="#0c0" stroke="#090" stroke-width="0.5"/>
-            <line x1="148" y1="68" x2="144" y2="80" stroke="#090" stroke-width="1"/>
-            <text x="144" y="62" text-anchor="middle" font-size="5" fill="#090" font-weight="bold">FG</text>
-            <rect x="140" y="90" width="8" height="16" rx="1.5" fill="#e8d0a0" stroke="#986" stroke-width="0.6"/>
-            <text x="144" y="100" text-anchor="middle" font-size="4" fill="#654">220</text>
-            <line x1="144" y1="80" x2="144" y2="48" stroke="#333" stroke-width="0.8" stroke-dasharray="2,1"/>
-
-            <text x="134" y="125" text-anchor="middle" font-size="6" fill="#555" font-weight="bold">Fußg.-Ampel</text>
-
-            <!-- === TASTER: Spalten 16-17 (ueber Mittelrinne) === -->
-            <rect x="179" y="110" width="22" height="26" rx="3" fill="#888" stroke="#555" stroke-width="1"/>
-            <circle cx="190" cy="123" r="6" fill="#aaa" stroke="#666" stroke-width="0.8"/>
-            <text x="190" y="108" text-anchor="middle" font-size="5" fill="#555" font-weight="bold">Taster</text>
-            <!-- Taster-Beinchen: Spalte 16 Reihe e + Spalte 17 Reihe f -->
-            <line x1="184" y1="116" x2="184" y2="110" stroke="#555" stroke-width="1"/>
-            <line x1="196" y1="136" x2="196" y2="142" stroke="#555" stroke-width="1"/>
-
-            <!-- ===== ARDUINO ===== -->
-            <rect x="410" y="20" width="280" height="210" rx="8" fill="#2176AE" stroke="#1a5f8a" stroke-width="2"/>
-            <text x="550" y="45" text-anchor="middle" font-size="14" fill="white" font-weight="bold">Arduino Uno</text>
-            <rect x="530" y="15" width="50" height="12" rx="2" fill="#aaa" stroke="#888" stroke-width="1"/>
-            <text x="555" y="23" text-anchor="middle" font-size="5" fill="#555">USB</text>
-
-            <!-- Arduino Pins-Header -->
-            <text x="445" y="60" text-anchor="middle" font-size="7" fill="#fff" font-weight="bold" opacity="0.85">Digital-Pins</text>
-            <text x="580" y="60" text-anchor="middle" font-size="7" fill="#fff" font-weight="bold" opacity="0.85">Spannung</text>
-
-            <!-- Arduino Pins -->
-            <g font-size="7" fill="white" font-weight="bold">
-              <rect x="420" y="65" width="50" height="14" rx="2" fill="#1a5f8a"/>
-              <text x="445" y="75" text-anchor="middle">Pin 2</text>
-              <rect x="420" y="85" width="50" height="14" rx="2" fill="#1a5f8a"/>
-              <text x="445" y="95" text-anchor="middle">Pin 3</text>
-              <rect x="420" y="105" width="50" height="14" rx="2" fill="#1a5f8a"/>
-              <text x="445" y="115" text-anchor="middle">Pin 4</text>
-              <rect x="420" y="125" width="50" height="14" rx="2" fill="#1a5f8a"/>
-              <text x="445" y="135" text-anchor="middle">Pin 5</text>
-              <rect x="420" y="145" width="50" height="14" rx="2" fill="#1a5f8a"/>
-              <text x="445" y="155" text-anchor="middle">Pin 6</text>
-              <rect x="420" y="165" width="50" height="14" rx="2" fill="#1a5f8a"/>
-              <text x="445" y="175" text-anchor="middle">Pin 7</text>
-              <rect x="420" y="195" width="50" height="14" rx="2" fill="#333"/>
-              <text x="445" y="205" text-anchor="middle">GND</text>
-              <rect x="560" y="195" width="50" height="14" rx="2" fill="#c00"/>
-              <text x="585" y="205" text-anchor="middle">5V</text>
-            </g>
-
-            <!-- Beschriftungen rechts neben Pin-Boxen (statt auf den Kabeln) -->
-            <g font-size="6.5" font-weight="bold">
-              <text x="478" y="76" fill="#c00">→ Auto Rot</text>
-              <text x="478" y="96" fill="#aa0">→ Auto Gelb</text>
-              <text x="478" y="116" fill="#090">→ Auto Grün</text>
-              <text x="478" y="136" fill="#c00">→ Fußg. Rot</text>
-              <text x="478" y="156" fill="#090">→ Fußg. Grün</text>
-              <text x="478" y="176" fill="#44c">→ Taster</text>
-            </g>
-
-            <!-- ===== KABEL (gestaffelte Bahnen + versetzte horizontale Spuren = klares Flachband) ===== -->
-            <!-- Pin 2 → Spalte 3 (Auto Rot) - vertikale Bahn x=406, horizontale Spur y=112 -->
-            <path d="M 420 72 L 406 72 L 406 112 L 44 112 L 44 116" fill="none" stroke="#e44" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle cx="44" cy="116" r="2.5" fill="#e44"/>
-
-            <!-- Pin 3 → Spalte 5 (Auto Gelb) - Bahn x=402, Spur y=114 -->
-            <path d="M 420 92 L 402 92 L 402 114 L 64 114 L 64 116" fill="none" stroke="#cc0" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle cx="64" cy="116" r="2.5" fill="#cc0"/>
-
-            <!-- Pin 4 → Spalte 7 (Auto Grün) - Bahn x=398, Spur y=116 (= Reihe e direkt) -->
-            <path d="M 420 112 L 398 112 L 398 116 L 84 116" fill="none" stroke="#0a0" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle cx="84" cy="116" r="2.5" fill="#0a0"/>
-
-            <!-- Pin 5 → Spalte 10 (Fußg. Rot) - Bahn x=394, Spur y=118 -->
-            <path d="M 420 132 L 394 132 L 394 118 L 124 118 L 124 116" fill="none" stroke="#e44" stroke-width="1.8" stroke-dasharray="4,2" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle cx="124" cy="116" r="2.5" fill="#e44"/>
-
-            <!-- Pin 6 → Spalte 12 (Fußg. Grün) - Bahn x=390, Spur y=120 -->
-            <path d="M 420 152 L 390 152 L 390 120 L 144 120 L 144 116" fill="none" stroke="#0a0" stroke-width="1.8" stroke-dasharray="4,2" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle cx="144" cy="116" r="2.5" fill="#0a0"/>
-
-            <!-- Pin 7 → Taster (Spalte 16, Reihe e) - Bahn x=386, Spur y=122 -->
-            <path d="M 420 172 L 386 172 L 386 122 L 184 122 L 184 116" fill="none" stroke="#66f" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle cx="184" cy="116" r="2.5" fill="#66f"/>
-
-            <!-- GND → obere -Schiene (über die rechte Bahn x=382) -->
-            <path d="M 420 202 L 382 202 L 382 43 L 340 43" fill="none" stroke="#333" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
-            <circle cx="340" cy="43" r="2.5" fill="#333"/>
-
-            <!-- Taster anderes Bein (Spalte 17, Reihe f) → untere -Schiene → verbunden zu obere -Schiene -->
-            <line x1="196" y1="142" x2="196" y2="222" stroke="#1565C0" stroke-width="2.2" stroke-linecap="round"/>
-            <line x1="196" y1="222" x2="340" y2="222" stroke="#1565C0" stroke-width="2" stroke-linecap="round"/>
-            <line x1="340" y1="222" x2="340" y2="48" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.7"/>
-            <circle cx="196" cy="142" r="2.5" fill="#1565C0"/>
-            <circle cx="340" cy="222" r="2.5" fill="#1565C0"/>
-            <text x="205" y="215" font-size="7" fill="#0a3a78" font-weight="bold">→ GND</text>
-
-            <!-- 5V-Verbindung (hier nicht noetig, nur GND) -->
+            <!-- TASTER (Sp.23-24, ueber Mittelrinne, INPUT_PULLUP -> kein Vorwiderstand) -->
+            <rect x="488" y="334" width="44" height="60" rx="4" fill="none" stroke="#66f" stroke-width="1" stroke-dasharray="4,2"/>
+            <!-- Label vertikal nach oben gesetzt (y=178), damit es nicht in das FUSSGAENGER-Label (y=200) laeuft -->
+            <text x="510" y="178" text-anchor="middle" font-size="12" fill="#44c" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">&#8595; TASTER</text>
+            <rect x="494" y="340" width="32" height="42" rx="3" fill="#888" stroke="#555" stroke-width="1"/>
+            <circle cx="510" cy="361" r="10" fill="#aaa" stroke="#666" stroke-width="1"/>
+            <text x="510" y="364" text-anchor="middle" font-size="6" fill="#444">druecken</text>
+            <!-- Beinchen: Sp.23 Reihe e (Pin 7) + Sp.24 Reihe f (GND-Bruecke) -->
+            <circle cx="500" cy="342" r="2.5" fill="#888" stroke="#444" stroke-width="0.8"/>
+            <line x1="500" y1="342" x2="500" y2="340" stroke="#555" stroke-width="1.5"/>
+            <circle cx="520" cy="372" r="2.5" fill="#888" stroke="#444" stroke-width="0.8"/>
+            <line x1="520" y1="382" x2="520" y2="372" stroke="#555" stroke-width="1.5"/>
+            <!-- Jumper Sp.24 Reihe f -> untere -Schiene (durchgezogen schwarz, GND) -->
+            <line x1="520" y1="372" x2="520" y2="455" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
+            <text x="535" y="420" font-size="7" fill="#333" font-style="italic">&#8594; untere</text>
+            <text x="535" y="430" font-size="7" fill="#333" font-style="italic">    GND-Schiene</text>
 
             <!-- ===== LEGENDE ===== -->
-            <rect x="10" y="260" width="700" height="70" rx="6" fill="#f0f0f0" stroke="#ccc" stroke-width="1"/>
-            <text x="20" y="278" font-size="9" fill="#333" font-weight="bold">Legende:</text>
-            <line x1="20" y1="290" x2="45" y2="290" stroke="#e44" stroke-width="2"/><text x="50" y="293" font-size="7" fill="#555">Rote LED / Signal</text>
-            <line x1="150" y1="290" x2="175" y2="290" stroke="#cc0" stroke-width="2"/><text x="180" y="293" font-size="7" fill="#555">Gelbe LED</text>
-            <line x1="260" y1="290" x2="285" y2="290" stroke="#0a0" stroke-width="2"/><text x="290" y="293" font-size="7" fill="#555">Grüne LED</text>
-            <line x1="380" y1="290" x2="405" y2="290" stroke="#333" stroke-width="2"/><text x="410" y="293" font-size="7" fill="#555">GND (schwarz)</text>
-            <line x1="510" y1="290" x2="535" y2="290" stroke="#66f" stroke-width="2"/><text x="540" y="293" font-size="7" fill="#555">Signal (Taster)</text>
-            <rect x="20" y="302" width="10" height="8" rx="1" fill="#e8d0a0" stroke="#986" stroke-width="0.5"/><text x="35" y="309" font-size="7" fill="#555">220Ω Vorwiderstand</text>
-            <text x="200" y="309" font-size="7" fill="#555">Gestrichelt: LED-Kathode → GND-Schiene</text>
-            <text x="20" y="322" font-size="7" fill="#999">Alle LED-Kathoden (−) sind mit der oberen blauen GND-Schiene verbunden.</text>
+            <rect x="20" y="555" width="680" height="130" rx="6" fill="#f0f0f0" stroke="#ccc" stroke-width="1"/>
+            <text x="32" y="578" font-size="11" fill="#333" font-weight="bold">Legende &#8211; Ampel mit Fussgaengerueberweg:</text>
+
+            <line x1="32" y1="600" x2="62" y2="600" stroke="#e44" stroke-width="2.5"/><text x="68" y="603" font-size="9" fill="#555">Auto-Ampel: Rot (Pin 2)</text>
+            <line x1="240" y1="600" x2="270" y2="600" stroke="#cc0" stroke-width="2.5"/><text x="276" y="603" font-size="9" fill="#555">Auto-Ampel: Gelb (Pin 3)</text>
+            <line x1="450" y1="600" x2="480" y2="600" stroke="#0a0" stroke-width="2.5"/><text x="486" y="603" font-size="9" fill="#555">Auto-Ampel: Gruen (Pin 4)</text>
+
+            <line x1="32" y1="620" x2="62" y2="620" stroke="#e44" stroke-width="2.5" stroke-dasharray="6,3"/><text x="68" y="623" font-size="9" fill="#555">Fussgaenger: Rot (Pin 5)</text>
+            <line x1="240" y1="620" x2="270" y2="620" stroke="#0a0" stroke-width="2.5" stroke-dasharray="6,3"/><text x="276" y="623" font-size="9" fill="#555">Fussgaenger: Gruen (Pin 6)</text>
+            <line x1="450" y1="620" x2="480" y2="620" stroke="#66f" stroke-width="2.5"/><text x="486" y="623" font-size="9" fill="#555">Taster-Signal (Pin 7)</text>
+
+            <line x1="32" y1="640" x2="62" y2="640" stroke="#333" stroke-width="3"/><text x="68" y="643" font-size="9" fill="#555">GND (schwarz, durchgezogen)</text>
+            <rect x="240" y="635" width="14" height="10" rx="1" fill="#e8d0a0" stroke="#986" stroke-width="0.8"/><text x="260" y="643" font-size="9" fill="#555">220&#937; Vorwiderstand (5&#215; fuer LEDs)</text>
+
+            <text x="32" y="665" font-size="8.5" fill="#666" font-style="italic">Taster mit INPUT_PULLUP &#8594; kein externer Widerstand noetig. Beide Beine zwischen Pin 7 (Sp.23) und GND (Sp.24).</text>
+            <text x="32" y="678" font-size="8.5" fill="#666" font-style="italic">Gestrichelte Pin-Kabel (Fussgaenger) helfen nur, sie visuell von der Auto-Ampel zu trennen &#8211; es sind ganz normale Drahtkabel.</text>
           </svg>
         </div>
 
@@ -627,7 +669,8 @@ const LESSONS_PROJEKT = [
 
             <!-- ===== Taster (Sp.23-24) ===== -->
             <rect x="488" y="334" width="44" height="60" rx="4" fill="none" stroke="#66f" stroke-width="1" stroke-dasharray="4,2"/>
-            <text x="510" y="200" text-anchor="middle" font-size="12" fill="#44c" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">⬇ TASTER</text>
+            <!-- Label vertikal hoeher (y=178), damit es nicht in das LDR-SENSOR-Label (y=200) laeuft -->
+            <text x="510" y="178" text-anchor="middle" font-size="12" fill="#44c" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">⬇ TASTER</text>
             <rect x="494" y="340" width="32" height="42" rx="3" fill="#888" stroke="#555" stroke-width="1"/>
             <circle cx="510" cy="361" r="10" fill="#aaa" stroke="#666" stroke-width="1"/>
             <text x="510" y="364" text-anchor="middle" font-size="6" fill="#444">drücken</text>
@@ -638,7 +681,8 @@ const LESSONS_PROJEKT = [
 
             <!-- ===== LDR-Spannungsteiler (Sp.26-28, NEU) ===== -->
             <rect x="548" y="266" width="80" height="84" rx="4" fill="#ffe8cc" opacity="0.25" stroke="#f90" stroke-width="1" stroke-dasharray="4,2"/>
-            <text x="588" y="200" text-anchor="middle" font-size="12" fill="#c60" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">⬇ LDR-SENSOR (NEU!)</text>
+            <!-- Label hochgezogen auf y=178 (selbe Reihe wie TASTER), damit nicht in FUSSGAENGER-Reihe -->
+            <text x="588" y="178" text-anchor="middle" font-size="12" fill="#c60" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">⬇ LDR-SENSOR</text>
 
             <ellipse cx="570" cy="280" rx="13" ry="8" fill="#ffe066" stroke="#c90" stroke-width="1.5"/>
             <text x="570" y="278" text-anchor="middle" font-size="6" fill="#864" font-weight="bold">LDR</text>
@@ -657,11 +701,11 @@ const LESSONS_PROJEKT = [
             <circle cx="580" cy="324" r="2.2" fill="#c0a060" stroke="#864" stroke-width="0.8"/>
             <circle cx="600" cy="324" r="2.2" fill="#c0a060" stroke="#864" stroke-width="0.8"/>
             <line x1="600" y1="324" x2="600" y2="342" stroke="#864" stroke-width="1.5"/>
-            <!-- GND-Jumper 10kΩ → untere -Schiene (durchgezogen blau) -->
-            <line x1="600" y1="342" x2="600" y2="460" stroke="#1565C0" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="600" cy="342" r="3" fill="#1565C0" stroke="#0a3a78" stroke-width="0.8"/>
-            <circle cx="600" cy="460" r="3.5" fill="#1565C0" stroke="#0a3a78" stroke-width="0.8"/>
-            <text x="615" y="425" font-size="8" fill="#0a3a78" font-weight="bold">→ GND</text>
+            <!-- GND-Jumper 10kΩ → untere -Schiene (durchgezogen schwarz, Konvention: GND immer #222) -->
+            <line x1="600" y1="342" x2="600" y2="460" stroke="#222" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="600" cy="342" r="3" fill="#222"/>
+            <circle cx="600" cy="460" r="3.5" fill="#222"/>
+            <text x="615" y="425" font-size="8" fill="#333" font-weight="bold">→ GND</text>
 
             <!-- ===== LEGENDE ===== -->
             <rect x="20" y="555" width="680" height="160" rx="6" fill="#f0f0f0" stroke="#ccc" stroke-width="1"/>
@@ -1191,11 +1235,11 @@ const LESSONS_PROJEKT = [
             <circle cx="580" cy="324" r="2.2" fill="#c0a060" stroke="#864" stroke-width="0.8"/>
             <circle cx="600" cy="324" r="2.2" fill="#c0a060" stroke="#864" stroke-width="0.8"/>
             <line x1="600" y1="324" x2="600" y2="342" stroke="#864" stroke-width="1.5"/>
-            <!-- Sp.28 Reihe e → untere -Schiene (10k zur Masse, durchgezogen blau) -->
-            <line x1="600" y1="342" x2="600" y2="460" stroke="#1565C0" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="600" cy="342" r="3" fill="#1565C0" stroke="#0a3a78" stroke-width="0.8"/>
-            <circle cx="600" cy="460" r="3.5" fill="#1565C0" stroke="#0a3a78" stroke-width="0.8"/>
-            <text x="615" y="425" font-size="8" fill="#0a3a78" font-weight="bold">→ GND</text>
+            <!-- Sp.28 Reihe e → untere -Schiene (10k zur Masse, durchgezogen schwarz, Konvention: GND immer #222) -->
+            <line x1="600" y1="342" x2="600" y2="460" stroke="#222" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="600" cy="342" r="3" fill="#222"/>
+            <circle cx="600" cy="460" r="3.5" fill="#222"/>
+            <text x="615" y="425" font-size="8" fill="#333" font-weight="bold">→ GND</text>
 
             <!-- ===== LEGENDE ===== -->
             <rect x="20" y="555" width="680" height="160" rx="6" fill="#f0f0f0" stroke="#ccc" stroke-width="1"/>

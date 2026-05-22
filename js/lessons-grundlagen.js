@@ -540,7 +540,7 @@ const LESSONS_GRUNDLAGEN = [
             <circle cx="180" cy="240" r="2.5" fill="#ef5350" stroke="#600" stroke-width="0.6"/>
             <circle cx="200" cy="240" r="2.5" fill="#864" stroke="#444" stroke-width="0.6"/>
             <!-- Kathoden-Jumper: Sp.8 Reihe a → obere -Schiene -->
-            <line x1="200" y1="240" x2="200" y2="212" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="200" y1="240" x2="200" y2="212" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- ===== LEGENDE ===== -->
             <rect x="20" y="440" width="660" height="70" rx="6" fill="#fff" stroke="#ddd" stroke-width="1"/>
@@ -549,7 +549,7 @@ const LESSONS_GRUNDLAGEN = [
             <text x="68" y="476" font-size="9" fill="#555">Pin 13 → Sp.5 (Signal)</text>
             <line x1="220" y1="473" x2="250" y2="473" stroke="#333" stroke-width="3" stroke-linecap="round"/>
             <text x="256" y="476" font-size="9" fill="#555">GND → −Schiene (Masse)</text>
-            <line x1="430" y1="473" x2="460" y2="473" stroke="#333" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3,1.5"/>
+            <line x1="430" y1="473" x2="460" y2="473" stroke="#222" stroke-width="2.5" stroke-linecap="round"/>
             <text x="466" y="476" font-size="9" fill="#555">LED-Kathode → −Schiene</text>
             <text x="32" y="496" font-size="8.5" fill="#555">Stromfluss: Pin 13 → 220Ω → LED Anode → LED Kathode → GND</text>
           </svg>

@@ -1164,7 +1164,7 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
             <text x="260" y="290" text-anchor="middle" font-size="6" fill="#654" font-weight="bold">10kΩ</text>
             <circle cx="220" cy="296" r="2.2" fill="#c0a060" stroke="#864" stroke-width="0.8"/>
             <circle cx="300" cy="296" r="2.2" fill="#c0a060" stroke="#864" stroke-width="0.8"/>
-            <line x1="300" y1="296" x2="300" y2="212" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="300" y1="296" x2="300" y2="212" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
             <text x="320" y="262" font-size="7" fill="#333" font-style="italic">→ GND</text>
 
             <!-- ===== LED-Kreis (Sp.17 → Sp.18 → Sp.19, alles im oberen Block, Reihen a-e) ===== -->

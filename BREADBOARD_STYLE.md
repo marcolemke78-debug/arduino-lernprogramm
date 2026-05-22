@@ -144,24 +144,34 @@ Beispiele:
 
 ## 7. Jumper-Kabel auf Breadboard
 
-**GND-Jumper zur −Schiene (durchgezogen, blau):**
+**Goldene Regel:** Alle Verbindungen zur **−Schiene (GND)** sind **immer durchgezogen schwarz** (#222), **nie gestrichelt**. Gleiches gilt für 5V-Verbindungen (rot, durchgezogen). Standard-Breadboard-Konvention: Rot = +5V, Schwarz = GND, andere Farben = Signale.
+
+**GND-Verbindung zur −Schiene (durchgezogen schwarz):**
 
 ```html
-<line x1="240" y1="320" x2="240" y2="393" stroke="#1565C0" stroke-width="2.8" stroke-linecap="round"/>
-<circle cx="240" cy="320" r="3" fill="#1565C0" stroke="#0a3a78" stroke-width="0.8"/>
-<circle cx="240" cy="393" r="3.5" fill="#1565C0" stroke="#0a3a78" stroke-width="0.8"/>
-<text x="260" y="385" font-size="8" fill="#0a3a78" font-weight="bold">Jumper</text>
-<text x="260" y="397" font-size="7" fill="#0a3a78" font-style="italic">zur untere −Schiene (GND)</text>
+<line x1="420" y1="240" x2="420" y2="212" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="420" cy="240" r="2.5" fill="#222"/>
+<circle cx="420" cy="212" r="2.5" fill="#222"/>
 ```
 
-**5V-Jumper zur +Schiene (durchgezogen, rot):**
+Für lange Jumper-Strecken zu einer entfernten −Schiene (z.B. Taster Bein 2 → untere Schiene):
 
 ```html
-<line x1="..." x2="..." stroke="#d62828" stroke-width="2.8" stroke-linecap="round"/>
-<!-- Endpunkt-Kreise in #d62828 -->
+<line x1="240" y1="320" x2="240" y2="393" stroke="#222" stroke-width="2.8" stroke-linecap="round"/>
+<circle cx="240" cy="320" r="3" fill="#222" stroke="#000" stroke-width="0.8"/>
+<circle cx="240" cy="393" r="3.5" fill="#222" stroke="#000" stroke-width="0.8"/>
+<text x="260" y="385" font-size="8" fill="#222" font-weight="bold">Jumper (GND)</text>
+<text x="260" y="397" font-size="7" fill="#222" font-style="italic">zur untere −Schiene</text>
 ```
 
-**Regel:** Jumper sind IMMER durchgezogen + farbig + mit Endpunkt-Kreisen. NIE gestrichelt (außer für "kommt aus anderer Lektion"-Verweise).
+**5V-Verbindung zur +Schiene (durchgezogen rot):**
+
+```html
+<line x1="..." x2="..." stroke="#c00" stroke-width="1.8" stroke-linecap="round"/>
+<circle cx="..." cy="..." r="2.5" fill="#c00"/>
+```
+
+**Was gestrichelt sein darf:** Nur indirekte Verweise wie „Brücke zur anderen Schiene" oder Hinweis-Pfeile — niemals direkte Bauteil-Bein-zu-Schiene Verbindungen.
 
 ---
 
@@ -281,8 +291,10 @@ Bei mehrteiligen Lektionen (L19/L20/L21), die obere und untere −Schiene verbin
 - ❌ Taster komplett in unterer Hälfte (Reihen f-j) ohne Mittelrinnen-Überspannung
 - ❌ Pin-Kabel die senkrecht durch die Mittelrinne "durchgehen"
 - ❌ Bauteil-Bereichs-Labels OHNE weißen Outline (werden von Kabeln überdeckt)
-- ❌ GND-Jumper gestrichelt grau (zu schwach, nicht erkennbar)
+- ❌ **GND-Verbindungen gestrichelt** (egal welche Farbe) — immer durchgezogen schwarz (#222)
 - ❌ Pin-Kabel die durch Pin-Labels durchlaufen
+- ❌ Bauteil-Bein-Linien durch den Bauteil-Körper hindurch — Body nach Beinen zeichnen, sodass er sie überdeckt
+- ❌ Gerade vertikale Jumper über das ganze Breadboard (sieht wie Spalten-Bahn aus) — als Bogen/Knick zeichnen
 
 ---
 

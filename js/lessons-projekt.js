@@ -567,7 +567,7 @@ const LESSONS_PROJEKT = [
             <line x1="132" y1="274" x2="132" y2="286" stroke="#a00" stroke-width="2"/>
             <text x="125" y="262" text-anchor="middle" font-size="7" fill="#c00" font-weight="bold">ROT</text>
             <circle cx="120" cy="280" r="2.2" fill="#E74C3C"/><circle cx="140" cy="280" r="2.2" fill="#864"/>
-            <line x1="140" y1="280" x2="140" y2="250" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="140" y1="280" x2="140" y2="250" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- GELB (Sp.7-8-9) -->
             <rect x="178" y="306" width="24" height="8" rx="2" fill="#e8d0a0" stroke="#864" stroke-width="1"/>
@@ -580,7 +580,7 @@ const LESSONS_PROJEKT = [
             <line x1="212" y1="274" x2="212" y2="286" stroke="#aa0" stroke-width="2"/>
             <text x="205" y="262" text-anchor="middle" font-size="7" fill="#aa0" font-weight="bold">GELB</text>
             <circle cx="200" cy="280" r="2.2" fill="#F1C40F"/><circle cx="220" cy="280" r="2.2" fill="#864"/>
-            <line x1="220" y1="280" x2="220" y2="250" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="220" y1="280" x2="220" y2="250" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- GRÜN (Sp.11-12-13) -->
             <rect x="258" y="306" width="24" height="8" rx="2" fill="#e8d0a0" stroke="#864" stroke-width="1"/>
@@ -593,7 +593,7 @@ const LESSONS_PROJEKT = [
             <line x1="292" y1="274" x2="292" y2="286" stroke="#090" stroke-width="2"/>
             <text x="285" y="262" text-anchor="middle" font-size="7" fill="#090" font-weight="bold">GRÜN</text>
             <circle cx="280" cy="280" r="2.2" fill="#2ECC71"/><circle cx="300" cy="280" r="2.2" fill="#864"/>
-            <line x1="300" y1="280" x2="300" y2="250" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="300" y1="280" x2="300" y2="250" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- ===== Fußg-Ampel (Sp.15-21) ===== -->
             <rect x="332" y="266" width="140" height="84" rx="4" fill="none" stroke="#66c" stroke-width="1" stroke-dasharray="4,2"/>
@@ -610,7 +610,7 @@ const LESSONS_PROJEKT = [
             <line x1="372" y1="274" x2="372" y2="286" stroke="#a00" stroke-width="2"/>
             <text x="365" y="262" text-anchor="middle" font-size="7" fill="#c00" font-weight="bold">F-ROT</text>
             <circle cx="360" cy="280" r="2.2" fill="#E74C3C"/><circle cx="380" cy="280" r="2.2" fill="#864"/>
-            <line x1="380" y1="280" x2="380" y2="250" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="380" y1="280" x2="380" y2="250" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- F-GRÜN (Sp.19-20-21) -->
             <rect x="418" y="306" width="24" height="8" rx="2" fill="#e8d0a0" stroke="#864" stroke-width="1"/>
@@ -623,7 +623,7 @@ const LESSONS_PROJEKT = [
             <line x1="452" y1="274" x2="452" y2="286" stroke="#090" stroke-width="2"/>
             <text x="445" y="262" text-anchor="middle" font-size="7" fill="#090" font-weight="bold">F-GRÜN</text>
             <circle cx="440" cy="280" r="2.2" fill="#2ECC71"/><circle cx="460" cy="280" r="2.2" fill="#864"/>
-            <line x1="460" y1="280" x2="460" y2="250" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="460" y1="280" x2="460" y2="250" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- ===== Taster (Sp.23-24) ===== -->
             <rect x="488" y="334" width="44" height="60" rx="4" fill="none" stroke="#66f" stroke-width="1" stroke-dasharray="4,2"/>
@@ -633,7 +633,7 @@ const LESSONS_PROJEKT = [
             <text x="510" y="364" text-anchor="middle" font-size="6" fill="#444">drücken</text>
             <circle cx="500" cy="342" r="2.5" fill="#888" stroke="#444" stroke-width="0.8"/>
             <circle cx="520" cy="372" r="2.5" fill="#888" stroke="#444" stroke-width="0.8"/>
-            <line x1="520" y1="372" x2="520" y2="455" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="520" y1="372" x2="520" y2="455" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
             <text x="535" y="420" font-size="7" fill="#333" font-style="italic">→ untere GND</text>
 
             <!-- ===== LDR-Spannungsteiler (Sp.26-28, NEU) ===== -->
@@ -647,7 +647,7 @@ const LESSONS_PROJEKT = [
             <line x1="570" y1="268" x2="570" y2="262" stroke="#c90" stroke-width="1"/>
             <line x1="584" y1="272" x2="588" y2="268" stroke="#c90" stroke-width="1"/>
             <circle cx="560" cy="280" r="2.2" fill="#864"/><circle cx="580" cy="280" r="2.2" fill="#864"/>
-            <line x1="560" y1="280" x2="560" y2="250" stroke="#c00" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="560" y1="280" x2="560" y2="250" stroke="#c00" stroke-width="1.8" stroke-linecap="round"/>
 
             <circle cx="580" cy="310" r="4" fill="#f90" stroke="#c60" stroke-width="1.2"/>
             <text x="580" y="304" text-anchor="middle" font-size="6.5" fill="#c60" font-weight="bold" stroke="white" stroke-width="2.5" stroke-linejoin="round" paint-order="stroke fill">A0-Knoten</text>
@@ -1066,7 +1066,7 @@ const LESSONS_PROJEKT = [
             <text x="125" y="262" text-anchor="middle" font-size="7" fill="#c00" font-weight="bold">ROT</text>
             <circle cx="120" cy="280" r="2.2" fill="#e00" stroke="#600" stroke-width="0.6"/>
             <circle cx="140" cy="280" r="2.2" fill="#864" stroke="#444" stroke-width="0.6"/>
-            <line x1="140" y1="280" x2="140" y2="250" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="140" y1="280" x2="140" y2="250" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- AUTO-GELB (Sp.7 Pin → Sp.8 Anode → Sp.9 Kathode) -->
             <rect x="178" y="306" width="24" height="8" rx="2" fill="#e8d0a0" stroke="#864" stroke-width="1"/>
@@ -1084,7 +1084,7 @@ const LESSONS_PROJEKT = [
             <text x="205" y="262" text-anchor="middle" font-size="7" fill="#aa0" font-weight="bold">GELB</text>
             <circle cx="200" cy="280" r="2.2" fill="#ee0" stroke="#660" stroke-width="0.6"/>
             <circle cx="220" cy="280" r="2.2" fill="#864" stroke="#444" stroke-width="0.6"/>
-            <line x1="220" y1="280" x2="220" y2="250" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="220" y1="280" x2="220" y2="250" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- AUTO-GRÜN (Sp.11 Pin → Sp.12 Anode → Sp.13 Kathode) -->
             <rect x="258" y="306" width="24" height="8" rx="2" fill="#e8d0a0" stroke="#864" stroke-width="1"/>
@@ -1102,7 +1102,7 @@ const LESSONS_PROJEKT = [
             <text x="285" y="262" text-anchor="middle" font-size="7" fill="#090" font-weight="bold">GRÜN</text>
             <circle cx="280" cy="280" r="2.2" fill="#0c0" stroke="#040" stroke-width="0.6"/>
             <circle cx="300" cy="280" r="2.2" fill="#864" stroke="#444" stroke-width="0.6"/>
-            <line x1="300" y1="280" x2="300" y2="250" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="300" y1="280" x2="300" y2="250" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- ===== FUSSGÄNGER-AMPEL Bereich (Sp.15-21) ===== -->
             <rect x="332" y="266" width="140" height="84" rx="4" fill="none" stroke="#66c" stroke-width="1" stroke-dasharray="4,2"/>
@@ -1124,7 +1124,7 @@ const LESSONS_PROJEKT = [
             <text x="365" y="262" text-anchor="middle" font-size="7" fill="#c00" font-weight="bold">F-ROT</text>
             <circle cx="360" cy="280" r="2.2" fill="#e00" stroke="#600" stroke-width="0.6"/>
             <circle cx="380" cy="280" r="2.2" fill="#864" stroke="#444" stroke-width="0.6"/>
-            <line x1="380" y1="280" x2="380" y2="250" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="380" y1="280" x2="380" y2="250" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- F-GRÜN (Sp.19 Pin → Sp.20 Anode → Sp.21 Kathode) -->
             <rect x="418" y="306" width="24" height="8" rx="2" fill="#e8d0a0" stroke="#864" stroke-width="1"/>
@@ -1142,7 +1142,7 @@ const LESSONS_PROJEKT = [
             <text x="445" y="262" text-anchor="middle" font-size="7" fill="#090" font-weight="bold">F-GRÜN</text>
             <circle cx="440" cy="280" r="2.2" fill="#0c0" stroke="#040" stroke-width="0.6"/>
             <circle cx="460" cy="280" r="2.2" fill="#864" stroke="#444" stroke-width="0.6"/>
-            <line x1="460" y1="280" x2="460" y2="250" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="460" y1="280" x2="460" y2="250" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- ===== TASTER (Sp.23-24, über Mittelrinne) ===== -->
             <rect x="488" y="334" width="44" height="60" rx="4" fill="none" stroke="#66f" stroke-width="1" stroke-dasharray="4,2"/>
@@ -1156,7 +1156,7 @@ const LESSONS_PROJEKT = [
             <circle cx="520" cy="372" r="2.5" fill="#888" stroke="#444" stroke-width="0.8"/>
             <line x1="520" y1="382" x2="520" y2="372" stroke="#555" stroke-width="1.5"/>
             <!-- Jumper Sp.24 Reihe f → untere -Schiene (GND) -->
-            <line x1="520" y1="372" x2="520" y2="455" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="520" y1="372" x2="520" y2="455" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
             <text x="535" y="420" font-size="7" fill="#333" font-style="italic">→ untere</text>
             <text x="535" y="430" font-size="7" fill="#333" font-style="italic">    GND-Schiene</text>
 
@@ -1175,7 +1175,7 @@ const LESSONS_PROJEKT = [
             <circle cx="560" cy="280" r="2.2" fill="#864"/>
             <circle cx="580" cy="280" r="2.2" fill="#864"/>
             <!-- LDR-Bein A (Sp.26) → 5V-Schiene (Jumper) -->
-            <line x1="560" y1="280" x2="560" y2="250" stroke="#c00" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="560" y1="280" x2="560" y2="250" stroke="#c00" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- A0-Knotenpunkt: Sp.27 ist die Bahn die mit LDR-B (Reihe a) UND Pin A0 (Reihe e) UND 10k-Bein 1 (Reihe c) verbunden ist -->
             <circle cx="580" cy="310" r="4" fill="#f90" stroke="#c60" stroke-width="1.2"/>

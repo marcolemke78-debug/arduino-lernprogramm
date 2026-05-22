@@ -494,7 +494,7 @@ void loop() {
             <circle cx="180" cy="240" r="2.5" fill="#27AE60" stroke="#040" stroke-width="0.6"/>
             <circle cx="200" cy="240" r="2.5" fill="#864" stroke="#444" stroke-width="0.6"/>
             <!-- Kathoden-Jumper Sp.8 → -Schiene -->
-            <line x1="200" y1="240" x2="200" y2="212" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="200" y1="240" x2="200" y2="212" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- LED 2 (rot, Pin 13): Sp.11 (Pin) → 220Ω Sp.11↔Sp.13 → LED Anode Sp.13 → LED Kathode Sp.14 → GND -->
             <rect x="260" y="264" width="40" height="8" rx="2" fill="#e8d5a3" stroke="#a08050" stroke-width="1"/>
@@ -514,7 +514,7 @@ void loop() {
             <circle cx="300" cy="240" r="2.5" fill="#E74C3C" stroke="#600" stroke-width="0.6"/>
             <circle cx="320" cy="240" r="2.5" fill="#864" stroke="#444" stroke-width="0.6"/>
             <!-- Kathoden-Jumper Sp.14 → -Schiene -->
-            <line x1="320" y1="240" x2="320" y2="212" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="320" y1="240" x2="320" y2="212" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- ===== LEGENDE ===== -->
             <rect x="20" y="460" width="660" height="70" rx="6" fill="#fff" stroke="#ddd" stroke-width="1"/>
@@ -778,7 +778,7 @@ void loop() {
             <line x1="132" y1="234" x2="132" y2="246" stroke="#C0392B" stroke-width="2"/>
             <text x="125" y="222" text-anchor="middle" font-size="7" fill="#E74C3C" font-weight="bold">L1</text>
             <circle cx="120" cy="240" r="2.2" fill="#E74C3C"/><circle cx="140" cy="240" r="2.2" fill="#864"/>
-            <line x1="140" y1="240" x2="140" y2="212" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="140" y1="240" x2="140" y2="212" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- LED 2 (orange, Pin 9): Sp.7 → Sp.8 → Sp.9 -->
             <rect x="180" y="264" width="20" height="8" rx="2" fill="#e8d5a3" stroke="#a08050" stroke-width="1"/>
@@ -794,7 +794,7 @@ void loop() {
             <line x1="212" y1="234" x2="212" y2="246" stroke="#D35400" stroke-width="2"/>
             <text x="205" y="222" text-anchor="middle" font-size="7" fill="#E67E22" font-weight="bold">L2</text>
             <circle cx="200" cy="240" r="2.2" fill="#E67E22"/><circle cx="220" cy="240" r="2.2" fill="#864"/>
-            <line x1="220" y1="240" x2="220" y2="212" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="220" y1="240" x2="220" y2="212" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- LED 3 (gelb, Pin 10): Sp.11 → Sp.12 → Sp.13 -->
             <rect x="260" y="264" width="20" height="8" rx="2" fill="#e8d5a3" stroke="#a08050" stroke-width="1"/>
@@ -810,7 +810,7 @@ void loop() {
             <line x1="292" y1="234" x2="292" y2="246" stroke="#D4AC0D" stroke-width="2"/>
             <text x="285" y="222" text-anchor="middle" font-size="7" fill="#D4AC0D" font-weight="bold">L3</text>
             <circle cx="280" cy="240" r="2.2" fill="#F1C40F"/><circle cx="300" cy="240" r="2.2" fill="#864"/>
-            <line x1="300" y1="240" x2="300" y2="212" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="300" y1="240" x2="300" y2="212" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- LED 4 (grün, Pin 11): Sp.15 → Sp.16 → Sp.17 -->
             <rect x="340" y="264" width="20" height="8" rx="2" fill="#e8d5a3" stroke="#a08050" stroke-width="1"/>
@@ -826,7 +826,7 @@ void loop() {
             <line x1="372" y1="234" x2="372" y2="246" stroke="#27AE60" stroke-width="2"/>
             <text x="365" y="222" text-anchor="middle" font-size="7" fill="#27AE60" font-weight="bold">L4</text>
             <circle cx="360" cy="240" r="2.2" fill="#2ECC71"/><circle cx="380" cy="240" r="2.2" fill="#864"/>
-            <line x1="380" y1="240" x2="380" y2="212" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="380" y1="240" x2="380" y2="212" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- LED 5 (blau, Pin 12): Sp.19 → Sp.20 → Sp.21 -->
             <rect x="420" y="264" width="20" height="8" rx="2" fill="#e8d5a3" stroke="#a08050" stroke-width="1"/>
@@ -842,7 +842,7 @@ void loop() {
             <line x1="452" y1="234" x2="452" y2="246" stroke="#2980b9" stroke-width="2"/>
             <text x="445" y="222" text-anchor="middle" font-size="7" fill="#3498db" font-weight="bold">L5</text>
             <circle cx="440" cy="240" r="2.2" fill="#3498db"/><circle cx="460" cy="240" r="2.2" fill="#864"/>
-            <line x1="460" y1="240" x2="460" y2="212" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="460" y1="240" x2="460" y2="212" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- Lauflicht-Pfeil -->
             <line x1="100" y1="465" x2="460" y2="465" stroke="#0068B5" stroke-width="1.8" stroke-dasharray="6,3"/>
@@ -1541,7 +1541,7 @@ void loop() {
             <text x="285" y="222" text-anchor="middle" font-size="8" fill="#E74C3C" font-weight="bold">LED</text>
             <circle cx="280" cy="240" r="2.2" fill="#E74C3C"/>
             <circle cx="300" cy="240" r="2.2" fill="#864"/>
-            <line x1="300" y1="240" x2="300" y2="212" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="300" y1="240" x2="300" y2="212" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- GND-Brücke obere ↔ untere -Schiene -->
             <path d="M 690 213 L 712 213 L 712 393 L 690 393" stroke="#333" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
@@ -1739,7 +1739,7 @@ void loop() {
             <line x1="134" y1="232" x2="134" y2="248" stroke="#C0392B" stroke-width="2"/>
             <text x="125" y="222" text-anchor="middle" font-size="8" fill="#E74C3C" font-weight="bold">ROT</text>
             <circle cx="120" cy="240" r="2.2" fill="#E74C3C"/><circle cx="140" cy="240" r="2.2" fill="#864"/>
-            <line x1="140" y1="240" x2="140" y2="212" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="140" y1="240" x2="140" y2="212" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- LED Gelb (Pin 3): Sp.7-Sp.8-Sp.9 -->
             <rect x="180" y="264" width="20" height="8" rx="2" fill="#e8d5a3" stroke="#a08050" stroke-width="1"/>
@@ -1755,7 +1755,7 @@ void loop() {
             <line x1="214" y1="232" x2="214" y2="248" stroke="#D4AC0D" stroke-width="2"/>
             <text x="205" y="222" text-anchor="middle" font-size="8" fill="#D4AC0D" font-weight="bold">GELB</text>
             <circle cx="200" cy="240" r="2.2" fill="#F1C40F"/><circle cx="220" cy="240" r="2.2" fill="#864"/>
-            <line x1="220" y1="240" x2="220" y2="212" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="220" y1="240" x2="220" y2="212" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- LED Grün (Pin 4): Sp.11-Sp.12-Sp.13 -->
             <rect x="260" y="264" width="20" height="8" rx="2" fill="#e8d5a3" stroke="#a08050" stroke-width="1"/>
@@ -1771,7 +1771,7 @@ void loop() {
             <line x1="294" y1="232" x2="294" y2="248" stroke="#27AE60" stroke-width="2"/>
             <text x="285" y="222" text-anchor="middle" font-size="8" fill="#27AE60" font-weight="bold">GRÜN</text>
             <circle cx="280" cy="240" r="2.2" fill="#2ECC71"/><circle cx="300" cy="240" r="2.2" fill="#864"/>
-            <line x1="300" y1="240" x2="300" y2="212" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <line x1="300" y1="240" x2="300" y2="212" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
 
             <!-- ===== Ampel-Visualisierung rechts neben Bauteilen ===== -->
             <text x="540" y="240" text-anchor="middle" font-size="10" fill="#333" font-weight="bold">Wie eine echte Ampel:</text>

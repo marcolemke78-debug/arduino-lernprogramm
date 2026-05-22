@@ -1682,6 +1682,22 @@ p {
   margin: 0.75rem 0;
 }
 
+.praxis-auftrag ol,
+.praxis-auftrag ul {
+  padding-left: 1.75em;
+  margin: 0.5rem 0;
+}
+
+.praxis-auftrag li {
+  padding-left: 0.35em;
+  margin-bottom: 0.35rem;
+}
+
+.praxis-auftrag li::marker {
+  font-weight: bold;
+  color: #6b4500;
+}
+
 .praxis-lernziel {
   margin-top: 1rem;
   padding-top: 0.75rem;

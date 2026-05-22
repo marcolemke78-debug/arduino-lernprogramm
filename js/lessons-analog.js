@@ -1014,7 +1014,7 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
         <div class="info-card">
           <h3>Die Schaltung</h3>
 
-          <svg viewBox="0 0 400 280" style="width:100%;max-width:400px;margin:1em auto;display:block;font-family:system-ui;">
+          <svg viewBox="0 0 400 300" style="width:100%;max-width:400px;margin:1em auto;display:block;font-family:system-ui;">
             <!-- 5V Label -->
             <text x="200" y="18" text-anchor="middle" font-size="14" font-weight="bold" fill="#C0392B">5V</text>
             <!-- Vertikale Leitung von 5V -->
@@ -1035,13 +1035,14 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
             <rect x="170" y="155" width="60" height="45" rx="6" fill="#f5f5f5" stroke="#888" stroke-width="2"/>
             <text x="200" y="178" text-anchor="middle" font-size="11" font-weight="bold" fill="#555">10 kOhm</text>
             <text x="200" y="192" text-anchor="middle" font-size="9" fill="#888">fest</text>
-            <!-- Leitung zum GND -->
-            <line x1="200" y1="200" x2="200" y2="240" stroke="#333" stroke-width="2.5"/>
-            <!-- GND -->
-            <text x="200" y="258" text-anchor="middle" font-size="14" font-weight="bold" fill="#555">GND</text>
-            <line x1="175" y1="242" x2="225" y2="242" stroke="#555" stroke-width="3"/>
-            <line x1="182" y1="248" x2="218" y2="248" stroke="#555" stroke-width="2"/>
-            <line x1="189" y1="254" x2="211" y2="254" stroke="#555" stroke-width="1"/>
+            <!-- Leitung zum GND (verlängert) -->
+            <line x1="200" y1="200" x2="200" y2="255" stroke="#333" stroke-width="2.5"/>
+            <!-- GND-Erdungssymbol -->
+            <line x1="175" y1="257" x2="225" y2="257" stroke="#555" stroke-width="3"/>
+            <line x1="182" y1="263" x2="218" y2="263" stroke="#555" stroke-width="2"/>
+            <line x1="189" y1="269" x2="211" y2="269" stroke="#555" stroke-width="1"/>
+            <!-- GND-Text mit Abstand unter dem Symbol -->
+            <text x="200" y="288" text-anchor="middle" font-size="14" font-weight="bold" fill="#555">GND</text>
           </svg>
 
           <p><strong>Zusammengefasst:</strong></p>
@@ -1089,9 +1090,9 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
             <!-- A0 → Sp.9 (Knotenpunkt LDR+10k) -->
             <line x1="220" y1="118" x2="220" y2="282" stroke="#f90" stroke-width="2.8" stroke-linecap="round"/>
             <circle cx="220" cy="282" r="3.5" fill="#f90" stroke="#c60" stroke-width="0.8"/>
-            <!-- Pin 2 → Sp.17 Reihe e (220R Bein 1) -->
-            <line x1="380" y1="118" x2="380" y2="342" stroke="#0a0" stroke-width="2.8" stroke-linecap="round"/>
-            <circle cx="380" cy="342" r="3.5" fill="#0a0" stroke="#040" stroke-width="0.8"/>
+            <!-- Pin 2 → Sp.17 Reihe e (Widerstand-Bein 1 oben, im oberen Block) -->
+            <line x1="380" y1="118" x2="380" y2="296" stroke="#0a0" stroke-width="2.8" stroke-linecap="round"/>
+            <circle cx="380" cy="296" r="3.5" fill="#0a0" stroke="#040" stroke-width="0.8"/>
             <!-- GND → obere -Schiene Sp.23 -->
             <line x1="500" y1="118" x2="500" y2="210" stroke="#333" stroke-width="2.8" stroke-linecap="round"/>
             <circle cx="500" cy="210" r="3.5" fill="#333"/>
@@ -1166,25 +1167,31 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
             <line x1="300" y1="296" x2="300" y2="212" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
             <text x="320" y="262" font-size="7" fill="#333" font-style="italic">→ GND</text>
 
-            <!-- ===== LED-Kreis (Sp.17 → Sp.18 → Sp.19) ===== -->
-            <rect x="372" y="266" width="80" height="84" rx="4" fill="none" stroke="#0a0" stroke-width="1" stroke-dasharray="4,2"/>
+            <!-- ===== LED-Kreis (Sp.17 → Sp.18 → Sp.19, alles im oberen Block, Reihen a-e) ===== -->
+            <rect x="372" y="218" width="80" height="84" rx="4" fill="none" stroke="#0a0" stroke-width="1" stroke-dasharray="4,2"/>
             <text x="412" y="200" text-anchor="middle" font-size="11" fill="#080" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">⬇ LED-Nachtlicht</text>
 
-            <rect x="378" y="306" width="24" height="8" rx="2" fill="#e8d5a3" stroke="#a08050" stroke-width="1"/>
-            <line x1="384" y1="306" x2="384" y2="314" stroke="#e53935" stroke-width="1.2"/>
-            <line x1="389" y1="306" x2="389" y2="314" stroke="#e53935" stroke-width="1.2"/>
-            <line x1="394" y1="306" x2="394" y2="314" stroke="#6d4c41" stroke-width="1.2"/>
-            <text x="390" y="304" text-anchor="middle" font-size="5.5" fill="#654" font-weight="bold">220Ω</text>
-            <circle cx="380" cy="310" r="2.2" fill="#e8d5a3" stroke="#864" stroke-width="0.8"/>
-            <circle cx="400" cy="310" r="2.2" fill="#e8d5a3" stroke="#864" stroke-width="0.8"/>
-            <line x1="380" y1="310" x2="380" y2="342" stroke="#864" stroke-width="1.5"/>
-            <line x1="400" y1="310" x2="400" y2="240" stroke="#864" stroke-width="1.5"/>
+            <!-- 220Ω horizontal Sp.17 → Sp.18, Reihe c (y=268) -->
+            <rect x="378" y="264" width="24" height="8" rx="2" fill="#e8d5a3" stroke="#a08050" stroke-width="1"/>
+            <line x1="384" y1="264" x2="384" y2="272" stroke="#e53935" stroke-width="1.2"/>
+            <line x1="389" y1="264" x2="389" y2="272" stroke="#e53935" stroke-width="1.2"/>
+            <line x1="394" y1="264" x2="394" y2="272" stroke="#6d4c41" stroke-width="1.2"/>
+            <text x="390" y="262" text-anchor="middle" font-size="5.5" fill="#654" font-weight="bold">220Ω</text>
+            <circle cx="380" cy="268" r="2.2" fill="#e8d5a3" stroke="#864" stroke-width="0.8"/>
+            <circle cx="400" cy="268" r="2.2" fill="#e8d5a3" stroke="#864" stroke-width="0.8"/>
+            <!-- Bein-Verbindungen: Sp.17 Reihe c → Reihe e (Pin 2 trifft hier), Sp.18 Reihe c → Reihe a (LED-Anode) -->
+            <line x1="380" y1="268" x2="380" y2="296" stroke="#864" stroke-width="1.5"/>
+            <line x1="400" y1="268" x2="400" y2="240" stroke="#864" stroke-width="1.5"/>
+            <!-- LED horizontal Sp.18 (Anode) → Sp.19 (Kathode), Reihe a -->
             <polygon points="398,234 398,246 412,240" fill="#0c0" stroke="#090" stroke-width="1.2"/>
             <line x1="412" y1="234" x2="412" y2="246" stroke="#090" stroke-width="2"/>
             <text x="405" y="222" text-anchor="middle" font-size="7" fill="#090" font-weight="bold">LED</text>
             <circle cx="400" cy="240" r="2.2" fill="#0c0"/>
             <circle cx="420" cy="240" r="2.2" fill="#864"/>
-            <line x1="420" y1="240" x2="420" y2="212" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
+            <!-- Sp.19 → obere -Schiene (GND-Jumper, schwarz Konvention) -->
+            <line x1="420" y1="240" x2="420" y2="212" stroke="#222" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="420" cy="240" r="2.5" fill="#222"/>
+            <circle cx="420" cy="212" r="2.5" fill="#222"/>
 
             <!-- ===== LEGENDE ===== -->
             <rect x="20" y="475" width="660" height="80" rx="6" fill="#fff" stroke="#ddd" stroke-width="1"/>

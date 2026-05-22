@@ -370,10 +370,10 @@ Hitze:       U<sub>2</sub> = 5 V &middot; 4  / (10 + 4)  &asymp; <strong>1,43 V<
             <text x="170" y="185" text-anchor="middle" font-size="12" fill="#C0392B" font-weight="bold">GND</text>
             <text x="210" y="185" text-anchor="middle" font-size="12" fill="#2980B9" font-weight="bold">A0</text>
             <text x="250" y="185" text-anchor="middle" font-size="12" fill="#27AE60" font-weight="bold">5V</text>
-            <!-- Pfeil fuer Drehbewegung -->
-            <path d="M 195 28 A 20 20 0 0 1 225 28" fill="none" stroke="#E67E22" stroke-width="2" marker-end="url(#arrowOrange9)"/>
+            <!-- Pfeil fuer Drehbewegung (Bogen UNTER dem Wort, sweep=0 -> wölbt nach unten) -->
+            <text x="210" y="15" text-anchor="middle" font-size="11" fill="#E67E22" font-weight="bold">Drehen</text>
+            <path d="M 192 25 A 20 20 0 0 0 228 25" fill="none" stroke="#E67E22" stroke-width="2" marker-end="url(#arrowOrange9)"/>
             <defs><marker id="arrowOrange9" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M 0 0 L 8 4 L 0 8 Z" fill="#E67E22"/></marker></defs>
-            <text x="210" y="20" text-anchor="middle" font-size="11" fill="#E67E22">Drehen</text>
           </svg>
         </div>
 
@@ -454,32 +454,37 @@ Hitze:       U<sub>2</sub> = 5 V &middot; 4  / (10 + 4)  &asymp; <strong>1,43 V<
             <rect x="50" y="389" width="620" height="9" rx="2" fill="#ddf" stroke="#00c" stroke-width="0.8"/>
             <rect x="50" y="401" width="620" height="9" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
 
-            <!-- ===== POTENTIOMETER (Sp.7-8-9-10-11, 3 Beine in Sp.7, Sp.11, Sp.15) ===== -->
-            <!-- Eigentlich liegt der Poti über 3 Sp mit 4 Sp Abstand (Sp.7, Sp.11, Sp.15) - so wie die Pin-Anschlüsse -->
+            <!-- ===== POTENTIOMETER (Sp.7, Sp.11, Sp.15, je 1 Bein) ===== -->
+            <!-- 3 Beinchen als kurze Stubs zwischen Body-Top und Reihe a (keine Linien durch den Body) -->
+            <circle cx="180" cy="240" r="2.5" fill="#864"/>
+            <circle cx="260" cy="240" r="2.5" fill="#864"/>
+            <circle cx="340" cy="240" r="2.5" fill="#864"/>
+            <line x1="180" y1="240" x2="180" y2="246" stroke="#864" stroke-width="2"/>
+            <line x1="260" y1="240" x2="260" y2="246" stroke="#864" stroke-width="2"/>
+            <line x1="340" y1="240" x2="340" y2="246" stroke="#864" stroke-width="2"/>
+
+            <!-- Body (deckt die Reihen-Bahn unter dem Poti ab) -->
             <rect x="160" y="246" width="200" height="44" rx="6" fill="#e8e8e8" stroke="#666" stroke-width="1.5"/>
             <text x="260" y="262" text-anchor="middle" font-size="11" font-weight="bold" fill="#333">Potentiometer</text>
             <circle cx="260" cy="276" r="8" fill="#ccc" stroke="#888" stroke-width="1.5"/>
             <line x1="260" y1="268" x2="260" y2="272" stroke="#555" stroke-width="2"/>
             <text x="260" y="282" text-anchor="middle" font-size="6" fill="#555">drehen</text>
 
-            <!-- 3 Beinchen: Sp.7 (links, 5V), Sp.11 (mitte, A0), Sp.15 (rechts, GND) -->
-            <line x1="180" y1="288" x2="180" y2="240" stroke="#864" stroke-width="2"/>
-            <line x1="260" y1="288" x2="260" y2="240" stroke="#864" stroke-width="2"/>
-            <line x1="340" y1="288" x2="340" y2="240" stroke="#864" stroke-width="2"/>
-            <circle cx="180" cy="240" r="2.5" fill="#864"/>
-            <circle cx="260" cy="240" r="2.5" fill="#864"/>
-            <circle cx="340" cy="240" r="2.5" fill="#864"/>
-            <text x="180" y="304" text-anchor="middle" font-size="6.5" fill="#c00" font-weight="bold">5V</text>
-            <text x="260" y="304" text-anchor="middle" font-size="6.5" fill="#c60" font-weight="bold">A0</text>
-            <text x="340" y="304" text-anchor="middle" font-size="6.5" fill="#333" font-weight="bold">GND</text>
+            <!-- Anschluss-Labels unter dem Body, mit kleinen Pfeilen zur Bein-Position -->
+            <line x1="180" y1="290" x2="180" y2="299" stroke="#864" stroke-width="0.8" stroke-dasharray="2 1"/>
+            <line x1="260" y1="290" x2="260" y2="299" stroke="#864" stroke-width="0.8" stroke-dasharray="2 1"/>
+            <line x1="340" y1="290" x2="340" y2="299" stroke="#864" stroke-width="0.8" stroke-dasharray="2 1"/>
+            <text x="180" y="307" text-anchor="middle" font-size="6.5" fill="#c00" font-weight="bold">5V</text>
+            <text x="260" y="307" text-anchor="middle" font-size="6.5" fill="#c60" font-weight="bold">A0</text>
+            <text x="340" y="307" text-anchor="middle" font-size="6.5" fill="#333" font-weight="bold">GND</text>
 
-            <!-- Beschriftungs-Box rechts -->
-            <rect x="430" y="240" width="220" height="80" rx="6" fill="#FFF8E1" stroke="#FFA000" stroke-width="1.5"/>
-            <text x="540" y="258" text-anchor="middle" font-size="10" fill="#E65100" font-weight="bold">So funktioniert's:</text>
-            <text x="440" y="276" font-size="9" fill="#555">► Drehen am Poti = Spannung ändern</text>
-            <text x="440" y="290" font-size="9" fill="#555">► Links: 0 V → analogRead() = 0</text>
-            <text x="440" y="304" font-size="9" fill="#555">► Mitte: 2,5 V → analogRead() = 512</text>
-            <text x="440" y="318" font-size="9" fill="#555">► Rechts: 5 V → analogRead() = 1023</text>
+            <!-- Beschriftungs-Box rechts (mit Padding unten) -->
+            <rect x="430" y="240" width="220" height="100" rx="6" fill="#FFF8E1" stroke="#FFA000" stroke-width="1.5"/>
+            <text x="540" y="262" text-anchor="middle" font-size="10" fill="#E65100" font-weight="bold">So funktioniert's:</text>
+            <text x="440" y="282" font-size="9" fill="#555">► Drehen am Poti = Spannung ändern</text>
+            <text x="440" y="298" font-size="9" fill="#555">► Links: 0 V → analogRead() = 0</text>
+            <text x="440" y="314" font-size="9" fill="#555">► Mitte: 2,5 V → analogRead() = 512</text>
+            <text x="440" y="330" font-size="9" fill="#555">► Rechts: 5 V → analogRead() = 1023</text>
 
             <!-- ===== LEGENDE ===== -->
             <rect x="20" y="460" width="660" height="50" rx="6" fill="#fff" stroke="#ddd" stroke-width="1"/>

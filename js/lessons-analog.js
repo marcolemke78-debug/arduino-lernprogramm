@@ -276,7 +276,7 @@ Hitze:       U<sub>2</sub> = 5 V &middot; 4  / (10 + 4)  &asymp; <strong>1,43 V<
           </figure>
           <figure class="schaltbild-figur">
             <figcaption><strong>2. Aufbau am Steckbrett</strong> &mdash; so sieht der echte Aufbau aus:</figcaption>
-            <img src="assets/lektion-30-spannungsteiler-aufbau.svg?v=4" alt="Steckbrett-Aufbau Spannungsteiler: zwei 10k-Widerstaende in Reihe zwischen 5V-Schiene und GND-Schiene, Multimeter misst in der Mitte" style="max-width: 100%; height: auto;" />
+            <img src="assets/lektion-30-spannungsteiler-aufbau.svg?v=5" alt="Steckbrett-Aufbau Spannungsteiler: zwei 10k-Widerstaende in Reihe zwischen 5V-Schiene und GND-Schiene, Multimeter misst in der Mitte" style="max-width: 100%; height: auto;" />
           </figure>`,
         schritte: [
           'Stecke das <strong>rote Jumper-Kabel</strong> in den <strong>5V-Pin</strong> des Arduino und das andere Ende in die <strong>+Schiene (rot)</strong> oben am Breadboard.',
@@ -392,7 +392,7 @@ Hitze:       U<sub>2</sub> = 5 V &middot; 4  / (10 + 4)  &asymp; <strong>1,43 V<
             <!-- Pin-Labels -->
             <g font-size="9" font-weight="bold" text-anchor="middle">
               <text x="180" y="93" fill="#ff5555">5V</text>
-              <text x="260" y="93" fill="#5cf">A0</text>
+              <text x="260" y="93" fill="#f90">A0</text>
               <text x="340" y="93" fill="#ddd">GND</text>
             </g>
 
@@ -1133,7 +1133,7 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
 
             <!-- ===== LDR-SPANNUNGSTEILER (Sp.5-Sp.9-Sp.13) ===== -->
             <rect x="125" y="246" width="200" height="60" rx="4" fill="#ffe8cc" opacity="0.3" stroke="#f90" stroke-width="1" stroke-dasharray="4,2"/>
-            <text x="225" y="200" text-anchor="middle" font-size="11" fill="#c60" font-weight="bold">⬇ LDR-Spannungsteiler</text>
+            <text x="225" y="200" text-anchor="middle" font-size="11" fill="#c60" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">⬇ LDR-Spannungsteiler</text>
 
             <!-- LDR Anschluss A Sp.5 (5V), Anschluss B Sp.9 (Knoten) -->
             <ellipse cx="180" cy="262" rx="38" ry="10" fill="#ffe066" stroke="#c90" stroke-width="1.5"/>
@@ -1163,7 +1163,7 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
 
             <!-- ===== LED-Kreis (Sp.17 → Sp.18 → Sp.19) ===== -->
             <rect x="372" y="266" width="80" height="84" rx="4" fill="none" stroke="#0a0" stroke-width="1" stroke-dasharray="4,2"/>
-            <text x="412" y="200" text-anchor="middle" font-size="11" fill="#080" font-weight="bold">⬇ LED-Nachtlicht</text>
+            <text x="412" y="200" text-anchor="middle" font-size="11" fill="#080" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">⬇ LED-Nachtlicht</text>
 
             <rect x="378" y="306" width="24" height="8" rx="2" fill="#e8d5a3" stroke="#a08050" stroke-width="1"/>
             <line x1="384" y1="306" x2="384" y2="314" stroke="#e53935" stroke-width="1.2"/>
@@ -1574,7 +1574,7 @@ analogRead &asymp; <strong>682</strong></pre>
           </figure>
           <figure class="schaltbild-figur">
             <figcaption><strong>2. Aufbau am Steckbrett</strong> &mdash; so sieht der echte Aufbau aus:</figcaption>
-            <img src="assets/lektion-31-ntc-aufbau.svg?v=3" alt="Steckbrett-Aufbau NTC: fester 10k-Widerstand und NTC in Reihe zwischen 5V und GND, Mittelpunkt an A0" style="max-width: 100%; height: auto;" />
+            <img src="assets/lektion-31-ntc-aufbau.svg?v=4" alt="Steckbrett-Aufbau NTC: fester 10k-Widerstand und NTC in Reihe zwischen 5V und GND, Mittelpunkt an A0" style="max-width: 100%; height: auto;" />
           </figure>`,
         schritte: [
           'Stecke das <strong>rote Jumper-Kabel</strong> in den <strong>5V-Pin</strong> des Arduino und das andere Ende in die <strong>+Schiene</strong> oben am Breadboard.',

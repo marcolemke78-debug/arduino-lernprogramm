@@ -21,10 +21,10 @@
     <text x="180" y="65" text-anchor="middle" fill="#fff" font-weight="bold" font-size="15" letter-spacing="2">ARDUINO UNO</text>
     <text x="180" y="83" text-anchor="middle" fill="#cfeeed" font-size="11">5V, GND und Pin 9 werden genutzt</text>
 
-    <!-- Pin-Labels OBERHALB der Pin-Boxes (innerhalb Arduino, weiss/farbig) -->
-    <text x="34" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">5V</text>
-    <text x="134" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">GND</text>
-    <text x="234" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff">Pin 9</text>
+    <!-- Pin-Labels OBERHALB der Pin-Boxes (innerhalb Arduino, farblich passend zur Pin-Box) -->
+    <text x="34" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#ff8a8a">5V</text>
+    <text x="134" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#eeeeee">GND</text>
+    <text x="234" y="108" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffb380">Pin 9</text>
 
     <!-- Pin-Leiste unten -->
     <rect x="20" y="115" width="320" height="13" fill="#1a1a1a"/>
@@ -128,6 +128,9 @@
     <!-- Markierung am a10 (Spalte 10 obere Halbinsel, Servo-Signal & Pin-9-Jumper-Ende) -->
     <circle cx="200" cy="47" r="7" fill="none" stroke="#E67E22" stroke-width="2" stroke-dasharray="3 2"/>
     <text x="200" y="-4" text-anchor="middle" font-size="10" font-weight="bold" fill="#E67E22">Servo S</text>
+
+    <!-- Breadboard-Label UNTER dem Breadboard (Style-Guide §6) -->
+    <text x="320" y="244" text-anchor="middle" font-size="10" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
   </g>
 
   <!-- ===================== SERVO SG90 (unten mittig) ===================== -->

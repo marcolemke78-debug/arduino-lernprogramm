@@ -33,7 +33,7 @@ const LESSONS_PROJEKT = [
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" style="max-width:100%;height:auto;background:#f8f8f8;border:1px solid #ccc;border-radius:8px;">
             <!-- ===== BREADBOARD ===== -->
             <rect x="10" y="10" width="350" height="230" rx="6" fill="#e8e0d0" stroke="#999" stroke-width="1.5"/>
-            <text x="185" y="8" text-anchor="middle" font-size="8" fill="#666">Breadboard</text>
+            <text x="185" y="253" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
 
             <!-- Obere +Schiene (rot) -->
             <rect x="30" y="22" width="310" height="10" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
@@ -228,10 +228,12 @@ const LESSONS_PROJEKT = [
             <circle cx="340" cy="43" r="2.5" fill="#333"/>
 
             <!-- Taster anderes Bein (Spalte 17, Reihe f) → untere -Schiene → verbunden zu obere -Schiene -->
-            <line x1="196" y1="142" x2="196" y2="222" stroke="#333" stroke-width="1"/>
-            <line x1="196" y1="222" x2="340" y2="222" stroke="#333" stroke-width="0.8"/>
-            <line x1="340" y1="222" x2="340" y2="48" stroke="#333" stroke-width="0.8" stroke-dasharray="2,1"/>
-            <text x="200" y="200" font-size="5" fill="#333">→GND</text>
+            <line x1="196" y1="142" x2="196" y2="222" stroke="#1565C0" stroke-width="2.2" stroke-linecap="round"/>
+            <line x1="196" y1="222" x2="340" y2="222" stroke="#1565C0" stroke-width="2" stroke-linecap="round"/>
+            <line x1="340" y1="222" x2="340" y2="48" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.7"/>
+            <circle cx="196" cy="142" r="2.5" fill="#1565C0"/>
+            <circle cx="340" cy="222" r="2.5" fill="#1565C0"/>
+            <text x="205" y="215" font-size="7" fill="#0a3a78" font-weight="bold">→ GND</text>
 
             <!-- 5V-Verbindung (hier nicht noetig, nur GND) -->
 
@@ -648,15 +650,18 @@ const LESSONS_PROJEKT = [
             <line x1="560" y1="280" x2="560" y2="250" stroke="#c00" stroke-width="1.5" stroke-dasharray="3,1.5"/>
 
             <circle cx="580" cy="310" r="4" fill="#f90" stroke="#c60" stroke-width="1.2"/>
-            <text x="580" y="304" text-anchor="middle" font-size="6.5" fill="#c60" font-weight="bold">A0-Knoten</text>
+            <text x="580" y="304" text-anchor="middle" font-size="6.5" fill="#c60" font-weight="bold" stroke="white" stroke-width="2.5" stroke-linejoin="round" paint-order="stroke fill">A0-Knoten</text>
 
             <rect x="578" y="320" width="24" height="8" rx="2" fill="#c0a060" stroke="#864" stroke-width="1"/>
             <text x="590" y="318" text-anchor="middle" font-size="5.5" fill="#654" font-weight="bold">10kΩ</text>
             <circle cx="580" cy="324" r="2.2" fill="#c0a060" stroke="#864" stroke-width="0.8"/>
             <circle cx="600" cy="324" r="2.2" fill="#c0a060" stroke="#864" stroke-width="0.8"/>
             <line x1="600" y1="324" x2="600" y2="342" stroke="#864" stroke-width="1.5"/>
-            <line x1="600" y1="342" x2="600" y2="455" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
-            <text x="613" y="420" font-size="7" fill="#333" font-style="italic">→ GND</text>
+            <!-- GND-Jumper 10kΩ → untere -Schiene (durchgezogen blau) -->
+            <line x1="600" y1="342" x2="600" y2="460" stroke="#1565C0" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="600" cy="342" r="3" fill="#1565C0" stroke="#0a3a78" stroke-width="0.8"/>
+            <circle cx="600" cy="460" r="3.5" fill="#1565C0" stroke="#0a3a78" stroke-width="0.8"/>
+            <text x="615" y="425" font-size="8" fill="#0a3a78" font-weight="bold">→ GND</text>
 
             <!-- ===== LEGENDE ===== -->
             <rect x="20" y="555" width="680" height="160" rx="6" fill="#f0f0f0" stroke="#ccc" stroke-width="1"/>
@@ -881,7 +886,7 @@ const LESSONS_PROJEKT = [
             <!-- Pin-Labels ÜBER der Pin-Nummer (im Arduino, ersetzen Header) -->
             <g font-size="9" font-weight="bold" text-anchor="middle">
               <text x="100" y="103" fill="#ff5555">ROT</text>
-              <text x="180" y="103" fill="#ff6">GELB</text>
+              <text x="180" y="103" fill="#ffe033">GELB</text>
               <text x="260" y="103" fill="#6f6">GRÜN</text>
               <text x="340" y="103" fill="#ff5555">F-ROT</text>
               <text x="420" y="103" fill="#6f6">F-GRÜN</text>
@@ -1174,7 +1179,7 @@ const LESSONS_PROJEKT = [
 
             <!-- A0-Knotenpunkt: Sp.27 ist die Bahn die mit LDR-B (Reihe a) UND Pin A0 (Reihe e) UND 10k-Bein 1 (Reihe c) verbunden ist -->
             <circle cx="580" cy="310" r="4" fill="#f90" stroke="#c60" stroke-width="1.2"/>
-            <text x="580" y="304" text-anchor="middle" font-size="6.5" fill="#c60" font-weight="bold">A0-Knoten</text>
+            <text x="580" y="304" text-anchor="middle" font-size="6.5" fill="#c60" font-weight="bold" stroke="white" stroke-width="2.5" stroke-linejoin="round" paint-order="stroke fill">A0-Knoten</text>
 
             <!-- 10kΩ Widerstand horizontal Sp.27-28, Reihe c -->
             <rect x="578" y="320" width="24" height="8" rx="2" fill="#c0a060" stroke="#864" stroke-width="1"/>
@@ -1186,9 +1191,11 @@ const LESSONS_PROJEKT = [
             <circle cx="580" cy="324" r="2.2" fill="#c0a060" stroke="#864" stroke-width="0.8"/>
             <circle cx="600" cy="324" r="2.2" fill="#c0a060" stroke="#864" stroke-width="0.8"/>
             <line x1="600" y1="324" x2="600" y2="342" stroke="#864" stroke-width="1.5"/>
-            <!-- Sp.28 Reihe e → untere -Schiene (10k zur Masse) -->
-            <line x1="600" y1="342" x2="600" y2="455" stroke="#333" stroke-width="1.5" stroke-dasharray="3,1.5"/>
-            <text x="613" y="420" font-size="7" fill="#333" font-style="italic">→ GND</text>
+            <!-- Sp.28 Reihe e → untere -Schiene (10k zur Masse, durchgezogen blau) -->
+            <line x1="600" y1="342" x2="600" y2="460" stroke="#1565C0" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="600" cy="342" r="3" fill="#1565C0" stroke="#0a3a78" stroke-width="0.8"/>
+            <circle cx="600" cy="460" r="3.5" fill="#1565C0" stroke="#0a3a78" stroke-width="0.8"/>
+            <text x="615" y="425" font-size="8" fill="#0a3a78" font-weight="bold">→ GND</text>
 
             <!-- ===== LEGENDE ===== -->
             <rect x="20" y="555" width="680" height="160" rx="6" fill="#f0f0f0" stroke="#ccc" stroke-width="1"/>

@@ -188,6 +188,9 @@
     <!-- ===== Markierung A0-Kabel-Einstich an a8 (Spalte 8, Reihe a) ===== -->
     <circle cx="180" cy="47" r="6" fill="none" stroke="#27AE60" stroke-width="2.5" stroke-dasharray="2 2"/>
     <text x="180" y="138" text-anchor="middle" font-size="8" font-style="italic" fill="#27AE60">A0-Kabel kommt hier rein (Sp.8 Reihe a)</text>
+
+    <!-- Breadboard-Label UNTER dem Breadboard (Style-Guide §6) -->
+    <text x="320" y="244" text-anchor="middle" font-size="10" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
   </g>
 
   <!-- ===================== HINWEIS-BOX ===================== -->

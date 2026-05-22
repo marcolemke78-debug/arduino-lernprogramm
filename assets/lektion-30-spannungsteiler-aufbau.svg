@@ -178,6 +178,9 @@
     <!-- Schwarze Messspitze an -Schiene (Spalte 16) -->
     <circle cx="340" cy="213" r="4" fill="#222" stroke="#fff" stroke-width="1.5"/>
     <text x="340" y="200" text-anchor="middle" font-size="7" font-weight="bold" fill="#222">schwarze Spitze (COM)</text>
+
+    <!-- Breadboard-Label UNTER dem Breadboard (Style-Guide §6) -->
+    <text x="320" y="244" text-anchor="middle" font-size="10" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
   </g>
 
   <!-- ===================== MULTIMETER (rechts) ===================== -->

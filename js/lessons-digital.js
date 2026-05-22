@@ -306,7 +306,7 @@ const LESSONS_DIGITAL = [
           </figure>
           <figure class="schaltbild-figur">
             <figcaption><strong>2. Aufbau am Steckbrett</strong> &mdash; so sieht der echte Aufbau aus:</figcaption>
-            <img src="assets/lektion-05-led-pin8-aufbau.svg?v=6" alt="Steckbrett-Aufbau: LED an Pin 8 mit 220 Ohm Vorwiderstand" style="max-width: 100%; height: auto;" />
+            <img src="assets/lektion-05-led-pin8-aufbau.svg?v=7" alt="Steckbrett-Aufbau: LED an Pin 8 mit 220 Ohm Vorwiderstand" style="max-width: 100%; height: auto;" />
           </figure>`,
         schritte: [
           'Stecke die LED senkrecht in das Steckbrett, <strong>ueber die Mittelluecke</strong>: der <strong>lange Anschluss</strong> (Anode, +) in Loch <code>f12</code>, der <strong>kurze Anschluss</strong> (Kathode, &minus;) genau gegenueber in <code>e12</code>.',
@@ -1176,7 +1176,7 @@ void loop() {
 
             <!-- ===== TASTER über Mittelrinne (Sp.8 Reihe e + Sp.10 Reihe f, diagonal) ===== -->
             <rect x="185" y="288" width="70" height="44" rx="4" fill="none" stroke="#66f" stroke-width="1" stroke-dasharray="4,2"/>
-            <text x="220" y="200" text-anchor="middle" font-size="11" fill="#44c" font-weight="bold">⬇ TASTER (über Mittelrinne)</text>
+            <text x="220" y="200" text-anchor="middle" font-size="11" fill="#44c" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">⬇ TASTER (über Mittelrinne)</text>
             <!-- Taster-Körper überspannt die Mittelrinne von Sp.8 bis Sp.10 -->
             <rect x="190" y="292" width="60" height="36" rx="3" fill="#888" stroke="#555" stroke-width="1"/>
             <circle cx="220" cy="310" r="8" fill="#aaa" stroke="#666" stroke-width="1"/>
@@ -1505,7 +1505,7 @@ void loop() {
 
             <!-- ===== TASTER (Sp.5 Reihe e + Sp.7 Reihe f, über Mittelrinne) ===== -->
             <rect x="125" y="288" width="70" height="44" rx="4" fill="none" stroke="#66f" stroke-width="1" stroke-dasharray="4,2"/>
-            <text x="160" y="200" text-anchor="middle" font-size="11" fill="#44c" font-weight="bold">⬇ TASTER (Eingabe)</text>
+            <text x="160" y="200" text-anchor="middle" font-size="11" fill="#44c" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">⬇ TASTER (Eingabe)</text>
             <!-- Taster-Körper überspannt Mittelrinne -->
             <rect x="130" y="292" width="60" height="36" rx="3" fill="#888" stroke="#555" stroke-width="1"/>
             <circle cx="160" cy="310" r="8" fill="#aaa" stroke="#666" stroke-width="1"/>
@@ -1525,7 +1525,7 @@ void loop() {
 
             <!-- ===== LED-Schaltung (Sp.11 → Sp.12 → Sp.13) ===== -->
             <rect x="252" y="266" width="80" height="84" rx="4" fill="none" stroke="#e44" stroke-width="1" stroke-dasharray="4,2"/>
-            <text x="290" y="200" text-anchor="middle" font-size="11" fill="#c44" font-weight="bold">⬇ LED (Ausgabe)</text>
+            <text x="290" y="200" text-anchor="middle" font-size="11" fill="#c44" font-weight="bold" stroke="white" stroke-width="3.5" stroke-linejoin="round" paint-order="stroke fill">⬇ LED (Ausgabe)</text>
 
             <rect x="258" y="306" width="24" height="8" rx="2" fill="#e8d5a3" stroke="#a08050" stroke-width="1"/>
             <line x1="264" y1="306" x2="264" y2="314" stroke="#e53935" stroke-width="1.2"/>

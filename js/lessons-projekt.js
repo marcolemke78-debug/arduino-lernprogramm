@@ -1701,7 +1701,7 @@ const LESSONS_PROJEKT = [
 
           <table class="icon-table">
             <tr><th>Bauteil</th><th>Anschluss</th></tr>
-            <tr><td>Festwiderstand 10 kOhm</td><td>5V &rarr; A0 (oben im Spannungsteiler, Konvention aus L16)</td></tr>
+            <tr><td>Festwiderstand 10 kOhm</td><td>5V &rarr; A0 (oben im Spannungsteiler)</td></tr>
             <tr><td>NTC (10 kOhm bei 25 &deg;C)</td><td>A0 &rarr; GND (unten im Spannungsteiler)</td></tr>
             <tr><td>Servomotor (SG90)</td><td>Signal &rarr; Pin 9 (PWM), Rot &rarr; 5V, Braun/Schwarz &rarr; GND</td></tr>
             <tr><td>Glühlampe über <strong>Relais-Modul</strong></td><td>Relais = elektronischer Schalter, der mit einem 5-V-Signal vom Arduino eine getrennte Last (z.&nbsp;B. 230 V) schaltet. Steuersignal &rarr; Pin 7. <strong>Wichtig:</strong> Die Glühlampe hängt an der <em>getrennten Lastseite</em> des Relais, niemals direkt am Arduino-Pin!</td></tr>
@@ -1715,7 +1715,7 @@ const LESSONS_PROJEKT = [
 <span class="keyword">int</span> lampePin  = <span class="value">7</span>;
 
 <span class="comment">// Schwellenwerte (Rohwerte vom Spannungsteiler, mit Serial Monitor kalibrieren!)</span>
-<span class="comment">// NTC unten am GND, Festwiderstand 10k oben an 5V (Konvention aus L16):</span>
+<span class="comment">// NTC unten am GND, Festwiderstand 10k oben an 5V:</span>
 <span class="comment">//   warm  =&gt; NTC-Widerstand sinkt =&gt; analogRead-Wert sinkt</span>
 <span class="comment">//   kalt  =&gt; NTC-Widerstand steigt =&gt; analogRead-Wert steigt</span>
 <span class="keyword">int</span> SCHWELLE_HEISS = <span class="value">450</span>;  <span class="comment">// Wert UNTER 450 = warm = Fenster auf</span>
@@ -1825,7 +1825,7 @@ Servo dachFenster;
           <table class="icon-table">
             <tr><th>Bauteil</th><th>Anschluss</th></tr>
             <tr><td>DC-Motor (max. 100 mA)</td><td>per NPN-Transistor (BC547) + Freilaufdiode an Pin 9 (PWM). Stärkerer Motor &rarr; BC337 (800 mA) oder TIP120 (5 A).</td></tr>
-            <tr><td>Festwiderstand 10 kOhm</td><td>5V &rarr; A0 (oben im Spannungsteiler, Konvention aus L16)</td></tr>
+            <tr><td>Festwiderstand 10 kOhm</td><td>5V &rarr; A0 (oben im Spannungsteiler)</td></tr>
             <tr><td>NTC (10 kOhm bei 25 &deg;C)</td><td>A0 &rarr; GND (unten im Spannungsteiler)</td></tr>
             <tr><td>Taster</td><td>zwischen Pin 8 und GND (INPUT_PULLUP)</td></tr>
             <tr><td>Freilaufdiode 1N4148</td><td>parallel zum Motor (Kathode/Ring an +5V) &mdash; schützt den Arduino vor Spannungsspitzen</td></tr>
@@ -1840,7 +1840,7 @@ Servo dachFenster;
 
 <span class="comment">// Zustand</span>
 <span class="keyword">bool</span> lueftungAn = <span class="value">false</span>;
-<span class="comment">// NTC unten am GND, Festwiderstand 10k oben an 5V (Konvention aus L16):</span>
+<span class="comment">// NTC unten am GND, Festwiderstand 10k oben an 5V:</span>
 <span class="comment">// warm =&gt; analogRead-Wert SINKT. Daher: kleiner Wert = sehr warm.</span>
 <span class="keyword">int</span> SCHWELLE_HEISS = <span class="value">400</span>;  <span class="comment">// Wert UNTER 400 = sehr warm = volle Drehzahl</span>
 

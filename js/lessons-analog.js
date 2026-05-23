@@ -1217,7 +1217,7 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
         </div>
 
         <div class="tip-box">
-          <strong>Merke:</strong> Bei dieser Schaltung gilt: <strong>Hell = hoher Wert, Dunkel = niedriger Wert</strong>. Das ist logisch, weil bei Helligkeit mehr Strom durch den LDR fliesst und mehr Spannung am Messpunkt ankommt.
+          <strong>Merke:</strong> Bei dieser Schaltung gilt: <strong>Hell = hoher Wert, Dunkel = niedriger Wert</strong>. Das ist logisch: Bei Helligkeit wird der LDR-Widerstand klein, also faellt fast die ganze Spannung ueber dem unteren 10-kOhm-Widerstand ab &ndash; und genau die misst der Arduino an A0. (In der Reihenschaltung fliesst durch beide Bauteile derselbe Strom; entscheidend ist, wie sich die Spannung aufteilt.)
         </div>
 
         <hr class="section-divider">

@@ -356,7 +356,7 @@ void loop() {
 }`,
         erklaerung: '<p>Im <code>setup()</code> wird Pin 8 als Ausgang konfiguriert — das passiert genau einmal beim Start. In der <code>loop()</code> wird der Pin dauerhaft auf HIGH (5V) gesetzt, die LED leuchtet konstant. <em>Erklaerung wird beim Pilot ggf. noch verfeinert.</em></p>',
         haeufige_fehler: [
-          '<strong>Vorwiderstand vergessen:</strong> LED brennt sofort durch — riecht verbrannt.',
+          '<strong>Vorwiderstand vergessen:</strong> Zu viel Strom — die LED wird ueberlastet und kann kaputtgehen, ausserdem belastet es den Arduino-Pin.',
           '<strong>LED falsch herum:</strong> Langes Bein (Anode) muss zum Widerstand/+5V, kurzes Bein zu GND.',
           '<strong>pinMode() vergessen:</strong> LED bleibt dunkel, kein Strom am Ausgang.',
           '<strong>Falscher Pin im Code:</strong> Code zeigt Pin 8, Kabel steckt in Pin 7 — kommt erstaunlich oft vor.'

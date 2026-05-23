@@ -442,7 +442,12 @@ const LESSONS_PROJEKT = [
           'Pin A0, INPUT'
         ],
         correct: 1,
-        explanation: 'Der Taster ist an Pin 7 mit INPUT_PULLUP. Der Arduino aktiviert einen internen Pull-Up-Widerstand, sodass kein externer Widerstand nötig ist. Der Pin liest HIGH wenn nicht gedrückt und LOW wenn gedrückt.'
+        explanation: 'Der Taster ist an Pin 7 mit INPUT_PULLUP. Der Arduino aktiviert einen internen Pull-Up-Widerstand, sodass kein externer Widerstand nötig ist. Der Pin liest HIGH wenn nicht gedrückt und LOW wenn gedrückt.',
+        wrongExplanations: {
+          0: 'Pin 7 stimmt, aber wir nutzen INPUT_PULLUP — der interne Widerstand reicht. Ein externer Widerstand waere doppelt gemoppelt.',
+          2: 'Pin 6 ist hier nicht der Taster — und ein Taster ist ein EINGANG. OUTPUT wuerde den Pin zum Ausgang machen, der den Taster gar nicht lesen koennte.',
+          3: 'A0 ist ein ANALOGER Pin. Fuer einen Taster (nur an/aus) ist das Verschwendung — wir nutzen den digitalen Pin 7.'
+        }
       },
       {
         type: 'multiple-choice',
@@ -454,7 +459,12 @@ const LESSONS_PROJEKT = [
           'Weil die LED sonst kaputt geht'
         ],
         correct: 2,
-        explanation: 'Die Räumzeit ist ein Sicherheitsfeature. In der echten Welt sind vielleicht noch Autos auf der Kreuzung, die erst durchfahren müssen, bevor Fußgänger sicher gehen können.'
+        explanation: 'Die Räumzeit ist ein Sicherheitsfeature. In der echten Welt sind vielleicht noch Autos auf der Kreuzung, die erst durchfahren müssen, bevor Fußgänger sicher gehen können.',
+        wrongExplanations: {
+          0: 'Der Arduino schaltet in Mikrosekunden — der ist nicht das Problem. Es geht um Sicherheit im echten Verkehr, nicht um Technik-Tempo.',
+          1: 'Es geht nicht um Optik, sondern um Verkehrssicherheit: Autos koennten noch auf der Kreuzung sein und muessen sie erst verlassen.',
+          3: 'LEDs vertragen beliebig schnelle Schaltvorgaenge problemlos. Die Pause ist eine Sicherheitsregel aus der Strassenverkehrs-Ordnung.'
+        }
       }
     ]
   },
@@ -798,7 +808,12 @@ const LESSONS_PROJEKT = [
           'Es kommt eine Fehlermeldung'
         ],
         correct: 0,
-        explanation: 'Bei Dunkelheit hat der LDR einen hohen Widerstand. In unserer Schaltung (5V → LDR → A0 → 10k → GND) fällt dann fast die gesamte Spannung am LDR ab und am Messpunkt A0 kommt nur wenig an – der Wert wird niedrig (z.B. 50-100).'
+        explanation: 'Bei Dunkelheit hat der LDR einen hohen Widerstand. In unserer Schaltung (5V → LDR → A0 → 10k → GND) fällt dann fast die gesamte Spannung am LDR ab und am Messpunkt A0 kommt nur wenig an – der Wert wird niedrig (z.B. 50-100).',
+        wrongExplanations: {
+          1: 'Andersrum: Bei viel LDR-Widerstand faellt fast alles am LDR ab und am A0-Knotenpunkt kommt nur wenig Spannung an. Dunkel = niedriger Wert.',
+          2: 'Nein, 512 waere genau die Mitte (2,5 V). Der Wert variiert je nach Helligkeit zwischen ~50 und ~900 — 512 kommt nur zufaellig vor.',
+          3: 'analogRead() liefert immer einen Wert — auch bei extremen Lichtverhaeltnissen. Fehlermeldungen kommen vom Compiler, nicht zur Laufzeit.'
+        }
       },
       {
         type: 'matching',
@@ -820,7 +835,12 @@ const LESSONS_PROJEKT = [
           'Weil der Code jedes Mal anders kompiliert wird'
         ],
         correct: 1,
-        explanation: 'Jeder LDR hat leichte Fertigungsunterschiede, und die Beleuchtung im Raum ist nie exakt gleich. Deshalb misst man die konkreten Werte mit dem Serial Monitor und passt den Schwellenwert an die eigene Situation an.'
+        explanation: 'Jeder LDR hat leichte Fertigungsunterschiede, und die Beleuchtung im Raum ist nie exakt gleich. Deshalb misst man die konkreten Werte mit dem Serial Monitor und passt den Schwellenwert an die eigene Situation an.',
+        wrongExplanations: {
+          0: 'Alle Arduinos arbeiten mit exakt 5 V (vom USB-Spannungsregler) — da gibt es keine Unterschiede. Die Streuung kommt von LDR und Umgebungslicht.',
+          2: 'Der Serial Monitor zeigt die Werte 1:1, er ist nur ein Anzeige-Tool. Die Kalibrierung ist noetig wegen LDR-Toleranzen und unterschiedlicher Raumhelligkeit.',
+          3: 'Kompilieren liefert immer das gleiche Programm — der Code laeuft auf jedem Arduino identisch. Was variiert, ist nur die Hardware-Umgebung.'
+        }
       }
     ]
   },
@@ -1974,7 +1994,12 @@ Servo dachFenster;
           '7 Stück (5 für LEDs + 1 für Taster + 1 für LDR)'
         ],
         correct: 2,
-        explanation: 'Du brauchst 5x 220-Ohm-Widerstände für die 5 LEDs und 1x 10-kOhm-Widerstand für den LDR-Spannungsteiler. Der Taster braucht keinen externen Widerstand, weil wir INPUT_PULLUP verwenden – das sind also 6 Widerstände insgesamt.'
+        explanation: 'Du brauchst 5x 220-Ohm-Widerstände für die 5 LEDs und 1x 10-kOhm-Widerstand für den LDR-Spannungsteiler. Der Taster braucht keinen externen Widerstand, weil wir INPUT_PULLUP verwenden – das sind also 6 Widerstände insgesamt.',
+        wrongExplanations: {
+          0: '5 stimmt fuer die LEDs, aber der LDR braucht zusaetzlich einen Festwiderstand fuer den Spannungsteiler — sonst kann der Arduino keine Spannung messen.',
+          1: 'Vorsicht: Der Taster braucht in dieser Schaltung KEINEN externen Widerstand, weil wir INPUT_PULLUP nutzen. Der 6. Widerstand ist fuer den LDR-Spannungsteiler.',
+          3: 'Einer zu viel: Wegen INPUT_PULLUP entfaellt der Taster-Widerstand. Es sind 5x 220 Ohm fuer LEDs + 1x 10 kOhm fuer den LDR = 6 Stueck.'
+        }
       },
       {
         type: 'multiple-choice',
@@ -1986,7 +2011,12 @@ Servo dachFenster;
           'Der Taster wird deaktiviert, aber die Ampel läuft weiter'
         ],
         correct: 2,
-        explanation: 'Wenn der LDR-Wert über dem Schwellenwert liegt, bedeutet das: Es ist hell (Tag). Im Code steht dann der else-Zweig: Alle LEDs werden ausgeschaltet. Die Ampel "schläft" und reagiert auch nicht auf den Taster.'
+        explanation: 'Wenn der LDR-Wert über dem Schwellenwert liegt, bedeutet das: Es ist hell (Tag). Im Code steht dann der else-Zweig: Alle LEDs werden ausgeschaltet. Die Ampel "schläft" und reagiert auch nicht auf den Taster.',
+        wrongExplanations: {
+          0: 'Nein, im Code gibt es keinen Blink-Befehl fuer den Tagmodus. Tagmodus heisst einfach: alles aus, um Energie und unnoetige Aufmerksamkeit zu sparen.',
+          1: 'Rot waere eine aktive Ampelphase — bei Tag soll die Ampel aber komplett SCHLAFEN, nicht durchschalten. Alle LEDs gehen aus.',
+          3: 'Andersrum: Bei hellem Licht sind ALLE LEDs aus. Die Ampel laeuft nicht weiter — sie schlaeft komplett, bis es wieder dunkel wird.'
+        }
       },
       {
         type: 'multiple-choice',

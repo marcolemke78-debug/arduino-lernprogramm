@@ -552,7 +552,12 @@ Hitze:       U<sub>2</sub> = 5 V &middot; 4  / (10 + 4)  &asymp; <strong>1,43 V<
           '0 bis 5000'
         ],
         correct: 2,
-        explanation: 'Richtig! Der 10-Bit Analog-Digital-Wandler des Arduino liefert Werte von 0 (= 0V) bis 1023 (= 5V). Das sind insgesamt 1024 verschiedene Stufen.'
+        explanation: 'Richtig! Der 10-Bit Analog-Digital-Wandler des Arduino liefert Werte von 0 (= 0V) bis 1023 (= 5V). Das sind insgesamt 1024 verschiedene Stufen.',
+        wrongExplanations: {
+          0: 'Nein, nur 0 oder 1 liefert digitalRead(). analogRead() misst feine Abstufungen zwischen 0 V und 5 V — sonst koennte man Sensorwerte nicht erfassen.',
+          1: 'Vorsicht: 0-255 ist der Wertebereich von analogWrite() (8-Bit PWM). analogRead() arbeitet mit 10-Bit-Aufloesung: 0-1023.',
+          3: 'Nein, der Arduino rechnet die 0-5 V intern in 1024 Stufen um — er liefert nicht den Millivolt-Wert, sondern eine Zahl von 0 bis 1023.'
+        }
       },
       {
         type: 'matching',
@@ -926,7 +931,12 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
           '0 bis 5000'
         ],
         correct: 2,
-        explanation: 'Richtig! analogWrite() verwendet einen 8-Bit-Wert: 0 (ganz aus) bis 255 (voll an). Im Gegensatz dazu liefert analogRead() Werte von 0 bis 1023.'
+        explanation: 'Richtig! analogWrite() verwendet einen 8-Bit-Wert: 0 (ganz aus) bis 255 (voll an). Im Gegensatz dazu liefert analogRead() Werte von 0 bis 1023.',
+        wrongExplanations: {
+          0: 'Vorsicht, das ist genau umgekehrt: 0-1023 ist der Bereich von analogRead() (10 Bit). analogWrite() schreibt mit nur 8 Bit (0-255).',
+          1: 'Nein, nur HIGH/LOW kennt digitalWrite(). analogWrite() kann auch Zwischenwerte — genau deshalb kann es dimmen.',
+          3: 'Die 0-5000 koennten an Millivolt erinnern — aber so denkt der Arduino nicht. analogWrite() arbeitet mit 256 Stufen (0-255).'
+        }
       },
       {
         type: 'matching',
@@ -948,7 +958,12 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
           'Er gibt 1023 zurueck'
         ],
         correct: 1,
-        explanation: 'Genau! 512 ist ungefaehr die Haelfte von 1023. Die Funktion map() rechnet das proportional um: Die Haelfte von 255 ist ca. 127. So wird aus einem Poti-Wert (0–1023) ein LED-Wert (0–255).'
+        explanation: 'Genau! 512 ist ungefaehr die Haelfte von 1023. Die Funktion map() rechnet das proportional um: Die Haelfte von 255 ist ca. 127. So wird aus einem Poti-Wert (0–1023) ein LED-Wert (0–255).',
+        wrongExplanations: {
+          0: 'Nein, map() rechnet UM — sonst waere die Funktion sinnlos. Aus 512 im Bereich 0-1023 wird proportional ein Wert im Bereich 0-255: rund 127.',
+          2: '0 waere nur richtig, wenn der Eingangswert auch 0 waere. 512 liegt in der Mitte des Eingangsbereichs — die Mitte des Zielbereichs ist 127.',
+          3: '1023 ist der OBERE Wert des EINGANGS-Bereichs. Das Ergebnis muss aber im ZIEL-Bereich 0-255 liegen — nicht im Eingangsbereich.'
+        }
       }
     ]
   },
@@ -1252,7 +1267,12 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
           'Der LDR geht kaputt'
         ],
         correct: 1,
-        explanation: 'Richtig! Bei Dunkelheit steigt der Widerstand des LDR stark an (bis zu 100 kOhm oder mehr). Bei Helligkeit sinkt er auf wenige kOhm. Deshalb heisst er auch "lichtabhaengiger Widerstand".'
+        explanation: 'Richtig! Bei Dunkelheit steigt der Widerstand des LDR stark an (bis zu 100 kOhm oder mehr). Bei Helligkeit sinkt er auf wenige kOhm. Deshalb heisst er auch "lichtabhaengiger Widerstand".',
+        wrongExplanations: {
+          0: 'Andersrum: Bei DUNKELHEIT steigt der LDR-Widerstand stark an (bis ueber 100 kOhm). Hell = wenig Widerstand, dunkel = viel Widerstand.',
+          2: 'Doch, der LDR aendert seinen Widerstand mit dem Licht — genau das macht ihn zum Sensor. Bliebe er konstant, koennte man Helligkeit nicht messen.',
+          3: 'Nein, der LDR ist sehr robust und dafuer gebaut, sich staendig zu aendern. Kaputt geht da nichts.'
+        }
       },
       {
         type: 'matching',
@@ -1274,7 +1294,12 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
           'Der Widerstand ist optional und kann weggelassen werden'
         ],
         correct: 1,
-        explanation: 'Genau! Der Arduino kann keinen Widerstand direkt messen, nur Spannung. Der feste 10-kOhm-Widerstand bildet zusammen mit dem LDR einen Spannungsteiler. Die Spannung am Knotenpunkt aendert sich je nach Helligkeit – und genau diese Spannung misst der Arduino.'
+        explanation: 'Genau! Der Arduino kann keinen Widerstand direkt messen, nur Spannung. Der feste 10-kOhm-Widerstand bildet zusammen mit dem LDR einen Spannungsteiler. Die Spannung am Knotenpunkt aendert sich je nach Helligkeit – und genau diese Spannung misst der Arduino.',
+        wrongExplanations: {
+          0: 'Der LDR braucht keinen Schutz — er ist robust und vertraegt 5 V direkt. Der 10-kOhm ist sein MESS-PARTNER im Spannungsteiler, kein Schutzwiderstand.',
+          2: 'Die LED liegt in einem separaten Stromkreis. Der 10-kOhm-Widerstand sitzt in der Sensor-Schaltung und hat mit der LED nichts zu tun.',
+          3: 'Doch, der Widerstand ist Pflicht. Ohne ihn liegt am A0-Pin entweder 0 V oder 5 V — und der Arduino bekaeme keinen Helligkeits-Verlauf zu sehen.'
+        }
       }
     ]
   },
@@ -1809,7 +1834,12 @@ void loop() {
           'Der Arduino verbraucht weniger Strom'
         ],
         correct: 2,
-        explanation: 'Richtig! Hysterese verwendet zwei Schwellenwerte statt einem. Dadurch entsteht eine "Puffer-Zone", in der sich nichts aendert. Das verhindert das nervige Flackern, wenn der Sensorwert um den Schwellenwert herum schwankt.'
+        explanation: 'Richtig! Hysterese verwendet zwei Schwellenwerte statt einem. Dadurch entsteht eine "Puffer-Zone", in der sich nichts aendert. Das verhindert das nervige Flackern, wenn der Sensorwert um den Schwellenwert herum schwankt.',
+        wrongExplanations: {
+          0: 'Helligkeit ist eine Eigenschaft der LED + ihres Vorwiderstands — nicht der Steuer-Logik. Hysterese aendert nur das SCHALT-Verhalten.',
+          1: 'Doch — den 220-Ohm-Vorwiderstand fuer die LED brauchst du weiterhin. Hysterese ist ein reines Software-Konzept und ersetzt keine Hardware.',
+          3: 'Der Stromverbrauch aendert sich nicht messbar. Hysterese spart kein Strom, sondern verhindert nur das visuelle Flackern am Schwellenwert.'
+        }
       },
       {
         type: 'ordering',
@@ -1832,7 +1862,12 @@ void loop() {
           '250 ist die maximale Helligkeit der LED'
         ],
         correct: 1,
-        explanation: 'Genau! Bei unserer Schaltung bedeutet ein niedriger analogRead()-Wert, dass es dunkel ist. Wenn der Wert unter 250 faellt (= dunkel), wird die LED eingeschaltet. Das ist die Grundlogik eines automatischen Nachtlichts.'
+        explanation: 'Genau! Bei unserer Schaltung bedeutet ein niedriger analogRead()-Wert, dass es dunkel ist. Wenn der Wert unter 250 faellt (= dunkel), wird die LED eingeschaltet. Das ist die Grundlogik eines automatischen Nachtlichts.',
+        wrongExplanations: {
+          0: 'Andersrum: Der Vergleich &lt; 250 prueft, ob der Wert KLEINER ist. Die LED geht also bei NIEDRIGEN Werten an — und niedrig bedeutet bei dieser Schaltung dunkel.',
+          2: 'Nein, das if traegt eine Bedingung: Nur wenn helligkeit &lt; 250 ist die Bedingung wahr. Bei Tageslicht ist der Wert hoch und die LED bleibt aus.',
+          3: '250 ist hier ein SCHWELLENWERT fuer den Sensor (LDR), kein LED-Wert. Die LED kennt in dieser Schaltung nur HIGH oder LOW.'
+        }
       }
     ]
   }

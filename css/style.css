@@ -153,6 +153,94 @@ body {
   transition: width 0.4s ease;
 }
 
+/* === Spaced Repetition: "Heute faellig"-Sektion === */
+#review-due {
+  margin-bottom: 2rem;
+}
+
+.review-due-card {
+  border: 1px solid #FCD34D;
+  background: #FFFBEB;
+  border-left: 4px solid #F59E0B;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+
+.review-due-head {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #92400E;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.review-due-icon {
+  display: inline-block;
+  font-size: 1.1rem;
+  color: #B45309;
+}
+
+.review-due-hint {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin: 0.4rem 0 0.8rem;
+}
+
+.review-due-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.review-due-btn {
+  background: var(--bg);
+  border: 1px solid #FCD34D;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  /* Touch-freundliche Mindesthoehe */
+  min-height: 44px;
+}
+
+.review-due-btn:hover {
+  background: #FEF3C7;
+  border-color: #F59E0B;
+}
+
+.review-due-num {
+  font-weight: 600;
+  color: #B45309;
+}
+
+.review-due-box {
+  display: inline-block;
+  margin-left: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #92400E;
+  background: #FEF3C7;
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  vertical-align: middle;
+}
+
+/* Sidebar-Badge an faelliger Lektion */
+.review-badge {
+  margin-left: 0.4rem;
+  font-size: 0.85rem;
+  color: #B45309;
+  font-weight: 700;
+}
+
+#sidebar li.review-due-item {
+  font-weight: 600;
+}
+
 /* === Übungs-Header (Übung X von Y) === */
 .exercise-header {
   font-size: 0.9rem;

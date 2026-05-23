@@ -48,6 +48,7 @@ function navigateToLesson(id) {
 document.addEventListener('DOMContentLoaded', () => {
   Renderer.renderSidebar(LESSONS);
   Renderer.renderProgressBar();
+  Renderer.renderReviewDue();
   const lastLesson = Progress.getLastLesson();
   navigateToLesson(lastLesson);
   const menuToggle = document.getElementById('menu-toggle');

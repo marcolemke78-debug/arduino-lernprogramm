@@ -1,6 +1,48 @@
 const Renderer = {
 
   /**
+   * "Heute zur Wiederholung faellig"-Sektion rendern (Spaced Repetition).
+   * Zeigt die heute faelligen Lektionen als klickbare Buttons. Ist nichts
+   * faellig, bleibt die Sektion leer (kein leerer Kasten).
+   */
+  renderReviewDue() {
+    const box = document.getElementById('review-due');
+    if (!box) return;
+    const due = Progress.getDueLessons();
+    if (due.length === 0) {
+      box.innerHTML = '';
+      box.style.display = 'none';
+      return;
+    }
+    box.style.display = '';
+
+    const heading = due.length === 1
+      ? '1 Lektion ist heute zur Wiederholung fällig'
+      : due.length + ' Lektionen sind heute zur Wiederholung fällig';
+
+    let html = '<div class="review-due-card">'
+      + '<div class="review-due-head"><span class="review-due-icon">↻</span> ' + heading + '</div>'
+      + '<p class="review-due-hint">Verteiltes Wiederholen festigt das Gelernte. Klick auf eine Lektion und mach ihre Übungen erneut.</p>'
+      + '<div class="review-due-list">';
+    due.forEach(item => {
+      const meta = LESSONS.find(l => l.id === item.id);
+      const title = meta ? meta.title : 'Lektion ' + item.id;
+      const pos = LESSONS.findIndex(l => l.id === item.id) + 1;
+      html += '<button class="review-due-btn" data-lesson-id="' + item.id + '">'
+        + '<span class="review-due-num">Lektion ' + pos + '</span> ' + title
+        + ' <span class="review-due-box">Fach ' + item.box + '</span></button>';
+    });
+    html += '</div></div>';
+    box.innerHTML = html;
+
+    box.querySelectorAll('.review-due-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        navigateToLesson(parseInt(btn.dataset.lessonId, 10));
+      });
+    });
+  },
+
+  /**
    * Sidebar mit Lektionsliste aufbauen.
    * Jede Lektion bekommt ein <li> mit data-lesson-id und einer
    * CSS-Klasse je nach Fortschrittsstatus.
@@ -30,6 +72,17 @@ const Renderer = {
       } else {
         li.classList.add('not-started');
         li.textContent = lesson.title;
+      }
+
+      // Spaced-Repetition-Badge: heute faellige Lektion markieren
+      const review = Progress.getReviewInfo(lesson.id);
+      if (review && review.due) {
+        li.classList.add('review-due-item');
+        const badge = document.createElement('span');
+        badge.className = 'review-badge';
+        badge.textContent = '↻';
+        badge.title = 'Heute zur Wiederholung fällig';
+        li.appendChild(badge);
       }
 
       // In die richtige Liste einfuegen (nach Modul-Name)
@@ -205,8 +258,12 @@ const Renderer = {
           // Wenn alle Uebungen bestanden: Lektion als abgeschlossen markieren
           if (completedCount === totalExercises) {
             Progress.setStatus(id, 'completed');
+            // Spaced Repetition: Lektion ins Leitner-System aufnehmen bzw.
+            // bei faelliger Wiederholung ins naechste Fach schieben.
+            Progress.recordCompletion(id);
             Renderer.renderSidebar(LESSONS);
             Renderer.renderProgressBar();
+            Renderer.renderReviewDue();
           }
         });
       });

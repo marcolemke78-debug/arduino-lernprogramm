@@ -99,5 +99,77 @@ const Progress = {
       }
     });
     return Math.round((completed / LESSONS.length) * 100);
+  },
+
+  // ===================== Spaced Repetition (Leitner-System) =====================
+  // Verteiltes Wiederholen: Eine abgeschlossene Lektion wandert durch fuenf
+  // Karteikasten-Faecher mit wachsenden Abstaenden. Jede erfolgreiche faellige
+  // Wiederholung schiebt sie ins naechste Fach. So konzentriert sich das Ueben
+  // automatisch auf das, was noch nicht sitzt.
+  // Die SR-Felder (box, dueDate, lastReviewed) werden additiv pro Lektion
+  // ergaenzt — KEIN VERSION-Bump noetig, damit bestehender Fortschritt erhalten bleibt.
+  INTERVALS: [1, 3, 7, 16, 35], // Tage bis zur naechsten Wiederholung je Fach (1..5)
+
+  // Heutiges Datum als YYYY-MM-DD (tagesgenau, ohne Uhrzeit/Zeitzone-Tuecken).
+  _today() {
+    const d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  },
+
+  // Datum-String (YYYY-MM-DD) um n Tage verschieben, wieder als YYYY-MM-DD.
+  _addDays(dateStr, n) {
+    const d = new Date(dateStr + 'T00:00:00');
+    d.setDate(d.getDate() + n);
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  },
+
+  // Ist dieses Faelligkeitsdatum heute oder schon ueberschritten?
+  // YYYY-MM-DD-Strings sind gleich lang und gepaddet -> lexikografischer Vergleich genuegt.
+  _isDue(dateStr) {
+    return !!dateStr && dateStr <= this._today();
+  },
+
+  // Eine Lektion wurde komplett (alle Uebungen richtig) geloest.
+  // - Erstabschluss          -> Fach 1, faellig in 1 Tag
+  // - faellige Wiederholung   -> naechstes Fach (max 5), faellig nach groesserem Abstand
+  // - vorzeitige Wiederholung -> Fach + Datum bleiben unveraendert (kein Vorspulen)
+  recordCompletion(lessonId) {
+    const data = this.load();
+    if (!data.lessons[lessonId]) data.lessons[lessonId] = { status: 'completed' };
+    const lesson = data.lessons[lessonId];
+    const isFirstTime = !lesson.box;
+    if (isFirstTime) {
+      lesson.box = 1;
+      lesson.dueDate = this._addDays(this._today(), this.INTERVALS[0]);
+      lesson.lastReviewed = this._today();
+    } else if (this._isDue(lesson.dueDate)) {
+      lesson.box = Math.min(lesson.box + 1, this.INTERVALS.length);
+      lesson.dueDate = this._addDays(this._today(), this.INTERVALS[lesson.box - 1]);
+      lesson.lastReviewed = this._today();
+    }
+    this.save(data);
+  },
+
+  // Alle heute (oder frueher) faelligen Lektionen, am laengsten ueberfaellig zuerst.
+  getDueLessons() {
+    const data = this.load();
+    const today = this._today();
+    const due = [];
+    Object.keys(data.lessons).forEach(id => {
+      const l = data.lessons[id];
+      if (l.box && l.box > 0 && l.dueDate && l.dueDate <= today) {
+        due.push({ id: parseInt(id, 10), box: l.box, dueDate: l.dueDate });
+      }
+    });
+    due.sort((a, b) => (a.dueDate < b.dueDate ? -1 : (a.dueDate > b.dueDate ? 1 : 0)));
+    return due;
+  },
+
+  // SR-Info einer einzelnen Lektion (fuer Sidebar-Badges). null = nicht im SR-System.
+  getReviewInfo(lessonId) {
+    const data = this.load();
+    const l = data.lessons[lessonId];
+    if (!l || !l.box) return null;
+    return { box: l.box, dueDate: l.dueDate, due: this._isDue(l.dueDate) };
   }
 };

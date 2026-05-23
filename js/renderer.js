@@ -261,9 +261,11 @@ const Renderer = {
             // Spaced Repetition: Lektion ins Leitner-System aufnehmen bzw.
             // bei faelliger Wiederholung ins naechste Fach schieben.
             Progress.recordCompletion(id);
+            // Nur Sidebar-Badge + Fortschritt aktualisieren — die Faellig-Box
+            // NICHT neu zeigen (waere mitten im Lernen ablenkend; sie ist eine
+            // Begruessung beim Start, danach uebernehmen die Sidebar-Badges).
             Renderer.renderSidebar(LESSONS);
             Renderer.renderProgressBar();
-            Renderer.renderReviewDue();
           }
         });
       });

@@ -30,6 +30,11 @@ const LESSONS = [
 function navigateToLesson(id) {
   document.getElementById('progress-bar-container').style.display = '';
   document.getElementById('sidebar').classList.remove('open');
+  // Wiederholungs-Box ausblenden, sobald aktiv in eine Lektion navigiert wird
+  // (Fokus aufs Lernen). Sie erscheint nur als Begruessung beim App-Start;
+  // die dezenten Sidebar-Badges bleiben als Dauer-Erinnerung sichtbar.
+  const reviewBox = document.getElementById('review-due');
+  if (reviewBox) reviewBox.style.display = 'none';
   Progress.setLastLesson(id);
   if (Progress.getStatus(id) === 'not_started') {
     Progress.setStatus(id, 'in_progress');
@@ -48,9 +53,11 @@ function navigateToLesson(id) {
 document.addEventListener('DOMContentLoaded', () => {
   Renderer.renderSidebar(LESSONS);
   Renderer.renderProgressBar();
-  Renderer.renderReviewDue();
   const lastLesson = Progress.getLastLesson();
   navigateToLesson(lastLesson);
+  // Begruessung: Faellig-Box NACH der initialen Navigation zeigen,
+  // damit sie beim App-Start ueber der zuletzt geoeffneten Lektion erscheint.
+  Renderer.renderReviewDue();
   const menuToggle = document.getElementById('menu-toggle');
   const sidebar = document.getElementById('sidebar');
   if (menuToggle) {

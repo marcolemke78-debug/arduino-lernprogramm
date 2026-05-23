@@ -1,4 +1,58 @@
 const Exercises = {
+  // Alle 24 Permutationen von [0,1,2,3] — fuer deterministisches MC-Shuffle.
+  _ALL_PERMS_4: [
+    [0,1,2,3],[0,1,3,2],[0,2,1,3],[0,2,3,1],[0,3,1,2],[0,3,2,1],
+    [1,0,2,3],[1,0,3,2],[1,2,0,3],[1,2,3,0],[1,3,0,2],[1,3,2,0],
+    [2,0,1,3],[2,0,3,1],[2,1,0,3],[2,1,3,0],[2,3,0,1],[2,3,1,0],
+    [3,0,1,2],[3,0,2,1],[3,1,0,2],[3,1,2,0],[3,2,0,1],[3,2,1,0]
+  ],
+
+  /**
+   * Deterministischer Shuffle der options/correct/wrongExplanations
+   * fuer MC-Uebungen. Verhindert Position-Bias (Marco 2026-05-23:
+   * 73% aller MCs hatten correct=1, weil Autoren intuitiv die richtige
+   * Antwort an Position 2 setzen).
+   *
+   * Seed = "L<lessonId>E<exIdx>" -> Hash (Knuth multiplicative) ->
+   * Permutationsindex 0..23. Gleicher Seed = gleiche Permutation
+   * (reproduzierbar bei Reload). Bei Lektions-Bestand mit 51 MCs
+   * resultiert das in Position-Verteilung 13/10/15/13 (20-29 %).
+   *
+   * @param {Object} exercise - MC-Exercise mit options, correct, wrongExplanations
+   * @param {string} seedString - z.B. "L5E0" fuer Lektion 5, Uebung 0
+   * @returns {Object} Neue Exercise mit permutierten Feldern (Original unveraendert)
+   */
+  shuffleMc(exercise, seedString) {
+    if (exercise.type !== 'multiple-choice' || !exercise.options || exercise.options.length !== 4) {
+      return exercise;
+    }
+    // Knuth multiplicative hash (Math.imul) — gleichmaessigste Verteilung im Test
+    let hash = 0;
+    for (let i = 0; i < seedString.length; i++) {
+      hash = Math.imul(hash ^ seedString.charCodeAt(i), 2654435761);
+    }
+    const perm = Exercises._ALL_PERMS_4[Math.abs(hash) % 24];
+
+    const newOptions = perm.map(i => exercise.options[i]);
+    const newCorrect = perm.indexOf(exercise.correct);
+
+    let newWrong;
+    if (exercise.wrongExplanations) {
+      newWrong = Array.isArray(exercise.wrongExplanations) ? [] : {};
+      Object.entries(exercise.wrongExplanations).forEach(([oldKey, value]) => {
+        if (value == null) return;
+        const newIdx = perm.indexOf(parseInt(oldKey, 10));
+        newWrong[newIdx] = value;
+      });
+    }
+
+    return Object.assign({}, exercise, {
+      options: newOptions,
+      correct: newCorrect,
+      wrongExplanations: newWrong
+    });
+  },
+
   /**
    * Rendert eine einzelne Uebung in den Container.
    * Dispatcht je nach exercise.type an die passende Render-Funktion.

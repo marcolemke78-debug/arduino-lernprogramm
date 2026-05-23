@@ -192,7 +192,13 @@ const Renderer = {
         exerciseHeader.textContent = 'Übung ' + (index + 1) + ' von ' + totalExercises;
         exercisesSection.appendChild(exerciseHeader);
 
-        Exercises.render(exercise, exercisesSection, () => {
+        // MC-Uebungen deterministisch shufflen, um Position-Bias zu vermeiden
+        // (Quell-Code hatte 73 % aller correct=1 — Schueler raten sonst die Position).
+        const renderedExercise = exercise.type === 'multiple-choice'
+          ? Exercises.shuffleMc(exercise, 'L' + id + 'E' + index)
+          : exercise;
+
+        Exercises.render(renderedExercise, exercisesSection, () => {
           completedCount++;
           // Header als abgeschlossen markieren (visuelle Rueckmeldung)
           exerciseHeader.classList.add('completed');

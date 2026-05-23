@@ -258,7 +258,12 @@ const LESSONS_DIGITAL = [
           'Damit die LED blinkt'
         ],
         correct: 1,
-        explanation: 'Ohne Vorwiderstand fliesst zu viel Strom durch die LED und sie brennt durch. Der Widerstand begrenzt den Strom auf ein sicheres Mass. 220 Ohm ist der Standardwert fuer die meisten LEDs.'
+        explanation: 'Ohne Vorwiderstand fliesst zu viel Strom durch die LED und sie brennt durch. Der Widerstand begrenzt den Strom auf ein sicheres Mass. 220 Ohm ist der Standardwert fuer die meisten LEDs.',
+        wrongExplanations: {
+          0: 'Im Gegenteil: Ohne Widerstand wuerde die LED kurzzeitig sehr hell leuchten — und dann durchbrennen. Der Widerstand schuetzt sie vor zu viel Strom.',
+          2: 'Mit dem Arduino-Takt hat der Vorwiderstand nichts zu tun. Er sitzt im LED-Stromkreis und schuetzt die LED, nicht den Prozessor.',
+          3: 'Blinken kommt vom Code (digitalWrite + delay), nicht vom Widerstand. Ein Widerstand allein kann nichts ein- und ausschalten.'
+        }
       },
       {
         type: 'matching',
@@ -281,7 +286,12 @@ const LESSONS_DIGITAL = [
           'analogWrite(5, HIGH);'
         ],
         correct: 1,
-        explanation: 'Zuerst wird der Pin als OUTPUT gesetzt, dann mit digitalWrite(5, HIGH) eingeschaltet. Ohne OUTPUT-Modus kann der Pin keinen Strom liefern.'
+        explanation: 'Zuerst wird der Pin als OUTPUT gesetzt, dann mit digitalWrite(5, HIGH) eingeschaltet. Ohne OUTPUT-Modus kann der Pin keinen Strom liefern.',
+        wrongExplanations: {
+          0: 'Vorsicht: INPUT macht den Pin zum EINGANG — er kann dann keinen Strom liefern, sondern nur einen Zustand lesen. Du brauchst OUTPUT.',
+          2: 'digitalRead() LIEST den Pin nur aus, schaltet ihn aber nicht ein. Zum Anschalten brauchst du digitalWrite(5, HIGH).',
+          3: 'analogWrite() erwartet eine Helligkeit von 0-255, nicht HIGH. Fuer reines Einschalten ist digitalWrite() der richtige Befehl.'
+        }
       }
     ],
     // === Praxis-Tab (Tab 4) ===
@@ -609,7 +619,12 @@ void loop() {
           'Der Arduino geht kaputt'
         ],
         correct: 1,
-        explanation: 'delay(250) wartet nur 250 Millisekunden = 0,25 Sekunden. Die LEDs wechseln also viermal so schnell wie bei delay(1000). Alles andere bleibt gleich.'
+        explanation: 'delay(250) wartet nur 250 Millisekunden = 0,25 Sekunden. Die LEDs wechseln also viermal so schnell wie bei delay(1000). Alles andere bleibt gleich.',
+        wrongExplanations: {
+          0: 'Helligkeit haengt von Spannung und Vorwiderstand ab, nicht von delay(). Eine kuerzere Pause aendert das TEMPO, nicht die Helligkeit.',
+          2: 'Nein, beide LEDs blinken weiter — nur schneller. delay() veraendert keine Pin-Zuweisungen, sondern wartet nur kuerzer.',
+          3: 'Der Arduino verkraftet beliebige delay()-Werte problemlos — auch delay(1) oder delay(10000). Er geht davon nicht kaputt.'
+        }
       },
       {
         type: 'matching',
@@ -631,7 +646,12 @@ void loop() {
           'Weil die LEDs ueber Funk verbunden sind'
         ],
         correct: 1,
-        explanation: 'Der Arduino arbeitet mit 16 Millionen Takten pro Sekunde. Die zwei digitalWrite()-Befehle dauern nur wenige Mikrosekunden \u2013 das ist fuer Menschen nicht wahrnehmbar. Erst das delay() danach macht eine sichtbare Pause.'
+        explanation: 'Der Arduino arbeitet mit 16 Millionen Takten pro Sekunde. Die zwei digitalWrite()-Befehle dauern nur wenige Mikrosekunden \u2013 das ist fuer Menschen nicht wahrnehmbar. Erst das delay() danach macht eine sichtbare Pause.',
+        wrongExplanations: {
+          0: 'Nein, der Arduino Uno hat nur EINEN Prozessor (ATmega328P). Er ist nur extrem schnell \u2014 16 Millionen Takte pro Sekunde.',
+          2: 'delay() schaltet gar nichts \u2014 der Befehl wartet nur. Geschaltet wird ueber digitalWrite() bei jeder LED einzeln.',
+          3: 'Nein, es gibt keinen Funk. Die LEDs sind ueber Pin-Kabel direkt mit dem Arduino verbunden \u2014 der schaltet sie eine nach der anderen.'
+        }
       }
     ]
   },
@@ -987,7 +1007,12 @@ void loop() {
           'Gar keinen'
         ],
         correct: 2,
-        explanation: 'Jede LED braucht ihren eigenen 220 Ohm Vorwiderstand. Bei 5 LEDs sind das 5 Widerstaende. So wird der Strom fuer jede LED individuell begrenzt.'
+        explanation: 'Jede LED braucht ihren eigenen 220 Ohm Vorwiderstand. Bei 5 LEDs sind das 5 Widerstaende. So wird der Strom fuer jede LED individuell begrenzt.',
+        wrongExplanations: {
+          0: 'Nein, ein gemeinsamer Widerstand fuer alle 5 LEDs funktioniert nicht — der Strom teilt sich ungleichmaessig auf, manche LEDs leuchten schwach oder gar nicht.',
+          1: 'Nein, du brauchst genau so viele Widerstaende wie LEDs — bei 5 LEDs also 5 Stueck. Jeder Stromkreis braucht seinen eigenen Schutz.',
+          3: 'Ohne Widerstand brennt jede LED nach wenigen Sekunden durch. Bei 5 LEDs heisst das: 5x kaputt. Pro LED: 220 Ohm.'
+        }
       },
       {
         type: 'matching',
@@ -1009,7 +1034,12 @@ void loop() {
           'Weil die Pins 8 und 12 nicht rueckwaerts funktionieren'
         ],
         correct: 1,
-        explanation: 'LED 5 leuchtet am Ende des Vorwaerts-Laufs und LED 1 am Anfang des naechsten. Wuerden wir sie im Ruecklauf nochmal zaehlen, wuerden sie doppelt so lange leuchten und das Lauflicht wuerde dort stocken.'
+        explanation: 'LED 5 leuchtet am Ende des Vorwaerts-Laufs und LED 1 am Anfang des naechsten. Wuerden wir sie im Ruecklauf nochmal zaehlen, wuerden sie doppelt so lange leuchten und das Lauflicht wuerde dort stocken.',
+        wrongExplanations: {
+          0: 'Mehrfaches Schalten macht LEDs nicht kaputt — sie sind dafuer gebaut. Es geht um den OPTISCHEN Eindruck, nicht um Lebensdauer.',
+          2: 'Nein, der Arduino kann viele Pins gleichzeitig steuern (alle 14 digitalen). Hier geht es nur um die Reihenfolge im Lauf.',
+          3: 'Pins kennen keine Richtung — digitalWrite(8, HIGH) funktioniert genauso, egal ob vor- oder rueckwaerts gezaehlt wird.'
+        }
       }
     ]
   },
@@ -1264,7 +1294,12 @@ void loop() {
           'Gar nichts'
         ],
         correct: 1,
-        explanation: 'Bei INPUT_PULLUP zieht der interne Widerstand den Pin auf HIGH. Erst wenn der Taster gedrueckt wird, verbindet er den Pin mit GND und der Wert wird LOW.'
+        explanation: 'Bei INPUT_PULLUP zieht der interne Widerstand den Pin auf HIGH. Erst wenn der Taster gedrueckt wird, verbindet er den Pin mit GND und der Wert wird LOW.',
+        wrongExplanations: {
+          0: 'Andersrum: Bei INPUT_PULLUP ist NICHT gedrueckt = HIGH. Erst beim Druecken zieht der Taster den Pin auf LOW. Eselsbruecke: "Pull-UP zieht hoch".',
+          2: 'Zufaellige Werte gibt es nur OHNE Pull-up/-down (schwebender Pin). Genau deshalb nutzt man INPUT_PULLUP — dann ist der Zustand klar definiert.',
+          3: 'digitalRead() liefert immer einen Wert — entweder HIGH oder LOW. "Nichts" gibt es nicht.'
+        }
       },
       {
         type: 'matching',
@@ -1286,7 +1321,12 @@ void loop() {
           'Damit die LED heller leuchtet'
         ],
         correct: 1,
-        explanation: 'Ohne Widerstand "schwebt" der Pin und liefert zufaellige Werte. Der Pull-up/Pull-down gibt ihm eine klare Grundstellung (HIGH oder LOW), wenn der Taster offen ist.'
+        explanation: 'Ohne Widerstand "schwebt" der Pin und liefert zufaellige Werte. Der Pull-up/Pull-down gibt ihm eine klare Grundstellung (HIGH oder LOW), wenn der Taster offen ist.',
+        wrongExplanations: {
+          0: 'Mit dem Reaktions-Tempo hat der Widerstand nichts zu tun — Taster reagieren ohnehin in Millisekunden. Es geht um den Pin-Zustand im OFFENEN Zustand.',
+          2: 'Der Arduino bekommt seinen Strom ueber USB oder die Strombuchse. Der Pull-up-Widerstand ist nur fuer den Eingangspegel zustaendig.',
+          3: 'LED und Taster sind getrennte Stromkreise — der Pull-up-Widerstand hat nichts mit der LED-Helligkeit zu tun.'
+        }
       }
     ]
   },
@@ -1587,7 +1627,12 @@ void loop() {
           'Pin 7 und Pin 8 werden beide auf LOW gesetzt'
         ],
         correct: 1,
-        explanation: 'Bei INPUT_PULLUP bedeutet LOW = gedrueckt. Also: Wenn Taster gedrueckt, dann LED an Pin 8 einschalten (HIGH).'
+        explanation: 'Bei INPUT_PULLUP bedeutet LOW = gedrueckt. Also: Wenn Taster gedrueckt, dann LED an Pin 8 einschalten (HIGH).',
+        wrongExplanations: {
+          0: 'Vorsicht: Der Code prueft auf LOW, nicht HIGH. Bei INPUT_PULLUP bedeutet LOW = gedrueckt, HIGH = nicht gedrueckt — also genau umgekehrt zur Intuition.',
+          2: 'Pin 7 ist hier der TASTER (Eingang, INPUT_PULLUP) — keine LED. Die LED haengt an Pin 8.',
+          3: 'Nein, hier wird nur GELESEN (digitalRead an Pin 7) und je nach Ergebnis GESCHRIEBEN (digitalWrite an Pin 8 = HIGH). Keine doppelte LOW-Zuweisung.'
+        }
       },
       {
         type: 'matching',
@@ -1610,7 +1655,12 @@ void loop() {
           'Damit der Code kuerzer wird'
         ],
         correct: 1,
-        explanation: 'Ohne "letzterDruck" wuerde der Arduino bei jedem loop()-Durchlauf (tausende Male pro Sekunde!) umschalten, solange der Taster gehalten wird. Die Variable stellt sicher, dass nur ein NEUER Druck erkannt wird.'
+        explanation: 'Ohne "letzterDruck" wuerde der Arduino bei jedem loop()-Durchlauf (tausende Male pro Sekunde!) umschalten, solange der Taster gehalten wird. Die Variable stellt sicher, dass nur ein NEUER Druck erkannt wird.',
+        wrongExplanations: {
+          0: 'Helligkeit hat mit einer Logik-Variable nichts zu tun — letzterDruck merkt sich nur den Tasterzustand vom letzten Durchlauf.',
+          2: 'Andersrum: Die Variable BREMST bewusst, damit nicht jeder loop()-Durchlauf zaehlt. Nur der EINE neue Tastendruck soll umschalten.',
+          3: 'Im Gegenteil — ohne die Variable waere der Code zwar kuerzer, aber unbrauchbar: Die LED wuerde wild flackern, solange du den Taster haeltst.'
+        }
       }
     ]
   },
@@ -1953,7 +2003,12 @@ void loop() {
           'Gar keinen, die LEDs teilen sich den Strom'
         ],
         correct: 2,
-        explanation: 'Jede LED braucht ihren eigenen 220 Ohm Vorwiderstand, damit der Strom individuell begrenzt wird. Wuerde man nur einen Widerstand fuer alle verwenden, wuerden die LEDs unterschiedlich hell leuchten.'
+        explanation: 'Jede LED braucht ihren eigenen 220 Ohm Vorwiderstand, damit der Strom individuell begrenzt wird. Wuerde man nur einen Widerstand fuer alle verwenden, wuerden die LEDs unterschiedlich hell leuchten.',
+        wrongExplanations: {
+          0: 'Bei einem gemeinsamen Widerstand teilen sich die 3 LEDs den Strom ungleichmaessig — sie leuchten verschieden hell. Faustregel: Pro LED ein eigener Widerstand.',
+          1: 'Nein, es muessen genau so viele Widerstaende wie LEDs sein — bei einer Ampel mit 3 LEDs also 3 Stueck.',
+          3: 'Ohne Widerstand brennen alle 3 LEDs schnell durch. Sie "teilen" sich den Strom auch nicht selbststaendig — jeder Stromkreis braucht seinen eigenen Schutz.'
+        }
       },
       {
         type: 'matching',
@@ -1975,7 +2030,12 @@ void loop() {
           'Gruen \u2192 Gelb \u2192 Rot \u2192 Rot-Gelb \u2192 Gruen'
         ],
         correct: 1,
-        explanation: 'Die deutsche Ampelfolge ist: Rot (Halt) \u2192 Rot-Gelb (Achtung, gleich Gruen) \u2192 Gruen (Fahren) \u2192 Gelb (Achtung, gleich Rot). Die Rot-Gelb-Phase gibt es nur in wenigen Laendern!'
+        explanation: 'Die deutsche Ampelfolge ist: Rot (Halt) \u2192 Rot-Gelb (Achtung, gleich Gruen) \u2192 Gruen (Fahren) \u2192 Gelb (Achtung, gleich Rot). Die Rot-Gelb-Phase gibt es nur in wenigen Laendern!',
+        wrongExplanations: {
+          0: 'Da fehlt die Rot-Gelb-Phase. In Deutschland kommt zwischen Rot und Gruen IMMER Rot-Gelb als Achtung-Signal. Direkt von Rot auf Gruen springen nur Ampeln im Ausland.',
+          2: 'Falsche Reihenfolge: Rot-Gelb kommt VOR Gruen, nicht danach. Eselsbruecke: Rot-Gelb heisst "gleich darfst du fahren", nicht "gleich musst du halten".',
+          3: 'Der typische Zyklus beginnt mit Rot. Praktisch laeuft die Ampel zwar im Kreis, aber konventionell startet man im Halt-Zustand.'
+        }
       }
     ]
   }

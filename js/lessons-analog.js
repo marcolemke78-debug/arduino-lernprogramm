@@ -1326,7 +1326,7 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
 
         <div class="info-card">
           <h3>Was bedeutet "NTC"?</h3>
-          <p>NTC ist die Abkuerzung fuer <strong>N</strong>egativer <strong>T</strong>emperatur<strong>K</strong>oeffizient (engl.: <em>Negative Temperature Coefficient</em>). Auf deutsch: <strong>negativer Zusammenhang</strong> zwischen Temperatur und Widerstand.</p>
+          <p>NTC ist die englische Abkuerzung fuer <strong>N</strong>egative <strong>T</strong>emperature <strong>C</strong>oefficient. Auf deutsch: <strong>negativer Temperaturkoeffizient</strong> &ndash; also ein <strong>negativer Zusammenhang</strong> zwischen Temperatur und Widerstand (Temperatur hoch &rarr; Widerstand runter).</p>
           <table class="icon-table">
             <tr><th>Temperatur</th><th>Widerstand</th><th>Eselsbruecke</th></tr>
             <tr><td><strong>kalt</strong></td><td>hoch</td><td>"kalt = klemmt"</td></tr>

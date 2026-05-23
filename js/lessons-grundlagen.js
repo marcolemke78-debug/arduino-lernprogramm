@@ -329,7 +329,7 @@ const LESSONS_GRUNDLAGEN = [
       steps: [
         { label: 'LED anschließen', html: 'Eine LED braucht einen <strong>digitalen Pin</strong> (z.B. Pin 8) und einen <strong>GND</strong>-Anschluss. Der Pin sagt "an" oder "aus".' },
         { label: 'Taster anschließen', html: 'Ein Taster wird auch an einen <strong>digitalen Pin</strong> angeschlossen. Der Arduino liest: "Gedrückt oder nicht?"' },
-        { label: 'Lichtsensor', html: 'Ein Lichtsensor braucht einen <strong>analogen Pin</strong> (z.B. A0). Analoge Pins können Werte zwischen 0 und 1023 messen – nicht nur an/aus.' },
+        { label: 'Lichtsensor', html: 'Ein Lichtsensor braucht einen <strong>analogen Pin</strong> (z.B. A0). Analoge Pins wandeln die gemessene Spannung (0–5V) mit 10-Bit-Auflösung in einen Wert zwischen 0 und 1023 um – nicht nur an/aus.' },
         { label: 'LED dimmen', html: 'Zum Dimmen brauchst du einen <strong>PWM-Pin</strong> (mit ~ markiert). Nur diese Pins können Zwischenwerte ausgeben.' }
       ]
     },

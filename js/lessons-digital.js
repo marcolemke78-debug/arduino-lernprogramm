@@ -1127,7 +1127,7 @@ void loop() {
 
         <div class="tip-box">
           <strong>Die einfachste Loesung: INPUT_PULLUP</strong><br>
-          Der Arduino hat <strong>eingebaute Pull-up-Widerstaende</strong>! Mit <code>pinMode(pin, INPUT_PULLUP)</code> aktivierst du ihn &ndash; <strong>kein externer Widerstand noetig</strong>. Der Taster wird einfach zwischen Pin und GND angeschlossen. Das ist die Methode, die wir im Unterricht verwenden!
+          Der Arduino hat <strong>eingebaute Pull-up-Widerstaende</strong> (ca. 20&ndash;50 k&Omega;)! Mit <code>pinMode(pin, INPUT_PULLUP)</code> aktivierst du ihn &ndash; <strong>kein externer Widerstand noetig</strong>. Der Taster wird einfach zwischen Pin und GND angeschlossen. Das ist die Methode, die wir im Unterricht verwenden!
         </div>
 
         <hr class="section-divider">

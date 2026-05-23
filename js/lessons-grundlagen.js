@@ -349,7 +349,12 @@ const LESSONS_GRUNDLAGEN = [
         question: 'Wie viele analoge Pins hat der Arduino Uno?',
         options: ['4', '6', '8', '14'],
         correct: 1,
-        explanation: 'Der Arduino Uno hat 6 analoge Pins: A0 bis A5. Sie können Spannungen zwischen 0V und 5V messen.'
+        explanation: 'Der Arduino Uno hat 6 analoge Pins: A0 bis A5. Sie können Spannungen zwischen 0V und 5V messen.',
+        wrongExplanations: {
+          0: 'Nein, 4 ist zu wenig. Schau auf das Board: A0, A1, A2, A3, A4, A5 — das sind genau 6 Pins.',
+          2: 'Nein, 8 hat der Uno nicht. Größere Boards wie der Arduino Mega haben mehr analoge Pins — beim Uno sind es nur A0 bis A5.',
+          3: 'Vorsicht: Die 14 sind die DIGITALEN Pins (0–13). Analog gibt es nur 6 (A0–A5) — die liegen auf der anderen Seite des Boards.'
+        }
       },
       {
         type: 'multiple-choice',
@@ -361,7 +366,12 @@ const LESSONS_GRUNDLAGEN = [
           'Der Arduino geht kaputt'
         ],
         correct: 2,
-        explanation: 'Ohne GND ist der Stromkreis nicht geschlossen – kein Strom fließt, die LED bleibt dunkel. Wie ein Wasserkreislauf ohne Rückfluss.'
+        explanation: 'Ohne GND ist der Stromkreis nicht geschlossen – kein Strom fließt, die LED bleibt dunkel. Wie ein Wasserkreislauf ohne Rückfluss.',
+        wrongExplanations: {
+          0: 'Nein, ohne Rückweg über GND fließt gar kein Strom. Die LED bleibt komplett dunkel — wie ein Wasserkreislauf ohne Abfluss.',
+          1: 'Nein, schwächer leuchtet sie auch nicht. Strom ist hier nicht weniger, sondern null — der Kreis ist einfach offen.',
+          3: 'Keine Panik: Wenn der Kreis offen ist, fließt nichts. Der Arduino geht erst kaputt, wenn ZU VIEL Strom fließt — z.B. Pin direkt an GND OHNE Widerstand.'
+        }
       }
     ]
   },
@@ -577,7 +587,12 @@ const LESSONS_GRUNDLAGEN = [
           'Setzt die Helligkeit auf 500'
         ],
         correct: 2,
-        explanation: 'delay() wartet die angegebene Zeit in Millisekunden. 500 ms = 0,5 Sekunden = eine halbe Sekunde.'
+        explanation: 'delay() wartet die angegebene Zeit in Millisekunden. 500 ms = 0,5 Sekunden = eine halbe Sekunde.',
+        wrongExplanations: {
+          0: 'Nein, delay() schaltet keine Pins. Pins schaltest du mit digitalWrite() oder analogWrite() — delay() pausiert nur das Programm.',
+          1: 'Vorsicht: delay() arbeitet in MILLISEKUNDEN, nicht Sekunden. 500 ms = 0,5 s. Für 500 Sekunden müsstest du delay(500000) schreiben.',
+          3: 'Nein, für Helligkeit (PWM-Werte 0–255) gibt es analogWrite(). delay() macht etwas ganz anderes: es wartet.'
+        }
       },
       {
         type: 'multiple-choice',
@@ -589,7 +604,12 @@ const LESSONS_GRUNDLAGEN = [
           'Pin 13 wird ausgeschaltet'
         ],
         correct: 1,
-        explanation: 'HIGH bedeutet "an" = 5 Volt am Pin. LOW wäre "aus" = 0 Volt.'
+        explanation: 'HIGH bedeutet "an" = 5 Volt am Pin. LOW wäre "aus" = 0 Volt.',
+        wrongExplanations: {
+          0: 'Vorsicht: Eingang oder Ausgang wird mit pinMode() festgelegt — das passiert einmalig in setup(). digitalWrite() schaltet danach den Ausgang nur noch an oder aus.',
+          2: 'Nein, halbe Helligkeit gibt es bei digitalWrite() nicht — der Befehl kennt nur HIGH (an) und LOW (aus). Für Zwischenwerte brauchst du analogWrite(pin, 128).',
+          3: 'Andersrum: HIGH ist AN (5 V). Ausschalten wäre digitalWrite(13, LOW). Eselsbrücke: HIGH = hohe Spannung = an.'
+        }
       },
       {
         type: 'ordering',
@@ -755,7 +775,12 @@ const LESSONS_GRUNDLAGEN = [
           'Zweimal'
         ],
         correct: 1,
-        explanation: 'setup() wird genau einmal ausgeführt – wenn der Arduino startet oder nach einem Reset. Dort richtest du alles ein.'
+        explanation: 'setup() wird genau einmal ausgeführt – wenn der Arduino startet oder nach einem Reset. Dort richtest du alles ein.',
+        wrongExplanations: {
+          0: 'Doch — setup() läuft tatsächlich. Sonst wüsste der Arduino z.B. gar nicht, dass Pin 13 ein Ausgang sein soll, und nichts würde funktionieren.',
+          2: 'Endlos wiederholt wird nur loop(). setup() ist die EINMALIGE Einrichtung beim Start — wie das Ofen-Vorheizen, bevor du anfängst zu kochen.',
+          3: 'Nein, nur einmal. Erst wenn du den roten Reset-Button drückst (oder den Strom trennst und wieder anschließt), startet setup() neu.'
+        }
       },
       {
         type: 'multiple-choice',
@@ -767,7 +792,12 @@ const LESSONS_GRUNDLAGEN = [
           'Nichts, es funktioniert trotzdem'
         ],
         correct: 1,
-        explanation: 'Ohne Semikolon kann der Arduino-Compiler den Code nicht verstehen. Du bekommst eine Fehlermeldung – meist "expected \';\' before..."'
+        explanation: 'Ohne Semikolon kann der Arduino-Compiler den Code nicht verstehen. Du bekommst eine Fehlermeldung – meist "expected \';\' before..."',
+        wrongExplanations: {
+          0: 'Nein, der Compiler ignoriert keine Zeile — er bricht ab. Ohne Semikolon weiß er nicht, wo der Befehl endet, und meldet einen Fehler.',
+          2: 'Nein, ein fehlendes Semikolon ist KEIN Tempo-Problem. Der Code wird gar nicht erst hochgeladen, weil die IDE ihn nicht kompilieren kann.',
+          3: 'Doch, das fehlende Semikolon ist ein harter Fehler. Die Fehlermeldung lautet meist: expected \';\' before next-token.'
+        }
       },
       {
         type: 'ordering',

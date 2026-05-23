@@ -130,23 +130,36 @@ const Progress = {
   },
 
   // Eine Lektion wurde komplett (alle Uebungen richtig) geloest.
-  // - Erstabschluss          -> Fach 1, faellig in 1 Tag
-  // - faellige Wiederholung   -> naechstes Fach (max 5), faellig nach groesserem Abstand
-  // - vorzeitige Wiederholung -> Fach + Datum bleiben unveraendert (kein Vorspulen)
-  recordCompletion(lessonId) {
+  // Die Selbsteinschaetzung des Lernenden (confidence) steuert das Leitner-Fach
+  // — assessment-capable learning (Hattie d=1,44): der Schueler bewertet selbst,
+  // wie sicher er sich fuehlt, und steuert damit den Wiederholungsrhythmus.
+  //   'low'    (noch unsicher) -> zurueck auf Fach 1 (morgen wieder)
+  //   'medium' (geht so)       -> bleibt im aktuellen Fach (Erstabschluss: Fach 1)
+  //   'high'   (sitzt sicher)  -> ein Fach weiter (Erstabschluss: Fach 2, ueberspringt Fach 1)
+  // Ohne confidence (Fallback): wie 'medium'.
+  // Das naechste Faelligkeitsdatum ergibt sich aus dem Intervall des neuen Fachs.
+  recordCompletion(lessonId, confidence) {
     const data = this.load();
     if (!data.lessons[lessonId]) data.lessons[lessonId] = { status: 'completed' };
     const lesson = data.lessons[lessonId];
     const isFirstTime = !lesson.box;
-    if (isFirstTime) {
-      lesson.box = 1;
-      lesson.dueDate = this._addDays(this._today(), this.INTERVALS[0]);
-      lesson.lastReviewed = this._today();
-    } else if (this._isDue(lesson.dueDate)) {
-      lesson.box = Math.min(lesson.box + 1, this.INTERVALS.length);
-      lesson.dueDate = this._addDays(this._today(), this.INTERVALS[lesson.box - 1]);
-      lesson.lastReviewed = this._today();
+    const currentBox = lesson.box || 0;
+
+    let newBox;
+    if (confidence === 'low') {
+      newBox = 1;
+    } else if (confidence === 'high') {
+      newBox = isFirstTime ? 2 : currentBox + 1;
+    } else { // 'medium' oder kein Wert
+      newBox = isFirstTime ? 1 : currentBox;
     }
+    // In gueltigen Fachbereich 1..5 zwingen
+    newBox = Math.max(1, Math.min(newBox, this.INTERVALS.length));
+
+    lesson.box = newBox;
+    lesson.dueDate = this._addDays(this._today(), this.INTERVALS[newBox - 1]);
+    lesson.lastReviewed = this._today();
+    if (confidence) lesson.confidence = confidence;
     this.save(data);
   },
 

@@ -241,6 +241,71 @@ body {
   font-weight: 600;
 }
 
+/* === Selbst-Check nach Lektionsabschluss (Assessment-Prompt) === */
+.self-check {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent-light);
+}
+
+.self-check-head {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.self-check-hint {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin: 0.4rem 0 1rem;
+}
+
+.self-check-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.self-check-btn {
+  flex: 1 1 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.7rem 0.5rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.05s ease;
+  /* Touch-freundlich */
+  min-height: 56px;
+}
+
+.self-check-btn:hover { transform: translateY(-1px); }
+.self-check-btn:active { transform: translateY(0); }
+
+.sc-label { font-weight: 700; font-size: 0.95rem; color: var(--text); }
+.sc-sub { font-size: 0.75rem; color: var(--text-light); }
+
+.self-check-low:hover    { border-color: #DC2626; background: #FEF2F2; }
+.self-check-medium:hover { border-color: #F59E0B; background: #FFFBEB; }
+.self-check-high:hover   { border-color: var(--success); background: #F0FDF4; }
+
+.self-check-done {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--success);
+}
+
+.self-check-done .sc-box {
+  color: var(--text-light);
+  font-weight: 500;
+}
+
 /* === Übungs-Header (Übung X von Y) === */
 .exercise-header {
   font-size: 0.9rem;

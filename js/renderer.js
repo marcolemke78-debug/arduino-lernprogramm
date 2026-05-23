@@ -43,6 +43,56 @@ const Renderer = {
   },
 
   /**
+   * Selbst-Check nach Lektionsabschluss (Assessment-Capable Learning, Hattie d=1,44).
+   * Der Lernende schaetzt selbst ein, wie sicher er sich fuehlt — diese Einschaetzung
+   * steuert ueber Progress.recordCompletion das Leitner-Fach (wann die Lektion
+   * zur Wiederholung kommt). Nach der Wahl wird eine Bestaetigung gezeigt.
+   */
+  renderSelfCheck(lessonId, container) {
+    // Doppelten Block vermeiden, falls erneut aufgerufen
+    const existing = container.querySelector('.self-check');
+    if (existing) existing.remove();
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'self-check';
+
+    const head = document.createElement('div');
+    head.className = 'self-check-head';
+    head.textContent = 'Geschafft! Wie sicher fühlst du dich jetzt mit dieser Lektion?';
+    wrapper.appendChild(head);
+
+    const hint = document.createElement('p');
+    hint.className = 'self-check-hint';
+    hint.textContent = 'Sei ehrlich zu dir selbst — deine Einschätzung steuert, wann die Lektion zur Wiederholung kommt.';
+    wrapper.appendChild(hint);
+
+    const btnRow = document.createElement('div');
+    btnRow.className = 'self-check-btns';
+    const options = [
+      { conf: 'low',    label: 'Noch unsicher', sub: 'morgen nochmal' },
+      { conf: 'medium', label: 'Geht so',       sub: 'bald wieder' },
+      { conf: 'high',   label: 'Sitzt sicher',  sub: 'später wieder' }
+    ];
+    options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'self-check-btn self-check-' + opt.conf;
+      btn.innerHTML = '<span class="sc-label">' + opt.label + '</span><span class="sc-sub">' + opt.sub + '</span>';
+      btn.addEventListener('click', () => {
+        Progress.recordCompletion(lessonId, opt.conf);
+        const info = Progress.getReviewInfo(lessonId);
+        const days = info ? Progress.INTERVALS[info.box - 1] : null;
+        const dayText = days === 1 ? 'morgen' : 'in ' + days + ' Tagen';
+        wrapper.innerHTML = '<div class="self-check-done">✓ Gespeichert! Diese Lektion kommt '
+          + dayText + ' zur Wiederholung <span class="sc-box">(Fach ' + (info ? info.box : '?') + ')</span>.</div>';
+        Renderer.renderSidebar(LESSONS);
+      });
+      btnRow.appendChild(btn);
+    });
+    wrapper.appendChild(btnRow);
+    container.appendChild(wrapper);
+  },
+
+  /**
    * Sidebar mit Lektionsliste aufbauen.
    * Jede Lektion bekommt ein <li> mit data-lesson-id und einer
    * CSS-Klasse je nach Fortschrittsstatus.
@@ -258,14 +308,12 @@ const Renderer = {
           // Wenn alle Uebungen bestanden: Lektion als abgeschlossen markieren
           if (completedCount === totalExercises) {
             Progress.setStatus(id, 'completed');
-            // Spaced Repetition: Lektion ins Leitner-System aufnehmen bzw.
-            // bei faelliger Wiederholung ins naechste Fach schieben.
-            Progress.recordCompletion(id);
-            // Nur Sidebar-Badge + Fortschritt aktualisieren — die Faellig-Box
-            // NICHT neu zeigen (waere mitten im Lernen ablenkend; sie ist eine
-            // Begruessung beim Start, danach uebernehmen die Sidebar-Badges).
             Renderer.renderSidebar(LESSONS);
             Renderer.renderProgressBar();
+            // Assessment-Prompt: Der Selbst-Check fragt die Selbsteinschaetzung ab
+            // und ruft danach Progress.recordCompletion(id, confidence) auf — die
+            // Einschaetzung steuert das Leitner-Fach (statt automatischem Aufnehmen).
+            Renderer.renderSelfCheck(id, exercisesSection);
           }
         });
       });

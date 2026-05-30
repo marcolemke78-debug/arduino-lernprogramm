@@ -2,6 +2,7 @@ const LESSONS = [
   // Modul 1: Grundlagen
   { id: 1, title: 'Was ist ein Arduino?', module: 'grundlagen' },
   { id: 2, title: 'Board & Breadboard', module: 'grundlagen' },
+  { id: 35, title: 'Strom, Spannung & Widerstand', module: 'grundlagen' },
   { id: 3, title: 'Die Arduino IDE & dein erstes Programm', module: 'grundlagen' },
   { id: 4, title: 'setup() und loop()', module: 'grundlagen' },
   // Modul 2: Digitale Welt

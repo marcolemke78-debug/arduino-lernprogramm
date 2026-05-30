@@ -378,6 +378,190 @@ const LESSONS_GRUNDLAGEN = [
     ]
   },
 
+  // ===================== LEKTION (Elektrische Grundlagen, id 35) =====================
+  // Ohmsches Gesetz, Vorwiderstand-Rechnung, LED-Polaritaet. Eingeschoben
+  // vor der Blink-Lektion, weil dort der 220-Ohm-Widerstand zum ersten Mal auftaucht.
+  {
+    id: 35,
+    title: 'Strom, Spannung & Widerstand',
+    explanation: {
+      html: `
+        <h2>Strom, Spannung und Widerstand &ndash; die drei Grundgrößen</h2>
+        <p>Bevor du LEDs und Motoren ansteuerst, brauchst du drei Begriffe. Sie tauchen in jeder Schaltung und in der Prüfung wieder auf. Keine Sorge &ndash; mit einer Wasser-Analogie wird alles ganz anschaulich.</p>
+
+        <div class="analogy-box">
+          <strong>Alltagsanalogie: Strom ist wie Wasser im Rohr.</strong>
+          <ul style="margin-top:0.5rem;">
+            <li><strong>Spannung (U)</strong> = der <strong>Druck</strong>, mit dem das Wasser drückt. Einheit: <strong>Volt (V)</strong>. Der Arduino liefert 5&nbsp;V.</li>
+            <li><strong>Strom (I)</strong> = die <strong>Wassermenge</strong>, die pro Sekunde fließt. Einheit: <strong>Ampere (A)</strong> &ndash; meist die kleinere Einheit <strong>Milliampere (mA)</strong>. 1&nbsp;A = 1000&nbsp;mA.</li>
+            <li><strong>Widerstand (R)</strong> = eine <strong>enge Stelle</strong> im Rohr, die den Durchfluss bremst. Einheit: <strong>Ohm (&Omega;)</strong>.</li>
+          </ul>
+          Mehr Druck &rarr; mehr fließt. Engere Stelle &rarr; weniger fließt. Genau das beschreibt eine kleine Formel.
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Das Ohmsche Gesetz</h3>
+          <p>Spannung, Strom und Widerstand hängen über eine einzige Formel zusammen:</p>
+          <p style="text-align:center;font-size:1.3rem;margin:0.8rem 0;"><strong>I = U &divide; R</strong></p>
+          <p>Also: <strong>Strom = Spannung geteilt durch Widerstand.</strong></p>
+          <p><strong>Beispiel:</strong> An einem Widerstand von 250&nbsp;&Omega; liegen 5&nbsp;V an. Dann fließt:<br>
+          I = 5&nbsp;V &divide; 250&nbsp;&Omega; = <strong>0,02&nbsp;A = 20&nbsp;mA</strong>.</p>
+          <div class="tip-box">
+            <strong>Merkhilfe:</strong> Großer Widerstand &rarr; kleiner Strom. Kleiner Widerstand &rarr; großer Strom. Den interaktiven Regler dazu findest du gleich in der Lektion <em>"Die Arduino IDE & dein erstes Programm"</em>.
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Warum eine LED einen Vorwiderstand braucht</h3>
+          <p>Eine LED ist "gierig": Schließt du sie <strong>direkt</strong> an 5&nbsp;V an, zieht sie viel zu viel Strom und <strong>brennt durch</strong> &ndash; oft sofort. Ein <strong>Vorwiderstand</strong> in Reihe begrenzt den Strom auf einen sicheren Wert.</p>
+          <p>Eine normale LED braucht etwa <strong>2&nbsp;V</strong> für sich selbst (das nennt man Flussspannung) und mag ungefähr <strong>10&ndash;20&nbsp;mA</strong> Strom. Der Vorwiderstand "verbraucht" den Rest der Spannung.</p>
+        </div>
+
+        <div class="info-card">
+          <h3>Vorwiderstand berechnen</h3>
+          <p>Die Formel ist das Ohmsche Gesetz, umgestellt &ndash; mit der Spannung, die am Widerstand abfällt:</p>
+          <p style="text-align:center;font-size:1.2rem;margin:0.8rem 0;"><strong>R = (U<sub>Quelle</sub> &minus; U<sub>LED</sub>) &divide; I</strong></p>
+          <p><strong>Beispiel (rote LED am Arduino):</strong><br>
+          U<sub>Quelle</sub> = 5&nbsp;V, U<sub>LED</sub> = 2&nbsp;V, gewünschter Strom I = 15&nbsp;mA = 0,015&nbsp;A.<br>
+          R = (5&nbsp;V &minus; 2&nbsp;V) &divide; 0,015&nbsp;A = <strong>200&nbsp;&Omega;</strong>.</p>
+          <p>Es gibt nicht jeden Wert zu kaufen, nur <strong>Normwerte</strong>. Den nächstgrößeren nimmt man (etwas weniger Strom = sicherer) &ndash; das ist <strong>220&nbsp;&Omega;</strong>. Darum siehst du in fast jeder Arduino-Schaltung einen 220-&Omega;-Vorwiderstand an der LED.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>LED-Polung: Es gibt ein Vorne und ein Hinten</h3>
+          <p>Eine LED lässt Strom <strong>nur in eine Richtung</strong> durch (sie ist eine Diode). Deshalb hat sie zwei unterschiedliche Beine:</p>
+          <div style="text-align:center;margin:1rem 0;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 170" style="max-width:280px;width:100%;height:auto;background:#fafafa;border:1px solid #ddd;border-radius:8px;">
+              <ellipse cx="150" cy="55" rx="34" ry="40" fill="#ff6b6b" stroke="#c0392b" stroke-width="2"/>
+              <path d="M116 70 a34 14 0 0 0 68 0" fill="none" stroke="#c0392b" stroke-width="2"/>
+              <line x1="138" y1="93" x2="138" y2="150" stroke="#888" stroke-width="3"/>
+              <line x1="162" y1="93" x2="162" y2="125" stroke="#888" stroke-width="3"/>
+              <text x="138" y="165" text-anchor="middle" font-size="11" fill="#222" font-weight="bold">langes Bein</text>
+              <text x="138" y="130" text-anchor="middle" font-size="11" fill="#1e8449" font-weight="bold">Anode (+)</text>
+              <text x="205" y="120" text-anchor="start" font-size="11" fill="#222" font-weight="bold">kurzes Bein</text>
+              <text x="205" y="134" text-anchor="start" font-size="11" fill="#c0392b" font-weight="bold">Kathode (-)</text>
+            </svg>
+          </div>
+          <table class="icon-table">
+            <tr><th>Bein</th><th>Name</th><th>Wohin?</th></tr>
+            <tr><td><strong>langes Bein</strong></td><td>Anode (+)</td><td>Richtung Pluspol / über den Widerstand zum Arduino-Pin</td></tr>
+            <tr><td><strong>kurzes Bein</strong></td><td>Kathode (&minus;)</td><td>Richtung Minuspol / GND</td></tr>
+          </table>
+        </div>
+
+        <div class="warning-box">
+          <strong>Falsch herum = die LED bleibt dunkel.</strong> Sie geht davon meist nicht kaputt, aber sie leuchtet einfach nicht, weil sie Strom nur in eine Richtung durchlässt. Erster Tipp bei "LED leuchtet nicht": einmal umdrehen.
+        </div>
+      `
+    },
+    example: {
+      title: 'Schritt für Schritt: Vorwiderstand für eine rote LED berechnen',
+      steps: [
+        {
+          label: 'Werte sammeln',
+          html: `
+            <p>Wir wollen eine rote LED am Arduino betreiben. Bekannt ist:</p>
+            <ul>
+              <li>Versorgungsspannung U<sub>Quelle</sub> = <strong>5&nbsp;V</strong> (Arduino-Pin)</li>
+              <li>Flussspannung der LED U<sub>LED</sub> = <strong>2&nbsp;V</strong> (typisch für Rot)</li>
+              <li>gewünschter Strom I = <strong>15&nbsp;mA = 0,015&nbsp;A</strong></li>
+            </ul>
+          `
+        },
+        {
+          label: 'Spannung am Widerstand bestimmen',
+          html: `
+            <p>Der Widerstand bekommt die Spannung ab, die nach der LED übrig bleibt:</p>
+            <pre style="background:#f5f5f5;padding:0.8rem;border-left:3px solid #2980B9;">
+U(Widerstand) = 5 V - 2 V = 3 V</pre>
+          `
+        },
+        {
+          label: 'Mit dem Ohmschen Gesetz rechnen',
+          html: `
+            <p>Jetzt R = U &divide; I einsetzen:</p>
+            <pre style="background:#f5f5f5;padding:0.8rem;border-left:3px solid #27AE60;">
+R = 3 V / 0,015 A = 200 Ohm</pre>
+            <p>200&nbsp;&Omega; gibt es nicht als Standardwert &ndash; also nimmst du den nächstgrößeren Normwert <strong>220&nbsp;&Omega;</strong>. Damit fließen rund 14&nbsp;mA: hell genug und völlig sicher.</p>
+            <div class="tip-box">
+              <strong>Genau deshalb</strong> steckt in fast jeder LED-Schaltung dieses Programms ein 220-&Omega;-Widerstand.
+            </div>
+          `
+        }
+      ]
+    },
+    exercises: [
+      {
+        type: 'multiple-choice',
+        question: 'An einem Widerstand von 250&nbsp;&Omega; liegen 5&nbsp;V an. Wie groß ist der Strom? (Tipp: I = U &divide; R)',
+        options: [
+          '1250 mA',
+          '20 mA',
+          '0,02 mA',
+          '50 mA'
+        ],
+        correct: 1,
+        explanation: 'Richtig! I = U &divide; R = 5&nbsp;V &divide; 250&nbsp;&Omega; = 0,02&nbsp;A. Und 0,02&nbsp;A sind 20&nbsp;mA (mal 1000).',
+        wrongExplanations: {
+          0: 'Du hast vermutlich multipliziert statt geteilt. Es gilt I = U &divide; R, also 5 geteilt durch 250 &ndash; nicht mal.',
+          2: 'Fast: 5 &divide; 250 = 0,02&nbsp;A. Das sind aber 20&nbsp;mA, nicht 0,02&nbsp;mA. Achte auf die Umrechnung A &rarr; mA (mal 1000).',
+          3: 'Rechne nochmal sauber: 5 &divide; 250 = 0,02&nbsp;A = 20&nbsp;mA, nicht 50&nbsp;mA.'
+        }
+      },
+      {
+        type: 'matching',
+        question: 'Ordne rund um die LED-Polung richtig zu:',
+        pairs: [
+          { left: 'Langes Bein der LED', right: 'Anode (+), Richtung Widerstand/Pin' },
+          { left: 'Kurzes Bein der LED', right: 'Kathode (&minus;), Richtung GND' },
+          { left: 'LED richtig herum eingebaut', right: 'leuchtet' },
+          { left: 'LED falsch herum eingebaut', right: 'bleibt dunkel' }
+        ],
+        explanation: 'Eine LED ist eine Diode und lässt Strom nur in eine Richtung durch. Das lange Bein (Anode, +) zeigt zum Pluspol bzw. über den Vorwiderstand zum Pin, das kurze Bein (Kathode, &minus;) zu GND. Falsch herum sperrt die LED und bleibt dunkel &ndash; kaputt geht sie davon meist nicht.'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Warum schließt man eine LED nie ohne Vorwiderstand direkt an 5&nbsp;V an?',
+        options: [
+          'Weil sie sonst zu langsam leuchtet',
+          'Weil dann zu viel Strom fließt und die LED durchbrennt',
+          'Weil sie sonst die falsche Farbe hat',
+          'Weil der Arduino sonst nicht startet'
+        ],
+        correct: 1,
+        explanation: 'Richtig! Ohne Vorwiderstand begrenzt nichts den Strom &ndash; er wird viel zu groß und zerstört die LED (oft sofort). Der Vorwiderstand stellt einen sicheren Strom von etwa 10&ndash;20&nbsp;mA ein.',
+        wrongExplanations: {
+          0: 'Mit der Geschwindigkeit hat das nichts zu tun. Das Problem ist der zu hohe Strom ohne Begrenzung.',
+          2: 'Die Farbe hängt vom LED-Typ ab, nicht vom Widerstand. Ohne Vorwiderstand geht die LED schlicht kaputt.',
+          3: 'Der Arduino startet trotzdem &ndash; aber die LED brennt durch, weil der Strom nicht begrenzt ist.'
+        }
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Eine rote LED (2&nbsp;V) soll mit etwa 15&nbsp;mA an 5&nbsp;V leuchten. Welcher Vorwiderstand passt ungefähr?',
+        options: [
+          '10 &Omega;',
+          '220 &Omega;',
+          '4700 &Omega;',
+          'gar keiner nötig'
+        ],
+        correct: 1,
+        explanation: 'Richtig! R = (5&nbsp;V &minus; 2&nbsp;V) &divide; 0,015&nbsp;A = 200&nbsp;&Omega;. Der nächste Normwert ist 220&nbsp;&Omega; &ndash; der Standardwert für LEDs am Arduino.',
+        wrongExplanations: {
+          0: '10&nbsp;&Omega; wäre viel zu klein &ndash; dann flössen rund 300&nbsp;mA und die LED würde sofort durchbrennen.',
+          2: '4700&nbsp;&Omega; ist viel zu groß: Es flössen nur etwa 0,6&nbsp;mA, die LED bliebe sehr dunkel.',
+          3: 'Doch, ein Vorwiderstand ist nötig &ndash; sonst zerstört der zu hohe Strom die LED.'
+        }
+      }
+    ]
+  },
+
   // ===================== LEKTION 3 =====================
   {
     id: 3,

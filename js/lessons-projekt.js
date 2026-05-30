@@ -339,7 +339,7 @@ const LESSONS_PROJEKT = [
         </div>
 
         <div class="code-card">
-          <h4>AMPEL MIT FUSSGANGERUEBERWEG</h4>
+          <h4>AMPEL MIT FUSSGAENGERUEBERWEG</h4>
           <pre><code><span class="comment">// ===== Pin-Definitionen =====</span>
 <span class="keyword">int</span> autoRot    = <span class="value">2</span>;   <span class="comment">// Auto-Ampel: Rote LED</span>
 <span class="keyword">int</span> autoGelb   = <span class="value">3</span>;   <span class="comment">// Auto-Ampel: Gelbe LED</span>
@@ -837,7 +837,7 @@ const LESSONS_PROJEKT = [
         correct: 1,
         explanation: 'Jeder LDR hat leichte Fertigungsunterschiede, und die Beleuchtung im Raum ist nie exakt gleich. Deshalb misst man die konkreten Werte mit dem Serial Monitor und passt den Schwellenwert an die eigene Situation an.',
         wrongExplanations: {
-          0: 'Alle Arduinos arbeiten mit exakt 5 V (vom USB-Spannungsregler) — da gibt es keine Unterschiede. Die Streuung kommt von LDR und Umgebungslicht.',
+          0: 'Die Versorgungsspannung liegt bei allen Arduinos bei etwa 5 V (per USB) — kleine Schwankungen davon sind nicht der Grund. Die Streuung kommt von LDR-Toleranzen und Umgebungslicht.',
           2: 'Der Serial Monitor zeigt die Werte 1:1, er ist nur ein Anzeige-Tool. Die Kalibrierung ist noetig wegen LDR-Toleranzen und unterschiedlicher Raumhelligkeit.',
           3: 'Kompilieren liefert immer das gleiche Programm — der Code laeuft auf jedem Arduino identisch. Was variiert, ist nur die Hardware-Umgebung.'
         }

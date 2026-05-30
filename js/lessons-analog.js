@@ -1200,7 +1200,7 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
             <text x="32" y="495" font-size="10" fill="#333" font-weight="bold">Legende – LDR-Nachtlicht:</text>
             <text x="32" y="513" font-size="9" fill="#555">► LDR-Spannungsteiler: 5V → Sp.5 → LDR → Sp.9 (A0-Knoten) → 10kΩ → Sp.13 → GND-Schiene</text>
             <text x="32" y="528" font-size="9" fill="#555">► LED-Kreis: Pin 2 → Sp.17 → 220Ω → Sp.18 → LED Anode → LED Kathode → Sp.19 → GND-Schiene</text>
-            <text x="32" y="545" font-size="9" fill="#666" font-style="italic">► Hell → LDR-Widerstand sinkt → A0-Wert steigt (~920) | Dunkel → A0-Wert sinkt (~50)</text>
+            <text x="32" y="545" font-size="9" fill="#666" font-style="italic">► Hell → LDR-Widerstand sinkt → A0-Wert steigt (~920) | Dunkel → A0-Wert sinkt (~100)</text>
           </svg>
         </div>
 
@@ -1212,7 +1212,7 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
           <table class="icon-table">
             <tr><th>Lichtsituation</th><th>LDR-Widerstand</th><th>Spannung an A0</th><th>analogRead()-Wert</th></tr>
             <tr><td><strong>Hell</strong></td><td>Niedrig (~1 kOhm)</td><td>Hoch (~4,5V)</td><td><strong>Hoch</strong> (~920)</td></tr>
-            <tr><td><strong>Dunkel</strong></td><td>Hoch (~100 kOhm)</td><td>Niedrig (~0,5V)</td><td><strong>Niedrig</strong> (~50)</td></tr>
+            <tr><td><strong>Dunkel</strong></td><td>Hoch (~100 kOhm)</td><td>Niedrig (~0,5V)</td><td><strong>Niedrig</strong> (~100)</td></tr>
           </table>
         </div>
 
@@ -1820,7 +1820,7 @@ void loop() {
         { label: 'Schwellenwerte ermitteln', html: 'Lade zuerst nur den LDR-Auslesecode aus Lektion 11 hoch. Notiere die Werte bei <strong>Raumlicht</strong> (~600) und <strong>abgedecktem Sensor</strong> (~100). Waehle deinen Schwellenwert dazwischen.' },
         { label: 'Nachtlicht-Code hochladen', html: 'Passe <code>schwelleAn</code> und <code>schwelleAus</code> an deine Werte an. Lade den Code hoch.' },
         { label: 'Testen', html: 'Bedecke den LDR mit der Hand → <strong>LED geht an</strong>. Nimm die Hand weg → <strong>LED geht aus</strong>. Beobachte im Serial Monitor, wie die Puffer-Zone das Flackern verhindert!' },
-        { label: 'Erweiterungsidee', html: 'Statt einer einfachen LED koenntest du die LED auch <strong>dimmen</strong>: Je dunkler es wird, desto heller die LED. Dafuer kombinierst du <code>analogRead()</code>, <code>map()</code> und <code>analogWrite()</code> aus Lektion 10!' }
+        { label: 'Erweiterungsidee', html: 'Statt einer einfachen LED koenntest du die LED auch <strong>dimmen</strong>: Je dunkler es wird, desto heller die LED. Dafuer kombinierst du <code>analogRead()</code>, <code>map()</code> und <code>analogWrite()</code> aus der PWM-Lektion (Dimmen statt Schalten)!' }
       ]
     },
     exercises: [

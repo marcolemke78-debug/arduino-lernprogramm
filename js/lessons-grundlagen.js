@@ -69,7 +69,7 @@ const LESSONS_GRUNDLAGEN = [
         correct: 1,
         explanation: 'Richtig! Ein Arduino ist ein Mikrocontroller, der für eine bestimmte Aufgabe programmiert wird und diese dauerhaft ausführt. Ein Computer kann viele Programme gleichzeitig laufen lassen.',
         wrongExplanations: {
-          0: 'Andersherum: Ein Computer ist deutlich schneller. Der Arduino-Chip arbeitet mit 16 MHz, ein moderner Computer mit mehreren GHz – etwa 1000× schneller.',
+          0: 'Andersherum: Ein Computer ist deutlich schneller. Der Arduino-Chip arbeitet mit 16 MHz, ein moderner Computer mit mehreren GHz – rund 100- bis 200-mal schneller.',
           2: 'Doch, ein Arduino braucht Strom – aber sehr wenig. Etwa so viel wie zwei bis drei kleine LEDs, also viel weniger als ein Laptop.',
           3: 'Nein, der Arduino hat keinen eingebauten Bildschirm. Er kann aber externe Displays ansteuern.'
         }
@@ -563,6 +563,11 @@ const LESSONS_GRUNDLAGEN = [
             <text x="466" y="476" font-size="9" fill="#555">LED-Kathode → −Schiene</text>
             <text x="32" y="496" font-size="8.5" fill="#555">Stromfluss: Pin 13 → 220Ω → LED Anode → LED Kathode → GND</text>
           </svg>
+        </div>
+
+        <div class="warning-box">
+          <strong>LED richtig herum einbauen!</strong><br>
+          Das <strong>lange Bein</strong> (Anode, Plus) zeigt zum Widerstand bzw. zum Pin, das <strong>kurze Bein</strong> (Kathode, Minus) zu GND. Falsch herum bleibt die LED dunkel – sie lässt Strom nur in eine Richtung durch.
         </div>
       `
     },

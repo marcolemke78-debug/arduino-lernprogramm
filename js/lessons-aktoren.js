@@ -231,7 +231,7 @@ void loop() {
         pairs: [
           { left: 'Dachfenster geschlossen (Gewaechshaus)', right: 'meinServo.write(0)' },
           { left: 'Dachfenster offen (Gewaechshaus)', right: 'meinServo.write(90)' },
-          { left: 'Scheibenwischer wischt nach links', right: 'meinServo.write(150)' },
+          { left: 'Scheibenwischer wischt nach links', right: 'meinServo.write(30)' },
           { left: 'Kurvenlicht geradeaus', right: 'meinServo.write(90)' }
         ]
       },

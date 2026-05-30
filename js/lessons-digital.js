@@ -295,8 +295,6 @@ const LESSONS_DIGITAL = [
       }
     ],
     // === Praxis-Tab (Tab 4) ===
-    // Inhalte werden gemeinsam Schritt fuer Schritt mit Marco erarbeitet.
-    // Aktuell: Platzhalter, damit Layout/Renderer testbar ist.
     praxis: {
       aufgabe: {
         titel: 'Eigene LED zum Leuchten bringen',
@@ -354,7 +352,7 @@ void loop() {
 void loop() {
   digitalWrite(8, HIGH);
 }`,
-        erklaerung: '<p>Im <code>setup()</code> wird Pin 8 als Ausgang konfiguriert — das passiert genau einmal beim Start. In der <code>loop()</code> wird der Pin dauerhaft auf HIGH (5V) gesetzt, die LED leuchtet konstant. <em>Erklaerung wird beim Pilot ggf. noch verfeinert.</em></p>',
+        erklaerung: '<p>Im <code>setup()</code> wird Pin 8 als Ausgang konfiguriert — das passiert genau einmal beim Start. In der <code>loop()</code> wird der Pin dauerhaft auf HIGH (5V) gesetzt, die LED leuchtet konstant.</p>',
         haeufige_fehler: [
           '<strong>Vorwiderstand vergessen:</strong> Zu viel Strom — die LED wird ueberlastet und kann kaputtgehen, ausserdem belastet es den Arduino-Pin.',
           '<strong>LED falsch herum:</strong> Langes Bein (Anode) muss zum Widerstand/+5V, kurzes Bein zu GND.',

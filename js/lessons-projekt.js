@@ -868,7 +868,7 @@ const LESSONS_PROJEKT = [
             <tr><th>Pflicht</th><th>Was heißt das konkret?</th></tr>
             <tr><td><strong>Sensoren &amp; Aktoren</strong></td><td>Mindestens <strong>1 Sensor + 2 Aktoren</strong> ODER <strong>2 Sensoren + 1 Aktor</strong>. Sie müssen <em>extern</em> sein – also außerhalb des Arduino-Chips, von dir auf der Lötplatine angeschlossen.</td></tr>
             <tr><td><strong>Analoger Sensor</strong></td><td><strong>Mindestens 1</strong> externer Sensor muss <strong>analog</strong> sein (LDR, NTC, Potentiometer). Reines Taster-Setup reicht nicht!</td></tr>
-            <tr><td><strong>Schaltung gelötet</strong></td><td><strong>Kein Breadboard in der Prüfung!</strong> Du baust deine Schaltung auf einer Lötplatine auf. Dazu kommt unten Sektion 4.</td></tr>
+            <tr><td><strong>Aufbau &amp; Löten</strong></td><td>Offiziell ist Löten an der <strong>Realschule nicht vorgeschrieben</strong> (ein Breadboard wäre in der Prüfung erlaubt). <strong>In unserem Unterricht löten wir trotzdem:</strong> erst alles auf dem Breadboard testen, dann sauber auf eine <strong>Lochstreifen-Kupferplatine</strong> übertragen (Sektion 4). Saubere Lötstellen zählen bei der handwerklichen Umsetzung mit!</td></tr>
             <tr><td><strong>Konstruktion</strong></td><td>Werkstoffbereich: <strong>Messen, Anreißen</strong> <em>(= mit Stahlspitze markieren, wo gebohrt/gesägt wird)</em><strong>, Bohren, Sägen</strong>. Das Modell muss neben der Elektronik auch handwerklich entstanden sein.</td></tr>
             <tr><td><strong>Vollständig</strong></td><td><strong>Computergestützte Steuerung oder Regelung</strong> muss komplett funktionieren – nicht nur ein Teilbereich.</td></tr>
           </table>
@@ -900,7 +900,7 @@ const LESSONS_PROJEKT = [
           <table class="icon-table">
             <tr><th>Anzahl</th><th>Bauteil</th><th>Wozu?</th></tr>
             <tr><td>1x</td><td>Arduino Uno</td><td>Steuerung</td></tr>
-            <tr><td>1x</td><td>Steckbrett (Breadboard)</td><td>nur für die <em>Test-Phase</em>! In der echten Prüfung verboten – du baust auf Lötplatine (siehe Sektion 4)</td></tr>
+            <tr><td>1x</td><td>Steckbrett (Breadboard)</td><td>Zum Testen – in der Realschulprüfung auch <strong>erlaubt</strong>. Bei uns überträgst du die fertige Schaltung danach auf eine <strong>Lochstreifenplatine</strong> (Sektion 4).</td></tr>
             <tr><td>2x</td><td>Rote LED</td><td>Auto Rot + Fußgänger Rot</td></tr>
             <tr><td>1x</td><td>Gelbe LED</td><td>Auto Gelb</td></tr>
             <tr><td>2x</td><td>Grüne LED</td><td>Auto Grün + Fußgänger Grün</td></tr>
@@ -1429,7 +1429,7 @@ const LESSONS_PROJEKT = [
 
         <div class="info-card">
           <h3>Vom Breadboard zur gelöteten Schaltung</h3>
-          <p>Der Code läuft – aber jetzt kommt der Schritt, der in der Prüfung wirklich zählt: <strong>Du musst deine Schaltung löten</strong>. Breadboards sind in der RSAP nicht erlaubt, weil Wackelkontakte die Funktion unzuverlässig machen.</p>
+          <p>Der Code läuft auf dem Breadboard – jetzt kommt unser nächster Schritt: <strong>die Schaltung auf eine Lochstreifen-Kupferplatine löten</strong>. Offiziell ist Löten an der Realschule zwar nicht vorgeschrieben (ein Breadboard wäre in der Prüfung erlaubt), aber Löten ist eine echte Technik-Fähigkeit – und saubere Lötstellen zählen bei der handwerklichen Bewertung. Deshalb üben wir es: erst Breadboard zum Testen, dann fest verlöten.</p>
 
           <h4 style="margin-top:1.25rem;">Welche Platine? Lochraster oder Streifenraster?</h4>
           <p>Es gibt zwei verbreitete Typen. Für Schul-Projekte ist <strong>Streifenraster</strong> oft einfacher, weil schon Verbindungen vorbereitet sind:</p>

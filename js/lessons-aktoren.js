@@ -351,7 +351,7 @@ void loop() {
   // Transistor als Schalter, Basiswiderstand, Freilaufdiode.
   {
     id: 33,
-    title: 'DC-Motor mit Transistor',
+    title: 'Transistor als Schalter (Grundlagen)',
     explanation: {
       html: `
         <h2>DC-Motor &ndash; ein Motor, der einfach nur dreht</h2>
@@ -423,17 +423,21 @@ void loop() {
         <hr class="section-divider">
 
         <div class="info-card">
-          <h3>Wofuer wird ein DC-Motor in der Pruefung gebraucht?</h3>
-          <p>In der Realschulabschlusspruefung (RSAP) Technik BW taucht der DC-Motor in mehreren Aufgaben auf:</p>
+          <h3>Wofuer brauchst du den Transistor als Schalter?</h3>
+          <p>Ein Transistor schaltet mit einem winzigen Steuersignal einen viel groesseren Strom. Das brauchst du immer dann, wenn ein Arduino-Pin etwas Stromhungriges schalten soll &ndash; einen kleinen Motor, eine starke Lampe oder ein Relais:</p>
 
           <table class="icon-table">
-            <tr><th>Anwendung</th><th>Motor-Aufgabe</th><th>Typische Steuerung</th></tr>
-            <tr><td><strong>Lueftung / Geblaese</strong></td><td>Luefter an bei zu warmer Temperatur</td><td>NTC misst &rarr; bei &gt; Schwelle Motor an</td></tr>
-            <tr><td><strong>Bohrmaschine</strong></td><td>Motor laeuft bei Tastendruck</td><td>Taster gedrueckt &rarr; Motor an</td></tr>
-            <tr><td><strong>Hebebuehne</strong></td><td>Motor hebt eine Last</td><td>Taster druecken &rarr; Motor laeuft fuer X Sekunden</td></tr>
+            <tr><th>Anwendung</th><th>Aufgabe</th><th>Typische Steuerung</th></tr>
+            <tr><td><strong>Lueftung / Geblaese</strong></td><td>Verbraucher an bei zu warmer Temperatur</td><td>NTC misst &rarr; bei &gt; Schwelle Transistor an</td></tr>
+            <tr><td><strong>Lampe / Heizdraht</strong></td><td>starker Verbraucher an/aus</td><td>Pin schaltet ueber den Transistor</td></tr>
+            <tr><td><strong>Kleiner Motor</strong></td><td>Motor laeuft bei Tastendruck</td><td>Taster gedrueckt &rarr; Transistor an</td></tr>
           </table>
 
-          <p>In dieser Lektion lernst du den <strong>Grundbaustein</strong>: Motor mit <code>digitalWrite()</code> ein- und ausschalten. Drehzahl-Regelung mit PWM (analogWrite) folgt am Ende als Plus-Box.</p>
+          <div class="warning-box">
+            <strong>Wichtig fuers RSAP:</strong> Im BW-Pruefungsskript wird der <strong>Gleichstrommotor selbst NICHT mit einem Einzeltransistor</strong>, sondern mit dem <strong>Motortreiber L298N</strong> gesteuert &ndash; das lernst du in der naechsten Lektion. Diese Lektion hier ist die <strong>Grundlage</strong>: "Transistorgrundschaltungen" sind ein eigenes Pruefungsthema (Bereich B1). Du verstehst hier, <em>wie</em> ein Transistor als Schalter arbeitet.
+          </div>
+
+          <p>In dieser Lektion lernst du den <strong>Grundbaustein</strong>: einen Verbraucher mit <code>digitalWrite()</code> ueber einen Transistor ein- und ausschalten.</p>
 
           <div class="tip-box">
             <strong>Hinweis fuer groessere Motoren:</strong> Der BC547 ist nur fuer Motoren bis ca. <strong>100 mA</strong> ausgelegt (Datenblatt). Fuer staerkere Motoren (Bohrmaschinen-Modell, kraeftige Geblaese) brauchst du einen staerkeren Transistor &ndash; z.B. <strong>BC337</strong> (bis 800 mA) oder <strong>TIP120</strong> (bis 5 A). Die Schaltung bleibt sonst gleich.
@@ -460,7 +464,7 @@ void loop() {
 digitalWrite(motorPin, LOW);  // Motor steht
 analogWrite(motorPin, 128);   // Motor laeuft halbe Drehzahl
 analogWrite(motorPin, 255);   // Motor laeuft volle Drehzahl</pre>
-          <p>Wichtig: Du musst dafuer einen <strong>PWM-faehigen Pin</strong> waehlen (mit ~ Zeichen auf dem Arduino, z.B. Pin 3, 5, 6, 9, 10, 11). In dieser Lektion bleibt es bei Pin 9 mit <code>digitalWrite()</code> &ndash; das ist die Pruefungs-Pflicht.</p>
+          <p>Wichtig: Du musst dafuer einen <strong>PWM-faehigen Pin</strong> waehlen (mit ~ Zeichen auf dem Arduino, z.B. Pin 3, 5, 6, 9, 10, 11). In dieser Grundlagen-Lektion bleibt es beim einfachen Ein-/Ausschalten mit <code>digitalWrite()</code> an Pin 9 &ndash; die Drehzahl-Regelung im Pruefungsstoff laeuft spaeter ueber den Enable-Pin (ENA) des L298N.</p>
         </div>
       `
     },
@@ -710,5 +714,211 @@ void loop() {
         ]
       }
     }
+  },
+  // ===================== LEKTION 21 (DC-Motor mit L298N, id 34) =====================
+  // RSAP-Pflicht: BW-Skript Kap. 9 steuert den Gleichstrommotor ueber den
+  // Motortreiber L298N (H-Bruecke). Drehrichtung via IN1/IN2, Drehzahl via
+  // analogWrite am ENA-Pin. Pin-Belegung laut Skript: ENA=10, IN1=9, IN2=8.
+  {
+    id: 34,
+    title: 'DC-Motor mit L298N',
+    explanation: {
+      html: `
+        <h2>DC-Motor steuern &ndash; mit dem Motortreiber L298N</h2>
+        <p>In der letzten Lektion hast du gelernt, wie ein <strong>Transistor</strong> einen Verbraucher schaltet. Ein Transistor kann den Motor aber nur <strong>an- und ausschalten</strong> &ndash; er dreht immer in dieselbe Richtung. Sobald du die <strong>Drehrichtung umkehren</strong> willst (vorwaerts/rueckwaerts) oder zwei Motoren brauchst, nimmst du einen <strong>Motortreiber</strong>. Genau das macht das BW-Pruefungsskript &ndash; mit dem <strong>L298N</strong>.</p>
+
+        <div class="warning-box">
+          <strong>Pruefungsrelevant (RSAP Technik BW):</strong> Im Pruefungsskript wird der Gleichstrommotor <strong>ausschliesslich ueber den Motortreiber L298N</strong> angesteuert &ndash; nicht ueber einen Einzeltransistor. Diese Lektion bildet genau das ab.
+        </div>
+
+        <div class="analogy-box">
+          <strong>Alltagsanalogie:</strong> Der L298N ist wie ein <strong>Bahnhof-Stellwerk</strong>. Der Arduino (der Fahrdienstleiter) gibt nur kleine Steuersignale &ndash; das schwere "Umstellen der Weichen" (der grosse Motorstrom) erledigt das Stellwerk. So bestimmst du mit winzigen Pin-Signalen, ob der Motor vorwaerts, rueckwaerts oder gar nicht faehrt.
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Warum ueberhaupt ein Motortreiber?</h3>
+          <p>Ein Arduino-Pin liefert nur etwa <strong>20&ndash;40 mA</strong>. Die meisten Motoren brauchen ein Vielfaches davon. Der L298N hat dafuer eine <strong>eigene Motor-Stromversorgung</strong> (bis 35 V, am Modul meist bis 12 V) und schaltet daraus bis zu <strong>2 A</strong> &ndash; gesteuert durch die kleinen Arduino-Signale.</p>
+          <p>Im Inneren sitzt eine <strong>H-Bruecke</strong>: vier elektronische Schalter, die den Strom <strong>in beide Richtungen</strong> durch den Motor schicken koennen. Genau daher kommt das Vorwaerts/Rueckwaerts.</p>
+        </div>
+
+        <div class="info-card">
+          <h3>Anschluss an den Arduino</h3>
+          <p>Drei Pins steuern einen Motor (Motor A am L298N-Modul). Im BW-Skript ist die Belegung:</p>
+          <table class="icon-table">
+            <tr><th>L298N-Modul</th><th>Arduino-Pin</th><th>Aufgabe</th></tr>
+            <tr><td><strong>ENA</strong> (Enable A)</td><td>Pin 10 <em>(~ PWM)</em></td><td>Motor freigeben + <strong>Drehzahl</strong></td></tr>
+            <tr><td><strong>IN1</strong></td><td>Pin 9</td><td><strong>Drehrichtung</strong> (mit IN2)</td></tr>
+            <tr><td><strong>IN2</strong></td><td>Pin 8</td><td><strong>Drehrichtung</strong> (mit IN1)</td></tr>
+          </table>
+          <div class="tip-box">
+            <strong>Nicht vergessen:</strong> Der <strong>GND</strong> des L298N-Moduls muss mit dem <strong>GND des Arduino</strong> verbunden sein &ndash; sonst haben die Steuersignale keinen gemeinsamen Bezugspunkt und nichts funktioniert. Die Motorspannung (z.B. 6&ndash;12 V) kommt aus einer <strong>eigenen Quelle</strong> (Batterie/Netzteil), nicht aus dem Arduino.
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Die Drehrichtung: IN1 und IN2</h3>
+          <p>Die beiden Eingaenge IN1 und IN2 legen fest, <strong>wie herum</strong> der Motor dreht:</p>
+          <table class="icon-table">
+            <tr><th>IN1</th><th>IN2</th><th>Motor</th></tr>
+            <tr><td>HIGH</td><td>LOW</td><td>dreht in <strong>eine</strong> Richtung (z.B. rechts)</td></tr>
+            <tr><td>LOW</td><td>HIGH</td><td>dreht in die <strong>andere</strong> Richtung (links)</td></tr>
+            <tr><td>LOW</td><td>LOW</td><td><strong>Stopp</strong> (Motor laeuft aus)</td></tr>
+          </table>
+          <p>Merke: IN1 und IN2 muessen <strong>unterschiedlich</strong> sein, damit der Motor dreht. Sind beide gleich (beide LOW), steht der Motor.</p>
+        </div>
+
+        <div class="info-card" style="border-left: 3px solid #2980B9;">
+          <h3>Die Drehzahl: ENA mit analogWrite()</h3>
+          <p>Der <strong>Enable-Pin ENA</strong> gibt den Motor frei. Schliesst du ihn an einen <strong>PWM-Pin</strong> an (Pin 10 hat ein ~), kannst du mit <code>analogWrite()</code> die Drehzahl regeln &ndash; ein Wert zwischen <strong>0 und 255</strong>:</p>
+          <pre style="background:#f5f5f5;padding:0.8rem;border-left:3px solid #2980B9;">
+analogWrite(10, 255);   // ENA voll an  &rarr; volle Drehzahl
+analogWrite(10, 128);   // ENA halb     &rarr; halbe Drehzahl
+analogWrite(10, 0);     // ENA aus      &rarr; Motor steht</pre>
+          <p>Genau wie beim Dimmen einer LED (PWM-Lektion): 255 ist dauerhaft HIGH, 0 dauerhaft LOW, die Werte dazwischen schalten ganz schnell ein und aus &ndash; der Motor "sieht" daraus eine mittlere Geschwindigkeit.</p>
+        </div>
+      `
+    },
+    example: {
+      title: 'Beispiel-Programm: Richtungswechsel und Geschwindigkeit (aus dem BW-Skript)',
+      steps: [
+        {
+          label: 'Pin-Konstanten anlegen',
+          html: `
+            <p>Ganz oben legen wir Namen fuer die drei Steuer-Pins an &ndash; genau nach der Tabelle oben:</p>
+            <pre style="background:#f5f5f5;padding:0.8rem;border-left:3px solid #2980B9;">
+int pinEn  = 10;   // zu ENA (Enable A) &ndash; Drehzahl
+int pinIN1 = 9;    // zu IN1            &ndash; Drehrichtung
+int pinIN2 = 8;    // zu IN2            &ndash; Drehrichtung
+int vmax   = 255;  // maximale Drehzahl (0..255)</pre>
+          `
+        },
+        {
+          label: 'Im setup(): Pins als Ausgang',
+          html: `
+            <p>Alle drei Steuer-Pins sind <strong>Ausgaenge</strong>:</p>
+            <pre style="background:#f5f5f5;padding:0.8rem;border-left:3px solid #2980B9;">
+void setup() {
+  pinMode(pinEn, OUTPUT);
+  pinMode(pinIN1, OUTPUT);
+  pinMode(pinIN2, OUTPUT);
+}</pre>
+          `
+        },
+        {
+          label: 'Im loop(): Drehzahl + Richtung setzen',
+          html: `
+            <p>Drei Befehle steuern den Motor: <code>analogWrite(pinEn, ...)</code> setzt die Drehzahl, das Paar <code>digitalWrite(pinIN1/pinIN2, ...)</code> die Richtung. So laeuft der Motor 5 Sekunden mit voller Drehzahl in eine Richtung, dann Stopp, dann halbe Drehzahl rueckwaerts:</p>
+            <pre style="background:#f5f5f5;padding:0.8rem;border-left:3px solid #27AE60;">
+void loop() {
+  analogWrite(pinEn, vmax);       // volle Drehzahl
+  digitalWrite(pinIN1, HIGH);     // Richtung 1
+  digitalWrite(pinIN2, LOW);
+  delay(5000);
+
+  digitalWrite(pinIN1, LOW);      // Stopp
+  digitalWrite(pinIN2, LOW);
+  delay(2000);
+
+  analogWrite(pinEn, vmax / 2);   // halbe Drehzahl
+  digitalWrite(pinIN1, LOW);      // Richtung 2 (umgekehrt)
+  digitalWrite(pinIN2, HIGH);
+  delay(5000);
+
+  digitalWrite(pinIN1, LOW);      // Stopp
+  digitalWrite(pinIN2, LOW);
+  delay(2000);
+}</pre>
+            <div class="tip-box">
+              <strong>Muster zum Merken:</strong> Erst <code>analogWrite(ENA, ...)</code> fuer das Tempo, dann das IN1/IN2-Paar fuer die Richtung. Zum Stoppen beide IN auf LOW &ndash; oder ENA auf 0.
+            </div>
+          `
+        }
+      ]
+    },
+    exercises: [
+      {
+        type: 'multiple-choice',
+        question: 'Warum steuert man den Gleichstrommotor im BW-Pruefungsskript ueber den L298N und nicht ueber einen einzelnen Transistor?',
+        options: [
+          'Weil der L298N billiger ist als ein Transistor',
+          'Weil der L298N die Drehrichtung umkehren kann (H-Bruecke) und genug Strom liefert',
+          'Weil ein Transistor nicht programmierbar ist',
+          'Weil der Arduino sonst kein analogWrite() kann'
+        ],
+        correct: 1,
+        explanation: 'Richtig! Der L298N enthaelt zwei H-Bruecken. Damit kann er den Strom in beide Richtungen durch den Motor schicken &ndash; der Motor dreht vorwaerts UND rueckwaerts. Ausserdem schaltet er den grossen Motorstrom aus einer eigenen Versorgung. Ein Einzeltransistor kann den Motor nur an/aus schalten, immer in dieselbe Richtung.',
+        wrongExplanations: {
+          0: 'Preis ist nicht der Grund &ndash; ein einzelner Transistor ist sogar guenstiger. Es geht um die Faehigkeit, die Drehrichtung umzukehren.',
+          2: 'Beide werden vom Arduino per Pin-Signal gesteuert. Der Unterschied ist die H-Bruecke fuer die Drehrichtung.',
+          3: 'analogWrite() funktioniert in beiden Faellen. Der entscheidende Punkt ist der Richtungswechsel ueber IN1/IN2.'
+        }
+      },
+      {
+        type: 'matching',
+        question: 'Ordne die IN1/IN2-Kombination (bzw. den ENA-Wert) dem Motor-Verhalten zu.',
+        pairs: [
+          { left: 'IN1 = HIGH, IN2 = LOW', right: 'dreht in eine Richtung' },
+          { left: 'IN1 = LOW, IN2 = HIGH', right: 'dreht in die andere Richtung' },
+          { left: 'IN1 = LOW, IN2 = LOW', right: 'Stopp' },
+          { left: 'analogWrite(ENA, 255)', right: 'volle Drehzahl' }
+        ],
+        explanation: 'IN1 und IN2 muessen unterschiedlich sein, damit der Motor dreht &ndash; ihre Reihenfolge bestimmt die Richtung. Sind beide LOW, steht der Motor. Die Drehzahl haengt nicht von IN1/IN2 ab, sondern vom Wert am ENA-Pin (analogWrite 0..255).'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Mit welchem Befehl regelst du die Drehzahl des Motors am L298N?',
+        options: [
+          'digitalWrite(pinIN1, HIGH);',
+          'analogWrite(pinEn, 180);',
+          'analogRead(pinEn);',
+          'pinMode(pinEn, INPUT);'
+        ],
+        correct: 1,
+        explanation: 'Richtig! Die Drehzahl regelst du ueber den Enable-Pin ENA mit analogWrite() und einem Wert von 0 (aus) bis 255 (voll). ENA muss dafuer an einem PWM-Pin haengen (hier Pin 10 mit ~).',
+        wrongExplanations: {
+          0: 'digitalWrite an IN1 setzt die Drehrichtung, nicht die Drehzahl. Es kann nur HIGH oder LOW &ndash; keine Zwischenstufen.',
+          2: 'analogRead() LIEST einen Sensorwert ein. Zum Ausgeben einer Drehzahl brauchst du analogWrite() am ENA-Pin.',
+          3: 'Damit machst du den Pin zum Eingang &ndash; dann kann er nichts mehr ausgeben. ENA muss OUTPUT sein.'
+        }
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Laut BW-Skript: An welchen Arduino-Pin gehoert der ENA-Anschluss des L298N?',
+        options: [
+          'Pin 8',
+          'Pin 9',
+          'Pin 10',
+          'Pin 13 (die eingebaute LED)'
+        ],
+        correct: 2,
+        explanation: 'Richtig! Im Skript ist ENA = Pin 10, IN1 = Pin 9, IN2 = Pin 8. Pin 10 ist ein PWM-Pin (~), deshalb kann er ueber analogWrite() die Drehzahl regeln.',
+        wrongExplanations: {
+          0: 'Pin 8 ist IN2 (Drehrichtung) &ndash; und Pin 8 ist kein PWM-Pin, koennte die Drehzahl also gar nicht regeln.',
+          1: 'Pin 9 ist IN1 (Drehrichtung). ENA, der die Drehzahl regelt, gehoert auf den PWM-Pin 10.',
+          3: 'Pin 13 wird hier nicht verwendet. Die Steuerpins sind 8, 9 und 10.'
+        }
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Was passiert, wenn IN1 und IN2 beide auf LOW stehen?',
+        options: [
+          'Der Motor dreht doppelt so schnell',
+          'Der Motor steht still (das normale Stopp-Kommando)',
+          'Der Arduino geht kaputt',
+          'Die Drehrichtung wechselt staendig von selbst'
+        ],
+        correct: 1,
+        explanation: 'Richtig! Eine Drehrichtung entsteht nur, wenn IN1 und IN2 unterschiedlich sind. Bei IN1 = LOW und IN2 = LOW steht der Motor &ndash; das ist das normale Stopp-Kommando.',
+        wrongExplanations: {
+          0: 'Die Drehzahl haengt am ENA-Pin, nicht an IN1/IN2. Gleiche IN-Werte erzeugen keine Drehung.',
+          2: 'Es geht nichts kaputt &ndash; der Motor dreht einfach nicht. Der L298N ist dafuer ausgelegt.',
+          3: 'Nichts wechselt von selbst. Der Motor folgt genau deinen IN1/IN2-Signalen.'
+        }
+      }
+    ]
   }
 ];

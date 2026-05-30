@@ -569,6 +569,21 @@ const LESSONS_GRUNDLAGEN = [
           <strong>LED richtig herum einbauen!</strong><br>
           Das <strong>lange Bein</strong> (Anode, Plus) zeigt zum Widerstand bzw. zum Pin, das <strong>kurze Bein</strong> (Kathode, Minus) zu GND. Falsch herum bleibt die LED dunkel – sie lässt Strom nur in eine Richtung durch.
         </div>
+
+        <div class="info-card" style="border-left: 3px solid #27AE60;">
+          <h3>Selber ausprobieren: Vorwiderstand &amp; LED-Strom</h3>
+          <p>Eine LED braucht einen <strong>Vorwiderstand</strong>, sonst fließt zu viel Strom und sie brennt durch. Wie viel Strom fließt bei welchem Widerstand? Schieb den Regler und schau zu (Versorgung 5&nbsp;V, rote LED ca. 2&nbsp;V):</p>
+          <div style="background:#f8f8f8;border:1px solid #ddd;border-radius:8px;padding:1rem;">
+            <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
+              <label for="vwr-slider" style="font-weight:bold;">Vorwiderstand:</label>
+              <input id="vwr-slider" type="range" min="47" max="1000" step="1" value="220" style="flex:1;min-width:180px;height:28px;" oninput="var R=+this.value;var I=(5-2)/R*1000;document.getElementById('vwr-r').textContent=R;document.getElementById('vwr-i').textContent=I.toFixed(1);var s=document.getElementById('vwr-status');var d=document.getElementById('vwr-led');if(I&gt;20){s.textContent='Zu viel Strom - die LED brennt durch!';s.style.color='#c0392b';d.style.background='#c0392b';d.style.opacity=1;}else if(I&lt;5){s.textContent='Wenig Strom - die LED leuchtet nur schwach.';s.style.color='#b8860b';d.style.background='#e74c3c';d.style.opacity=0.25;}else{s.textContent='Guter Bereich - die LED leuchtet sicher und hell genug.';s.style.color='#1e8449';d.style.background='#e74c3c';d.style.opacity=(I/20).toFixed(2);}">
+              <div id="vwr-led" style="width:26px;height:26px;border-radius:50%;background:#e74c3c;opacity:0.68;box-shadow:0 0 8px #e74c3c;flex:none;"></div>
+            </div>
+            <p style="margin:0.8rem 0 0;">Widerstand: <strong><span id="vwr-r">220</span>&nbsp;&Omega;</strong> &rarr; Strom durch die LED: <strong><span id="vwr-i">13.6</span>&nbsp;mA</strong></p>
+            <p id="vwr-status" style="margin:0.3rem 0 0;font-weight:bold;color:#1e8449;">Guter Bereich - die LED leuchtet sicher und hell genug.</p>
+          </div>
+          <p style="margin-top:0.8rem;">Dahinter steckt das Ohmsche Gesetz: <code>I = (5&nbsp;V &minus; 2&nbsp;V) / R</code>. Darum nimmt man für eine normale LED am Arduino meist <strong>220&nbsp;&Omega;</strong> &ndash; das ergibt rund 14&nbsp;mA: hell genug und völlig sicher.</p>
+        </div>
       `
     },
     example: {

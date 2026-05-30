@@ -51,6 +51,27 @@ const LESSONS_AKTOREN = [
           <p>Hobby-Servos koennen sich also <strong>180 Grad</strong> drehen &ndash; eine halbe Umdrehung. Eine ganze Umdrehung schaffen sie nicht (ausser Spezialmodelle "Continuous Rotation").</p>
         </div>
 
+        <div class="info-card" style="border-left: 3px solid #27AE60;">
+          <h3>Selber ausprobieren: Servo-Winkel</h3>
+          <p>Schieb den Regler und sieh, wohin der Servo-Arm zeigt &ndash; und welchen <code>write()</code>-Wert du dafuer brauchst:</p>
+          <div style="background:#f8f8f8;border:1px solid #ddd;border-radius:8px;padding:1rem;text-align:center;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 120" style="max-width:260px;width:100%;height:auto;">
+              <line x1="20" y1="92" x2="280" y2="92" stroke="#ccc" stroke-width="1"/>
+              <text x="22" y="108" text-anchor="middle" font-size="9" fill="#777">0&deg; links</text>
+              <text x="150" y="18" text-anchor="middle" font-size="9" fill="#777">90&deg; Mitte</text>
+              <text x="278" y="108" text-anchor="middle" font-size="9" fill="#777">180&deg; rechts</text>
+              <rect x="128" y="90" width="44" height="22" rx="3" fill="#444"/>
+              <line id="sv-arm" x1="150" y1="90" x2="150" y2="32" stroke="#27AE60" stroke-width="6" stroke-linecap="round" transform="rotate(0 150 90)"/>
+              <circle cx="150" cy="90" r="6" fill="#222"/>
+            </svg>
+            <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;margin-top:0.5rem;">
+              <label for="sv-slider" style="font-weight:bold;">Winkel:</label>
+              <input id="sv-slider" type="range" min="0" max="180" step="1" value="90" style="flex:1;min-width:160px;height:28px;" oninput="var a=+this.value;document.getElementById('sv-arm').setAttribute('transform','rotate('+(a-90)+' 150 90)');document.getElementById('sv-deg').textContent=a;document.getElementById('sv-code').textContent='meinServo.write('+a+');';">
+            </div>
+            <p style="margin:0.5rem 0 0;">Winkel: <strong><span id="sv-deg">90</span>&deg;</strong> &nbsp;&rarr;&nbsp; <code><span id="sv-code">meinServo.write(90);</span></code></p>
+          </div>
+        </div>
+
         <hr class="section-divider">
 
         <div class="info-card">

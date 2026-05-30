@@ -15,6 +15,32 @@ const LESSONS_GRUNDLAGEN = [
         <hr class="section-divider">
 
         <div class="info-card">
+          <h3>So arbeitet ein Arduino: das EVA-Prinzip</h3>
+          <p>Fast jedes technische System folgt demselben Ablauf: Es nimmt etwas auf, verarbeitet es und gibt etwas aus. Das nennt man <strong>EVA &ndash; Eingabe, Verarbeitung, Ausgabe</strong>:</p>
+          <div style="text-align:center;margin:1rem 0;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 150" style="max-width:100%;height:auto;">
+              <rect x="8" y="35" width="130" height="80" rx="8" fill="#E3F2FD" stroke="#2176AE" stroke-width="2"/>
+              <text x="73" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#15527a">EINGABE</text>
+              <text x="73" y="80" text-anchor="middle" font-size="10" fill="#333">Sensoren</text>
+              <text x="73" y="96" text-anchor="middle" font-size="9" fill="#555">Taster, LDR, NTC</text>
+              <line x1="142" y1="75" x2="170" y2="75" stroke="#888" stroke-width="3"/>
+              <polygon points="172,75 162,69 162,81" fill="#888"/>
+              <rect x="175" y="35" width="130" height="80" rx="8" fill="#E8F5E9" stroke="#2E7D32" stroke-width="2.5"/>
+              <text x="240" y="60" text-anchor="middle" font-size="13" font-weight="bold" fill="#1b5e20">VERARBEITUNG</text>
+              <text x="240" y="80" text-anchor="middle" font-size="10" fill="#333">Arduino</text>
+              <text x="240" y="96" text-anchor="middle" font-size="9" fill="#555">dein Programm</text>
+              <line x1="309" y1="75" x2="337" y2="75" stroke="#888" stroke-width="3"/>
+              <polygon points="339,75 329,69 329,81" fill="#888"/>
+              <rect x="342" y="35" width="130" height="80" rx="8" fill="#FFF3E0" stroke="#F59E0B" stroke-width="2"/>
+              <text x="407" y="60" text-anchor="middle" font-size="14" font-weight="bold" fill="#a65c00">AUSGABE</text>
+              <text x="407" y="80" text-anchor="middle" font-size="10" fill="#333">Aktoren</text>
+              <text x="407" y="96" text-anchor="middle" font-size="9" fill="#555">LED, Motor, Servo</text>
+            </svg>
+          </div>
+          <p>Beispiel Nachtlicht: Der <strong>LDR misst</strong> die Helligkeit (Eingabe) &rarr; der <strong>Arduino entscheidet</strong> "zu dunkel?" (Verarbeitung) &rarr; die <strong>LED geht an</strong> (Ausgabe).</p>
+        </div>
+
+        <div class="info-card">
           <h3>Mikrocontroller vs. Computer</h3>
           <p>Dein Computer kann alles Mögliche: Videos abspielen, im Internet surfen, Spiele starten. Ein <strong>Mikrocontroller</strong> (das Herzstück des Arduino) kann immer nur <em>eine Aufgabe</em> – aber die macht er zuverlässig und ohne Pause.</p>
           <table class="icon-table">

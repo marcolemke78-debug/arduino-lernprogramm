@@ -170,6 +170,29 @@ void loop() {
 }</pre>
             <p>14 Zeilen Code, und der Servo bewegt sich endlos hin und her. Genau dieses Grundgeruest erweitern Pruefungsaufgaben spaeter um Sensoren: "Wenn NTC heiss &rarr; Servo auf 90 (Fenster auf), sonst auf 0 (Fenster zu)."</p>
           `
+        },
+        {
+          label: 'Sanfter Sweep mit for-Schleife',
+          html: `
+            <p>Bisher <strong>springt</strong> der Servo hart zwischen 0&deg; und 180&deg;. Schoener ist ein <strong>sanftes Durchfahren</strong> aller Winkel &ndash; dafuer nimmst du eine <strong>for-Schleife</strong>, die eine Zaehlvariable Schritt fuer Schritt hochzaehlt:</p>
+            <pre style="background:#f5f5f5;padding:0.8rem;border-left:3px solid #27AE60;">
+void loop() {
+  // langsam von 0 nach 180 Grad
+  for (int winkel = 0; winkel &lt;= 180; winkel++) {
+    meinServo.write(winkel);
+    delay(15);
+  }
+  // und wieder zurueck von 180 nach 0
+  for (int winkel = 180; winkel &gt;= 0; winkel--) {
+    meinServo.write(winkel);
+    delay(15);
+  }
+}</pre>
+            <p>Die Schleife <code>for (int winkel = 0; winkel &lt;= 180; winkel++)</code> heisst: Starte bei <strong>0</strong>, zaehle nach jedem Durchlauf um <strong>1</strong> hoch (<code>winkel++</code>), und mach weiter, solange <code>winkel &lt;= 180</code> gilt. Bei jedem Schritt faehrt der Servo genau ein Grad weiter &ndash; das kurze <code>delay(15)</code> gibt ihm Zeit dafuer und macht die Bewegung fluessig.</p>
+            <div class="tip-box">
+              <strong>Pruefungsklassiker:</strong> Dieser "Sweep" (0&deg; &rarr; 180&deg; &rarr; 0&deg;) ist das Standard-Beispiel fuer Servo + for-Schleife. Groesseres <code>delay()</code> = langsamere Bewegung, kleineres = schnellere.
+            </div>
+          `
         }
       ]
     },
@@ -250,6 +273,34 @@ void loop() {
           0: 'Das waere zwar eine plausible Variable, aber sie ersetzt nicht die Library. Ohne #include funktioniert kein Servo-Befehl.',
           2: 'Serial.begin gehoert zum Serial Monitor, nicht zum Servo. Es ist hier nicht erforderlich.',
           3: 'Bei einem Servo macht der Library-Aufruf attach() das pinMode-Setzen automatisch. Du brauchst es nicht extra zu schreiben.'
+        }
+      },
+      {
+        type: 'ordering',
+        question: 'Ein Servo soll sanft hin- und herfahren (Sweep). Bringe die Schritte im <code>loop()</code> in die richtige Reihenfolge:',
+        items: [
+          'Hochfahren: eine for-Schleife zaehlt den Winkel von 0 auf 180',
+          'Dabei jeden Winkel mit write() anfahren und kurz warten (delay)',
+          'Zurueckfahren: eine for-Schleife zaehlt den Winkel von 180 auf 0',
+          'Auch hier jeden Winkel anfahren - dann beginnt loop() von vorne'
+        ],
+        correctOrder: [0, 1, 2, 3]
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Was bewirkt die Zeile <code>for (int winkel = 0; winkel &lt;= 180; winkel++)</code> beim Servo-Sweep?',
+        options: [
+          'Der Servo springt sofort auf 180 Grad',
+          'Der Winkel wird Schritt fuer Schritt von 0 bis 180 hochgezaehlt - der Servo faehrt sie nacheinander an',
+          'Der Servo dreht sich 180-mal komplett im Kreis',
+          'Die Schleife laeuft genau einmal und stoppt sofort bei 0 Grad'
+        ],
+        correct: 1,
+        explanation: 'Richtig! Die for-Schleife zaehlt <code>winkel</code> von 0 startend nach jedem Durchlauf um 1 hoch (<code>winkel++</code>), solange <code>winkel &lt;= 180</code> gilt. Bei jedem Wert wird <code>write(winkel)</code> aufgerufen &ndash; so faehrt der Servo alle Zwischenwinkel der Reihe nach an und bewegt sich fluessig, statt zu springen.',
+        wrongExplanations: {
+          0: 'Springen wuerde der Servo nur bei einem einzelnen <code>write(180)</code>. Die for-Schleife geht gerade NICHT direkt auf 180, sondern ueber alle Zwischenwerte.',
+          2: 'Ein Standard-Hobby-Servo dreht maximal 180&deg;, nicht im Kreis. Die 180 ist der Endwinkel, keine Anzahl an Umdrehungen.',
+          3: 'Die Schleife laeuft 181-mal (Winkel 0 bis 180), nicht einmal. <code>winkel++</code> erhoeht den Wert bei jedem Durchlauf, bis 180 erreicht ist.'
         }
       }
     ],

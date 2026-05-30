@@ -97,6 +97,23 @@ const LESSONS_ANALOG = [
           </table>
         </div>
 
+        <div class="info-card" style="border-left: 3px solid #27AE60;">
+          <h3>Selber ausprobieren: Spannungsteiler</h3>
+          <p>Oben sitzt ein fester Widerstand R<sub>1</sub> = 10&nbsp;k&Omega;, unten der verstellbare R<sub>2</sub>. Schieb den Regler und sieh zu, wie sich U<sub>2</sub> (und der analogRead-Wert) aendern &ndash; bei 5&nbsp;V Versorgung:</p>
+          <div style="background:#f8f8f8;border:1px solid #ddd;border-radius:8px;padding:1rem;">
+            <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
+              <label for="st-slider" style="font-weight:bold;">R<sub>2</sub>:</label>
+              <input id="st-slider" type="range" min="1" max="100" step="1" value="10" style="flex:1;min-width:180px;height:28px;" oninput="var R2=+this.value;var U2=5*R2/(10+R2);var adc=Math.round(U2/5*1023);document.getElementById('st-r2').textContent=R2;document.getElementById('st-u2').textContent=U2.toFixed(2);document.getElementById('st-adc').textContent=adc;document.getElementById('st-bar').style.width=(U2/5*100).toFixed(0)+'%';">
+              <strong><span id="st-r2">10</span>&nbsp;k&Omega;</strong>
+            </div>
+            <div style="margin-top:0.8rem;height:18px;background:#e0e0e0;border-radius:9px;overflow:hidden;">
+              <div id="st-bar" style="width:50%;height:100%;background:#27AE60;"></div>
+            </div>
+            <p style="margin:0.6rem 0 0;">U<sub>2</sub> = <strong><span id="st-u2">2.50</span>&nbsp;V</strong> &rarr; analogRead-Wert &asymp; <strong><span id="st-adc">512</span></strong> (von 0&ndash;1023)</p>
+          </div>
+          <p style="margin-top:0.8rem;">Probier die Eselsbruecke aus: <strong>R<sub>2</sub> groesser &rarr; U<sub>2</sub> groesser</strong>. Genau so liefert spaeter ein LDR oder NTC unterschiedliche analogRead-Werte.</p>
+        </div>
+
         <hr class="section-divider">
 
         <div class="info-card">
@@ -344,6 +361,10 @@ Hitze:       U<sub>2</sub> = 5 V &middot; 4  / (10 + 4)  &asymp; <strong>1,43 V<
 
         <div class="tip-box">
           <strong>Warum 1023?</strong> Der Arduino hat einen <strong>10-Bit Analog-Digital-Wandler</strong>. Das bedeutet: Er teilt die Spannung von 0V bis 5V in 2<sup>10</sup> = <strong>1024 Stufen</strong> auf (0 bis 1023). Je hoeher die Spannung, desto hoeher der Wert.
+        </div>
+
+        <div class="warning-box">
+          <strong>Achtung beim Umrechnen in Volt:</strong> Nutze <code>float volt = wert * 5.0 / 1023;</code> &ndash; mit dem Punkt bei <strong>5.0</strong>. Ohne den Punkt (<code>wert * 5 / 1023</code>) rechnet der Arduino nur mit ganzen Zahlen und schneidet die Nachkommastellen ab &ndash; statt 2,47&nbsp;V bekommst du grobe Stufen. Der Punkt macht aus der 5 eine Kommazahl.
         </div>
 
         <hr class="section-divider">

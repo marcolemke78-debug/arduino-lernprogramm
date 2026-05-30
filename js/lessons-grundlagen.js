@@ -877,7 +877,11 @@ R = 3 V / 0,015 A = 200 Ohm</pre>
           <rect x="10" y="10" width="480" height="60" rx="8" fill="#FEF3C7" stroke="#F59E0B" stroke-width="2"/>
           <text x="25" y="35" font-size="14" fill="#92400E" font-weight="bold">Bereich 1: Variablen</text>
           <text x="25" y="55" font-size="11" fill="#78350F">Pin-Nummern, Zähler, Zustände – werden VOR setup() festgelegt</text>
-          <text x="460" y="45" text-anchor="end" font-size="22" fill="#F59E0B" opacity="0.5" font-weight="bold">📋</text>
+          <rect x="438" y="22" width="20" height="26" rx="2" fill="none" stroke="#F59E0B" stroke-width="2" opacity="0.5"/>
+          <rect x="445" y="18" width="6" height="6" rx="1" fill="#F59E0B" opacity="0.5"/>
+          <line x1="442" y1="31" x2="454" y2="31" stroke="#F59E0B" stroke-width="1.5" opacity="0.5"/>
+          <line x1="442" y1="37" x2="454" y2="37" stroke="#F59E0B" stroke-width="1.5" opacity="0.5"/>
+          <line x1="442" y1="43" x2="454" y2="43" stroke="#F59E0B" stroke-width="1.5" opacity="0.5"/>
 
           <!-- Pfeil Variablen -> setup() (Spitze nach UNTEN) -->
           <polygon points="250,85 240,75 260,75" fill="#999"/>

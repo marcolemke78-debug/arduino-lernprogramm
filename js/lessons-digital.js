@@ -274,7 +274,8 @@ const LESSONS_DIGITAL = [
           { left: 'Anode (+)', right: 'Langes Beinchen der LED' },
           { left: 'Kathode (\u2212)', right: 'Kurzes Beinchen der LED' },
           { left: '220 Ohm', right: 'Standard-Vorwiderstand fuer LEDs' }
-        ]
+        ],
+        explanation: 'HIGH bedeutet 5V (Strom an), LOW bedeutet 0V (Strom aus) &ndash; daran erkennst du, ob ein Pin ein- oder ausgeschaltet ist. Bei der LED merkst du dir: Das lange Beinchen ist die Anode (+) und kommt an den Pluspol, das kurze die Kathode (&minus;). Der 220-Ohm-Vorwiderstand begrenzt den Strom, damit die LED nicht durchbrennt.'
       },
       {
         type: 'multiple-choice',
@@ -632,7 +633,8 @@ void loop() {
           { left: 'digitalWrite(led2, LOW)', right: 'LED 2 ausschalten' },
           { left: 'delay(1000)', right: '1 Sekunde warten' },
           { left: 'pinMode(led1, OUTPUT)', right: 'Pin 12 als Ausgang festlegen' }
-        ]
+        ],
+        explanation: 'pinMode legt zuerst fest, dass der Pin ein Ausgang ist &ndash; das muss immer im setup passieren, bevor man die LED schalten kann. Danach schaltet digitalWrite mit HIGH ein und mit LOW aus, und delay(1000) haelt das Programm 1000 Millisekunden (also 1 Sekunde) an.'
       },
       {
         type: 'multiple-choice',
@@ -1020,7 +1022,8 @@ void loop() {
           { left: 'Version 2 (Knight Rider)', right: 'LEDs leuchten hin und zurueck' },
           { left: 'wartezeit = 200', right: 'Jede LED leuchtet 0,2 Sekunden' },
           { left: 'for-Schleife (spaeter)', right: 'Macht den Code viel kuerzer' }
-        ]
+        ],
+        explanation: 'Version 1 laesst das Lauflicht nur in eine Richtung wandern, Version 2 (Knight Rider) zusaetzlich wieder zurueck &ndash; der Unterschied ist nur die Reihenfolge der Befehle. wartezeit = 200 sind 200 Millisekunden, also 0,2 Sekunden pro LED. Eine for-Schleife wiederholt gleiche Befehle automatisch und macht den Code dadurch viel kuerzer.'
       },
       {
         type: 'multiple-choice',
@@ -1307,7 +1310,8 @@ void loop() {
           { left: 'INPUT_PULLUP', right: 'Eingang mit internem Pull-up-Widerstand' },
           { left: 'Prellen', right: 'Kurzzeitiges Wackeln des Kontakts beim Druecken' },
           { left: 'Schwebender Pin', right: 'Pin ohne Widerstand gibt zufaellige Werte' }
-        ]
+        ],
+        explanation: 'digitalRead() liest, ob an einem Eingang HIGH oder LOW anliegt. Damit ein offener Pin nicht zufaellige Werte liefert (schwebender Pin), schaltet INPUT_PULLUP einen internen Widerstand dazu, der den Pin sicher auf HIGH zieht. Prellen ist das kurze mechanische Wackeln des Kontakts im Moment des Drueckens.'
       },
       {
         type: 'multiple-choice',
@@ -1641,7 +1645,8 @@ void loop() {
           { left: '== (doppeltes Gleich)', right: 'Vergleicht zwei Werte miteinander' },
           { left: '! (Ausrufezeichen)', right: 'Dreht einen bool-Wert um (Negation)' },
           { left: 'bool', right: 'Datentyp mit nur true oder false' }
-        ]
+        ],
+        explanation: 'if prueft eine Bedingung und fuehrt den Code nur aus, wenn sie wahr ist; else springt ein, wenn sie falsch ist. Wichtig ist der Unterschied zwischen == (vergleicht zwei Werte) und einem einzelnen = (weist einen Wert zu). Das ! dreht einen bool-Wert um (aus true wird false), und bool ist der Datentyp, der genau diese zwei Zustaende speichern kann.'
       },
       {
         type: 'multiple-choice',
@@ -2016,7 +2021,8 @@ void loop() {
           { left: 'Phase 2: Rot-Gelb', right: 'Rote und gelbe LED an' },
           { left: 'Phase 3: Gruen', right: 'Nur gruene LED an' },
           { left: 'Phase 4: Gelb', right: 'Nur gelbe LED an' }
-        ]
+        ],
+        explanation: 'Eine deutsche Ampel hat vier feste Phasen in fester Reihenfolge: Rot, dann Rot-Gelb zum Anfahren, dann Gruen, dann Gelb zum Abbremsen. In Phase 2 leuchten ausnahmsweise zwei LEDs gleichzeitig (rot und gelb), in allen anderen Phasen genau eine. Im Code schaltest du fuer jede Phase die passenden LEDs mit HIGH und LOW.'
       },
       {
         type: 'multiple-choice',

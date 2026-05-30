@@ -430,7 +430,8 @@ const LESSONS_PROJEKT = [
           'Fußgänger-Ampel: Grün (5 Sekunden)',
           'Auto-Ampel: Rot / Fußgänger-Ampel: Rot → Grün'
         ],
-        correctOrder: [2, 5, 4, 1, 0, 3]
+        correctOrder: [2, 5, 4, 1, 0, 3],
+        explanation: 'Die Reihenfolge folgt der Sicherheit: Die Autos werden erst durch Gelb gewarnt und dann gestoppt (Rot), bevor die Fußgänger Grün bekommen. Das Blinken am Ende kündigt das baldige Rot an, und zum Schluss schaltet die Auto-Ampel wieder auf Grün zurück &ndash; ein vollständiger Kreislauf.'
       },
       {
         type: 'multiple-choice',
@@ -823,7 +824,8 @@ const LESSONS_PROJEKT = [
           { left: 'analogRead(A0)', right: 'Liest den Sensorwert (0-1023)' },
           { left: 'Schwellenwert', right: 'Grenze zwischen hell und dunkel' },
           { left: 'Serial Monitor', right: 'Zeigt Sensorwerte zur Kalibrierung' }
-        ]
+        ],
+        explanation: 'Diese vier Begriffe bilden die Mess-Kette der Nachtabschaltung: Der LDR wandelt Helligkeit in einen Widerstand um, analogRead(A0) macht daraus eine Zahl von 0 bis 1023, der Serial Monitor zeigt dir diese Zahl an und der Schwellenwert ist die Grenze, ab der dein Code zwischen hell und dunkel unterscheidet.'
       },
       {
         type: 'multiple-choice',
@@ -1982,7 +1984,8 @@ Servo dachFenster;
           'Auto-Ampel aufbauen (3 LEDs an Pin 2, 3, 4)',
           'Kompletten Code hochladen und Gesamttest durchführen'
         ],
-        correctOrder: [3, 1, 2, 0, 4]
+        correctOrder: [3, 1, 2, 0, 4],
+        explanation: 'Beim Aufbau gehst du Schritt für Schritt vor und testest jeden Teil einzeln, bevor du den nächsten ergänzt &ndash; so findest du Fehler sofort. Erst die Auto-Ampel, dann die Fußgänger-Ampel, dann der Taster und der LDR-Sensor, und ganz zum Schluss der Gesamttest mit dem kompletten Code.'
       },
       {
         type: 'multiple-choice',
@@ -2064,7 +2067,8 @@ Servo dachFenster;
           { left: 'Lüftung', right: 'DC-Motor mit Transistor' },
           { left: 'Ampel mit Nachtabschaltung', right: 'LDR im Spannungsteiler' },
           { left: 'Dimmer / Bohrmaschine-Drehzahl', right: 'Potentiometer + PWM' }
-        ]
+        ],
+        explanation: 'Jede Pool-Aufgabe verlangt das passende Bauteil zur Aufgabe: Temperatur misst der NTC (Gewächshaus), kräftige Lasten wie einen Motor schaltet man über einen Transistor (Lüftung), Helligkeit erkennt der LDR im Spannungsteiler (Nachtabschaltung) und eine stufenlose Einstellung machst du mit dem Potentiometer plus PWM (Dimmer). So matchst du Sensor oder Aktor immer zur Funktion.'
       },
       {
         type: 'ordering',
@@ -2076,7 +2080,8 @@ Servo dachFenster;
           'Erst das Lot wegnehmen, dann den Lötkolben',
           'Lötkolben für ca. 1 Sekunde auf Pad und Bein gleichzeitig halten'
         ],
-        correctOrder: [1, 4, 0, 3, 2]
+        correctOrder: [1, 4, 0, 3, 2],
+        explanation: 'Erst das Bauteil stecken, dann Pad und Bein gemeinsam erhitzen, damit das Lot an beiden gut haftet, und das Lot von der Gegenseite zuführen statt direkt auf die Spitze. Zuletzt nimmst du erst das Lot und dann den Kolben weg und knipst den Rest ab. Für die Realschulprüfung darfst du auch ein Breadboard nutzen &ndash; saubere Lötstellen sind aber eine nützliche Fertigkeit, die bei der handwerklichen Bewertung zählt.'
       }
     ]
   }

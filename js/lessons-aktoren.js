@@ -256,7 +256,8 @@ void loop() {
           { left: 'Dachfenster offen (Gewaechshaus)', right: 'meinServo.write(90)' },
           { left: 'Scheibenwischer wischt nach links', right: 'meinServo.write(30)' },
           { left: 'Kurvenlicht geradeaus', right: 'meinServo.write(90)' }
-        ]
+        ],
+        explanation: 'Der Wert in write() ist direkt der Winkel in Grad: 0 = ganz links, 90 = Mitte, 180 = ganz rechts. Geschlossen und geradeaus sind feste Endstellungen (0&deg; bzw. die Mitte 90&deg;), waehrend der Scheibenwischer mit 30&deg; nur ein Stueck nach links faehrt. So uebersetzt du jede mechanische Stellung in genau einen Zahlenwert.'
       },
       {
         type: 'multiple-choice',
@@ -284,7 +285,8 @@ void loop() {
           'Zurueckfahren: eine for-Schleife zaehlt den Winkel von 180 auf 0',
           'Auch hier jeden Winkel anfahren - dann beginnt loop() von vorne'
         ],
-        correctOrder: [0, 1, 2, 3]
+        correctOrder: [0, 1, 2, 3],
+        explanation: 'Ein Sweep ist eine Hin- und Rueckbewegung: Erst zaehlt eine for-Schleife den Winkel von 0 auf 180 hoch und faehrt mit write() jeden Zwischenwert kurz an &ndash; das delay sorgt fuer die sanfte, langsame Bewegung statt eines Sprungs. Danach laeuft die zweite Schleife von 180 zurueck auf 0. Weil loop() sich endlos wiederholt, beginnt das Spiel danach wieder von vorne.'
       },
       {
         type: 'multiple-choice',
@@ -667,7 +669,8 @@ void loop() {
           { left: '1 kOhm-Widerstand', right: 'Begrenzt den Basis-Strom und schuetzt den Arduino-Pin' },
           { left: 'Freilaufdiode 1N4148', right: 'Faengt die Spannungsspitze beim Abschalten ab und schuetzt den Transistor' },
           { left: 'DC-Motor', right: 'Wandelt elektrische Energie in Drehbewegung um' }
-        ]
+        ],
+        explanation: 'Jedes Bauteil hat genau eine Schutz- oder Schaltaufgabe: Der Transistor ist der eigentliche Schalter, der mit dem schwachen Pin-Signal den grossen Motorstrom steuert. Der 1 k&Omega;-Widerstand begrenzt den Basis-Strom, damit der Arduino-Pin nicht durchbrennt. Die Freilaufdiode faengt die Spannungsspitze ab, die der Motor beim Abschalten erzeugt, und schuetzt so den Transistor. Der Motor selbst wandelt den Strom in Drehbewegung um.'
       }
     ],
     // === Praxis-Tab (Tab 4) ===

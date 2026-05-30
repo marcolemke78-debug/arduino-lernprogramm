@@ -245,7 +245,8 @@ Hitze:       U<sub>2</sub> = 5 V &middot; 4  / (10 + 4)  &asymp; <strong>1,43 V<
           { left: 'LDR', right: 'Helligkeit messen' },
           { left: 'Taster mit Pull-Down-Widerstand', right: 'Sauberen LOW-Pegel an einem digitalen Eingang erzeugen' },
           { left: 'Potentiometer', right: 'Stufenlos einstellbare Spannung zwischen 0 V und 5 V' }
-        ]
+        ],
+        explanation: 'Alle vier nutzen denselben Trick: Sie veraendern einen Widerstand im Spannungsteiler, und der Arduino misst die dadurch entstehende Spannung U2. Beim NTC haengt R von der Temperatur ab, beim LDR vom Licht, beim Potentiometer vom Drehwinkel &ndash; und der Taster mit Pull-Down-Widerstand sorgt fuer einen sauberen LOW-Pegel, solange er nicht gedrueckt ist.'
       }
     ],
     // === Praxis-Tab (Tab 4) ===
@@ -567,7 +568,8 @@ Hitze:       U<sub>2</sub> = 5 V &middot; 4  / (10 + 4)  &asymp; <strong>1,43 V<
           { left: 'digitalRead()', right: 'Liest nur HIGH oder LOW' },
           { left: 'Potentiometer', right: 'Drehregler mit 3 Anschluessen' },
           { left: 'Serial Monitor', right: 'Zeigt Werte auf dem Bildschirm' }
-        ]
+        ],
+        explanation: 'Merke dir den Unterschied: analogRead() liefert feine Abstufungen von 0 bis 1023, digitalRead() nur HIGH oder LOW. Das Potentiometer ist die Hardware (der Drehregler mit 3 Anschluessen), die du ausliest, und der Serial Monitor ist dein Fenster, um die Zahlen am Bildschirm zu sehen.'
       },
       {
         type: 'ordering',
@@ -578,7 +580,8 @@ Hitze:       U<sub>2</sub> = 5 V &middot; 4  / (10 + 4)  &asymp; <strong>1,43 V<
           'Im setup() Serial.begin(9600) schreiben',
           'Im loop() analogRead(A0) aufrufen'
         ],
-        correctOrder: [1, 2, 3, 0]
+        correctOrder: [1, 2, 3, 0],
+        explanation: 'Erst kommt die Hardware: das Potentiometer an GND, A0 und 5V anschliessen. Dann die Software-Vorbereitung im setup() mit Serial.begin(9600), damit der Arduino ueberhaupt Werte senden kann. Danach im loop() den Wert mit analogRead(A0) auslesen &ndash; und erst zuletzt kannst du ihn im Serial Monitor beobachten.'
       }
     ]
   },
@@ -946,7 +949,8 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
           { left: 'analogWrite(9, 127)', right: 'LED an Pin 9 auf halbe Helligkeit' },
           { left: 'map()', right: 'Rechnet Wertebereiche um' },
           { left: '~3, ~5, ~6, ~9, ~10, ~11', right: 'PWM-faehige Pins am Arduino Uno' }
-        ]
+        ],
+        explanation: 'PWM ist das Prinzip (schnelles Ein-/Ausschalten), analogWrite(9, 127) ist der Befehl, der es nutzt &ndash; 127 ist etwa die Haelfte von 255, also halbe Helligkeit. map() hilft, einen Poti-Wert (0&ndash;1023) in einen analogWrite-Wert (0&ndash;255) umzurechnen. Und nur die mit ~ markierten Pins koennen PWM, deshalb haengt man dimmbare LEDs genau dort an.'
       },
       {
         type: 'multiple-choice',
@@ -1282,7 +1286,8 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
           { left: 'A0', right: 'Knotenpunkt zwischen LDR und Widerstand' },
           { left: '10-kOhm-Widerstand', right: 'Zwischen Knotenpunkt und GND' },
           { left: 'GND', right: 'Am Ende des festen Widerstands' }
-        ]
+        ],
+        explanation: 'Das ist ein Spannungsteiler: 5V geht an den LDR, der feste 10-kOhm-Widerstand liegt zwischen Knotenpunkt und GND. Genau in der Mitte &ndash; am Knotenpunkt zwischen beiden &ndash; greift A0 die Spannung ab. Aendert sich die Helligkeit, aendert sich der LDR-Widerstand und damit die Spannung an A0, die der Arduino misst.'
       },
       {
         type: 'multiple-choice',
@@ -1550,7 +1555,8 @@ analogRead &asymp; <strong>682</strong></pre>
           { left: '25 °C (Zimmertemperatur)', right: '~ 511 (mittig)' },
           { left: '50 °C (Tasse heisses Wasser danebenhalten)', right: '~ 270 (klein)' },
           { left: '100 °C (kochend, NICHT in echt machen)', right: '~ 92 (sehr klein)' }
-        ]
+        ],
+        explanation: 'Bei dieser Schaltung sitzt der NTC unten (= R2). Je waermer er wird, desto kleiner sein Widerstand &rarr; desto kleiner U2 &rarr; desto kleiner der analogRead-Wert. Deshalb gehoert zu 0 &deg;C der hohe Wert (~786) und zu 100 &deg;C der kleine (~92). Merksatz: heisser Sensor, kleiner Zahlenwert.'
       },
       {
         type: 'multiple-choice',
@@ -1850,7 +1856,8 @@ void loop() {
           'if/else-Logik programmieren',
           'Mit Serial Monitor Lichtwerte bei hell/dunkel ablesen'
         ],
-        correctOrder: [1, 3, 0, 2]
+        correctOrder: [1, 3, 0, 2],
+        explanation: 'Zuerst baust du die Hardware auf (LDR-Spannungsteiler und LED). Dann liest du im Serial Monitor ab, welche Werte bei hell und bei dunkel wirklich herauskommen &ndash; denn die haengen von deinem LDR und der Beleuchtung ab. Erst mit diesen echten Messwerten kannst du sinnvolle Schwellenwerte festlegen und zuletzt die if/else-Logik programmieren, die die LED schaltet.'
       },
       {
         type: 'multiple-choice',

@@ -82,7 +82,8 @@ const LESSONS_GRUNDLAGEN = [
           { left: 'Programm', right: 'Die Anweisung, die der Arduino ausführt' },
           { left: 'Sensor', right: 'Misst etwas (z.B. Licht, Temperatur)' },
           { left: 'LED', right: 'Kleines Lämpchen, das leuchten kann' }
-        ]
+        ],
+        explanation: 'Der Mikrocontroller ist der zentrale Chip, der alles steuert &ndash; deshalb das Gehirn. Das Programm sagt ihm Schritt für Schritt, was er tun soll. Ein Sensor liefert Messwerte aus der Umwelt, und eine LED ist ein Bauteil, das als sichtbares Signal leuchtet.'
       },
       {
         type: 'multiple-choice',
@@ -342,7 +343,8 @@ const LESSONS_GRUNDLAGEN = [
           { left: 'Lichtsensor', right: 'Analoger Pin (A0-A5)' },
           { left: 'LED dimmen', right: 'PWM-Pin (~)' },
           { left: 'Stromkreis schließen', right: 'GND' }
-        ]
+        ],
+        explanation: 'Eine LED kennt nur an oder aus &ndash; das passt zu einem digitalen Pin. Ein Lichtsensor liefert viele Zwischenwerte, die nur ein analoger Pin (A0&ndash;A5) messen kann. Zum Dimmen braucht man einen PWM-Pin (mit ~), der schnell ein- und ausschaltet, und GND schließt den Stromkreis, damit der Strom zurückfließen kann.'
       },
       {
         type: 'multiple-choice',
@@ -640,7 +642,8 @@ const LESSONS_GRUNDLAGEN = [
           'Code in der IDE schreiben',
           'Auf "Überprüfen" klicken'
         ],
-        correctOrder: [1, 2, 3, 0]
+        correctOrder: [1, 2, 3, 0],
+        explanation: 'Zuerst muss der Arduino per USB mit dem Computer verbunden sein. Dann schreibst du den Code in der IDE. Mit "Überprüfen" testet die IDE, ob der Code fehlerfrei ist, bevor du ihn mit "Hochladen" auf den Arduino überträgst &ndash; so vermeidest du, fehlerhaften Code aufzuspielen.'
       }
     ]
   },
@@ -828,7 +831,8 @@ const LESSONS_GRUNDLAGEN = [
           'Erster Durchlauf von loop()',
           'Arduino wird eingeschaltet'
         ],
-        correctOrder: [3, 1, 2, 0]
+        correctOrder: [3, 1, 2, 0],
+        explanation: 'Sobald der Arduino eingeschaltet wird, läuft setup() genau einmal &ndash; hier werden die Grundeinstellungen festgelegt. Danach beginnt loop() mit dem ersten Durchlauf und wiederholt sich immer wieder von vorne, solange der Arduino Strom hat.'
       }
     ]
   }

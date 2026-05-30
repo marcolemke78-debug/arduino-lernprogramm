@@ -1072,7 +1072,7 @@ const Exercises = {
       }
 
       if (allCorrect) {
-        feedbackEl.textContent = 'Alle Zuordnungen sind korrekt – super!';
+        feedbackEl.innerHTML = 'Alle Zuordnungen sind korrekt – super!' + (exercise.explanation ? '<br><br>' + exercise.explanation : '');
         feedbackEl.className = 'exercise-feedback correct';
         feedbackEl.style.display = 'block';
         checkBtn.disabled = true;
@@ -1956,7 +1956,7 @@ Exercises.renderOrdering = function(exercise, container, onComplete) {
 
     if (correctCount === items.length) {
       completed = true;
-      feedbackEl.textContent = 'Reihenfolge korrekt – super!';
+      feedbackEl.innerHTML = 'Reihenfolge korrekt – super!' + (exercise.explanation ? '<br><br>' + exercise.explanation : '');
       feedbackEl.className = 'exercise-feedback correct';
       feedbackEl.style.display = 'block';
       checkBtn.disabled = true;

@@ -314,6 +314,26 @@ const LESSONS_PROJEKT = [
           <strong>Achtung:</strong> Zwischen Auto-Rot und Fußgänger-Grün gibt es immer eine kurze Pause (ca. 1 Sekunde). In der echten Welt ist das die Räumzeit – Autos, die noch unterwegs sind, müssen die Kreuzung erst verlassen können!
         </div>
 
+        <div class="info-card" style="border-left: 3px solid #27AE60;">
+          <h3>Probiere es aus: steppe durch die Ampel-Phasen</h3>
+          <p>Klicke auf "Nächste Phase" und beobachte, wie Auto- und Fußgänger-Ampel zusammenspielen – genau in der Reihenfolge aus dem Ablauf oben (inklusive Räumzeit!):</p>
+          <div style="background:#f8f8f8;border:1px solid #ddd;border-radius:8px;padding:1rem;text-align:center;">
+            <svg viewBox="0 0 240 170" style="max-width:240px;height:auto;">
+              <text x="62" y="14" text-anchor="middle" font-size="11" fill="#555" font-weight="bold">Auto</text>
+              <rect x="40" y="22" width="44" height="118" rx="8" fill="#333"/>
+              <circle id="ampelsim-arot" cx="62" cy="44" r="14" fill="#ddd"/>
+              <circle id="ampelsim-agelb" cx="62" cy="81" r="14" fill="#ddd"/>
+              <circle id="ampelsim-agruen" cx="62" cy="118" r="14" fill="#2ECC71"/>
+              <text x="162" y="14" text-anchor="middle" font-size="11" fill="#555" font-weight="bold">Fußgänger</text>
+              <rect x="140" y="55" width="44" height="85" rx="8" fill="#333"/>
+              <circle id="ampelsim-frot" cx="162" cy="79" r="14" fill="#E74C3C"/>
+              <circle id="ampelsim-fgruen" cx="162" cy="116" r="14" fill="#ddd"/>
+            </svg>
+            <p style="margin:0.6rem 0 0.8rem;"><strong id="ampelsim-name">Normalzustand</strong><br><span id="ampelsim-desc">Auto Grün, Fußgänger Rot – Autos fahren, Fußgänger warten.</span></p>
+            <button data-phase="0" style="min-height:44px;padding:0.6rem 1.4rem;border:none;border-radius:8px;background:#2176AE;color:white;font-weight:bold;font-size:1rem;cursor:pointer;" onclick="var p=(parseInt(this.dataset.phase)+1)%6;this.dataset.phase=p;var s=[[0,0,1,1,0],[0,1,0,1,0],[1,0,0,1,0],[1,0,0,0,1],[1,0,0,0,1],[1,1,0,1,0]][p];var ids=['ampelsim-arot','ampelsim-agelb','ampelsim-agruen','ampelsim-frot','ampelsim-fgruen'];var col=['#E74C3C','#F1C40F','#2ECC71','#E74C3C','#2ECC71'];for(var i=0;i<5;i++){document.getElementById(ids[i]).setAttribute('fill',s[i]?col[i]:'#ddd');}var n=['Normalzustand','Phase 1: Auto Gelb (2 s)','Phase 1: Auto Rot + Räumzeit (1 s)','Phase 2: Fußgänger Grün (5 s)','Phase 3: Fußgänger-Grün blinkt 3-mal','Phase 4: Auto Rot-Gelb (1 s)'];var d=['Auto Grün, Fußgänger Rot – Autos fahren, Fußgänger warten.','Taster gedrückt: Die Auto-Ampel wechselt auf Gelb.','Auto steht auf Rot. 1 Sekunde Räumzeit, damit die Kreuzung frei wird.','Fußgänger dürfen gehen – 5 Sekunden lang.','Warnung: bald wieder Rot! Danach wird die Fußgänger-Ampel Rot (kurze Pause).','Rot und Gelb leuchten gleichzeitig, dann wird die Auto-Ampel wieder Grün – zurück zum Normalzustand.'];document.getElementById('ampelsim-name').textContent=n[p];document.getElementById('ampelsim-desc').textContent=d[p];">Nächste Phase &rarr;</button>
+          </div>
+        </div>
+
         <hr class="section-divider">
 
         <h3>Der komplette Code</h3>
@@ -464,7 +484,7 @@ const LESSONS_PROJEKT = [
         wrongExplanations: {
           0: 'Der Arduino schaltet in Mikrosekunden — der ist nicht das Problem. Es geht um Sicherheit im echten Verkehr, nicht um Technik-Tempo.',
           1: 'Es geht nicht um Optik, sondern um Verkehrssicherheit: Autos koennten noch auf der Kreuzung sein und muessen sie erst verlassen.',
-          3: 'LEDs vertragen beliebig schnelle Schaltvorgaenge problemlos. Die Pause ist eine Sicherheitsregel aus der Strassenverkehrs-Ordnung.'
+          3: 'LEDs vertragen beliebig schnelle Schaltvorgaenge problemlos. Die Pause ist eine Sicherheitsregel der Verkehrsplanung (Raeumzeit).'
         }
       }
     ]
@@ -724,8 +744,8 @@ const LESSONS_PROJEKT = [
             <text x="32" y="600" font-size="9" fill="#555">► Jede LED: Pin → 220Ω → LED Anode → LED Kathode → obere −Schiene</text>
             <text x="32" y="618" font-size="9" fill="#555">► LDR-Spannungsteiler (NEU): 5V → LDR → A0-Knoten → 10kΩ → GND</text>
             <text x="32" y="636" font-size="9" fill="#555">► Taster zwischen Pin 7 und unterer GND-Schiene (INPUT_PULLUP)</text>
-            <text x="32" y="660" font-size="9" fill="#666" font-style="italic">► Erweiterung gegenüber L19: LDR-Spannungsteiler an A0 ermöglicht Nachtabschaltung (Hell/Dunkel-Erkennung)</text>
-            <text x="32" y="684" font-size="9" fill="#666" font-style="italic">► Nächste Stufe (L21): Komplettprojekt mit Löten – diese Schaltung ist die Vorstufe!</text>
+            <text x="32" y="660" font-size="9" fill="#666" font-style="italic">► Erweiterung gegenüber L21: LDR-Spannungsteiler an A0 ermöglicht Nachtabschaltung (Hell/Dunkel-Erkennung)</text>
+            <text x="32" y="684" font-size="9" fill="#666" font-style="italic">► Nächste Stufe (L23): Komplettprojekt mit Löten – diese Schaltung ist die Vorstufe!</text>
           </svg>
         </div>
 
@@ -756,6 +776,20 @@ const LESSONS_PROJEKT = [
           </div>
         </div>
 
+        <div class="info-card" style="border-left: 3px solid #27AE60;">
+          <h3>Probiere es aus: finde den Schwellenwert</h3>
+          <p>Der Schieberegler simuliert die Helligkeit am LDR (analogRead-Wert 0–1023). Der Code nutzt die Schwelle <strong>300</strong>: bei Wert &le; 300 ist es dunkel – nur dann läuft die Ampel.</p>
+          <div style="background:#f8f8f8;border:1px solid #ddd;border-radius:8px;padding:1rem;">
+            <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
+              <label for="ldrsim-slider" style="font-weight:bold;">Helligkeit:</label>
+              <input id="ldrsim-slider" type="range" min="0" max="1023" step="1" value="500" style="flex:1;min-width:180px;height:28px;" oninput="var v=parseInt(this.value);var dunkel=v<=300;document.getElementById('ldrsim-wert').textContent=v;document.getElementById('ldrsim-tag').textContent=dunkel?'Dunkel (Nacht)':'Hell (Tag)';var st=document.getElementById('ldrsim-status');st.textContent=dunkel?'Ampel AKTIV – normaler Betrieb':'Ampel schläft – alle LEDs aus';st.style.color=dunkel?'#27AE60':'#999';">
+              <strong>analogRead: <span id="ldrsim-wert">500</span></strong>
+            </div>
+            <p style="margin:0.8rem 0 0;"><span id="ldrsim-tag" style="font-weight:bold;">Hell (Tag)</span> &rarr; <strong id="ldrsim-status" style="color:#999;">Ampel schläft – alle LEDs aus</strong></p>
+          </div>
+          <p style="margin-top:0.8rem;">Schiebe langsam nach links: Genau bei <strong>300</strong> "wacht" die Ampel auf (Wert &le; 300 = dunkel = normaler Betrieb).</p>
+        </div>
+
         <div class="code-card">
           <h4>CODE-ERWEITERUNG: LDR-ABFRAGE IN DER LOOP()</h4>
           <pre><code><span class="keyword">int</span> SCHWELLE = <span class="value">300</span>;  <span class="comment">// Schwellenwert – anpassen!</span>
@@ -771,7 +805,7 @@ const LESSONS_PROJEKT = [
 
     <span class="comment">// Auf Tastendruck pruefen</span>
     <span class="keyword">if</span> (<span class="function">digitalRead</span>(taster) == LOW) {
-      <span class="comment">// ... Ampel-Sequenz wie in Lektion 13 ...</span>
+      <span class="comment">// ... Ampel-Sequenz wie in Lektion 21 ...</span>
     }
   } <span class="keyword">else</span> {
     <span class="comment">// --- HELL: Ampel schlaeft ---</span>
@@ -1751,7 +1785,7 @@ Servo dachFenster;
 }</code></pre>
           </div>
 
-          <p><strong>Wenn dich dieses Projekt erwartet, schaue in:</strong> Lektion 16 (NTC verstehen und auslesen) und Lektion 19 (Servomotor ansteuern). Die Schwellwerte musst du in der Prüfung selbst kalibrieren.</p>
+          <p><strong>Wenn dich dieses Projekt erwartet, schaue in:</strong> Lektion 16 (NTC verstehen und auslesen) und Lektion 18 (Servomotor ansteuern). Die Schwellwerte musst du in der Prüfung selbst kalibrieren.</p>
 
           <h4 style="margin-top:1.5rem;">Showcase 5b: Lüftungs-Steuerung (Bautechnik)</h4>
           <p><strong>Aufgabenbeschreibung:</strong> Ein Lüfter (DC-Motor) wird per Taster ein- und ausgeschaltet. Zusätzlich misst ein NTC die Raumtemperatur und schaltet bei Überhitzung automatisch auf volle Drehzahl.</p>
@@ -1877,7 +1911,68 @@ Servo dachFenster;
 }</code></pre>
           </div>
 
-          <p><strong>Wenn dich dieses Projekt erwartet, schaue in:</strong> Lektion 20 (DC-Motor mit Transistor – inklusive Freilaufdiode!) und Lektion 16 (NTC). Achtung: Transistor und Freilaufdiode sind Pflicht für den DC-Motor, sonst geht der Arduino kaputt.</p>
+          <p><strong>Wenn dich dieses Projekt erwartet, schaue in:</strong> Lektion 19 (DC-Motor mit Transistor – inklusive Freilaufdiode!) und Lektion 16 (NTC). Achtung: Transistor und Freilaufdiode sind Pflicht für den DC-Motor, sonst geht der Arduino kaputt.</p>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Plus-Wissen: RGB-LED f&uuml;r die Temperaturanzeige</h3>
+          <p>Eine der Pool-Aufgaben (Temperaturanzeige) braucht eine <strong>RGB-LED</strong>. Das klingt nach einem neuen Bauteil, ist aber nur: <strong>drei LEDs in einem Gehäuse</strong> – eine rote, eine grüne und eine blaue.</p>
+
+          <svg viewBox="0 0 320 150" style="max-width:100%; display:block; margin:0.5rem auto;" role="img" aria-label="RGB-LED mit 4 Beinen">
+            <ellipse cx="160" cy="45" rx="34" ry="30" fill="#eee" stroke="#888" stroke-width="2"/>
+            <rect x="126" y="45" width="68" height="14" fill="#eee" stroke="#888" stroke-width="2"/>
+            <circle cx="146" cy="42" r="6" fill="#c0392b"/>
+            <circle cx="160" cy="36" r="6" fill="#2E7D32"/>
+            <circle cx="174" cy="42" r="6" fill="#2176AE"/>
+            <line x1="136" y1="59" x2="136" y2="105" stroke="#c0392b" stroke-width="3"/>
+            <line x1="152" y1="59" x2="152" y2="125" stroke="#333" stroke-width="3"/>
+            <line x1="168" y1="59" x2="168" y2="105" stroke="#2E7D32" stroke-width="3"/>
+            <line x1="184" y1="59" x2="184" y2="105" stroke="#2176AE" stroke-width="3"/>
+            <text x="136" y="120" text-anchor="middle" font-size="12" fill="#c0392b">R</text>
+            <text x="168" y="120" text-anchor="middle" font-size="12" fill="#2E7D32">G</text>
+            <text x="184" y="120" text-anchor="middle" font-size="12" fill="#2176AE">B</text>
+            <text x="152" y="142" text-anchor="middle" font-size="12" fill="#333">GND (l&auml;ngstes Bein)</text>
+          </svg>
+
+          <p><strong>Anschluss:</strong></p>
+          <ul style="margin-left:1.25rem;">
+            <li>Das <strong>l&auml;ngste Bein</strong> ist die <strong>gemeinsame Kathode</strong> &rarr; direkt an GND.</li>
+            <li><strong>Jeder Farbkanal braucht seinen eigenen Vorwiderstand</strong> (je 220&nbsp;&Omega;) – wie bei drei einzelnen LEDs!</li>
+            <li>Die drei Farb-Beine an <strong>drei PWM-Pins</strong> (die mit der Tilde&nbsp;~, z.&nbsp;B. 9, 10, 11).</li>
+          </ul>
+
+          <p><strong>Farben mischen</strong> geht mit <code>analogWrite(pin, 0&ndash;255)</code> auf jedem Kanal:</p>
+          <table class="icon-table">
+            <tr><th>Farbe</th><th>Rot</th><th>Gr&uuml;n</th><th>Blau</th></tr>
+            <tr><td>Rot</td><td>255</td><td>0</td><td>0</td></tr>
+            <tr><td>Orange/Gelb</td><td>255</td><td>80&ndash;255</td><td>0</td></tr>
+            <tr><td>Gr&uuml;n</td><td>0</td><td>255</td><td>0</td></tr>
+            <tr><td>Blau</td><td>0</td><td>0</td><td>255</td></tr>
+            <tr><td>Wei&szlig;</td><td>255</td><td>255</td><td>255</td></tr>
+          </table>
+
+          <div class="analogy-box">
+            <strong>Alltags-Analogie:</strong> Wie beim Mischpult im Musikraum – drei Regler (rot, grün, blau), und je nachdem, wie weit du jeden aufdrehst, kommt eine andere Mischfarbe heraus.
+          </div>
+
+          <p><strong>Kopplung an den NTC (L16):</strong> Temperatur messen, dann mit einer if/else-Kette die Farbe wählen – kalt &rarr; blau, okay &rarr; grün, heiß &rarr; rot:</p>
+          <div class="code-example">
+            <pre><code><span class="keyword">int</span> temp = <span class="function">analogRead</span>(ntcPin);
+
+<span class="keyword">if</span> (temp &gt; SCHWELLE_KALT) {          <span class="comment">// kalt (NTC: hoher Wert = kalt)</span>
+  <span class="function">analogWrite</span>(rotPin, <span class="value">0</span>);   <span class="function">analogWrite</span>(gruenPin, <span class="value">0</span>);   <span class="function">analogWrite</span>(blauPin, <span class="value">255</span>);
+} <span class="keyword">else if</span> (temp &gt; SCHWELLE_HEISS) {  <span class="comment">// angenehm</span>
+  <span class="function">analogWrite</span>(rotPin, <span class="value">0</span>);   <span class="function">analogWrite</span>(gruenPin, <span class="value">255</span>); <span class="function">analogWrite</span>(blauPin, <span class="value">0</span>);
+} <span class="keyword">else</span> {                              <span class="comment">// heiss</span>
+  <span class="function">analogWrite</span>(rotPin, <span class="value">255</span>); <span class="function">analogWrite</span>(gruenPin, <span class="value">0</span>);   <span class="function">analogWrite</span>(blauPin, <span class="value">0</span>);
+}</code></pre>
+          </div>
+
+          <div class="tip-box">
+            <strong>Merke:</strong> Eine RGB-LED ist keine neue Programmier-Technik – nur drei LEDs, drei Vorwiderstände, drei <code>analogWrite()</code>. Alles, was du dafür brauchst, kennst du schon aus L5 (LED), L14 (PWM) und L16 (NTC).
+          </div>
         </div>
 
         <hr class="section-divider">
@@ -1892,14 +1987,14 @@ Servo dachFenster;
             <tr><td><strong>Gewächshaus</strong> (Bautechnik)</td><td>NTC, Servo, Glühlampe</td><td>L16, L19</td><td>&#10003; Sektion 5a</td></tr>
             <tr><td><strong>Lüftung</strong> (Bautechnik)</td><td>DC-Motor, NTC, Taster</td><td>L16, L20</td><td>&#10003; Sektion 5b</td></tr>
             <tr><td>Außenbeleuchtung</td><td>LED, Taster, LDR</td><td>L5, L8, L15</td><td>sinngemäß Sektion 3</td></tr>
-            <tr><td>Temperaturanzeige (Farbe)</td><td>RGB-LED, Taster, NTC</td><td>L16 (RGB-LED-Lektion folgt noch)</td><td>nicht direkt – frag deine Lehrkraft, sobald die RGB-Lektion da ist</td></tr>
+            <tr><td>Temperaturanzeige (Farbe)</td><td>RGB-LED, Taster, NTC</td><td>L16 (NTC), L23 (diese Lektion)</td><td>&#10003; Plus-Box &bdquo;RGB-LED&ldquo; (oben)</td></tr>
             <tr><td>Dimmer</td><td>LED, Taster, Poti</td><td>L13, L14</td><td>aus L13/L14</td></tr>
             <tr><td>Treppenhauslicht</td><td>LED, 2× Taster, Poti</td><td>L8, L13, L14</td><td>aus L8/L13</td></tr>
             <tr><td>Scheibenwischer</td><td>Servo, Umschalter, Regensensor</td><td>L19, (Regensensor = LDR-Variante)</td><td>aus L19</td></tr>
             <tr><td>Kurvenlicht</td><td>LED, Servo, Poti</td><td>L13, L19</td><td>aus L13/L19</td></tr>
             <tr><td>Fahrradlicht</td><td>LED, Umschalter, LDR</td><td>L8, L15</td><td>aus L15/L8</td></tr>
             <tr><td>Bohrmaschine</td><td>DC-Motor, Schalter, Poti</td><td>L13, L20</td><td>aus L20/L13</td></tr>
-            <tr><td>Alarmanlage</td><td>Summer, Taster, Lichtschranke</td><td>L8, L21 (Box Summer)</td><td>Summer = Box in L21</td></tr>
+            <tr><td>Alarmanlage</td><td>Summer, Taster, Lichtschranke</td><td>L8 (Taster)</td><td>Summer-Abschnitt in L18 (Servomotor-Lektion)</td></tr>
           </table>
 
           <p style="margin-top:1rem;"><strong>Faustregel:</strong> Egal welche Aufgabe du bekommst – das Muster ist immer: Sensor messen &rarr; if/else entscheiden &rarr; Aktor schalten. Den Rest hast du in den Vorgängerlektionen schon geübt.</p>

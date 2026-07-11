@@ -125,7 +125,7 @@ const LESSONS_GRUNDLAGEN = [
         wrongExplanations: {
           0: 'Doch – Bewässerung geht super! Bodenfeuchte-Sensor + Pumpe + Arduino = automatisches Gießen.',
           2: 'Doch – Bewegungsmelder + Sirene + Arduino ergeben eine funktionierende Alarmanlage.',
-          3: 'Doch – eine Ampel mit 3 LEDs ist sogar ein Klassiker und wird in Modul 4 dein Prüfungsprojekt!'
+          3: 'Doch – eine Ampel mit 3 LEDs ist sogar ein Klassiker und wird in Modul 5 dein Prüfungsprojekt!'
         }
       }
     ]
@@ -445,6 +445,14 @@ const LESSONS_GRUNDLAGEN = [
           <h3>Warum eine LED einen Vorwiderstand braucht</h3>
           <p>Eine LED ist "gierig": Schließt du sie <strong>direkt</strong> an 5&nbsp;V an, zieht sie viel zu viel Strom und <strong>brennt durch</strong> &ndash; oft sofort. Ein <strong>Vorwiderstand</strong> in Reihe begrenzt den Strom auf einen sicheren Wert.</p>
           <p>Eine normale LED braucht etwa <strong>2&nbsp;V</strong> für sich selbst (das nennt man Flussspannung) und mag ungefähr <strong>10&ndash;20&nbsp;mA</strong> Strom. Der Vorwiderstand "verbraucht" den Rest der Spannung.</p>
+          <p>Die genaue Flussspannung hängt von der <strong>Farbe</strong> ab:</p>
+          <table class="icon-table">
+            <tr><th>LED-Farbe</th><th>Flussspannung (typisch)</th></tr>
+            <tr><td>rot</td><td>&asymp;&nbsp;2,0&nbsp;V</td></tr>
+            <tr><td>gelb / grün</td><td>&asymp;&nbsp;2,2&nbsp;V</td></tr>
+            <tr><td>blau / weiß</td><td>&asymp;&nbsp;3,2&nbsp;V</td></tr>
+          </table>
+          <p><strong>Merke:</strong> Die <strong>2&nbsp;V</strong> sind der vereinfachte Rechenwert für die Prüfung &ndash; damit rechnest du, wenn nichts anderes angegeben ist.</p>
         </div>
 
         <div class="info-card">
@@ -455,6 +463,20 @@ const LESSONS_GRUNDLAGEN = [
           U<sub>Quelle</sub> = 5&nbsp;V, U<sub>LED</sub> = 2&nbsp;V, gewünschter Strom I = 15&nbsp;mA = 0,015&nbsp;A.<br>
           R = (5&nbsp;V &minus; 2&nbsp;V) &divide; 0,015&nbsp;A = <strong>200&nbsp;&Omega;</strong>.</p>
           <p>Es gibt nicht jeden Wert zu kaufen, nur <strong>Normwerte</strong>. Den nächstgrößeren nimmt man (etwas weniger Strom = sicherer) &ndash; das ist <strong>220&nbsp;&Omega;</strong>. Darum siehst du in fast jeder Arduino-Schaltung einen 220-&Omega;-Vorwiderstand an der LED.</p>
+        </div>
+
+        <div class="info-card" style="border-left: 3px solid #27AE60;">
+          <h3>Probiere es aus: Vorwiderstand berechnen</h3>
+          <p>Stell mit dem Regler die <strong>Flussspannung</strong> deiner LED ein (je nach Farbe, siehe Tabelle oben) und sieh zu, welcher Vorwiderstand bei 5&nbsp;V und 20&nbsp;mA nötig ist:</p>
+          <div style="background:#f8f8f8;border:1px solid #ddd;border-radius:8px;padding:1rem;">
+            <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
+              <label for="vorwsim-slider" style="font-weight:bold;">U<sub>LED</sub>:</label>
+              <input id="vorwsim-slider" type="range" min="1.8" max="3.4" step="0.1" value="2.0" style="flex:1;min-width:180px;height:28px;" oninput="var uled=+this.value;var ur=5-uled;var r=Math.round(ur/0.02);var norm=[150,220,330,470];var n=norm[norm.length-1];for(var i=0;i<norm.length;i++){if(norm[i]>=r){n=norm[i];break;}}document.getElementById('vorwsim-uled').textContent=uled.toFixed(1).replace('.',',');document.getElementById('vorwsim-ur').textContent=ur.toFixed(1).replace('.',',');document.getElementById('vorwsim-r').textContent=r;document.getElementById('vorwsim-norm').textContent=n;">
+              <strong><span id="vorwsim-uled">2,0</span>&nbsp;V</strong>
+            </div>
+            <p style="margin:0.8rem 0 0;">U<sub>R</sub> = 5&nbsp;V &minus; U<sub>LED</sub> = <strong><span id="vorwsim-ur">3,0</span>&nbsp;V</strong> &rarr; R = U<sub>R</sub> &divide; 0,02&nbsp;A = <strong><span id="vorwsim-r">150</span>&nbsp;&Omega;</strong></p>
+            <p style="margin:0.4rem 0 0;">Passender Norm-Widerstand (nächstgrößerer aus 150/220/330/470): <strong><span id="vorwsim-norm">150</span>&nbsp;&Omega;</strong></p>
+          </div>
         </div>
 
         <hr class="section-divider">
@@ -470,6 +492,7 @@ const LESSONS_GRUNDLAGEN = [
               <line x1="162" y1="93" x2="162" y2="125" stroke="#888" stroke-width="3"/>
               <text x="138" y="165" text-anchor="middle" font-size="11" fill="#222" font-weight="bold">langes Bein</text>
               <text x="138" y="130" text-anchor="middle" font-size="11" fill="#1e8449" font-weight="bold">Anode (+)</text>
+              <line x1="202" y1="122" x2="166" y2="122" stroke="#888" stroke-width="1.5"/>
               <text x="205" y="120" text-anchor="start" font-size="11" fill="#222" font-weight="bold">kurzes Bein</text>
               <text x="205" y="134" text-anchor="start" font-size="11" fill="#c0392b" font-weight="bold">Kathode (-)</text>
             </svg>
@@ -483,6 +506,146 @@ const LESSONS_GRUNDLAGEN = [
 
         <div class="warning-box">
           <strong>Falsch herum = die LED bleibt dunkel.</strong> Sie geht davon meist nicht kaputt, aber sie leuchtet einfach nicht, weil sie Strom nur in eine Richtung durchlässt. Erster Tipp bei "LED leuchtet nicht": einmal umdrehen.
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Schaltsymbole &amp; Schaltpläne</h3>
+          <p>Bisher hast du Schaltungen als <strong>Breadboard-Ansicht</strong> gesehen &ndash; also so, wie sie real auf dem Steckbrett aussehen. In der Technik (und in der Prüfung!) benutzt man stattdessen den <strong>Schaltplan</strong>: eine abstrakte Zeichnung, bei der jedes Bauteil durch ein <strong>Symbol</strong> dargestellt wird und die Verbindungen als gerade Linien. Vorteil: Ein Schaltplan ist für jeden auf der Welt gleich lesbar &ndash; egal, wie die Kabel in Wirklichkeit liegen.</p>
+          <p>In Deutschland gelten die <strong>DIN-Symbole</strong>. Wichtig: Der Widerstand ist hier ein <strong>Rechteck</strong> &ndash; nicht die Zickzack-Linie, die du vielleicht aus amerikanischen Videos kennst!</p>
+          <div style="text-align:center;margin:1rem 0;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 400" style="max-width:100%;height:auto;background:#fafafa;border:1px solid #ddd;border-radius:8px;">
+              <!-- Kopfzeile -->
+              <text x="130" y="26" text-anchor="middle" font-size="14" font-weight="bold" fill="#2176AE">Symbol (DIN)</text>
+              <text x="380" y="26" text-anchor="middle" font-size="14" font-weight="bold" fill="#2176AE">Bauteil</text>
+              <line x1="20" y1="36" x2="500" y2="36" stroke="#2176AE" stroke-width="2"/>
+              <line x1="260" y1="36" x2="260" y2="390" stroke="#ddd" stroke-width="1"/>
+
+              <!-- Batterie / Spannungsquelle -->
+              <line x1="70" y1="62" x2="120" y2="62" stroke="#333" stroke-width="2"/>
+              <line x1="120" y1="46" x2="120" y2="78" stroke="#333" stroke-width="3"/>
+              <line x1="134" y1="54" x2="134" y2="70" stroke="#333" stroke-width="3"/>
+              <line x1="134" y1="62" x2="184" y2="62" stroke="#333" stroke-width="2"/>
+              <text x="112" y="44" text-anchor="middle" font-size="11" fill="#2E7D32" font-weight="bold">+</text>
+              <text x="142" y="44" text-anchor="middle" font-size="11" fill="#c0392b" font-weight="bold">&minus;</text>
+              <text x="380" y="66" text-anchor="middle" font-size="13" fill="#222">Batterie / Spannungsquelle<tspan x="380" dy="14" font-size="11" fill="#666">langer Strich = Plus, kurzer = Minus</tspan></text>
+              <line x1="20" y1="92" x2="500" y2="92" stroke="#eee" stroke-width="1"/>
+
+              <!-- Widerstand -->
+              <line x1="60" y1="115" x2="95" y2="115" stroke="#333" stroke-width="2"/>
+              <rect x="95" y="105" width="64" height="20" fill="#fff" stroke="#E67E22" stroke-width="2.5"/>
+              <line x1="159" y1="115" x2="194" y2="115" stroke="#333" stroke-width="2"/>
+              <text x="380" y="112" text-anchor="middle" font-size="13" fill="#222">Widerstand<tspan x="380" dy="14" font-size="11" fill="#666">DIN: Rechteck (nicht Zickzack!)</tspan></text>
+              <line x1="20" y1="140" x2="500" y2="140" stroke="#eee" stroke-width="1"/>
+
+              <!-- LED -->
+              <line x1="55" y1="168" x2="100" y2="168" stroke="#333" stroke-width="2"/>
+              <polygon points="100,154 100,182 126,168" fill="#fff" stroke="#E67E22" stroke-width="2.5"/>
+              <line x1="126" y1="154" x2="126" y2="182" stroke="#333" stroke-width="2.5"/>
+              <line x1="126" y1="168" x2="172" y2="168" stroke="#333" stroke-width="2"/>
+              <line x1="112" y1="150" x2="126" y2="138" stroke="#F59E0B" stroke-width="2"/>
+              <polygon points="126,138 118,140 124,146" fill="#F59E0B"/>
+              <line x1="124" y1="158" x2="138" y2="146" stroke="#F59E0B" stroke-width="2"/>
+              <polygon points="138,146 130,148 136,154" fill="#F59E0B"/>
+              <text x="95" y="196" text-anchor="middle" font-size="10" fill="#2E7D32" font-weight="bold">Anode (+)</text>
+              <text x="150" y="196" text-anchor="middle" font-size="10" fill="#c0392b" font-weight="bold">Kathode (&minus;)</text>
+              <text x="380" y="166" text-anchor="middle" font-size="13" fill="#222">LED (Leuchtdiode)<tspan x="380" dy="14" font-size="11" fill="#666">Dreieck-Spitze = Stromrichtung</tspan></text>
+              <line x1="20" y1="206" x2="500" y2="206" stroke="#eee" stroke-width="1"/>
+
+              <!-- Taster/Schalter -->
+              <line x1="60" y1="232" x2="100" y2="232" stroke="#333" stroke-width="2"/>
+              <circle cx="104" cy="232" r="3" fill="#333"/>
+              <line x1="104" y1="232" x2="148" y2="216" stroke="#333" stroke-width="2"/>
+              <circle cx="152" cy="232" r="3" fill="#333"/>
+              <line x1="155" y1="232" x2="194" y2="232" stroke="#333" stroke-width="2"/>
+              <text x="380" y="230" text-anchor="middle" font-size="13" fill="#222">Taster / Schalter<tspan x="380" dy="14" font-size="11" fill="#666">offen = kein Strom, geschlossen = Strom</tspan></text>
+              <line x1="20" y1="256" x2="500" y2="256" stroke="#eee" stroke-width="1"/>
+
+              <!-- Lampe -->
+              <line x1="60" y1="282" x2="110" y2="282" stroke="#333" stroke-width="2"/>
+              <circle cx="127" cy="282" r="17" fill="#fff" stroke="#333" stroke-width="2"/>
+              <line x1="115" y1="270" x2="139" y2="294" stroke="#333" stroke-width="2"/>
+              <line x1="139" y1="270" x2="115" y2="294" stroke="#333" stroke-width="2"/>
+              <line x1="144" y1="282" x2="194" y2="282" stroke="#333" stroke-width="2"/>
+              <text x="380" y="280" text-anchor="middle" font-size="13" fill="#222">Lampe / Gl&uuml;hlampe<tspan x="380" dy="14" font-size="11" fill="#666">Kreis mit Kreuz</tspan></text>
+              <line x1="20" y1="306" x2="500" y2="306" stroke="#eee" stroke-width="1"/>
+
+              <!-- Motor -->
+              <line x1="60" y1="332" x2="110" y2="332" stroke="#333" stroke-width="2"/>
+              <circle cx="127" cy="332" r="17" fill="#fff" stroke="#2176AE" stroke-width="2.5"/>
+              <text x="127" y="337" text-anchor="middle" font-size="14" font-weight="bold" fill="#2176AE">M</text>
+              <line x1="144" y1="332" x2="194" y2="332" stroke="#333" stroke-width="2"/>
+              <text x="380" y="330" text-anchor="middle" font-size="13" fill="#222">Motor<tspan x="380" dy="14" font-size="11" fill="#666">Kreis mit M</tspan></text>
+              <line x1="20" y1="356" x2="500" y2="356" stroke="#eee" stroke-width="1"/>
+
+              <!-- GND -->
+              <line x1="127" y1="366" x2="127" y2="376" stroke="#333" stroke-width="2"/>
+              <line x1="109" y1="376" x2="145" y2="376" stroke="#333" stroke-width="2.5"/>
+              <line x1="115" y1="381" x2="139" y2="381" stroke="#333" stroke-width="2.5"/>
+              <line x1="121" y1="386" x2="133" y2="386" stroke="#333" stroke-width="2.5"/>
+              <text x="380" y="378" text-anchor="middle" font-size="13" fill="#222">GND (Masse / Minuspol)<tspan x="380" dy="14" font-size="11" fill="#666">alle GND-Punkte sind verbunden</tspan></text>
+            </svg>
+          </div>
+          <p><strong>LED-Polung im Schaltplan:</strong> Das LED-Symbol ist ein Dreieck mit Querstrich &ndash; das Dreieck ist wie ein <strong>Pfeil</strong> und zeigt die Richtung, in die der Strom fließen darf: von der <strong>Anode (+)</strong> zur <strong>Kathode (&minus;, der Querstrich)</strong>. Die zwei kleinen Pfeile nach außen bedeuten "hier kommt Licht raus".</p>
+          <div class="tip-box">
+            <strong>Für die Prüfung:</strong> Du musst Schaltpläne <strong>lesen</strong> (welches Bauteil ist das? in welche Richtung leitet die LED?) und selbst <strong>zeichnen</strong> können &ndash; mit Lineal, DIN-Symbolen und geraden Verbindungslinien.
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Reihen- und Parallelschaltung von LEDs</h3>
+          <p>Willst du mehrere LEDs betreiben, gibt es zwei Grundmuster:</p>
+          <div style="text-align:center;margin:1rem 0;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 210" style="max-width:100%;height:auto;background:#fafafa;border:1px solid #ddd;border-radius:8px;">
+              <text x="130" y="26" text-anchor="middle" font-size="13" font-weight="bold" fill="#2176AE">Reihenschaltung</text>
+              <text x="390" y="26" text-anchor="middle" font-size="13" font-weight="bold" fill="#2176AE">Parallelschaltung</text>
+              <line x1="260" y1="15" x2="260" y2="200" stroke="#ddd" stroke-width="1"/>
+
+              <!-- Reihe: R -> LED1 -> LED2 -->
+              <line x1="20" y1="70" x2="45" y2="70" stroke="#333" stroke-width="2"/>
+              <rect x="45" y="61" width="40" height="18" fill="#fff" stroke="#E67E22" stroke-width="2"/>
+              <line x1="85" y1="70" x2="105" y2="70" stroke="#333" stroke-width="2"/>
+              <polygon points="105,59 105,81 125,70" fill="#fff" stroke="#E67E22" stroke-width="2"/>
+              <line x1="125" y1="59" x2="125" y2="81" stroke="#333" stroke-width="2"/>
+              <line x1="125" y1="70" x2="150" y2="70" stroke="#333" stroke-width="2"/>
+              <polygon points="150,59 150,81 170,70" fill="#fff" stroke="#E67E22" stroke-width="2"/>
+              <line x1="170" y1="59" x2="170" y2="81" stroke="#333" stroke-width="2"/>
+              <line x1="170" y1="70" x2="200" y2="70" stroke="#333" stroke-width="2"/>
+              <text x="65" y="52" text-anchor="middle" font-size="10" fill="#666">1 Widerstand</text>
+              <text x="140" y="98" text-anchor="middle" font-size="10" fill="#666">LEDs hintereinander</text>
+              <text x="130" y="130" text-anchor="middle" font-size="11" fill="#2E7D32" font-weight="bold">gleicher Strom durch alle</text>
+              <text x="130" y="146" text-anchor="middle" font-size="11" fill="#2E7D32">Spannungen addieren sich</text>
+
+              <!-- Parallel: 2 Zweige, je R + LED -->
+              <line x1="290" y1="55" x2="290" y2="115" stroke="#333" stroke-width="2"/>
+              <line x1="290" y1="55" x2="320" y2="55" stroke="#333" stroke-width="2"/>
+              <rect x="320" y="46" width="40" height="18" fill="#fff" stroke="#E67E22" stroke-width="2"/>
+              <line x1="360" y1="55" x2="385" y2="55" stroke="#333" stroke-width="2"/>
+              <polygon points="385,44 385,66 405,55" fill="#fff" stroke="#E67E22" stroke-width="2"/>
+              <line x1="405" y1="44" x2="405" y2="66" stroke="#333" stroke-width="2"/>
+              <line x1="405" y1="55" x2="470" y2="55" stroke="#333" stroke-width="2"/>
+              <line x1="290" y1="115" x2="320" y2="115" stroke="#333" stroke-width="2"/>
+              <rect x="320" y="106" width="40" height="18" fill="#fff" stroke="#E67E22" stroke-width="2"/>
+              <line x1="360" y1="115" x2="385" y2="115" stroke="#333" stroke-width="2"/>
+              <polygon points="385,104 385,126 405,115" fill="#fff" stroke="#E67E22" stroke-width="2"/>
+              <line x1="405" y1="104" x2="405" y2="126" stroke="#333" stroke-width="2"/>
+              <line x1="405" y1="115" x2="470" y2="115" stroke="#333" stroke-width="2"/>
+              <line x1="470" y1="55" x2="470" y2="115" stroke="#333" stroke-width="2"/>
+              <text x="390" y="146" text-anchor="middle" font-size="10" fill="#666">jeder Zweig: eigener Widerstand + LED</text>
+              <text x="390" y="172" text-anchor="middle" font-size="11" fill="#c0392b" font-weight="bold">jede LED braucht ihren</text>
+              <text x="390" y="188" text-anchor="middle" font-size="11" fill="#c0392b" font-weight="bold">EIGENEN Vorwiderstand!</text>
+            </svg>
+          </div>
+          <div class="analogy-box">
+            <strong>Alltagsanalogie:</strong> Die <strong>Reihenschaltung</strong> ist wie ein Wasserfall mit mehreren Stufen: Dasselbe Wasser fließt über jede Stufe (gleicher Strom durch alle Bauteile), aber jede Stufe "verbraucht" einen Teil der Fallhöhe (die Spannungen addieren sich). Die <strong>Parallelschaltung</strong> ist wie mehrere Rutschen nebeneinander im Schwimmbad: Jede Rutsche hat die volle Höhe (volle Spannung), aber das Wasser teilt sich auf die Rutschen auf.
+          </div>
+          <ul>
+            <li><strong>Reihe:</strong> Durch alle Bauteile fließt <strong>derselbe Strom</strong>, die Spannungen der Bauteile <strong>addieren sich</strong>. Beispiel: 2 LEDs &agrave; 2&nbsp;V an 5&nbsp;V &rarr; die LEDs brauchen zusammen 4&nbsp;V, für den Vorwiderstand bleibt <strong>nur 1&nbsp;V</strong> übrig. Eine dritte LED ginge gar nicht mehr &ndash; 6&nbsp;V wären mehr, als die Quelle liefert.</li>
+            <li><strong>Parallel:</strong> Jeder Zweig bekommt die <strong>volle Spannung</strong>. Deshalb braucht <strong>jede LED ihren eigenen Vorwiderstand</strong> &ndash; ein gemeinsamer Widerstand für alle wäre unfair verteilt: Die "gierigste" LED zieht am meisten Strom.</li>
+          </ul>
         </div>
       `
     },
@@ -583,6 +746,34 @@ R = 3 V / 0,015 A = 200 Ohm</pre>
           0: '10&nbsp;&Omega; wäre viel zu klein &ndash; dann flössen rund 300&nbsp;mA und die LED würde sofort durchbrennen.',
           2: '4700&nbsp;&Omega; ist viel zu groß: Es flössen nur etwa 0,6&nbsp;mA, die LED bliebe sehr dunkel.',
           3: 'Doch, ein Vorwiderstand ist nötig &ndash; sonst zerstört der zu hohe Strom die LED.'
+        }
+      },
+      {
+        type: 'matching',
+        question: 'Ordne die DIN-Schaltsymbole den Bauteilen zu:',
+        pairs: [
+          { left: 'Rechteck', right: 'Widerstand' },
+          { left: 'Dreieck mit Querstrich und zwei Pfeilen nach außen', right: 'LED' },
+          { left: 'Kreis mit M', right: 'Motor' },
+          { left: 'Kreis mit Kreuz', right: 'Lampe' }
+        ],
+        explanation: 'In Deutschland gelten die DIN-Symbole: Der Widerstand ist ein Rechteck (nicht die amerikanische Zickzack-Linie!). Die LED ist ein Dreieck mit Querstrich &ndash; die Dreieck-Spitze zeigt die Stromrichtung, die zwei kleinen Pfeile nach außen stehen für das abgestrahlte Licht. Der Motor ist ein Kreis mit einem M darin, die Lampe ein Kreis mit einem Kreuz. Diese Symbole musst du für die Prüfung sicher erkennen und selbst zeichnen können.'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Im Schaltplan siehst du das LED-Symbol: ein Dreieck, dessen Spitze auf einen Querstrich zeigt. Was verrät dir das über die Polung?',
+        options: [
+          'Die Dreieck-Spitze zeigt die Stromrichtung: vom Dreieck (Anode, +) zum Querstrich (Kathode, &minus;)',
+          'Der Querstrich ist der Pluspol, dort muss die Spannung angeschlossen werden',
+          'Die Richtung des Dreiecks ist egal, eine LED leitet in beide Richtungen',
+          'Die zwei kleinen Pfeile am Symbol zeigen die Stromrichtung an'
+        ],
+        correct: 0,
+        explanation: 'Richtig! Das Dreieck wirkt wie ein Pfeil und zeigt die erlaubte Stromrichtung: von der Anode (+, die flache Seite des Dreiecks) zur Kathode (&minus;, der Querstrich). Nur in dieser Richtung leitet die LED und leuchtet. So kannst du im Schaltplan sofort erkennen, wie herum die LED eingebaut werden muss.',
+        wrongExplanations: {
+          1: 'Genau andersherum: Der Querstrich ist die Kathode (&minus;) und gehört Richtung GND. Der Pluspol liegt an der flachen Seite des Dreiecks (Anode).',
+          2: 'Nein &ndash; eine LED ist eine Diode und lässt Strom nur in EINE Richtung durch. Falsch herum eingebaut bleibt sie dunkel. Genau deshalb ist die Richtung des Dreiecks im Schaltplan so wichtig.',
+          3: 'Die zwei kleinen Pfeile nach außen bedeuten nur "hier kommt Licht raus". Die Stromrichtung zeigt das Dreieck selbst: von der Anode (+) zur Kathode (&minus;).'
         }
       }
     ]
@@ -688,7 +879,7 @@ R = 3 V / 0,015 A = 200 Ohm</pre>
 
             <!-- ===== BREADBOARD (UNTEN, volle Breite) ===== -->
             <rect x="20" y="180" width="660" height="240" rx="6" fill="#e8e0d0" stroke="#999" stroke-width="1.5"/>
-            <text x="350" y="433" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (32 Spalten)</text>
+            <text x="350" y="433" text-anchor="middle" font-size="9" fill="#444" font-weight="bold">Breadboard (31 Spalten)</text>
 
             <!-- Stromschienen oben + GND -->
             <rect x="50" y="195" width="620" height="9" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
@@ -696,7 +887,7 @@ R = 3 V / 0,015 A = 200 Ohm</pre>
             <rect x="50" y="207" width="620" height="9" rx="2" fill="#ddf" stroke="#00c" stroke-width="0.8"/>
             <text x="38" y="214" font-size="8" fill="#00c" font-weight="bold">−</text>
 
-            <!-- Spaltennummern (alle 32 Spalten, 20px ab x=60) -->
+            <!-- Spaltennummern (alle 31 Spalten, 20px ab x=60) -->
             <g font-size="6" fill="#888" text-anchor="middle">
               <text x="60" y="230">1</text><text x="80" y="230">2</text><text x="100" y="230">3</text><text x="120" y="230">4</text><text x="140" y="230">5</text><text x="160" y="230">6</text><text x="180" y="230">7</text><text x="200" y="230">8</text><text x="220" y="230">9</text><text x="240" y="230">10</text><text x="260" y="230">11</text><text x="280" y="230">12</text><text x="300" y="230">13</text><text x="320" y="230">14</text><text x="340" y="230">15</text><text x="360" y="230">16</text><text x="380" y="230">17</text><text x="400" y="230">18</text><text x="420" y="230">19</text><text x="440" y="230">20</text><text x="460" y="230">21</text><text x="480" y="230">22</text><text x="500" y="230">23</text><text x="520" y="230">24</text><text x="540" y="230">25</text><text x="560" y="230">26</text><text x="580" y="230">27</text><text x="600" y="230">28</text><text x="620" y="230">29</text><text x="640" y="230">30</text><text x="660" y="230">31</text>
             </g>

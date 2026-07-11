@@ -291,7 +291,7 @@ const LESSONS_DIGITAL = [
         wrongExplanations: {
           0: 'Vorsicht: INPUT macht den Pin zum EINGANG — er kann dann keinen Strom liefern, sondern nur einen Zustand lesen. Du brauchst OUTPUT.',
           2: 'digitalRead() LIEST den Pin nur aus, schaltet ihn aber nicht ein. Zum Anschalten brauchst du digitalWrite(5, HIGH).',
-          3: 'analogWrite() erwartet eine Helligkeit von 0-255, nicht HIGH. Fuer reines Einschalten ist digitalWrite() der richtige Befehl.'
+          3: 'analogWrite() erwartet eine Helligkeit von 0-255. HIGH ist dabei kein Sonderbefehl, sondern einfach die Zahl 1 &ndash; analogWrite(5, HIGH) setzt also die Helligkeit 1 von 255. Die LED glimmt nur extrem schwach, sie ist NICHT richtig an. Fuer reines Einschalten ist digitalWrite() der richtige Befehl.'
         }
       }
     ],
@@ -374,7 +374,7 @@ void loop() {
         <p>Ein Blinker ist cool &ndash; aber <strong>zwei LEDs im Wechsel</strong> sind cooler! Denk an ein Polizeiauto oder einen Bahnuebergang: Immer abwechselnd links und rechts. Genau das bauen wir jetzt.</p>
 
         <div class="analogy-box">
-          <strong>Alltagsanalogie:</strong> Stell dir einen Scheibenwischer vor, der links und rechts blinkt: Wenn die linke Seite leuchtet, ist die rechte dunkel &ndash; und umgekehrt. Die LEDs "teilen sich" die Aufmerksamkeit.
+          <strong>Alltagsanalogie:</strong> Stell dir die zwei roten Wechsellichter am Bahnuebergang vor (am Andreaskreuz): Wenn das linke Licht leuchtet, ist das rechte dunkel &ndash; und umgekehrt. Genau so ein Wechselblinker sorgt dafuer, dass das Blinken sofort ins Auge faellt.
         </div>
 
         <hr class="section-divider">
@@ -785,7 +785,7 @@ void loop() {
             <rect x="50" y="401" width="620" height="9" rx="2" fill="#fdd" stroke="#c00" stroke-width="0.8"/>
 
             <!-- ===== BAUTEILE (5 LED-Kreise: Pin-Sp → 220Ω horizontal → LED-Anode-Sp → LED-Kathode-Sp → GND) ===== -->
-            <!-- Macro: alle 5 LEDs nach gleichem Pattern, je 3 Spalten Abstand -->
+            <!-- Macro: alle 5 LEDs nach gleichem Pattern, je 4 Spalten Abstand -->
 
             <!-- LED 1 (rot, Pin 8): Sp.3 → Sp.4 → Sp.5 → GND -->
             <rect x="100" y="264" width="20" height="8" rx="2" fill="#e8d5a3" stroke="#a08050" stroke-width="1"/>
@@ -984,6 +984,73 @@ void loop() {
         <div class="analogy-box">
           <strong>Vorschau auf spaeter:</strong> Mit einer <strong>for-Schleife</strong> und einem <strong>Array</strong> kannst du dieses Lauflicht in nur 10 Zeilen Code schreiben &ndash; egal ob 5 oder 50 LEDs! Das lernst du in den naechsten Modulen.
         </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Vom Flussdiagramm zum Code</h3>
+          <p>In der Pruefung musst du Programmablaeufe oft als <strong>Flussdiagramm</strong> lesen oder zeichnen koennen. Ein Flussdiagramm zeigt den Ablauf eines Programms mit wenigen Grundsymbolen &ndash; wie eine Wegbeschreibung mit Verkehrsschildern:</p>
+          <ul>
+            <li><strong>Oval</strong> = Start oder Ende des Ablaufs</li>
+            <li><strong>Rechteck</strong> = eine Anweisung (z.&nbsp;B. "LED an" oder "warten")</li>
+            <li><strong>Raute</strong> = eine Entscheidung mit Bedingung &ndash; hier geht es je nach Antwort (ja/nein) unterschiedlich weiter</li>
+            <li><strong>Pfeile</strong> = die Richtung, in der der Ablauf laeuft</li>
+          </ul>
+          <p>So sieht das Lauflicht als Flussdiagramm aus (hier mit 3 LEDs und einem Zaehler <code>i</code>, wie ihn spaeter die for-Schleife benutzt):</p>
+
+          <svg viewBox="0 0 460 540" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px;margin:1em auto;display:block;font-family:system-ui,sans-serif;">
+            <defs>
+              <marker id="fd-pfeil" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 z" fill="#333"/>
+              </marker>
+            </defs>
+
+            <!-- Start (Oval) -->
+            <ellipse cx="170" cy="35" rx="70" ry="24" fill="#2176AE" stroke="#1a5f8a" stroke-width="2"/>
+            <text x="170" y="40" text-anchor="middle" font-size="14" fill="white" font-weight="bold">Start (loop)</text>
+
+            <!-- i = 0 (Rechteck) -->
+            <line x1="170" y1="59" x2="170" y2="90" stroke="#333" stroke-width="2" marker-end="url(#fd-pfeil)"/>
+            <rect x="110" y="92" width="120" height="38" rx="4" fill="#fff" stroke="#2176AE" stroke-width="2"/>
+            <text x="170" y="116" text-anchor="middle" font-size="14" fill="#333">i = 0</text>
+
+            <!-- Raute i < 3? -->
+            <line x1="170" y1="130" x2="170" y2="162" stroke="#333" stroke-width="2" marker-end="url(#fd-pfeil)"/>
+            <polygon points="170,165 250,210 170,255 90,210" fill="#fff" stroke="#F59E0B" stroke-width="2.5"/>
+            <text x="170" y="215" text-anchor="middle" font-size="14" fill="#333" font-weight="bold">i &lt; 3 ?</text>
+
+            <!-- ja-Zweig nach unten -->
+            <line x1="170" y1="255" x2="170" y2="287" stroke="#333" stroke-width="2" marker-end="url(#fd-pfeil)"/>
+            <text x="182" y="276" font-size="12" fill="#2E7D32" font-weight="bold">ja</text>
+
+            <rect x="95" y="290" width="150" height="34" rx="4" fill="#fff" stroke="#2E7D32" stroke-width="2"/>
+            <text x="170" y="312" text-anchor="middle" font-size="13" fill="#333">LED i einschalten</text>
+
+            <line x1="170" y1="324" x2="170" y2="348" stroke="#333" stroke-width="2" marker-end="url(#fd-pfeil)"/>
+            <rect x="95" y="351" width="150" height="34" rx="4" fill="#fff" stroke="#2E7D32" stroke-width="2"/>
+            <text x="170" y="373" text-anchor="middle" font-size="13" fill="#333">warten (delay)</text>
+
+            <line x1="170" y1="385" x2="170" y2="409" stroke="#333" stroke-width="2" marker-end="url(#fd-pfeil)"/>
+            <rect x="95" y="412" width="150" height="34" rx="4" fill="#fff" stroke="#2E7D32" stroke-width="2"/>
+            <text x="170" y="434" text-anchor="middle" font-size="13" fill="#333">LED i ausschalten</text>
+
+            <line x1="170" y1="446" x2="170" y2="470" stroke="#333" stroke-width="2" marker-end="url(#fd-pfeil)"/>
+            <rect x="95" y="473" width="150" height="34" rx="4" fill="#fff" stroke="#2E7D32" stroke-width="2"/>
+            <text x="170" y="495" text-anchor="middle" font-size="13" fill="#333">i = i + 1</text>
+
+            <!-- Rueckpfeil zur Raute -->
+            <path d="M 245 490 L 320 490 L 320 210 L 253 210" fill="none" stroke="#2E7D32" stroke-width="2" marker-end="url(#fd-pfeil)"/>
+            <text x="330" y="350" font-size="11" fill="#2E7D32">zurueck zur</text>
+            <text x="330" y="364" font-size="11" fill="#2E7D32">Pruefung</text>
+
+            <!-- nein-Zweig: zurueck zum Anfang -->
+            <path d="M 90 210 L 40 210 L 40 35 L 97 35" fill="none" stroke="#F59E0B" stroke-width="2" marker-end="url(#fd-pfeil)"/>
+            <text x="48" y="200" font-size="12" fill="#F59E0B" font-weight="bold">nein</text>
+            <text x="10" y="120" font-size="11" fill="#F59E0B" transform="rotate(-90 20 130)">loop() startet neu</text>
+          </svg>
+
+          <p><strong>Lies das Diagramm so:</strong> Der Zaehler <code>i</code> startet bei 0. Die Raute prueft: Ist <code>i</code> noch kleiner als 3? Wenn <strong>ja</strong>, wird LED Nummer <code>i</code> ein- und wieder ausgeschaltet, der Zaehler geht um 1 hoch &ndash; und es geht zurueck zur Pruefung. Wenn <strong>nein</strong> (alle LEDs waren dran), ist ein Durchlauf fertig und <code>loop()</code> beginnt von vorne. Genau diesen Ablauf schreibt spaeter die for-Schleife in einer einzigen Zeile.</p>
+        </div>
       `
     },
     example: {
@@ -1041,6 +1108,20 @@ void loop() {
           2: 'Nein, der Arduino kann viele Pins gleichzeitig steuern (alle 14 digitalen). Hier geht es nur um die Reihenfolge im Lauf.',
           3: 'Pins kennen keine Richtung — digitalWrite(8, HIGH) funktioniert genauso, egal ob vor- oder rueckwaerts gezaehlt wird.'
         }
+      },
+      {
+        type: 'ordering',
+        question: 'Bringe die Schritte des Lauflicht-Ablaufs (wie im Flussdiagramm) in die richtige Reihenfolge:',
+        items: [
+          'LED Nummer i einschalten',
+          'Zaehler i auf 0 setzen',
+          'Zaehler i um 1 erhoehen und zurueck zur Pruefung',
+          'Pruefen: Ist i noch kleiner als die LED-Anzahl?',
+          'Kurz warten (delay)',
+          'LED Nummer i ausschalten'
+        ],
+        correctOrder: [1, 3, 0, 4, 5, 2],
+        explanation: 'Der Ablauf folgt genau dem Flussdiagramm: Zuerst wird der Zaehler i auf 0 gesetzt (Startwert). Dann prueft die Raute die Bedingung: Ist i noch kleiner als die LED-Anzahl? Wenn ja, laeuft der ja-Zweig: LED Nummer i einschalten, kurz warten (delay), LED Nummer i wieder ausschalten. Zum Schluss wird i um 1 erhoeht und es geht zurueck zur Pruefung &ndash; so kommt jede LED nacheinander dran. Erst wenn die Bedingung nicht mehr stimmt (nein-Zweig), ist der Durchlauf fertig und loop() startet von vorne. Merke: Die Pruefung kommt IMMER vor den Anweisungen im Schleifenkoerper &ndash; genau so arbeitet spaeter auch die for-Schleife.'
       }
     ]
   },
@@ -1152,7 +1233,7 @@ void loop() {
               <text x="380" y="93" fill="#ddd">Masse</text>
             </g>
 
-            <!-- Pin-Boxen (Pin 7 → Sp.10, GND → Sp.19) -->
+            <!-- Pin-Boxen (Pin 7 → Sp.8, GND → obere -Schiene bei x=380 / Sp.17) -->
             <g font-size="10" fill="white" font-weight="bold" text-anchor="middle">
               <rect x="185" y="96" width="30" height="22" rx="2" fill="#1a5f8a" stroke="white" stroke-width="0.5"/>
               <text x="200" y="112">7</text>

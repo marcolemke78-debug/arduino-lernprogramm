@@ -1,5 +1,5 @@
 const LESSONS_ANALOG = [
-  // ===================== LEKTION 11 (Spannungsteiler, id 30) =====================
+  // ===================== LEKTION (id 30): Spannungsteiler verstehen =====================
   // Pflicht-Bruecke zum analogen Teil: alle Sensorschaltungen (NTC, LDR,
   // Taster-Pulldown) und das Potentiometer beruhen auf dem Spannungsteiler.
   // Diese Lektion erklaert das Prinzip rein als Hardware-Konzept,
@@ -81,7 +81,7 @@ const LESSONS_ANALOG = [
         </div>
 
         <div class="tip-box">
-          <strong>Eselsbruecke:</strong> &bdquo;Unten waechst, U<sub>2</sub> waechst." &mdash; je groesser R<sub>2</sub> (unten), desto groesser auch die abgegriffene Spannung U<sub>2</sub>. Andersrum: je groesser R<sub>1</sub> (oben), desto kleiner U<sub>2</sub>.
+          <strong>Eselsbruecke:</strong> &bdquo;Unten waechst, U<sub>2</sub> waechst.&ldquo; &mdash; je groesser R<sub>2</sub> (unten), desto groesser auch die abgegriffene Spannung U<sub>2</sub>. Andersrum: je groesser R<sub>1</sub> (oben), desto kleiner U<sub>2</sub>.
         </div>
 
         <hr class="section-divider">
@@ -163,7 +163,7 @@ U<sub>2</sub> = 5 V &middot; 10 k&Omega; / (20 k&Omega; + 10 k&Omega;)
 U<sub>2</sub> = 5 V &middot; 10 / 30
 U<sub>2</sub> = 5 V &middot; 0,333&hellip;
 U<sub>2</sub> &asymp; <strong>1,67 V</strong></pre>
-            <p>Der grosse R<sub>1</sub> &bdquo;schluckt" 2/3 der Spannung &ndash; uebrig bleibt nur 1/3 fuer U<sub>2</sub>.</p>
+            <p>Der grosse R<sub>1</sub> &bdquo;schluckt&ldquo; 2/3 der Spannung &ndash; uebrig bleibt nur 1/3 fuer U<sub>2</sub>.</p>
           `
         },
         {
@@ -319,7 +319,7 @@ Hitze:       U<sub>2</sub> = 5 V &middot; 4  / (10 + 4)  &asymp; <strong>1,43 V<
     }
   },
 
-  // ===================== LEKTION 11 =====================
+  // ===================== LEKTION (id 11): Analoge Eingaenge =====================
   {
     id: 11,
     title: 'Analoge Eingaenge',
@@ -603,6 +603,23 @@ Hitze:       U<sub>2</sub> = 5 V &middot; 4  / (10 + 4)  &asymp; <strong>1,43 V<
         ],
         correctOrder: [1, 2, 3, 0],
         explanation: 'Erst kommt die Hardware: das Potentiometer an GND, A0 und 5V anschliessen. Dann die Software-Vorbereitung im setup() mit Serial.begin(9600), damit der Arduino ueberhaupt Werte senden kann. Danach im loop() den Wert mit analogRead(A0) auslesen &ndash; und erst zuletzt kannst du ihn im Serial Monitor beobachten.'
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Ein Schueler schreibt: float volt = wert * 5 / 1023; (ohne .0). Was gibt der Arduino bei wert = 300 aus?',
+        options: [
+          '1.47 &ndash; der Arduino rechnet automatisch mit Kommazahlen, weil volt ein float ist',
+          '1.00 &ndash; der Arduino rechnet mit ganzen Zahlen und schneidet die Nachkommastellen ab',
+          '0.00 &ndash; ohne den Punkt bei der 5 ist das Ergebnis immer null',
+          '1466 &ndash; der Arduino laesst das Komma einfach weg und haengt die Stellen hinten an'
+        ],
+        correct: 1,
+        explanation: 'Richtig! Hier tappt man in die Ganzzahl-Divisions-Falle: wert, 5 und 1023 sind alles ganze Zahlen (int) &ndash; und int mal int bleibt int. Der Arduino rechnet also 300 * 5 = 1500, dann 1500 / 1023 = 1 (die Nachkommastellen werden einfach abgeschnitten, nicht gerundet!). Erst DANACH wird die 1 in den float volt kopiert &ndash; da ist der Schaden schon passiert: 1.00 statt 1.47. Die Loesung: Schreibe 5.0 mit Punkt. Sobald EINE Zahl in der Rechnung eine Kommazahl ist, rechnet der Arduino die ganze Rechnung als Kommazahl-Rechnung: 300 * 5.0 / 1023 = 1.4663... &asymp; 1.47 V.',
+        wrongExplanations: {
+          0: 'Leider nein &ndash; das float auf der LINKEN Seite kommt zu spaet. Der Arduino berechnet erst die rechte Seite (nur mit int-Zahlen, Ergebnis: 1) und kopiert dann dieses fertige Ergebnis in volt. Die abgeschnittenen Nachkommastellen sind da schon verloren.',
+          2: 'Nein, null kommt nur heraus, wenn schon das Zwischenergebnis kleiner als der Teiler ist (z.B. 5 / 1023 = 0, wenn man zuerst teilt). Hier wird aber zuerst multipliziert: 300 * 5 = 1500, und 1500 / 1023 = 1 &ndash; die int-Division schneidet nur die Nachkommastellen ab.',
+          3: 'Nein, so funktioniert die int-Division nicht. Der Arduino verschiebt kein Komma, er teilt ganzzahlig: 1500 / 1023 = 1 Rest 477 &ndash; und der Rest wird schlicht weggeworfen. Uebrig bleibt 1.'
+        }
       }
     ]
   },
@@ -642,6 +659,25 @@ Hitze:       U<sub>2</sub> = 5 V &middot; 4  / (10 + 4)  &asymp; <strong>1,43 V<
             <div class="info-card" style="margin:0; border-top: 3px solid #2ecc71;">
               <h3 style="font-size:0.95rem;">analogWrite(pin, 255)</h3>
               <p>Signal: Immer an<br><strong>Helligkeit: 100%</strong><br>LED leuchtet voll</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card" style="border-left: 3px solid #F59E0B;">
+          <h3>Probiere es aus: PWM-Dimmer</h3>
+          <p>Schieb den Regler und beobachte, wie sich der Duty-Cycle und die Helligkeit der simulierten LED aendern:</p>
+          <div style="background:#f8f8f8;border:1px solid #ddd;border-radius:8px;padding:1rem;">
+            <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
+              <label for="pwmsim-slider" style="font-weight:bold;">analogWrite:</label>
+              <input id="pwmsim-slider" type="range" min="0" max="255" step="1" value="128" style="flex:1;min-width:180px;height:28px;" oninput="var w=+this.value;var dc=w/255*100;document.getElementById('pwmsim-wert').textContent=w;document.getElementById('pwmsim-duty').textContent=dc.toFixed(0);document.getElementById('pwmsim-led').style.opacity=(w/255).toFixed(2);document.getElementById('pwmsim-bar').style.width=dc.toFixed(0)+'%';">
+              <strong><span id="pwmsim-wert">128</span></strong>
+            </div>
+            <div style="margin-top:0.8rem;height:18px;background:#e0e0e0;border-radius:9px;overflow:hidden;">
+              <div id="pwmsim-bar" style="width:50%;height:100%;background:#F59E0B;"></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.8rem;margin-top:0.8rem;">
+              <div id="pwmsim-led" style="width:32px;height:32px;border-radius:50%;background:#F59E0B;opacity:0.50;border:2px solid #ccc;flex-shrink:0;"></div>
+              <p style="margin:0;">Duty-Cycle: <strong><span id="pwmsim-duty">50</span>&nbsp;%</strong> &rarr; so hell leuchtet die LED</p>
             </div>
           </div>
         </div>
@@ -1268,7 +1304,7 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
 
         <div class="warning-box">
           <strong>Wichtig – Vorbereitung fuer dein Pruefungsprojekt!</strong><br>
-          Der LDR und der Spannungsteiler sind die Grundlage fuer die <strong>Nachtabschaltung</strong> in deinem Pruefungsprojekt. In der naechsten Lektion lernst du, wie du mit <code>if/else</code> automatisch auf die Lichtwerte reagierst – z.B. eine LED einschalten, wenn es dunkel wird!
+          Der LDR und der Spannungsteiler sind die Grundlage fuer die <strong>Nachtabschaltung</strong> in deinem Pruefungsprojekt. Spaeter in diesem Modul lernst du, wie du mit <code>if/else</code> automatisch auf die Lichtwerte reagierst – z.B. eine LED einschalten, wenn es dunkel wird!
         </div>
       `
     },
@@ -1330,7 +1366,7 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
     ]
   },
 
-  // ===================== LEKTION 16 (NTC, id 31) =====================
+  // ===================== LEKTION (id 31): NTC-Temperatursensor =====================
   // RSAP-Pflicht-Lektion: NTC taucht in mehreren Pool-Aufgaben auf
   // (Temperaturanzeige, Gewaechshaus, Lueftung). Baut direkt auf L11
   // Spannungsteiler auf. Diese Lektion zeigt nur den Sensor +
@@ -1443,11 +1479,11 @@ ledWert  = <span class="function">map</span>(potiWert, <span class="value">0</sp
             <tr><td>0&nbsp;&deg;C (kalt)</td><td>33 k&Omega;</td><td>3,84 V</td><td><strong>~ 786</strong></td></tr>
             <tr><td>25&nbsp;&deg;C (Zimmer)</td><td>10 k&Omega;</td><td>2,50 V</td><td><strong>~ 511</strong></td></tr>
             <tr><td>50&nbsp;&deg;C (warm)</td><td>3,6 k&Omega;</td><td>1,32 V</td><td><strong>~ 270</strong></td></tr>
-            <tr><td>100&nbsp;&deg;C (sehr heiss)</td><td>1 k&Omega;</td><td>0,45 V</td><td><strong>~ 92</strong></td></tr>
+            <tr><td>100&nbsp;&deg;C (sehr heiss)</td><td>1 k&Omega;</td><td>0,45 V</td><td><strong>~ 93</strong></td></tr>
           </table>
 
           <div class="tip-box">
-            <strong>Merksatz:</strong> <em>Heisser Sensor, kleiner Zahlenwert.</em> Das ist die wichtigste Faustregel fuer das Programmieren. Du wirst in der naechsten Lektion damit Entscheidungen treffen (&bdquo;Wenn analogRead unter 300 &rarr; LED an").
+            <strong>Merksatz:</strong> <em>Heisser Sensor, kleiner Zahlenwert.</em> Das ist die wichtigste Faustregel fuer das Programmieren. Du wirst in der naechsten Lektion damit Entscheidungen treffen (&bdquo;Wenn analogRead unter 300 &rarr; LED an&ldquo;).
           </div>
         </div>
 
@@ -1553,19 +1589,19 @@ analogRead &asymp; <strong>682</strong></pre>
       },
       {
         type: 'multiple-choice',
-        question: 'Du baust einen Spannungsteiler mit NTC als R2 (unten) und 10 kOhm fest als R1 (oben). Was passiert mit der Spannung U2 (am NTC) und damit dem analogRead-Wert, wenn der NTC erwaermt wird?',
+        question: 'Du haeltst einen Eiswuerfel (im Beutel!) an den NTC deines Spannungsteilers (NTC als R2 unten, 10 kOhm fest als R1 oben). Was passiert mit der Spannung U2 (am NTC) und damit dem analogRead-Wert?',
         options: [
           'U2 steigt &rarr; analogRead steigt',
           'U2 sinkt &rarr; analogRead sinkt',
           'U2 bleibt konstant',
-          'analogRead springt auf 0'
+          'analogRead springt auf 1023'
         ],
-        correct: 1,
-        explanation: 'Richtig! NTC waermer &rarr; R2 sinkt &rarr; kleinerer Anteil im Spannungsteiler &rarr; U2 sinkt &rarr; analogRead-Wert wird kleiner. Daraus folgt der wichtige Merksatz: "Heisser Sensor, kleiner Zahlenwert."',
+        correct: 0,
+        explanation: 'Richtig! NTC kaelter &rarr; sein Widerstand R2 steigt &rarr; groesserer Anteil im Spannungsteiler &rarr; U2 steigt &rarr; analogRead-Wert wird groesser. Das ist die Umkehrung des Merksatzes: "Kalter Sensor, grosser Zahlenwert."',
         wrongExplanations: {
-          0: 'Nein, andersrum: R2 sinkt &rarr; U2 sinkt &rarr; analogRead sinkt. Die Spannung folgt dem Widerstand.',
+          1: 'Das waere beim Erwaermen richtig. Beim Abkuehlen steigt der NTC-Widerstand, also steigt auch U2 und der analogRead-Wert.',
           2: 'Konstant kann sie nicht sein &ndash; sonst gaebe es ja keine Messung. Der NTC aendert sein R, also auch U2.',
-          3: 'analogRead wuerde nur dann auf 0 springen, wenn U2 = 0 V (also R2 = 0). Bei normalen Temperaturen liegt der NTC zwischen 1 k&Omega; und 100 k&Omega;, U2 ist also immer zwischen 0,4 V und 4,5 V.'
+          3: 'analogRead waere nur dann exakt 1023, wenn U2 = 5 V (also R1 = 0 oder NTC unendlich gross). Bei 0 &deg;C hat der NTC etwa 33 k&Omega; &ndash; der Wert steigt Richtung ~786, springt aber nicht ans Maximum.'
         }
       },
       {
@@ -1726,7 +1762,7 @@ void loop() {
           <h3>Was ist ein Schwellenwert?</h3>
           <p>Der <strong>Schwellenwert</strong> (hier: 300) ist die Grenze, ab der der Arduino seine Entscheidung trifft. Du musst ihn selbst festlegen – am besten durch Ausprobieren:</p>
           <ol class="step-list">
-            <li>LDR-Schaltung aufbauen (wie in Lektion 11)</li>
+            <li>LDR-Schaltung aufbauen (wie in Lektion 13, Lichtsensor)</li>
             <li>Serial Monitor oeffnen und Werte bei verschiedenen Lichtsituationen beobachten</li>
             <li>Einen Wert waehlen, der <strong>zwischen hell und dunkel</strong> liegt</li>
           </ol>
@@ -1775,6 +1811,83 @@ void loop() {
             <li><strong>Ausschaltschwelle:</strong> LED geht aus, wenn Wert ueber 350 steigt</li>
           </ul>
           <p>Dazwischen aendert sich nichts – der "Puffer" verhindert das Flackern.</p>
+
+          <svg viewBox="0 0 560 320" style="width:100%;max-width:560px;margin:1em auto;display:block;font-family:system-ui,sans-serif;">
+            <!-- Pufferzone (zwischen 250 und 350) -->
+            <defs>
+              <pattern id="pufferSchraffur14" width="8" height="8" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+                <rect width="8" height="8" fill="#F59E0B" opacity="0.12"/>
+                <line x1="0" y1="0" x2="0" y2="8" stroke="#F59E0B" stroke-width="1.5" opacity="0.35"/>
+              </pattern>
+            </defs>
+            <rect x="60" y="122" width="470" height="36" fill="url(#pufferSchraffur14)"/>
+
+            <!-- Achsen -->
+            <line x1="60" y1="30" x2="60" y2="250" stroke="#333" stroke-width="2"/>
+            <line x1="60" y1="250" x2="540" y2="250" stroke="#333" stroke-width="2"/>
+            <text x="66" y="26" font-size="12" fill="#333" font-weight="bold">analogRead-Wert</text>
+            <text x="540" y="268" text-anchor="end" font-size="12" fill="#333" font-weight="bold">Zeit &rarr;</text>
+
+            <!-- Skala links -->
+            <text x="54" y="126" text-anchor="end" font-size="11" fill="#2E7D32" font-weight="bold">350</text>
+            <text x="54" y="162" text-anchor="end" font-size="11" fill="#c0392b" font-weight="bold">250</text>
+            <text x="54" y="254" text-anchor="end" font-size="11" fill="#888">0</text>
+
+            <!-- Ausschaltschwelle 350 (gruen gestrichelt) -->
+            <line x1="60" y1="122" x2="530" y2="122" stroke="#2E7D32" stroke-width="2" stroke-dasharray="8 5"/>
+            <text x="300" y="116" text-anchor="middle" font-size="10.5" fill="#2E7D32" font-weight="bold">Ausschaltschwelle 350: Wert steigt darueber &rarr; LED aus</text>
+            <!-- Einschaltschwelle 250 (rot gestrichelt) -->
+            <line x1="60" y1="158" x2="530" y2="158" stroke="#c0392b" stroke-width="2" stroke-dasharray="8 5"/>
+            <text x="300" y="174" text-anchor="middle" font-size="10.5" fill="#c0392b" font-weight="bold">Einschaltschwelle 250: Wert faellt darunter &rarr; LED an</text>
+
+            <!-- Zonen-Beschriftung rechts -->
+            <text x="536" y="80" font-size="10" fill="#2E7D32" font-weight="bold" transform="rotate(90 536 80)" text-anchor="middle">hell: LED aus</text>
+            <text x="536" y="210" font-size="10" fill="#c0392b" font-weight="bold" transform="rotate(90 536 210)" text-anchor="middle">dunkel: LED an</text>
+            <text x="300" y="145" text-anchor="middle" font-size="10" fill="#B45309" font-style="italic">Pufferzone: nichts aendert sich</text>
+
+            <!-- Sensorkurve: pendelt um beide Schwellen -->
+            <path d="M 60 100 C 90 96, 105 110, 125 140 C 145 170, 160 195, 185 200 C 210 205, 225 180, 245 150 C 265 120, 280 92, 305 85 C 330 78, 348 100, 368 130 C 388 160, 400 185, 425 192 C 450 199, 465 175, 485 145 C 500 122, 512 105, 525 98" fill="none" stroke="#2176AE" stroke-width="3" stroke-linecap="round"/>
+
+            <!-- Schaltpunkte markieren -->
+            <circle cx="170" cy="188" r="5" fill="#c0392b"/>
+            <text x="170" y="222" text-anchor="middle" font-size="9.5" fill="#c0392b" font-weight="bold">hier: LED an</text>
+            <circle cx="298" cy="86" r="5" fill="#2E7D32"/>
+            <text x="298" y="66" text-anchor="middle" font-size="9.5" fill="#2E7D32" font-weight="bold">hier: LED aus</text>
+
+            <!-- Legende -->
+            <line x1="60" y1="292" x2="90" y2="292" stroke="#2176AE" stroke-width="3" stroke-linecap="round"/>
+            <text x="96" y="296" font-size="10" fill="#555">gemessener LDR-Wert im Zeitverlauf</text>
+            <rect x="300" y="285" width="24" height="12" fill="url(#pufferSchraffur14)" stroke="#F59E0B" stroke-width="0.8"/>
+            <text x="330" y="296" font-size="10" fill="#555">Pufferzone (250&ndash;350)</text>
+          </svg>
+          <p>Das Bild zeigt, warum die Hysterese funktioniert: Die LED schaltet nur, wenn die blaue Kurve eine Schwelle <strong>durchquert</strong> &ndash; einmal unter 250 (LED an), einmal ueber 350 (LED aus). Solange der Wert nur in der Pufferzone dazwischen zappelt, passiert nichts. Mit nur EINEM Schwellenwert bei 300 wuerde die LED bei jedem kleinen Zucken um 300 herum flackern.</p>
+        </div>
+
+        <div class="info-card" style="border-left: 3px solid #F59E0B;">
+          <h3>Probiere es aus: mit und ohne Hysterese</h3>
+          <p>Der Regler ist dein simulierter LDR-Wert (analogRead 0&ndash;1023). Schieb ihn langsam hin und her &ndash; besonders knapp um 300 herum &ndash; und vergleiche die beiden LEDs:</p>
+          <div style="background:#f8f8f8;border:1px solid #ddd;border-radius:8px;padding:1rem;">
+            <div style="display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;">
+              <label for="hyssim-slider" style="font-weight:bold;">Wert:</label>
+              <input id="hyssim-slider" type="range" min="0" max="1023" step="1" value="300" style="flex:1;min-width:180px;height:28px;" oninput="var w=+this.value;document.getElementById('hyssim-wert').textContent=w;var o=document.getElementById('hyssim-led-ohne');var oa=(w<300);o.style.background=oa?'#F59E0B':'#ddd';document.getElementById('hyssim-txt-ohne').textContent=oa?'LED an':'LED aus';var m=document.getElementById('hyssim-led-mit');var z=m.getAttribute('data-an');if(w<250){z='1';}else if(w>350){z='0';}m.setAttribute('data-an',z);var ma=(z==='1');m.style.background=ma?'#F59E0B':'#ddd';document.getElementById('hyssim-txt-mit').textContent=ma?'LED an':'LED aus';">
+              <strong><span id="hyssim-wert">300</span></strong>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:0.8rem;">
+              <div style="text-align:center;border:1px solid #ddd;border-radius:8px;padding:0.8rem;background:#fff;">
+                <p style="margin:0 0 0.5rem;font-weight:bold;">Ohne Hysterese</p>
+                <div id="hyssim-led-ohne" style="width:32px;height:32px;border-radius:50%;background:#ddd;border:2px solid #ccc;margin:0 auto;"></div>
+                <p style="margin:0.5rem 0 0;"><span id="hyssim-txt-ohne">LED aus</span></p>
+                <p style="margin:0.3rem 0 0;font-size:0.85rem;color:#666;">eine Schwelle: 300</p>
+              </div>
+              <div style="text-align:center;border:1px solid #ddd;border-radius:8px;padding:0.8rem;background:#fff;">
+                <p style="margin:0 0 0.5rem;font-weight:bold;">Mit Hysterese</p>
+                <div id="hyssim-led-mit" data-an="0" style="width:32px;height:32px;border-radius:50%;background:#ddd;border:2px solid #ccc;margin:0 auto;"></div>
+                <p style="margin:0.5rem 0 0;"><span id="hyssim-txt-mit">LED aus</span></p>
+                <p style="margin:0.3rem 0 0;font-size:0.85rem;color:#666;">an unter 250, aus ueber 350</p>
+              </div>
+            </div>
+            <p style="margin:0.8rem 0 0;">Merkst du den Unterschied? Links schaltet die LED bei jedem winzigen Schubs um 300 hin und her. Rechts bleibt sie in der Pufferzone (250&ndash;350) einfach in ihrem Zustand.</p>
+          </div>
         </div>
 
         <hr class="section-divider">
@@ -1843,8 +1956,8 @@ void loop() {
     example: {
       title: 'Beispiel: Nachtlicht aufbauen und testen',
       steps: [
-        { label: 'Schaltung aufbauen', html: '<strong>LDR-Spannungsteiler:</strong> 5V → LDR → A0 → 10 kOhm → GND (wie Lektion 11).<br><strong>LED:</strong> Pin 8 → 220-Ohm-Widerstand → LED → GND.' },
-        { label: 'Schwellenwerte ermitteln', html: 'Lade zuerst nur den LDR-Auslesecode aus Lektion 11 hoch. Notiere die Werte bei <strong>Raumlicht</strong> (~600) und <strong>abgedecktem Sensor</strong> (~100). Waehle deinen Schwellenwert dazwischen.' },
+        { label: 'Schaltung aufbauen', html: '<strong>LDR-Spannungsteiler:</strong> 5V → LDR → A0 → 10 kOhm → GND (wie Lektion 13).<br><strong>LED:</strong> Pin 8 → 220-Ohm-Widerstand → LED → GND.' },
+        { label: 'Schwellenwerte ermitteln', html: 'Lade zuerst nur den LDR-Auslesecode aus Lektion 13 hoch. Notiere die Werte bei <strong>Raumlicht</strong> (~600) und <strong>abgedecktem Sensor</strong> (~100). Waehle deinen Schwellenwert dazwischen.' },
         { label: 'Nachtlicht-Code hochladen', html: 'Passe <code>schwelleAn</code> und <code>schwelleAus</code> an deine Werte an. Lade den Code hoch.' },
         { label: 'Testen', html: 'Bedecke den LDR mit der Hand → <strong>LED geht an</strong>. Nimm die Hand weg → <strong>LED geht aus</strong>. Beobachte im Serial Monitor, wie die Puffer-Zone das Flackern verhindert!' },
         { label: 'Erweiterungsidee', html: 'Statt einer einfachen LED koenntest du die LED auch <strong>dimmen</strong>: Je dunkler es wird, desto heller die LED. Dafuer kombinierst du <code>analogRead()</code>, <code>map()</code> und <code>analogWrite()</code> aus der PWM-Lektion (Dimmen statt Schalten)!' }

@@ -31,7 +31,7 @@ const LESSONS_AKTOREN = [
           </table>
 
           <div class="tip-box">
-            <strong>Merkhilfe:</strong> Die <strong>aussenliegende</strong> Farbe ist immer das Signal. Die Mitte ist immer + (rot). So musst du nicht ueberlegen, wenn du den Servo umdrehst.
+            <strong>Merkhilfe:</strong> Die <strong>Mitte ist immer + (rot)</strong>. Die hellste Aussen-Ader (orange/gelb) ist das Signal, die dunkelste (braun/schwarz) ist GND. So musst du nicht ueberlegen, wenn du den Servo umdrehst.
           </div>
         </div>
 
@@ -120,6 +120,115 @@ delay(1000);</pre>
             <li>Im Schul-Set funktionieren SG90-Servos direkt am USB-Strom. <strong>Groessere</strong> Servos brauchen eine externe Stromversorgung &ndash; sonst startet der Arduino bei jeder Bewegung neu.</li>
           </ul>
         </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Der Piezo-Summer &ndash; Toene ausgeben</h3>
+          <p>Neben Bewegung (Servo) und Licht (LED) gibt es noch einen dritten wichtigen Aktor: den <strong>Piezo-Summer</strong> (auch "Buzzer"). Er macht aus Strom <strong>Toene</strong> &ndash; perfekt fuer Alarme, Signaltoene und Melodien.</p>
+
+          <p>Es gibt zwei Sorten, die von aussen fast gleich aussehen:</p>
+          <table class="icon-table">
+            <tr><th>Typ</th><th>Innenleben</th><th>Ansteuerung</th></tr>
+            <tr><td><strong>Aktiver Summer</strong></td><td>hat eine <strong>eingebaute Elektronik</strong>, die den Ton selbst erzeugt</td><td>einfach <code>digitalWrite(pin, HIGH)</code> &ndash; wie eine LED!</td></tr>
+            <tr><td><strong>Passiver Summer</strong></td><td>nur eine Membran, KEINE eigene Elektronik</td><td>braucht ein Schwingungs-Signal, z.B. mit <code>tone()</code></td></tr>
+          </table>
+
+          <div class="analogy-box">
+            <strong>Alltagsanalogie:</strong> Der <strong>aktive</strong> Summer ist wie eine <strong>Tuerklingel</strong>: Knopf druecken (Strom an) &rarr; sie klingelt von allein. Der <strong>passive</strong> Summer ist wie ein <strong>Lautsprecher</strong>: Er macht nur dann einen Ton, wenn du ihm das "Musiksignal" selbst lieferst.
+          </div>
+
+          <p><strong>Anschluss</strong> (einfacher geht es kaum): das <strong>+</strong>-Bein (laengeres Bein bzw. mit + markiert) an einen <strong>digitalen Pin</strong>, das <strong>&minus;</strong>-Bein an <strong>GND</strong>. Beim aktiven Summer ist <strong>kein Vorwiderstand noetig</strong> &ndash; er zieht nur wenig Strom.</p>
+
+          <p>So laesst du einen <strong>aktiven</strong> Summer im Sekundentakt piepsen &ndash; der Code ist identisch mit dem LED-Blinken:</p>
+          <pre style="background:#f5f5f5;padding:0.8rem;border-left:3px solid #2980B9;">
+const int summerPin = 8;
+
+void setup() {
+  pinMode(summerPin, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(summerPin, HIGH);  // Piep an
+  delay(500);
+  digitalWrite(summerPin, LOW);   // Piep aus
+  delay(500);
+}</pre>
+
+          <div class="tip-box">
+            <strong>Plus-Info fuer den passiven Summer:</strong> Mit <code>tone(pin, 440);</code> erzeugt der Arduino selbst die Schwingung &ndash; hier den Kammerton A (440 Schwingungen pro Sekunde). Mit <code>noTone(pin);</code> ist wieder Ruhe. So kannst du sogar Melodien programmieren.
+          </div>
+
+          <div class="tip-box">
+            <strong>Pruefungskontext:</strong> Der Summer taucht typisch in der <strong>Alarmanlage</strong> auf: Ein Taster (Fensterkontakt) oder eine Lichtschranke meldet "Einbruch" &rarr; der Arduino schaltet den Summer an. Software-seitig ist das nichts anderes als: Eingang lesen, bei Alarm <code>digitalWrite(summerPin, HIGH)</code>.
+          </div>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="info-card">
+          <h3>Der Ultraschall-Sensor HC-SR04 &ndash; Entfernungen messen</h3>
+          <p>Streng genommen ein Sensor, aber er gehoert in viele Aktor-Aufgaben: Der <strong>HC-SR04</strong> misst <strong>Entfernungen</strong> &ndash; beruehrungslos, mit Schall, den du nicht hoeren kannst (Ultraschall).</p>
+
+          <div class="analogy-box">
+            <strong>Alltagsanalogie:</strong> Genau wie eine <strong>Fledermaus</strong>: Sie ruft, der Schall prallt am Hindernis ab, und aus der Zeit bis zum Echo weiss sie, wie weit das Hindernis weg ist. Der HC-SR04 macht exakt dasselbe.
+          </div>
+
+          <p>So funktioniert die Messung:</p>
+          <ol class="step-list">
+            <li>Der Arduino gibt am <strong>Trig-Pin</strong> (Trigger) einen kurzen Impuls &ndash; der Sensor sendet einen Ultraschall-"Ping" los.</li>
+            <li>Der Schall fliegt zum Hindernis, wird reflektiert und kommt zurueck.</li>
+            <li>Der <strong>Echo-Pin</strong> meldet dem Arduino, <strong>wie lange</strong> der Schall unterwegs war (die Laufzeit).</li>
+            <li>Schall ist etwa <strong>343 m/s</strong> schnell. Also gilt: <strong>Entfernung = Laufzeit &times; Schallgeschwindigkeit &divide; 2</strong> &ndash; durch 2, weil der Schall den Weg ja <strong>hin UND zurueck</strong> fliegt!</li>
+          </ol>
+
+          <div style="background:#f8f8f8;border:1px solid #ddd;border-radius:8px;padding:1rem;text-align:center;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 130" style="max-width:300px;width:100%;height:auto;">
+              <rect x="10" y="35" width="60" height="60" rx="4" fill="#2176AE"/>
+              <circle cx="28" cy="55" r="9" fill="#fff"/>
+              <circle cx="52" cy="55" r="9" fill="#fff"/>
+              <text x="40" y="86" text-anchor="middle" font-size="9" fill="#fff">HC-SR04</text>
+              <path d="M 85 45 q 8 10 0 20" stroke="#F59E0B" stroke-width="2" fill="none"/>
+              <path d="M 100 38 q 12 17 0 34" stroke="#F59E0B" stroke-width="2" fill="none"/>
+              <path d="M 115 31 q 16 24 0 48" stroke="#F59E0B" stroke-width="2" fill="none"/>
+              <rect x="270" y="20" width="14" height="90" fill="#2E7D32"/>
+              <text x="277" y="14" text-anchor="middle" font-size="9" fill="#2E7D32">Hindernis</text>
+              <line x1="140" y1="50" x2="258" y2="50" stroke="#F59E0B" stroke-width="2"/>
+              <polygon points="258,50 248,45 248,55" fill="#F59E0B"/>
+              <text x="196" y="43" text-anchor="middle" font-size="9" fill="#F59E0B">Ping hin</text>
+              <line x1="258" y1="80" x2="140" y2="80" stroke="#2176AE" stroke-width="2"/>
+              <polygon points="140,80 150,75 150,85" fill="#2176AE"/>
+              <text x="196" y="97" text-anchor="middle" font-size="9" fill="#2176AE">Echo zurueck</text>
+            </svg>
+            <p style="margin:0.5rem 0 0;font-size:0.9rem;">Der Schall fliegt <strong>hin und zurueck</strong> &ndash; deshalb wird die Laufzeit durch 2 geteilt.</p>
+          </div>
+
+          <p>Der HC-SR04 hat <strong>4 Pins</strong>:</p>
+          <table class="icon-table">
+            <tr><th>Pin</th><th>Wohin am Arduino?</th><th>Aufgabe</th></tr>
+            <tr><td><strong>VCC</strong></td><td>5V</td><td>Stromversorgung</td></tr>
+            <tr><td><strong>Trig</strong></td><td>digitaler Pin (z.B. 7)</td><td>Ping ausloesen (Ausgang vom Arduino)</td></tr>
+            <tr><td><strong>Echo</strong></td><td>digitaler Pin (z.B. 6)</td><td>Laufzeit melden (Eingang zum Arduino)</td></tr>
+            <tr><td><strong>GND</strong></td><td>GND</td><td>Masse</td></tr>
+          </table>
+
+          <p>So sieht der Mess-Code aus &ndash; das Herzstueck ist <code>pulseIn()</code>, das die Laufzeit in Mikrosekunden misst:</p>
+          <pre style="background:#f5f5f5;padding:0.8rem;border-left:3px solid #2980B9;">
+digitalWrite(trigPin, LOW);
+delayMicroseconds(2);
+digitalWrite(trigPin, HIGH);     // kurzen Ping ausloesen
+delayMicroseconds(10);
+digitalWrite(trigPin, LOW);
+
+long dauer = pulseIn(echoPin, HIGH);  // Laufzeit in Mikrosekunden
+long cm = dauer / 58;                 // Umrechnung in Zentimeter</pre>
+
+          <p><strong>Woher kommt die 58?</strong> Schall schafft 343 m/s = 0,0343 cm pro Mikrosekunde. Fuer 1 cm Entfernung braucht er hin und zurueck also 2 cm Weg, das sind 2 &divide; 0,0343 &asymp; <strong>58 Mikrosekunden</strong>. Deshalb: Laufzeit durch 58 = Entfernung in cm.</p>
+
+          <div class="tip-box">
+            <strong>Pruefungskontext:</strong> Der HC-SR04 taucht typisch als <strong>Einparkhilfe</strong> auf (je naeher das Hindernis, desto schneller piepst der Summer &ndash; da sind Summer und Ultraschall ein Team!) oder als <strong>Fuellstandsmessung</strong> (Sensor misst von oben den Abstand zur Oberflaeche, ein Servo zeigt den Fuellstand wie eine Tank-Nadel an).
+          </div>
+        </div>
       `
     },
     example: {
@@ -146,7 +255,7 @@ void setup() {
 }</pre>
             <p>Hier sagst du: "Mein Servo namens <em>meinServo</em> haengt an <strong>Pin 9</strong>." Das machst du nur EINMAL im setup &ndash; danach weiss der Arduino immer, wo der Servo steckt.</p>
             <div class="tip-box">
-              <strong>Welcher Pin?</strong> Beliebige digitale Pins funktionieren. Beliebt sind Pin 9 oder 10. Pin 13 vermeiden (dort ist die Onboard-LED).
+              <strong>Welcher Pin?</strong> Beliebige digitale Pins funktionieren (die Servo-Bibliothek erzeugt das Signal selbst). Fuer die Pruefung nimm <strong>Pin 9</strong> &ndash; so steht es im Skript. Pin 13 vermeiden (dort ist die Onboard-LED).
             </div>
           `
         },
@@ -254,7 +363,7 @@ void loop() {
       },
       {
         type: 'multiple-choice',
-        question: 'Welche Position fahrt der Servo bei dem Befehl meinServo.write(90) an?',
+        question: 'Welche Position faehrt der Servo bei dem Befehl meinServo.write(90) an?',
         options: [
           '0 Grad (ganz links)',
           'Mittelstellung (90 Grad)',
@@ -264,7 +373,7 @@ void loop() {
         correct: 1,
         explanation: 'Richtig! Der Zahlenwert in write() entspricht direkt dem Winkel in Grad. 0 = links, 90 = Mitte, 180 = rechts.',
         wrongExplanations: {
-          0: '0 Grad waere der Befehl meinServo.write(0). Der Wert 90 fahrt mittig an.',
+          0: '0 Grad waere der Befehl meinServo.write(0). Der Wert 90 faehrt die Mitte an.',
           2: '180 Grad waere meinServo.write(180). Bei 90 ist der Servo exakt in der Mitte.',
           3: 'write() definiert eine POSITION (in Grad), keine GESCHWINDIGKEIT. Ein Hobby-Servo dreht nicht endlos.'
         }
@@ -325,6 +434,51 @@ void loop() {
           2: 'Ein Standard-Hobby-Servo dreht maximal 180&deg;, nicht im Kreis. Die 180 ist der Endwinkel, keine Anzahl an Umdrehungen.',
           3: 'Die Schleife laeuft 181-mal (Winkel 0 bis 180), nicht einmal. <code>winkel++</code> erhoeht den Wert bei jedem Durchlauf, bis 180 erreicht ist.'
         }
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Wie steuerst du einen AKTIVEN Piezo-Summer an, damit er piepst?',
+        options: [
+          'Mit der Servo-Library und attach()',
+          'Mit digitalWrite(pin, HIGH) - genau wie eine LED',
+          'Nur mit tone(), sonst bleibt er stumm',
+          'Mit analogRead(), weil er ein Sensor ist'
+        ],
+        correct: 1,
+        explanation: 'Richtig! Der aktive Summer hat eine eingebaute Elektronik, die den Ton selbst erzeugt. Du musst ihn nur mit Strom versorgen: digitalWrite(pin, HIGH) = Piep an, LOW = Piep aus. Aus Software-Sicht ist er das Gleiche wie eine LED &ndash; sogar ohne Vorwiderstand.',
+        wrongExplanations: {
+          0: 'Die Servo-Library ist nur fuer Servomotoren &ndash; sie erzeugt spezielle Positions-Impulse. Der aktive Summer braucht nur simples An/Aus.',
+          2: 'tone() brauchst du nur beim PASSIVEN Summer, weil der keine eigene Ton-Elektronik hat. Der aktive Summer piepst schon bei einfachem HIGH.',
+          3: 'Der Summer ist ein Aktor (Ausgabe), kein Sensor (Eingabe). analogRead() liest Werte ein &ndash; damit gibst du nichts aus.'
+        }
+      },
+      {
+        type: 'multiple-choice',
+        question: 'Beim Ultraschall-Sensor gilt: Entfernung = Laufzeit &times; Schallgeschwindigkeit &divide; 2. Warum wird durch 2 geteilt?',
+        options: [
+          'Weil der Sensor zwei Augen (Sender und Empfaenger) hat',
+          'Weil der Schall den Weg zweimal zuruecklegt: hin zum Hindernis UND zurueck zum Sensor',
+          'Weil Ultraschall nur halb so schnell ist wie normaler Schall',
+          'Weil der Arduino nur jede zweite Messung verwendet'
+        ],
+        correct: 1,
+        explanation: 'Richtig! Die gemessene Laufzeit ist die Zeit fuer den KOMPLETTEN Weg: vom Sensor zum Hindernis und wieder zurueck. Die Entfernung zum Hindernis ist aber nur der halbe Weg &ndash; deshalb durch 2 teilen. Wie beim Echo im Gebirge: Du hoerst dein Echo nach der doppelten Strecke.',
+        wrongExplanations: {
+          0: 'Die zwei "Augen" sind zwar Sender und Empfaenger, aber das ist nicht der Grund fuer die 2. Es geht um den doppelten WEG des Schalls.',
+          2: 'Nein, Ultraschall ist genauso schnell wie hoerbarer Schall (ca. 343 m/s) &ndash; er ist nur hoeher, nicht langsamer.',
+          3: 'Der Arduino verwendet jede Messung. Die 2 steckt in der Physik: Hin- und Rueckweg zusammen sind doppelt so lang wie die Entfernung.'
+        }
+      },
+      {
+        type: 'matching',
+        question: 'Ordne jedem Pin des HC-SR04 seine Funktion zu.',
+        pairs: [
+          { left: 'VCC', right: 'Stromversorgung (5V vom Arduino)' },
+          { left: 'Trig', right: 'Ping ausloesen - Signal VOM Arduino zum Sensor' },
+          { left: 'Echo', right: 'Laufzeit melden - Signal vom Sensor ZUM Arduino' },
+          { left: 'GND', right: 'Masse (gemeinsamer Bezugspunkt)' }
+        ],
+        explanation: 'VCC und GND sind die Stromversorgung (5V und Masse). Die anderen beiden bilden ein Frage-Antwort-Paar: Ueber Trig sagt der Arduino "Miss jetzt!" (Ausgang), ueber Echo antwortet der Sensor mit der Laufzeit des Schalls (Eingang). Merkhilfe: Trig wie "Trigger" = Abzug druecken, Echo wie das Echo im Gebirge, das zurueckkommt.'
       }
     ],
     // === Praxis-Tab (Tab 4) ===
@@ -482,7 +636,7 @@ void loop() {
 
         <div class="info-card">
           <h3>Die Freilaufdiode &ndash; sonst stirbt der Transistor</h3>
-          <p>Ein Motor besteht aus einer <strong>Spule</strong>. Solange Strom fliesst, baut sich ein Magnetfeld auf. <strong>Wenn du den Strom abschaltest, baut sich dieses Magnetfeld blitzschnell wieder ab</strong> &ndash; und erzeugt dabei eine kurze, sehr hohe Spannungsspitze (oft &gt; 100 V!) in <strong>umgekehrter Richtung</strong>.</p>
+          <p>Ein Motor besteht aus einer <strong>Spule</strong>. Solange Strom fliesst, baut sich ein Magnetfeld auf. <strong>Wenn du den Strom abschaltest, baut sich dieses Magnetfeld blitzschnell wieder ab</strong> &ndash; und erzeugt dabei eine kurze, sehr hohe Spannungsspitze (oft mehrere Dutzend Volt!) in <strong>umgekehrter Richtung</strong>.</p>
           <p>Bei einem kleinen Hobby-Motor sind das oft schon <strong>mehrere Dutzend Volt</strong>, bei groesseren Motoren auch ueber 100 V &ndash; in jedem Fall genug, um den Transistor in Millisekunden zu zerstoeren. Die Loesung: Eine <strong>Diode</strong> (Typ <strong>1N4148</strong> oder <strong>1N4007</strong>) parallel zum Motor, mit der <strong>Kathode (Ring) zu +5V</strong>. Im Normalbetrieb sperrt die Diode (kein Stromfluss). Aber bei der Spannungsspitze leitet sie und <strong>fuehrt die Spitze sicher zurueck</strong> zur Versorgung. Deshalb heisst sie <strong>Freilaufdiode</strong>.</p>
 
           <div class="analogy-box">
@@ -827,6 +981,43 @@ void loop() {
             <tr><td><strong>IN1</strong></td><td>Pin 9</td><td><strong>Drehrichtung</strong> (mit IN2)</td></tr>
             <tr><td><strong>IN2</strong></td><td>Pin 8</td><td><strong>Drehrichtung</strong> (mit IN1)</td></tr>
           </table>
+
+          <div style="background:#f8f8f8;border:1px solid #ddd;border-radius:8px;padding:1rem;text-align:center;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 200" style="max-width:340px;width:100%;height:auto;">
+              <!-- Arduino links -->
+              <rect x="10" y="30" width="70" height="140" rx="6" fill="#2176AE"/>
+              <text x="45" y="52" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">Arduino</text>
+              <text x="70" y="80" text-anchor="end" font-size="9" fill="#fff">Pin 10</text>
+              <text x="70" y="105" text-anchor="end" font-size="9" fill="#fff">Pin 9</text>
+              <text x="70" y="130" text-anchor="end" font-size="9" fill="#fff">Pin 8</text>
+              <text x="70" y="155" text-anchor="end" font-size="9" fill="#fff">GND</text>
+              <!-- L298N-Modul Mitte -->
+              <rect x="140" y="30" width="110" height="140" rx="6" fill="#eee" stroke="#555" stroke-width="2"/>
+              <text x="195" y="50" text-anchor="middle" font-size="11" fill="#333" font-weight="bold">L298N</text>
+              <text x="148" y="80" text-anchor="start" font-size="9" fill="#333">ENA</text>
+              <text x="148" y="105" text-anchor="start" font-size="9" fill="#333">IN1</text>
+              <text x="148" y="130" text-anchor="start" font-size="9" fill="#333">IN2</text>
+              <text x="148" y="155" text-anchor="start" font-size="9" fill="#333">GND</text>
+              <text x="242" y="90" text-anchor="end" font-size="9" fill="#333">OUT1</text>
+              <text x="242" y="115" text-anchor="end" font-size="9" fill="#333">OUT2</text>
+              <text x="195" y="185" text-anchor="middle" font-size="9" fill="#C0392B">12V/VCC (eigene Quelle)</text>
+              <line x1="195" y1="170" x2="195" y2="177" stroke="#C0392B" stroke-width="2"/>
+              <!-- Steuerleitungen Arduino -> L298N -->
+              <line x1="80" y1="77" x2="140" y2="77" stroke="#F59E0B" stroke-width="2"/>
+              <line x1="80" y1="102" x2="140" y2="102" stroke="#F59E0B" stroke-width="2"/>
+              <line x1="80" y1="127" x2="140" y2="127" stroke="#F59E0B" stroke-width="2"/>
+              <line x1="80" y1="152" x2="140" y2="152" stroke="#555" stroke-width="2"/>
+              <!-- Motorleitungen L298N -> Motor -->
+              <line x1="250" y1="87" x2="300" y2="87" stroke="#2E7D32" stroke-width="2"/>
+              <line x1="250" y1="112" x2="300" y2="112" stroke="#2E7D32" stroke-width="2"/>
+              <!-- Motor rechts -->
+              <circle cx="322" cy="100" r="24" fill="#fff" stroke="#2E7D32" stroke-width="3"/>
+              <text x="322" y="105" text-anchor="middle" font-size="12" fill="#2E7D32" font-weight="bold">M</text>
+              <text x="322" y="142" text-anchor="middle" font-size="9" fill="#2E7D32">Motor</text>
+            </svg>
+            <p style="margin:0.5rem 0 0;font-size:0.9rem;"><span style="color:#F59E0B;font-weight:bold;">Orange</span> = Steuersignale vom Arduino, <span style="color:#2E7D32;font-weight:bold;">Gruen</span> = Motorstrom zum Motor, <span style="color:#C0392B;font-weight:bold;">Rot</span> = eigene Motor-Stromquelle. GND von Arduino und Modul sind verbunden.</p>
+          </div>
+
           <div class="tip-box">
             <strong>Nicht vergessen:</strong> Der <strong>GND</strong> des L298N-Moduls muss mit dem <strong>GND des Arduino</strong> verbunden sein &ndash; sonst haben die Steuersignale keinen gemeinsamen Bezugspunkt und nichts funktioniert. Die Motorspannung (z.B. 6&ndash;12 V) kommt aus einer <strong>eigenen Quelle</strong> (Batterie/Netzteil), nicht aus dem Arduino.
           </div>
@@ -842,8 +1033,30 @@ void loop() {
             <tr><td>HIGH</td><td>LOW</td><td>dreht in <strong>eine</strong> Richtung (z.B. rechts)</td></tr>
             <tr><td>LOW</td><td>HIGH</td><td>dreht in die <strong>andere</strong> Richtung (links)</td></tr>
             <tr><td>LOW</td><td>LOW</td><td><strong>Stopp</strong> (Motor laeuft aus)</td></tr>
+            <tr><td>HIGH</td><td>HIGH</td><td><strong>Stopp</strong> (Bremse)</td></tr>
           </table>
-          <p>Merke: IN1 und IN2 muessen <strong>unterschiedlich</strong> sein, damit der Motor dreht. Sind beide gleich (beide LOW), steht der Motor.</p>
+          <p>Merke: IN1 und IN2 muessen <strong>unterschiedlich</strong> sein, damit der Motor dreht. Sind beide gleich, steht der Motor.</p>
+        </div>
+
+        <div class="info-card">
+          <h3>Probiere es aus: der L298N-Simulator</h3>
+          <p>Schalte IN1 und IN2 per Klick zwischen LOW und HIGH um und regle mit dem Schieberegler die Drehzahl (ENA, 0&ndash;255). Beobachte, wann der Motor dreht &ndash; und in welche Richtung!</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.6rem;align-items:center;margin-bottom:0.8rem;">
+            <button id="l298-in1" data-v="0" style="min-height:44px;min-width:110px;border:none;border-radius:8px;font-weight:bold;font-size:1rem;color:#fff;background:#95A5A6;cursor:pointer;" onclick="var b=this;b.dataset.v=b.dataset.v==='1'?'0':'1';b.textContent='IN1: '+(b.dataset.v==='1'?'HIGH':'LOW');b.style.background=b.dataset.v==='1'?'#E67E22':'#95A5A6';var i1=document.getElementById('l298-in1').dataset.v==='1';var i2=document.getElementById('l298-in2').dataset.v==='1';var ena=parseInt(document.getElementById('l298-ena').value,10);var pct=Math.round(ena/255*100);document.getElementById('l298-pct').textContent=pct+' %';var st=document.getElementById('l298-status');var ind=document.getElementById('l298-ind');if(i1!==i2&amp;&amp;ena&gt;0){st.textContent=i1?'Motor dreht rechts':'Motor dreht links';st.style.color='#2E7D32';ind.textContent=i1?'\\u21BB':'\\u21BA';ind.style.color=pct&gt;66?'#E67E22':(pct&gt;33?'#F5B041':'#F8C471');}else{st.textContent='Stopp';st.style.color='#C0392B';ind.textContent='\\u25A0';ind.style.color='#999';}">IN1: LOW</button>
+            <button id="l298-in2" data-v="0" style="min-height:44px;min-width:110px;border:none;border-radius:8px;font-weight:bold;font-size:1rem;color:#fff;background:#95A5A6;cursor:pointer;" onclick="var b=this;b.dataset.v=b.dataset.v==='1'?'0':'1';b.textContent='IN2: '+(b.dataset.v==='1'?'HIGH':'LOW');b.style.background=b.dataset.v==='1'?'#E67E22':'#95A5A6';var i1=document.getElementById('l298-in1').dataset.v==='1';var i2=document.getElementById('l298-in2').dataset.v==='1';var ena=parseInt(document.getElementById('l298-ena').value,10);var pct=Math.round(ena/255*100);document.getElementById('l298-pct').textContent=pct+' %';var st=document.getElementById('l298-status');var ind=document.getElementById('l298-ind');if(i1!==i2&amp;&amp;ena&gt;0){st.textContent=i1?'Motor dreht rechts':'Motor dreht links';st.style.color='#2E7D32';ind.textContent=i1?'\\u21BB':'\\u21BA';ind.style.color=pct&gt;66?'#E67E22':(pct&gt;33?'#F5B041':'#F8C471');}else{st.textContent='Stopp';st.style.color='#C0392B';ind.textContent='\\u25A0';ind.style.color='#999';}">IN2: LOW</button>
+          </div>
+          <div style="margin-bottom:0.8rem;">
+            <label for="l298-ena" style="font-weight:bold;">ENA (Drehzahl): <span id="l298-ena-wert">128</span> / 255</label><br>
+            <input type="range" id="l298-ena" min="0" max="255" value="128" style="width:100%;max-width:340px;min-height:44px;" oninput="document.getElementById('l298-ena-wert').textContent=this.value;var i1=document.getElementById('l298-in1').dataset.v==='1';var i2=document.getElementById('l298-in2').dataset.v==='1';var ena=parseInt(this.value,10);var pct=Math.round(ena/255*100);document.getElementById('l298-pct').textContent=pct+' %';var st=document.getElementById('l298-status');var ind=document.getElementById('l298-ind');if(i1!==i2&amp;&amp;ena&gt;0){st.textContent=i1?'Motor dreht rechts':'Motor dreht links';st.style.color='#2E7D32';ind.textContent=i1?'\\u21BB':'\\u21BA';ind.style.color=pct&gt;66?'#E67E22':(pct&gt;33?'#F5B041':'#F8C471');}else{st.textContent='Stopp';st.style.color='#C0392B';ind.textContent='\\u25A0';ind.style.color='#999';}">
+          </div>
+          <div style="background:#f8f8f8;border:1px solid #ddd;border-radius:8px;padding:0.8rem;display:flex;align-items:center;gap:1rem;">
+            <span id="l298-ind" style="font-size:2.2rem;line-height:1;color:#999;">&#9632;</span>
+            <div>
+              <div id="l298-status" style="font-weight:bold;font-size:1.1rem;color:#C0392B;">Stopp</div>
+              <div>Drehzahl: <strong id="l298-pct">50 %</strong></div>
+            </div>
+          </div>
+          <p style="font-size:0.9rem;color:#666;margin-top:0.5rem;">Tipp: Setze IN1 auf HIGH und lass IN2 auf LOW &ndash; dann dreht der Motor. Beide gleich (LOW/LOW oder HIGH/HIGH) = Stopp. Und mit ENA = 0 steht er auch bei richtiger IN-Kombination.</p>
         </div>
 
         <div class="info-card" style="border-left: 3px solid #2980B9;">
@@ -994,6 +1207,153 @@ void loop() {
           3: 'Nichts wechselt von selbst. Der Motor folgt genau deinen IN1/IN2-Signalen.'
         }
       }
-    ]
+    ],
+    praxis: {
+      aufgabe: {
+        titel: 'DC-Motor mit L298N ansteuern',
+        auftrag: '<p>Baue die Original-Pruefungsschaltung auf: Ein <strong>DC-Motor</strong> wird ueber den <strong>Motortreiber L298N</strong> angesteuert. Der Motor soll <strong>5 Sekunden vorwaerts</strong> laufen, <strong>2 Sekunden stoppen</strong>, dann <strong>5 Sekunden rueckwaerts mit halber Geschwindigkeit</strong> drehen &ndash; und das Ganze endlos wiederholen. Pin-Belegung laut BW-Skript: <strong>ENA = Pin 10, IN1 = Pin 9, IN2 = Pin 8</strong>.</p><p><strong>Deine drei Aufgaben:</strong></p><ol><li><strong>Hardware:</strong> Arduino, L298N-Modul, Motor und externes Netzteil verkabeln. <strong>Wichtig:</strong> Der Motor wird NICHT aus dem Arduino versorgt &ndash; gemeinsame Masse nicht vergessen!</li><li><strong>Software:</strong> Vervollstaendige das Code-Geruest mit der Vorwaerts-Stopp-Rueckwaerts-Sequenz.</li><li><strong>Testen:</strong> Lade das Programm hoch und beobachte Drehrichtung und Drehzahl.</li></ol>',
+        lernziel: 'Du kannst einen DC-Motor ueber die H-Bruecke L298N in beide Richtungen ansteuern: Drehrichtung mit <code>digitalWrite()</code> an IN1/IN2, Drehzahl mit <code>analogWrite()</code> am ENA-Pin.'
+      },
+      bauteile: [
+        { name: 'Arduino Uno', anzahl: 1 },
+        { name: 'Motortreiber-Modul L298N', anzahl: 1, hinweis: 'Doppel-H-Bruecke; wir nutzen Motor A (OUT1/OUT2, ENA, IN1, IN2)' },
+        { name: 'DC-Motor (Gleichstrommotor)', anzahl: 1, hinweis: 'z.B. 6-12 V Getriebemotor' },
+        { name: 'Externes Netzteil oder Batteriepack (6-12 V)', anzahl: 1, hinweis: 'versorgt NUR den Motor ueber den L298N &ndash; niemals den Motor aus dem Arduino speisen!' },
+        { name: 'Jumper-Kabel Male-Female', anzahl: 4, hinweis: 'fuer ENA, IN1, IN2 und GND zwischen Arduino und L298N' },
+        { name: 'USB-Kabel', anzahl: 1, hinweis: 'Strom fuer den Arduino + Programm-Upload' }
+      ],
+      anschluss: {
+        svg: `
+          <figure class="schaltbild-figur">
+            <figcaption><strong>Verdrahtungsplan</strong> &mdash; Arduino steuert, der L298N schaltet den Motorstrom aus dem Batteriepack:</figcaption>
+            <svg viewBox="0 0 760 420" role="img" aria-label="Verdrahtung: Arduino Pin 10 an ENA, Pin 9 an IN1, Pin 8 an IN2, GND an GND; L298N OUT1/OUT2 an den Motor; Batteriepack Plus an 12V, Minus an GND des L298N" style="max-width: 100%; height: auto; background: #fff;">
+              <!-- Arduino links -->
+              <rect x="30" y="60" width="170" height="220" rx="10" fill="#2176AE" />
+              <text x="115" y="95" text-anchor="middle" fill="#fff" font-size="18" font-weight="bold">Arduino Uno</text>
+              <circle cx="200" cy="130" r="5" fill="#fff" /><text x="150" y="135" text-anchor="end" fill="#fff" font-size="14">Pin 10 (~)</text>
+              <circle cx="200" cy="170" r="5" fill="#fff" /><text x="150" y="175" text-anchor="end" fill="#fff" font-size="14">Pin 9</text>
+              <circle cx="200" cy="210" r="5" fill="#fff" /><text x="150" y="215" text-anchor="end" fill="#fff" font-size="14">Pin 8</text>
+              <circle cx="200" cy="250" r="5" fill="#fff" /><text x="150" y="255" text-anchor="end" fill="#fff" font-size="14">GND</text>
+              <!-- L298N Mitte -->
+              <rect x="330" y="60" width="180" height="260" rx="10" fill="#c0392b" />
+              <text x="420" y="95" text-anchor="middle" fill="#fff" font-size="18" font-weight="bold">L298N</text>
+              <circle cx="330" cy="130" r="5" fill="#fff" /><text x="345" y="135" fill="#fff" font-size="14">ENA</text>
+              <circle cx="330" cy="170" r="5" fill="#fff" /><text x="345" y="175" fill="#fff" font-size="14">IN1</text>
+              <circle cx="330" cy="210" r="5" fill="#fff" /><text x="345" y="215" fill="#fff" font-size="14">IN2</text>
+              <circle cx="330" cy="250" r="5" fill="#fff" /><text x="345" y="255" fill="#fff" font-size="14">GND</text>
+              <circle cx="370" cy="320" r="5" fill="#fff" /><text x="370" y="305" text-anchor="middle" fill="#fff" font-size="13">12V</text>
+              <circle cx="420" cy="320" r="5" fill="#fff" /><text x="420" y="305" text-anchor="middle" fill="#fff" font-size="13">GND</text>
+              <circle cx="510" cy="140" r="5" fill="#fff" /><text x="495" y="145" text-anchor="end" fill="#fff" font-size="14">OUT1</text>
+              <circle cx="510" cy="190" r="5" fill="#fff" /><text x="495" y="195" text-anchor="end" fill="#fff" font-size="14">OUT2</text>
+              <!-- Motor rechts -->
+              <circle cx="640" cy="165" r="50" fill="#F59E0B" />
+              <text x="640" y="160" text-anchor="middle" fill="#fff" font-size="16" font-weight="bold">M</text>
+              <text x="640" y="180" text-anchor="middle" fill="#fff" font-size="12">DC-Motor</text>
+              <!-- Batteriepack unten -->
+              <rect x="320" y="360" width="200" height="45" rx="8" fill="#2E7D32" />
+              <text x="420" y="388" text-anchor="middle" fill="#fff" font-size="15" font-weight="bold">Batteriepack 6-12 V</text>
+              <!-- Verbindungen Arduino -> L298N -->
+              <line x1="200" y1="130" x2="330" y2="130" stroke="#F59E0B" stroke-width="3" />
+              <text x="265" y="122" text-anchor="middle" fill="#F59E0B" font-size="12" font-weight="bold">Pin 10 &rarr; ENA</text>
+              <line x1="200" y1="170" x2="330" y2="170" stroke="#2176AE" stroke-width="3" />
+              <text x="265" y="162" text-anchor="middle" fill="#2176AE" font-size="12" font-weight="bold">Pin 9 &rarr; IN1</text>
+              <line x1="200" y1="210" x2="330" y2="210" stroke="#2176AE" stroke-width="3" />
+              <text x="265" y="202" text-anchor="middle" fill="#2176AE" font-size="12" font-weight="bold">Pin 8 &rarr; IN2</text>
+              <line x1="200" y1="250" x2="330" y2="250" stroke="#111" stroke-width="3" />
+              <text x="265" y="242" text-anchor="middle" fill="#111" font-size="12" font-weight="bold">GND &harr; GND</text>
+              <!-- L298N -> Motor -->
+              <line x1="510" y1="140" x2="597" y2="150" stroke="#2E7D32" stroke-width="3" />
+              <line x1="510" y1="190" x2="597" y2="182" stroke="#2E7D32" stroke-width="3" />
+              <text x="553" y="128" text-anchor="middle" fill="#2E7D32" font-size="12" font-weight="bold">OUT1/OUT2</text>
+              <!-- Batterie -> L298N -->
+              <line x1="370" y1="360" x2="370" y2="320" stroke="#c0392b" stroke-width="3" />
+              <text x="352" y="345" text-anchor="end" fill="#c0392b" font-size="12" font-weight="bold">+ &rarr; 12V</text>
+              <line x1="420" y1="360" x2="420" y2="320" stroke="#111" stroke-width="3" />
+              <text x="438" y="345" fill="#111" font-size="12" font-weight="bold">&minus; &rarr; GND</text>
+            </svg>
+          </figure>`,
+        schritte: [
+          '<strong>Bevor du steckst:</strong> Arduino vom USB trennen und Batteriepack noch NICHT anschliessen &ndash; verkabelt wird immer stromlos.',
+          'Verbinde mit einem <strong>orangen Jumper-Kabel</strong> <strong>Pin 10</strong> des Arduino mit <strong>ENA</strong> am L298N. Falls auf ENA ein kleiner <strong>Jumper (Steckbruecke)</strong> steckt: abziehen, sonst laeuft der Motor immer mit Vollgas.',
+          'Verbinde <strong>Pin 9</strong> mit <strong>IN1</strong> und <strong>Pin 8</strong> mit <strong>IN2</strong> am L298N.',
+          'Verbinde mit einem <strong>schwarzen Jumper-Kabel</strong> einen <strong>GND-Pin</strong> des Arduino mit dem <strong>GND</strong> der L298N-Schraubklemme. <strong>Sicherheits-Check gemeinsame Masse:</strong> Arduino-GND, L298N-GND und Batterie-Minus muessen alle am selben Punkt haengen &ndash; sonst "versteht" der L298N die Arduino-Signale nicht.',
+          'Schraube die beiden <strong>Motor-Kabel</strong> an <strong>OUT1</strong> und <strong>OUT2</strong> (Motor A) fest.',
+          'Schliesse das <strong>Batteriepack</strong> an: <strong>Plus an die 12V-Klemme</strong>, <strong>Minus an die GND-Klemme</strong> des L298N. Kontrolliere, dass der <strong>5V-Regler-Jumper</strong> (5V_EN) auf dem Modul gesteckt ist &ndash; er erzeugt aus der Motorspannung die 5 V fuer die Logik des L298N.',
+          '<strong>Letzter Sicherheits-Check vor dem Strom:</strong> Kein Kabel vom Motor oder Batteriepack fuehrt direkt zum Arduino? Plus und Minus am L298N nicht vertauscht? Erst dann Arduino per USB anschliessen.',
+          'Lade das vervollstaendigte Programm hoch.',
+          '<strong>Test-Beobachtung:</strong> Der Motor laeuft 5 Sekunden vorwaerts (volle Drehzahl), steht 2 Sekunden still, dreht dann 5 Sekunden <em>hoerbar langsamer</em> rueckwaerts &ndash; und beginnt von vorn. Dreht er zuerst "falsch herum", tausche einfach die beiden Motorkabel an OUT1/OUT2.'
+        ]
+      },
+      code_hinweise: {
+        geruest:
+`const int pinENA = 10;  // Drehzahl (PWM)
+const int pinIN1 = 9;   // Drehrichtung
+const int pinIN2 = 8;   // Drehrichtung
+
+void setup() {
+  pinMode(pinENA, OUTPUT);
+  pinMode(pinIN1, OUTPUT);
+  pinMode(pinIN2, OUTPUT);
+}
+
+void loop() {
+  // TODO: 5 Sekunden VORWAERTS mit voller Drehzahl
+  // Tipp: analogWrite(pinENA, ?); dann IN1/IN2 setzen
+  delay(5000);
+
+  // TODO: 2 Sekunden STOPP
+  // Tipp: beide IN-Pins auf denselben Pegel
+  delay(2000);
+
+  // TODO: 5 Sekunden RUECKWAERTS mit halber Drehzahl
+  // Tipp: IN1/IN2 vertauscht + analogWrite mit halbem Wert
+  delay(5000);
+}`,
+        tipps: [
+          'Volle Drehzahl ist <code>analogWrite(pinENA, 255)</code>, halbe Drehzahl <code>analogWrite(pinENA, 128)</code>.',
+          'Vorwaerts heisst: IN1 und IN2 <strong>unterschiedlich</strong> (z.B. IN1 HIGH, IN2 LOW). Rueckwaerts ist genau das vertauschte Paar.',
+          'Zum Stoppen setzt du <strong>beide</strong> IN-Pins auf LOW &ndash; oder ENA auf 0.',
+          'Wenn der Motor gar nicht laeuft: Steckt der 5V_EN-Jumper? Ist die gemeinsame Masse (Arduino-GND an L298N-GND) verbunden?',
+          'Wenn "halbe Geschwindigkeit" kaum langsamer klingt: Pruefe, ob der ENA-Jumper wirklich abgezogen ist &ndash; sonst ueberbrueckt er dein PWM-Signal.'
+        ]
+      },
+      loesung: {
+        code:
+`const int pinENA = 10;  // Drehzahl (PWM)
+const int pinIN1 = 9;   // Drehrichtung
+const int pinIN2 = 8;   // Drehrichtung
+
+void setup() {
+  pinMode(pinENA, OUTPUT);
+  pinMode(pinIN1, OUTPUT);
+  pinMode(pinIN2, OUTPUT);
+}
+
+void loop() {
+  analogWrite(pinENA, 255);   // volle Drehzahl
+  digitalWrite(pinIN1, HIGH); // vorwaerts
+  digitalWrite(pinIN2, LOW);
+  delay(5000);
+
+  digitalWrite(pinIN1, LOW);  // Stopp
+  digitalWrite(pinIN2, LOW);
+  delay(2000);
+
+  analogWrite(pinENA, 128);   // halbe Drehzahl
+  digitalWrite(pinIN1, LOW);  // rueckwaerts
+  digitalWrite(pinIN2, HIGH);
+  delay(5000);
+}`,
+        erklaerung: '<p>Im <code>setup()</code> werden alle drei Steuerpins als Ausgaenge definiert.</p><p>In der <code>loop()</code> laeuft die Sequenz: Erst gibt <code>analogWrite(pinENA, 255)</code> volle Drehzahl frei, und <code>IN1 = HIGH, IN2 = LOW</code> legt die Vorwaerts-Richtung fest &ndash; 5 Sekunden. Dann stoppen beide IN-Pins auf LOW den Motor fuer 2 Sekunden. Zuletzt wird das IN-Paar vertauscht (<code>IN1 = LOW, IN2 = HIGH</code>) und <code>analogWrite(pinENA, 128)</code> halbiert die Drehzahl &ndash; 5 Sekunden rueckwaerts. Danach beginnt <code>loop()</code> automatisch von vorn.</p><p><strong>Merksatz:</strong> ENA = Gaspedal (Tempo per PWM), IN1/IN2 = Waehlhebel (vorwaerts/rueckwaerts/stopp).</p>',
+        haeufige_fehler: [
+          '<strong>Motor laeuft gar nicht:</strong> Gemeinsame Masse fehlt &ndash; Arduino-GND muss mit dem L298N-GND (und damit dem Batterie-Minus) verbunden sein, sonst kommen die Steuersignale nicht an.',
+          '<strong>Motor laeuft immer mit Vollgas, halbe Drehzahl wirkt nicht:</strong> Der Jumper auf ENA steckt noch und ueberbrueckt dein PWM-Signal. Jumper abziehen und ENA per Kabel an Pin 10.',
+          '<strong>Motor dreht in die "falsche" Richtung:</strong> Kein Software-Fehler &ndash; einfach die beiden Motorkabel an OUT1/OUT2 tauschen (oder IN1/IN2 im Code vertauschen).',
+          '<strong>Arduino startet staendig neu oder Motor ruckelt:</strong> Der Motor haengt versehentlich an der Arduino-5V-Versorgung. Motorstrom kommt IMMER aus dem externen Netzteil ueber die 12V-Klemme des L298N.',
+          '<strong>Motor brummt nur, dreht aber nicht:</strong> Batteriespannung zu niedrig (leere Batterien) &ndash; der L298N verschluckt selbst ca. 2 V. Frische Batterien oder Netzteil verwenden.',
+          '<strong>Compiler-Fehler:</strong> <code>analogWrite(pinENA, 128);</code> braucht ein Komma zwischen Pin und Wert &ndash; und HIGH/LOW gehoeren zu <code>digitalWrite()</code>, nicht zu <code>analogWrite()</code>.'
+        ]
+      }
+    }
   }
 ];
